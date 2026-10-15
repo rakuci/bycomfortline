@@ -40,9 +40,31 @@
     });
   });
 
-  document.querySelectorAll(".language-menu").forEach((menu) => {
-    document.addEventListener("click", (event) => {
-      if (!menu.contains(event.target)) menu.removeAttribute("open");
+  const navigationMenus = [...document.querySelectorAll(".language-menu, .mobile-nav")];
+  navigationMenus.forEach((menu) => {
+    menu.addEventListener("toggle", () => {
+      if (!menu.open) return;
+      navigationMenus.forEach((other) => {
+        if (other !== menu) other.open = false;
+      });
+    });
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => { menu.open = false; });
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    navigationMenus.forEach((menu) => {
+      if (!menu.contains(event.target)) menu.open = false;
+    });
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    navigationMenus.forEach((menu) => {
+      if (menu.open) {
+        menu.open = false;
+        menu.querySelector("summary")?.focus();
+      }
     });
   });
 })();
