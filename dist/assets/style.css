@@ -392,3 +392,8 @@ footer { padding: 62px max(20px, calc((100vw - 1180px) / 2)) 24px; background: #
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
+
+/* Official ComfortLine 2026 identity */
+.brand-logo { display:block; width:200px; max-width:100%; height:auto; }
+.gateway .brand-logo { width:230px; }
+@media (max-width: 600px) { .brand-logo { width:155px; } .gateway .brand-logo { width:195px; } }
