@@ -224,10 +224,18 @@ function routeCards(lang, current) {
   }).join("");
 }
 
+function messengerButtons() {
+  const channels = [
+    ["WhatsApp", "https://wa.me/375291552776"],
+    ["Viber", "viber://chat?number=%2B375291552776"],
+  ];
+  return `<div class="messenger-contact" aria-label="Messaging apps"><span class="messenger-heading">WhatsApp / Viber</span><div class="messenger-buttons">${channels.map(([name, url]) => `<a class="messenger-button" href="${url}"${name === "WhatsApp" ? ' target="_blank" rel="noopener noreferrer"' : ""}>${name} ↗</a>`).join("")}</div></div>`;
+}
+
 function bookingForm(lang, from = "") {
   const l = locale[lang];
   return `<section class="booking-section" id="contact">
-    <div class="booking-copy"><span class="eyebrow">Comfortline</span><h2>${esc(l.formTitle)}</h2><p>${esc(l.formLead)}</p><div class="direct-contact"><a href="tel:${phoneHref}">${icons.phone}<span>${esc(l.call)}<strong>${phoneDisplay}</strong></span></a><a href="mailto:${email}">${icons.mail}<span>${esc(l.emailLabel)}<strong>${email}</strong></span></a></div></div>
+    <div class="booking-copy"><span class="eyebrow">Comfortline</span><h2>${esc(l.formTitle)}</h2><p>${esc(l.formLead)}</p><div class="direct-contact"><a href="tel:${phoneHref}">${icons.phone}<span>${esc(l.call)}<strong>${phoneDisplay}</strong></span></a><a href="mailto:${email}">${icons.mail}<span>${esc(l.emailLabel)}<strong>${email}</strong></span></a></div>${messengerButtons()}</div>
     <form class="booking-form" data-lang="${lang}" data-email="${email}">
       <label><span>${esc(l.fields.from)}</span><input name="from" value="${esc(from)}" placeholder="${esc(l.fieldValues.fromPlaceholder)}" required></label>
       <label><span>${esc(l.fields.to)}</span><input name="to" value="${esc(l.fieldValues.to)}" required></label>
