@@ -228,8 +228,12 @@ function messengerButtons() {
   const channels = [
     ["WhatsApp", "https://wa.me/375291552776"],
     ["Viber", "viber://chat?number=%2B375291552776"],
+    ["Telegram", "https://t.me/transfer_comfortline"],
+    ["Instagram", "https://www.instagram.com/transfer_comfortline/"],
+    ["Facebook Messenger", "https://m.me/103816619260365"],
+    ["Threads", "https://www.threads.com/@transferwarsaw_taxi"],
   ];
-  return `<div class="messenger-contact" aria-label="Messaging apps"><span class="messenger-heading">WhatsApp / Viber</span><div class="messenger-buttons">${channels.map(([name, url]) => `<a class="messenger-button" href="${url}"${name === "WhatsApp" ? ' target="_blank" rel="noopener noreferrer"' : ""}>${name} ↗</a>`).join("")}</div></div>`;
+  return `<div class="messenger-contact" aria-label="Messaging apps"><span class="messenger-heading">WhatsApp · Viber · Telegram · Instagram · Messenger · Threads</span><div class="messenger-buttons">${channels.map(([name, url]) => `<a class="messenger-button" href="${url}"${url.startsWith("https://") ? ' target="_blank" rel="noopener noreferrer"' : ""} aria-label="Contact ComfortLine on ${name}">${name} ↗</a>`).join("")}</div></div>`;
 }
 
 function bookingForm(lang, from = "") {
