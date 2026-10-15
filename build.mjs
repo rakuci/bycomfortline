@@ -1,4 +1,5 @@
 import { mkdir, writeFile, copyFile } from "node:fs/promises";
+import { routeSeo } from "./route-seo.mjs";
 import { dirname, join } from "node:path";
 
 const out = new URL("./dist/", import.meta.url).pathname;
@@ -14,6 +15,52 @@ const routes = {
 };
 
 const locale = {
+  en: {
+    code: "en", locale: "en_US", label: "English", home: "/en/",
+    nav: { routes: "Routes", service: "How it works", faq: "Questions", contact: "Contact" },
+    kicker: "Private international transfers • since 2015",
+    hubTitle: "Private transfers to Minsk from Vilnius, Warsaw and Riga",
+    hubDescription: "ComfortLine arranges private, door-to-door road transfers from Lithuania, Poland and Latvia to Minsk. Choose your pickup location, book a vehicle for your group and agree on the details in advance.",
+    routesTitle: "Choose your transfer route to Minsk",
+    routesLead: "Plan your journey to Minsk from Vilnius, Warsaw or Riga, with city or airport pickup and a private car for your group.",
+    cardCta: "Explore this transfer",
+    trust: ["Licensed transport provider", "Private vehicle for your group", "Child seats on request"],
+    facts: { distance: "Distance", time: "Travel time", note: "indicative; traffic and border checks can change it", airport: "Airports" },
+    routeNames: { vilnius: "Vilnius – Minsk", warsaw: "Warsaw – Minsk", riga: "Riga – Minsk" },
+    fromNames: { vilnius: "Vilnius", warsaw: "Warsaw", riga: "Riga" },
+    slugs: { vilnius: "vilnius-minsk-transfer", warsaw: "warsaw-minsk-transfer", riga: "riga-minsk-transfer" },
+    routeTitle: key => routeSeo.en[key].h1,
+    routeDescriptions: {
+      vilnius: "Private car from Vilnius city or Vilnius Airport VNO to a Minsk address, with an agreed pickup plan and assistance with luggage.",
+      warsaw: "Private transfer from Warsaw, Chopin Airport WAW or Modlin Airport WMI to your address in Minsk.",
+      riga: "Individual car from Riga or Riga Airport RIX to Minsk, with a planned pickup and the vehicle reserved for your group.",
+    },
+    serviceTitle: "Your journey, planned around you",
+    services: [
+      ["Pickup at your address", "We agree on where and when to meet, including at airports."],
+      ["Just your own group", "Travel without sharing a vehicle with unrelated passengers."],
+      ["Room for your luggage", "Discuss sedan, minivan or larger vehicle options when booking."],
+      ["Trip coordination", "Our coordinator helps arrange pickup and stays in touch about the journey."],
+    ],
+    stepsTitle: "How to arrange your transfer",
+    steps: [["01", "Send your route", "Tell us the addresses, date, travellers and luggage."], ["02", "Get a quote", "We discuss a suitable vehicle, price and pickup time."], ["03", "Travel door to door", "Meet your driver at the agreed location and travel to your destination."]],
+    formTitle: "Request a transfer quote",
+    formLead: "Send the details by email or call; we will confirm the route, availability and price.",
+    fields: { from: "From", to: "To", date: "Date and time", passengers: "Passengers", phone: "Contact phone" },
+    fieldValues: { to: "Minsk", fromPlaceholder: "City, airport or address", passengers: "e.g. 3 adults and a child", phone: "+..." },
+    submit: "Send an enquiry", call: "Call us", emailLabel: "Send an email", formNote: "The button opens a pre-filled message in your email app.",
+    faqTitle: "Frequently asked questions",
+    faqs: [
+      ["How much does a private transfer cost?", "Prices depend on the date, pickup and drop-off points, vehicle and group size. We agree on the quote before your journey."],
+      ["Do border checks affect the journey time?", "Yes. Any stated duration is an estimate. Checkpoint operation, queues and border regulations can change without notice."],
+      ["Can you meet me at an airport?", "Airport pickups can be requested. Please share the airport, flight number and arrival time."],
+      ["Can I request child seats or more luggage space?", "Yes, share children's ages and baggage details in advance so we can discuss a suitable vehicle."],
+    ],
+    otherTitle: "Other routes to Minsk",
+    footerText: "Private transfers between Belarus and European cities. Operating since 2015.",
+    license: "Transport provider: Murashko Andrey Antonovich · licence No. 02190/1-85358 · UNP 193255422",
+    rights: "All rights reserved.",
+  },
   ru: {
     code: "ru", locale: "ru_BY", label: "Русский", home: "/ru/",
     nav: { routes: "Маршруты", service: "Как проходит поездка", faq: "Вопросы", contact: "Контакты" },
@@ -188,7 +235,7 @@ function alternateLinks(pathType, routeKey) {
     const href = pathType === "home" ? `${base}/${lang}/` : `${base}${routePath(lang, routeKey)}`;
     return `<link rel="alternate" hreflang="${lang}" href="${href}">`;
   });
-  links.push(`<link rel="alternate" hreflang="x-default" href="${base}/">`);
+  links.push(`<link rel="alternate" hreflang="x-default" href="${pathType === "home" ? `${base}/` : `${base}${routePath("en", routeKey)}`}">`);
   return links.join("\n    ");
 }
 
@@ -201,7 +248,7 @@ function languageMenu(lang, type, routeKey) {
 
 function header(lang, type = "home", routeKey) {
   const l = locale[lang];
-  const menuLabel = { ru: "Меню", pl: "Menu", lt: "Meniu", lv: "Izvēlne" }[lang];
+  const menuLabel = { en: "Menu", ru: "Меню", pl: "Menu", lt: "Meniu", lv: "Izvēlne" }[lang];
   return `<header class="site-header">
     <a class="brand" href="${l.home}" aria-label="Comfortline">
       <img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56">
@@ -267,7 +314,7 @@ function floatingContact() {
 
 function layout({ lang, title, description, canonical, alternates, body, schema }) {
   const l = locale[lang];
-  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${floatingContact()}</body></html>`;
+  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="ComfortLine"><meta property="og:locale" content="${esc(l.locale)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${base}/assets/comfortline-transfer-van.webp"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${floatingContact()}</body></html>`;
 }
 
 function businessSchema(lang, url) {
@@ -289,23 +336,40 @@ function hubPage(lang) {
   return layout({ lang, title, description: l.hubDescription, canonical, alternates: alternateLinks("home"), body, schema: businessSchema(lang, canonical) });
 }
 
+function routeEditorial(lang, key) {
+  const seo = routeSeo[lang][key], ui = routeSeo[lang].ui;
+  return `<section class="route-editorial section" id="route-guide">
+    <div class="section-head"><span class="eyebrow">${esc(ui.overview)}</span><h2>${esc(seo.h1)}</h2><p>${esc(seo.intro)}</p></div>
+    <div class="route-editorial-grid">
+      <article><span class="route-detail-symbol" aria-hidden="true">⌖</span><h3>${esc(ui.pickup)}</h3><p>${esc(seo.pickupText)}</p></article>
+      <article><span class="route-detail-symbol" aria-hidden="true">✈</span><h3>${esc(ui.airport)}</h3><p>${esc(seo.airportText)}</p></article>
+      <article><span class="route-detail-symbol" aria-hidden="true">↗</span><h3>${esc(ui.planning)}</h3><p>${esc(seo.planningText)}</p></article>
+    </div>
+    <div class="route-checklist"><div><h3>${esc(ui.prepare)}</h3><ul>${ui.checklist.map(text => `<li>${esc(text)}</li>`).join("")}</ul></div><p>${esc(ui.border)}</p></div>
+    <div class="route-specific-faq"><h3>${esc(ui.faqs)}</h3><div class="route-specific-questions">${seo.faqs.map(([question, answer]) => `<details><summary>${esc(question)}</summary><p>${esc(answer)}</p></details>`).join("")}</div></div>
+    <aside class="related-comfortline"><p>${esc(ui.related)} <a href="https://comfortline.by/" rel="noopener">comfortline.by ↗</a></p></aside>
+  </section>`;
+}
+
 function routePage(lang, key) {
   const l = locale[lang], r = routes[key];
   const canonical = `${base}${routePath(lang, key)}`;
-  const h1 = l.routeTitle(key);
-  const description = `${h1}. ${l.routeDescriptions[key]}`;
-  const faqSchema = { "@type": "FAQPage", mainEntity: l.faqs.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
-  const schema = { "@context": "https://schema.org", "@graph": [businessSchema(lang, canonical), { "@type": "Service", name: h1, provider: { "@type": "TaxiService", name: "ComfortLine" }, areaServed: [l.fromNames[key], "Minsk"], url: canonical }, { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: l.nav.routes, item: `${base}/${lang}/` }, { "@type": "ListItem", position: 2, name: l.routeNames[key], item: canonical }] }, faqSchema] };
+  const seo = routeSeo[lang][key];
+  const h1 = seo.h1;
+  const description = seo.description;
+  const faqSchema = { "@type": "FAQPage", mainEntity: [...seo.faqs, ...l.faqs].map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
+  const schema = { "@context": "https://schema.org", "@graph": [businessSchema(lang, canonical), { "@type": "Service", name: h1, serviceType: "Private airport and intercity transfer", description: seo.intro, provider: { "@type": "TaxiService", name: "ComfortLine" }, areaServed: [l.fromNames[key], "Minsk"], url: canonical }, { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: l.nav.routes, item: `${base}/${lang}/` }, { "@type": "ListItem", position: 2, name: l.routeNames[key], item: canonical }] }, faqSchema] };
   const body = `${header(lang, "route", key)}<main>
-    <section class="route-hero"><div class="route-hero-bg"></div><div class="route-hero-content"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(l.routeNames[key])}</span></nav><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(h1)}</h1><p>${esc(l.routeDescriptions[key])}</p><div class="hero-actions"><a class="button primary" href="#contact">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div></div><div class="journey-card"><div><span>${esc(l.fromNames[key])}</span><b>${r.airport}</b></div><div class="journey-line"><i></i><em>${r.distance}</em><i></i></div><div><span>Minsk</span><b>MSQ</b></div></div></section>
+    <section class="route-hero"><div class="route-hero-bg"></div><div class="route-hero-content"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(l.routeNames[key])}</span></nav><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(h1)}</h1><p>${esc(seo.intro)}</p><div class="hero-actions"><a class="button primary" href="#contact">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div></div><div class="journey-card"><div><span>${esc(l.fromNames[key])}</span><b>${r.airport}</b></div><div class="journey-line"><i></i><em>${r.distance}</em><i></i></div><div><span>Minsk</span><b>MSQ</b></div></div></section>
     ${trustStrip(l)}
     <section class="facts-section"><article><span>${icons.pin}</span><div><small>${esc(l.facts.distance)}</small><strong>${r.distance}</strong></div></article><article><span class="clock">◷</span><div><small>${esc(l.facts.time)}</small><strong>${r.time}</strong><em>${esc(l.facts.note)}</em></div></article><article><span class="plane">✈</span><div><small>${esc(l.facts.airport)}</small><strong>${r.airport}</strong></div></article></section>
+    ${routeEditorial(lang, key)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">${esc(l.routeNames[key])}</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     <section class="section steps-section"><div class="section-head"><span class="eyebrow">3 steps</span><h2>${esc(l.stepsTitle)}</h2></div><div class="steps">${l.steps.map(([n, h, p]) => `<article><span>${n}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     ${bookingForm(lang, l.fromNames[key])}${faq(l)}
     <section class="section other-routes"><div class="section-head"><span class="eyebrow">Comfortline</span><h2>${esc(l.otherTitle)}</h2></div><div class="route-grid">${routeCards(lang, key)}</div></section>
     </main>${footer(l)}`;
-  return layout({ lang, title: `${h1} | ComfortLine`, description, canonical, alternates: alternateLinks("route", key), body, schema });
+  return layout({ lang, title: seo.title, description, canonical, alternates: alternateLinks("route", key), body, schema });
 }
 
 function gateway() {
