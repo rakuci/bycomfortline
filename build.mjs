@@ -374,7 +374,7 @@ function routePage(lang, key) {
 
 function gateway() {
   const links = Object.entries(locale).map(([code, l]) => `<a href="/${code}/"><span>${code.toUpperCase()}</span><strong>${l.label}</strong>${icons.arrow}</a>`).join("");
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ComfortLine — private transfers to Minsk</title><meta name="description" content="Private transfers to Minsk from Vilnius, Warsaw and Riga in Russian, Polish, Lithuanian and Latvian."><meta name="robots" content="index,follow"><link rel="canonical" href="${base}/">${alternateLinks("home")}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"></head><body class="gateway"><main><div class="gateway-panel"><a class="brand" href="/"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>Private transfers to Minsk</p><h1>Choose your language</h1><div class="gateway-links">${links}</div><small>Vilnius · Warsaw · Riga · Minsk</small></div></main>${floatingContact()}</body></html>`;
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ComfortLine — private transfers to Minsk</title><meta name="description" content="Private transfers to Minsk from Vilnius, Warsaw and Riga in Russian, Polish, Lithuanian and Latvian."><meta name="robots" content="index,follow"><link rel="canonical" href="${base}/">${alternateLinks("home")}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"></head><body class="gateway"><main><div class="gateway-panel"><a class="brand" href="/"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>Private transfers to Minsk</p><h1>Choose your language</h1><div class="gateway-links">${links}</div><small>Vilnius · Warsaw · Riga · Minsk</small></div></main>${floatingContact()}</body></html>`;
 }
 
 async function put(relative, content) {
@@ -389,6 +389,17 @@ for (const lang of Object.keys(locale)) {
   for (const key of Object.keys(routes)) await put(`${lang}/${locale[lang].slugs[key]}/index.html`, routePage(lang, key));
 }
 
-const urls = [`${base}/`, ...Object.keys(locale).flatMap(lang => [`${base}/${lang}/`, ...Object.keys(routes).map(key => `${base}${routePath(lang, key)}`)])];
-await put("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(url => `  <url><loc>${url}</loc><changefreq>monthly</changefreq><priority>${url.split("/").filter(Boolean).length <= 1 ? "0.9" : "0.8"}</priority></url>`).join("\n")}\n</urlset>`);
+const sitemapEntries = [
+  `<url><loc>${base}/</loc></url>`,
+  ...Object.keys(locale).map(lang => `<url><loc>${base}/${lang}/</loc>${Object.keys(locale).map(code => `<xhtml:link rel="alternate" hreflang="${code}" href="${base}/${code}/"/>`).join("")}<xhtml:link rel="alternate" hreflang="x-default" href="${base}/"/></url>`),
+  ...Object.keys(routes).flatMap(key => Object.keys(locale).map(lang => {
+    const url = `${base}${routePath(lang, key)}`;
+    const localized = Object.keys(locale).map(code => `<xhtml:link rel="alternate" hreflang="${code}" href="${base}${routePath(code, key)}"/>`).join("");
+    return `<url><loc>${url}</loc>${localized}<xhtml:link rel="alternate" hreflang="x-default" href="${base}${routePath("en", key)}"/></url>`;
+  }))
+];
+await put("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${sitemapEntries.join("\n")}
+</urlset>`);
 await put("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${base}/sitemap.xml\n`);
