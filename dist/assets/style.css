@@ -397,3 +397,11 @@ footer { padding: 62px max(20px, calc((100vw - 1180px) / 2)) 24px; background: #
 .brand-logo { display:block; width:200px; max-width:100%; height:auto; }
 .gateway .brand-logo { width:230px; }
 @media (max-width: 600px) { .brand-logo { width:155px; } .gateway .brand-logo { width:195px; } }
+
+/* Messaging contact actions */
+.messenger-contact { margin-top: 20px; }
+.messenger-heading { display:block; font-weight:700; margin-bottom:10px; }
+.messenger-buttons { display:flex; flex-wrap:wrap; gap:10px; }
+.messenger-button { display:inline-flex; align-items:center; justify-content:center; padding:11px 18px; border-radius:9px; background:#f6ad3f; color:#07192b; font-weight:750; transition:opacity .2s ease; }
+.messenger-button:hover { opacity:.85; }
+.messenger-button:focus-visible { outline:3px solid #fff; outline-offset:3px; }
