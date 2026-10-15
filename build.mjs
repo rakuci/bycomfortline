@@ -203,7 +203,7 @@ function header(lang, type = "home", routeKey) {
   const l = locale[lang];
   return `<header class="site-header">
     <a class="brand" href="${l.home}" aria-label="Comfortline">
-      <span class="brand-mark">CL</span><span class="brand-name">comfort<span>line</span></span>
+      <img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56">
     </a>
     <nav class="main-nav" aria-label="${esc(l.nav.routes)}">
       <a href="${l.home}#routes">${l.nav.routes}</a><a href="#service">${l.nav.service}</a><a href="#faq">${l.nav.faq}</a><a href="#contact">${l.nav.contact}</a>
@@ -244,7 +244,7 @@ function faq(l) {
 }
 
 function footer(l) {
-  return `<footer><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><span class="brand-mark">CL</span><span class="brand-name">comfort<span>line</span></span></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}</div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
+  return `<footer><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}</div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
 }
 
 function layout({ lang, title, description, canonical, alternates, body, schema }) {
@@ -292,7 +292,7 @@ function routePage(lang, key) {
 
 function gateway() {
   const links = Object.entries(locale).map(([code, l]) => `<a href="/${code}/"><span>${code.toUpperCase()}</span><strong>${l.label}</strong>${icons.arrow}</a>`).join("");
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ComfortLine — private transfers to Minsk</title><meta name="description" content="Private transfers to Minsk from Vilnius, Warsaw and Riga in Russian, Polish, Lithuanian and Latvian."><meta name="robots" content="index,follow"><link rel="canonical" href="${base}/">${alternateLinks("home")}<link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"></head><body class="gateway"><main><div class="gateway-panel"><a class="brand" href="/"><span class="brand-mark">CL</span><span class="brand-name">comfort<span>line</span></span></a><p>Private transfers to Minsk</p><h1>Choose your language</h1><div class="gateway-links">${links}</div><small>Vilnius · Warsaw · Riga · Minsk</small></div></main></body></html>`;
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ComfortLine — private transfers to Minsk</title><meta name="description" content="Private transfers to Minsk from Vilnius, Warsaw and Riga in Russian, Polish, Lithuanian and Latvian."><meta name="robots" content="index,follow"><link rel="canonical" href="${base}/">${alternateLinks("home")}<link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"></head><body class="gateway"><main><div class="gateway-panel"><a class="brand" href="/"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>Private transfers to Minsk</p><h1>Choose your language</h1><div class="gateway-links">${links}</div><small>Vilnius · Warsaw · Riga · Minsk</small></div></main></body></html>`;
 }
 
 async function put(relative, content) {
