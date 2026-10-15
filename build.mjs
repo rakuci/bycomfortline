@@ -3,8 +3,8 @@ import { dirname, join } from "node:path";
 
 const out = new URL("./dist/", import.meta.url).pathname;
 const base = "https://bycomfortline.com";
-const phoneDisplay = "+375 (44) 762-06-49";
-const phoneHref = "+375447620649";
+const phoneDisplay = "+375 29 155 27 76";
+const phoneHref = "+375291552776";
 const email = "info@comfortline.by";
 
 const routes = {
