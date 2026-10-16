@@ -27,7 +27,24 @@ export const bookingPopupUi = {
     "invalidForm": "Please check your booking details and try again.",
     "rateLimited": "Too many requests right now. Please wait and try again or contact us via WhatsApp.",
     "serviceUnavailable": "The email service is temporarily unavailable. Please try again later or contact us on WhatsApp.",
-    "networkError": "Could not connect to the booking service. Check your internet connection and try again."
+    "networkError": "Could not connect to the booking service. Check your internet connection and try again.",
+    "passengerPicker": {
+      "adults": "Adults",
+      "children": "Children",
+      "infants": "Infants",
+      "pets": "Pets",
+      "suitcases": "Suitcases",
+      "classTitle": "Vehicle class",
+      "any": "Any",
+      "comfort": "Comfort",
+      "business": "Business",
+      "premium": "Premium",
+      "apply": "Apply",
+      "passengerOne": "passenger",
+      "passengerMany": "passengers",
+      "open": "Choose passengers, luggage and vehicle class",
+      "maxWarning": "Maximum 8 passengers. Infants count as passengers."
+    }
   },
   "ru": {
     "header": "Оформление заявки на трансфер",
@@ -57,7 +74,24 @@ export const bookingPopupUi = {
     "invalidForm": "Проверьте данные заявки и попробуйте ещё раз.",
     "rateLimited": "Слишком много запросов. Подождите и повторите попытку или напишите в WhatsApp.",
     "serviceUnavailable": "Сервис отправки писем временно недоступен. Повторите попытку позже или напишите в WhatsApp.",
-    "networkError": "Не удалось подключиться к сервису бронирования. Проверьте интернет и повторите попытку."
+    "networkError": "Не удалось подключиться к сервису бронирования. Проверьте интернет и повторите попытку.",
+    "passengerPicker": {
+      "adults": "Взрослые",
+      "children": "Дети",
+      "infants": "Младенцы",
+      "pets": "Питомцы",
+      "suitcases": "Количество чемоданов",
+      "classTitle": "Класс",
+      "any": "Любой",
+      "comfort": "Комфорт",
+      "business": "Бизнес",
+      "premium": "Премиум",
+      "apply": "Применить",
+      "passengerOne": "пассажир",
+      "passengerMany": "пассажиров",
+      "open": "Выбрать пассажиров, багаж и класс автомобиля",
+      "maxWarning": "Максимум 8 пассажиров с учётом младенцев."
+    }
   },
   "pl": {
     "header": "Dokończ zapytanie o transfer",
@@ -87,7 +121,24 @@ export const bookingPopupUi = {
     "invalidForm": "Sprawdź dane zapytania i spróbuj ponownie.",
     "rateLimited": "Zbyt wiele zapytań. Poczekaj i spróbuj ponownie lub napisz na WhatsApp.",
     "serviceUnavailable": "Usługa wysyłki email jest chwilowo niedostępna. Spróbuj później lub skontaktuj się przez WhatsApp.",
-    "networkError": "Brak połączenia z usługą rezerwacji. Sprawdź internet i spróbuj ponownie."
+    "networkError": "Brak połączenia z usługą rezerwacji. Sprawdź internet i spróbuj ponownie.",
+    "passengerPicker": {
+      "adults": "Dorośli",
+      "children": "Dzieci",
+      "infants": "Niemowlęta",
+      "pets": "Zwierzęta",
+      "suitcases": "Liczba walizek",
+      "classTitle": "Klasa samochodu",
+      "any": "Dowolna",
+      "comfort": "Komfort",
+      "business": "Biznes",
+      "premium": "Premium",
+      "apply": "Zastosuj",
+      "passengerOne": "pasażer",
+      "passengerMany": "pasażerów",
+      "open": "Wybierz pasażerów, bagaże i klasę",
+      "maxWarning": "Maksymalnie 8 pasażerów, w tym niemowlęta."
+    }
   },
   "lt": {
     "header": "Užbaikite pervežimo užklausą",
@@ -117,7 +168,24 @@ export const bookingPopupUi = {
     "invalidForm": "Patikrinkite užklausos duomenis ir bandykite dar kartą.",
     "rateLimited": "Per daug užklausų. Palaukite ir bandykite vėl arba susisiekite per WhatsApp.",
     "serviceUnavailable": "El. pašto siuntimo paslauga laikinai neveikia. Bandykite vėliau arba kreipkitės per WhatsApp.",
-    "networkError": "Nepavyko prisijungti prie rezervavimo paslaugos. Patikrinkite interneto ryšį ir bandykite dar kartą."
+    "networkError": "Nepavyko prisijungti prie rezervavimo paslaugos. Patikrinkite interneto ryšį ir bandykite dar kartą.",
+    "passengerPicker": {
+      "adults": "Suaugusieji",
+      "children": "Vaikai",
+      "infants": "Kūdikiai",
+      "pets": "Augintiniai",
+      "suitcases": "Lagaminų skaičius",
+      "classTitle": "Automobilio klasė",
+      "any": "Bet kuri",
+      "comfort": "Komfortas",
+      "business": "Verslo klasė",
+      "premium": "Premium",
+      "apply": "Taikyti",
+      "passengerOne": "keleivis",
+      "passengerMany": "keleiviai",
+      "open": "Pasirinkite keleivius, bagažą ir automobilio klasę",
+      "maxWarning": "Iki 8 keleivių, įskaitant kūdikius."
+    }
   },
   "lv": {
     "header": "Pabeidziet transfēra pieprasījumu",
@@ -147,6 +215,23 @@ export const bookingPopupUi = {
     "invalidForm": "Pārbaudiet pieprasījuma datus un mēģiniet vēlreiz.",
     "rateLimited": "Pārāk daudz pieprasījumu. Uzgaidiet un mēģiniet vēlreiz vai rakstiet WhatsApp.",
     "serviceUnavailable": "E-pasta nosūtīšana pašlaik nav pieejama. Mēģiniet vēlāk vai sazinieties ar mums WhatsApp.",
-    "networkError": "Neizdevās savienoties ar rezervāciju servisu. Pārbaudiet interneta savienojumu un mēģiniet vēlreiz."
+    "networkError": "Neizdevās savienoties ar rezervāciju servisu. Pārbaudiet interneta savienojumu un mēģiniet vēlreiz.",
+    "passengerPicker": {
+      "adults": "Pieaugušie",
+      "children": "Bērni",
+      "infants": "Zīdaiņi",
+      "pets": "Mājdzīvnieki",
+      "suitcases": "Koferu skaits",
+      "classTitle": "Auto klase",
+      "any": "Jebkura",
+      "comfort": "Komforts",
+      "business": "Bizness",
+      "premium": "Premium",
+      "apply": "Lietot",
+      "passengerOne": "pasažieris",
+      "passengerMany": "pasažieri",
+      "open": "Izvēlieties pasažierus, bagāžu un klasi",
+      "maxWarning": "Ne vairāk kā 8 pasažieri, ieskaitot zīdaiņus."
+    }
   }
 };
