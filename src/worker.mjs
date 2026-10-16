@@ -2,7 +2,7 @@
 // Uses the verified Resend sending domain comfortline.by, not Cloudflare Email Sending.
 // Set the RESEND_API_KEY as a Cloudflare Worker Secret; never commit it to GitHub.
 const RECIPIENT = "info@comfortline.by";
-const SENDER = "ComfortLine Bookings <bookings@comfortline.by>";
+const SENDER = "byComfortLine <bookings@comfortline.by>";
 const RESEND_SEND_URL = "https://api.resend.com/emails";
 const ALLOWED_LANGUAGES = new Set(["en", "ru", "pl", "lt", "lv"]);
 
@@ -25,20 +25,20 @@ const FIELD_RULES = {
 };
 
 const FIELD_LABELS = {
-  fromPreset: "Departure",
-  to: "Destination",
-  pickupAddress: "Pickup address",
-  dropAddress: "Drop-off address",
-  date: "Departure date and time",
-  passengers: "Passengers",
-  carClass: "Vehicle class",
-  luggage: "Suitcases",
-  childSeats: "Child seats",
-  flight: "Flight number",
-  customerName: "Customer name",
-  phone: "Phone",
-  customerEmail: "Customer email",
-  notes: "Additional notes"
+  fromPreset: "Откуда",
+  to: "Куда",
+  pickupAddress: "Адрес подачи",
+  dropAddress: "Адрес прибытия",
+  date: "Дата и время поездки",
+  passengers: "Пассажиры",
+  carClass: "Класс автомобиля",
+  luggage: "Чемоданы",
+  childSeats: "Детские кресла",
+  flight: "Номер рейса",
+  customerName: "Имя клиента",
+  phone: "Телефон",
+  customerEmail: "Email клиента",
+  notes: "Пожелания к поездке"
 };
 
 function json(data, status = 200) {
@@ -84,17 +84,20 @@ function validateBooking(body) {
 }
 
 function bookingText({ lang, fields }, reference) {
+  const carLabels = { sedan: "Седан", minivan: "Минивэн / микроавтобус", premium: "Премиум" };
   const lines = [
-    "New ComfortLine booking enquiry",
-    "Reference: " + reference,
-    "Website: bycomfortline.com",
-    "Language: " + lang,
-    "Received (UTC): " + new Date().toISOString(),
+    "byComfortLine — новая заявка на трансфер",
+    "Отправитель: byComfortLine",
+    "Номер заявки: " + reference,
+    "Сайт: bycomfortline.com",
+    "Язык сайта при оформлении: " + lang.toUpperCase(),
+    "Получена (UTC): " + new Date().toISOString(),
     "",
-    ...Object.entries(FIELD_LABELS).map(([field, label]) => label + ": " + (fields[field] || "—")),
+    ...Object.entries(FIELD_LABELS).map(([field, label]) => label + ": " +
+      (field === "carClass" ? (carLabels[fields.carClass] || fields.carClass) : (fields[field] || "—"))),
     "",
-    "STATUS: Enquiry received by email. Transfer booking and price are not yet confirmed.",
-    "Reply to the customer using their contact details above."
+    "СТАТУС: Заявка получена по электронной почте. Поездка и стоимость ещё не подтверждены.",
+    "Свяжитесь с клиентом по контактным данным выше для подтверждения наличия автомобиля и стоимости."
   ];
   return lines.join("\n");
 }
@@ -239,7 +242,7 @@ async function submitBooking(request, env) {
   const payload = {
     from: SENDER,
     to: [RECIPIENT],
-    subject: "ComfortLine booking enquiry " + reference,
+    subject: "byComfortLine — новая заявка на трансфер № " + reference,
     text: bookingText(booking, reference),
     html: bookingHtml(booking, reference),
     ...(booking.fields.customerEmail ? { reply_to: booking.fields.customerEmail } : {})
