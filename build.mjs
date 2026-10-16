@@ -420,7 +420,7 @@ function bookingForm(lang, routeKey = "vilnius") {
         <h2 id="booking-dialog-title">${esc(popup.header)}</h2><p>${esc(popup.subtitle)}</p></div>
         <button type="button" class="booking-dialog-close" data-close-booking aria-label="${esc(popup.close)}"><span aria-hidden="true">×</span></button>
       </div>
-      <form class="booking-form" data-lang="${lang}" data-email="${email}" data-sending="${esc(popup.sending)}" data-send-error="${esc(popup.sendError)}" data-storage-success="${esc(popup.storageSuccess)}" action="/api/booking" method="post">
+      <form class="booking-form" data-lang="${lang}" data-email="${email}" data-sending="${esc(popup.sending)}" data-send-error="${esc(popup.sendError)}" data-storage-success="${esc(popup.storageSuccess)}" data-invalid-phone="${esc(popup.invalidPhone)}" data-invalid-route="${esc(popup.invalidRoute)}" data-invalid-form="${esc(popup.invalidForm)}" data-rate-limited="${esc(popup.rateLimited)}" data-service-unavailable="${esc(popup.serviceUnavailable)}" data-network-error="${esc(popup.networkError)}" action="/api/booking" method="post">
         ${locationFormField(lang, "fromPreset", "details", l.fromNames[routeKey])}
         ${locationFormField(lang, "to", "details", l.fieldValues.to)}
         <label><span>${esc(ui.pickupAddress)}</span><input name="pickupAddress" placeholder="${esc(l.fieldValues.fromPlaceholder)}"></label>
@@ -432,7 +432,7 @@ function bookingForm(lang, routeKey = "vilnius") {
         <label><span>${esc(ui.seats)}</span><input type="number" min="0" max="8" name="childSeats" value="0"></label>
         <label><span>${esc(ui.flight)}</span><input name="flight" placeholder="VNO / WAW / WMI / RIX"></label>
         <label><span>${esc(ui.name)}</span><input name="customerName" autocomplete="name" required></label>
-        <label><span>${esc(ui.phone)}</span><input type="tel" name="phone" autocomplete="tel" placeholder="${esc(l.fieldValues.phone)}" required></label>
+        <label><span>${esc(ui.phone)}</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="50" placeholder="${esc(l.fieldValues.phone)}" required></label>
         <label class="full"><span>${esc(ui.email)}</span><input type="email" name="customerEmail" autocomplete="email"></label>
         <label class="full"><span>${esc(ui.notes)}</span><textarea name="notes" rows="3"></textarea></label>
         <div class="booking-spam-trap" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
