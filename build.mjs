@@ -279,7 +279,7 @@ const socialChannels = [
   { id: "viber", label: "Viber", url: "viber://chat?number=%2B375291552776" },
   { id: "telegram", label: "Telegram", url: "https://t.me/transfer_comfortline" },
   { id: "instagram", label: "Instagram", url: "https://www.instagram.com/transfer_comfortline/" },
-  { id: "messenger", label: "Messenger", url: "https://m.me/103816619260365" },
+  { id: "messenger", label: "Facebook Messenger", url: "https://m.me/103816619260365" },
   { id: "threads", label: "Threads", url: "https://www.threads.com/@transferwarsaw_taxi" },
 ];
 
