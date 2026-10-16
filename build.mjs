@@ -300,6 +300,7 @@ const bookingLabels = {
     flight: "Flight number (if airport pickup)", luggage: "Suitcases", seats: "Child seats",
     name: "Your name", phone: "Contact phone", email: "Email (optional)", notes: "Additional requests",
     sedan: "Sedan", minivan: "Minivan / minibus", premium: "Premium",
+    whatsapp: "Send via WhatsApp",
     submit: "Prepare booking enquiry", info: "This opens your email app with your trip details. The booking is confirmed only after our manager replies.",
     airport: { vno: "Vilnius Airport (VNO)", waw: "Warsaw Chopin Airport (WAW)", wmi: "Warsaw Modlin Airport (WMI)", rix: "Riga Airport (RIX)" }
   },
@@ -310,6 +311,7 @@ const bookingLabels = {
     flight: "Номер рейса (если аэропорт)", luggage: "Чемоданы", seats: "Детские кресла",
     name: "Ваше имя", phone: "Телефон для связи", email: "Email (необязательно)", notes: "Пожелания к поездке",
     sedan: "Седан", minivan: "Минивэн / микроавтобус", premium: "Премиум",
+    whatsapp: "Отправить в WhatsApp",
     submit: "Подготовить заявку", info: "Откроется письмо с деталями поездки. Бронирование подтверждается менеджером после ответа.",
     airport: { vno: "Аэропорт Вильнюса (VNO)", waw: "Варшава Шопен (WAW)", wmi: "Варшава Модлин (WMI)", rix: "Аэропорт Риги (RIX)" }
   },
@@ -320,6 +322,7 @@ const bookingLabels = {
     flight: "Numer lotu (odbiór z lotniska)", luggage: "Walizki", seats: "Foteliki dziecięce",
     name: "Imię i nazwisko", phone: "Telefon kontaktowy", email: "Email (opcjonalnie)", notes: "Dodatkowe uwagi",
     sedan: "Sedan", minivan: "Minivan / bus", premium: "Premium",
+    whatsapp: "Wyślij przez WhatsApp",
     submit: "Przygotuj zapytanie", info: "Otworzy się wiadomość email ze szczegółami. Rezerwacja wymaga potwierdzenia przez koordynatora.",
     airport: { vno: "Lotnisko Wilno (VNO)", waw: "Warszawa Chopin (WAW)", wmi: "Warszawa Modlin (WMI)", rix: "Lotnisko Ryga (RIX)" }
   },
@@ -330,6 +333,7 @@ const bookingLabels = {
     flight: "Skrydžio numeris (oro uostui)", luggage: "Lagaminai", seats: "Vaikiškos kėdutės",
     name: "Jūsų vardas", phone: "Kontaktinis telefonas", email: "El. paštas (nebūtina)", notes: "Papildomi pageidavimai",
     sedan: "Sedanas", minivan: "Minivenas / mikroautobusas", premium: "Premium",
+    whatsapp: "Siųsti per WhatsApp",
     submit: "Paruošti užklausą", info: "Atsidarys el. laiškas su kelionės duomenimis. Užsakymas patvirtinamas tik gavus vadybininko atsakymą.",
     airport: { vno: "Vilniaus oro uostas (VNO)", waw: "Varšuvos Šopeno oro uostas (WAW)", wmi: "Varšuvos Modlino oro uostas (WMI)", rix: "Rygos oro uostas (RIX)" }
   },
@@ -340,6 +344,7 @@ const bookingLabels = {
     flight: "Reisa numurs (lidostai)", luggage: "Koferi", seats: "Bērnu sēdeklīši",
     name: "Jūsu vārds", phone: "Kontakttālrunis", email: "E-pasts (nav obligāts)", notes: "Papildu vēlmes",
     sedan: "Sedans", minivan: "Minivens / mikroautobuss", premium: "Premium",
+    whatsapp: "Sūtīt ar WhatsApp",
     submit: "Sagatavot pieprasījumu", info: "Tiks atvērta e-pasta vēstule ar brauciena datiem. Rezervācija jāapstiprina koordinatoram.",
     airport: { vno: "Viļņas lidosta (VNO)", waw: "Varšavas Šopēna lidosta (WAW)", wmi: "Varšavas Modlinas lidosta (WMI)", rix: "Rīgas lidosta (RIX)" }
   }
@@ -397,7 +402,7 @@ function bookingForm(lang, routeKey = "vilnius") {
         <label><span>${esc(ui.phone)}</span><input type="tel" name="phone" autocomplete="tel" placeholder="${esc(l.fieldValues.phone)}" required></label>
         <label class="full"><span>${esc(ui.email)}</span><input type="email" name="customerEmail" autocomplete="email"></label>
         <label class="full"><span>${esc(ui.notes)}</span><textarea name="notes" rows="3"></textarea></label>
-        <button type="submit">${esc(ui.submit)} ${icons.arrow}</button>
+        <div class="booking-submit-actions"><button type="submit" data-send="email">${esc(ui.submit)} ${icons.arrow}</button><button type="submit" data-send="whatsapp" class="booking-via-whatsapp"><img src="/assets/social/whatsapp.svg" width="20" height="20" alt="" aria-hidden="true">${esc(ui.whatsapp)}</button></div>
         <small class="booking-explanation">${esc(ui.info)}</small>
       </form>
     </div>
