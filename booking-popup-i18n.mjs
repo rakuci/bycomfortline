@@ -21,7 +21,13 @@ export const bookingPopupUi = {
     "sending": "Sending your enquiry…",
     "sendError": "We could not send your enquiry. Please try again, or contact us on WhatsApp. Your form details are still here.",
     "storageSuccess": "Your enquiry was emailed successfully. Please note your reference: ",
-    "formNotice": "Press Send to email your trip details to info@comfortline.by. The coordinator will reply to confirm the price and availability."
+    "formNotice": "Press Send to email your trip details to info@comfortline.by. The coordinator will reply to confirm the price and availability.",
+    "invalidPhone": "Enter a real contact phone number containing 6–16 digits, for example +375 29 155 27 76.",
+    "invalidRoute": "Please choose different From and To locations.",
+    "invalidForm": "Please check your booking details and try again.",
+    "rateLimited": "Too many requests right now. Please wait and try again or contact us via WhatsApp.",
+    "serviceUnavailable": "The email service is temporarily unavailable. Please try again later or contact us on WhatsApp.",
+    "networkError": "Could not connect to the booking service. Check your internet connection and try again."
   },
   "ru": {
     "header": "Оформление заявки на трансфер",
@@ -45,7 +51,13 @@ export const bookingPopupUi = {
     "sending": "Отправляем заявку…",
     "sendError": "Не удалось отправить заявку. Попробуйте ещё раз или напишите в WhatsApp. Введённые данные сохранены в форме.",
     "storageSuccess": "Заявка отправлена по email. Номер для связи: ",
-    "formNotice": "Нажмите «Отправить», чтобы отправить данные поездки на info@comfortline.by. Менеджер ответит и уточнит стоимость и возможность поездки."
+    "formNotice": "Нажмите «Отправить», чтобы отправить данные поездки на info@comfortline.by. Менеджер ответит и уточнит стоимость и возможность поездки.",
+    "invalidPhone": "Укажите настоящий контактный телефон: от 6 до 16 цифр, например +375 29 155 27 76.",
+    "invalidRoute": "Выберите разные пункты отправления и прибытия.",
+    "invalidForm": "Проверьте данные заявки и попробуйте ещё раз.",
+    "rateLimited": "Слишком много запросов. Подождите и повторите попытку или напишите в WhatsApp.",
+    "serviceUnavailable": "Сервис отправки писем временно недоступен. Повторите попытку позже или напишите в WhatsApp.",
+    "networkError": "Не удалось подключиться к сервису бронирования. Проверьте интернет и повторите попытку."
   },
   "pl": {
     "header": "Dokończ zapytanie o transfer",
@@ -69,7 +81,13 @@ export const bookingPopupUi = {
     "sending": "Wysyłanie zapytania…",
     "sendError": "Nie udało się wysłać zapytania. Spróbuj ponownie lub napisz na WhatsApp. Dane pozostają w formularzu.",
     "storageSuccess": "Zapytanie zostało wysłane e-mailem. Numer: ",
-    "formNotice": "Kliknij „Wyślij”, aby przesłać szczegóły na info@comfortline.by. Koordynator potwierdzi dostępność i cenę."
+    "formNotice": "Kliknij „Wyślij”, aby przesłać szczegóły na info@comfortline.by. Koordynator potwierdzi dostępność i cenę.",
+    "invalidPhone": "Podaj prawidłowy numer kontaktowy zawierający 6–16 cyfr, np. +375 29 155 27 76.",
+    "invalidRoute": "Wybierz różne miejsca wyjazdu i przyjazdu.",
+    "invalidForm": "Sprawdź dane zapytania i spróbuj ponownie.",
+    "rateLimited": "Zbyt wiele zapytań. Poczekaj i spróbuj ponownie lub napisz na WhatsApp.",
+    "serviceUnavailable": "Usługa wysyłki email jest chwilowo niedostępna. Spróbuj później lub skontaktuj się przez WhatsApp.",
+    "networkError": "Brak połączenia z usługą rezerwacji. Sprawdź internet i spróbuj ponownie."
   },
   "lt": {
     "header": "Užbaikite pervežimo užklausą",
@@ -93,7 +111,13 @@ export const bookingPopupUi = {
     "sending": "Siunčiame užklausą…",
     "sendError": "Užklausos išsiųsti nepavyko. Bandykite dar kartą arba kreipkitės per WhatsApp. Forma liko užpildyta.",
     "storageSuccess": "Užklausa sėkmingai išsiųsta el. paštu. Numeris: ",
-    "formNotice": "Spauskite „Siųsti“, kad išsiųstumėte kelionės duomenis į info@comfortline.by. Vadybininkas patvirtins galimybę ir kainą."
+    "formNotice": "Spauskite „Siųsti“, kad išsiųstumėte kelionės duomenis į info@comfortline.by. Vadybininkas patvirtins galimybę ir kainą.",
+    "invalidPhone": "Įveskite tikrą kontaktinį telefono numerį su 6–16 skaitmenų, pvz., +375 29 155 27 76.",
+    "invalidRoute": "Pasirinkite skirtingas išvykimo ir atvykimo vietas.",
+    "invalidForm": "Patikrinkite užklausos duomenis ir bandykite dar kartą.",
+    "rateLimited": "Per daug užklausų. Palaukite ir bandykite vėl arba susisiekite per WhatsApp.",
+    "serviceUnavailable": "El. pašto siuntimo paslauga laikinai neveikia. Bandykite vėliau arba kreipkitės per WhatsApp.",
+    "networkError": "Nepavyko prisijungti prie rezervavimo paslaugos. Patikrinkite interneto ryšį ir bandykite dar kartą."
   },
   "lv": {
     "header": "Pabeidziet transfēra pieprasījumu",
@@ -117,6 +141,12 @@ export const bookingPopupUi = {
     "sending": "Nosūtām pieprasījumu…",
     "sendError": "Neizdevās nosūtīt pieprasījumu. Mēģiniet vēlreiz vai rakstiet WhatsApp. Ievadītie dati saglabāti veidlapā.",
     "storageSuccess": "Pieprasījums nosūtīts pa e-pastu. Numurs: ",
-    "formNotice": "Nospiediet „Nosūtīt”, lai nosūtītu brauciena datus uz info@comfortline.by. Koordinators apstiprinās pieejamību un cenu."
+    "formNotice": "Nospiediet „Nosūtīt”, lai nosūtītu brauciena datus uz info@comfortline.by. Koordinators apstiprinās pieejamību un cenu.",
+    "invalidPhone": "Ievadiet derīgu kontakttālruni ar 6–16 cipariem, piemēram, +375 29 155 27 76.",
+    "invalidRoute": "Izvēlieties atšķirīgas izbraukšanas un galamērķa vietas.",
+    "invalidForm": "Pārbaudiet pieprasījuma datus un mēģiniet vēlreiz.",
+    "rateLimited": "Pārāk daudz pieprasījumu. Uzgaidiet un mēģiniet vēlreiz vai rakstiet WhatsApp.",
+    "serviceUnavailable": "E-pasta nosūtīšana pašlaik nav pieejama. Mēģiniet vēlāk vai sazinieties ar mums WhatsApp.",
+    "networkError": "Neizdevās savienoties ar rezervāciju servisu. Pārbaudiet interneta savienojumu un mēģiniet vēlreiz."
   }
 };
