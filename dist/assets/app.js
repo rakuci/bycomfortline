@@ -119,20 +119,24 @@
       event.preventDefault();
       if (!quick.reportValidity()) return;
       const details = document.querySelector(".booking-form");
-      if (!details) return;
+      if (!details || !bookingDialog) return;
       for (const name of ["fromPreset", "to", "date", "passengers", "carClass"]) {
         const source = getControl(quick, name);
         const target = getControl(details, name);
         if (source && target) target.value = source.value;
       }
-      const section = document.getElementById("contact");
-      if (section) {
-        section.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
-        if (window.history?.replaceState) window.history.replaceState(null, "", "#contact");
-      }
+      bookingDialog.showModal();
       getControl(details, "pickupAddress")?.focus({ preventScroll: true });
     });
   });
+
+  function createInquiryReference() {
+    const day = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+    const bytes = new Uint8Array(5);
+    window.crypto.getRandomValues(bytes);
+    const suffix = [...bytes].map(n => n.toString(16).padStart(2, "0")).join("").toUpperCase();
+    return "CL-" + day + "-" + suffix;
+  }
 
   document.querySelectorAll(".booking-form").forEach((form) => {
     form.addEventListener("submit", (event) => {
@@ -141,25 +145,61 @@
       const lang = form.dataset.lang || "en";
       const fields = [...form.querySelectorAll("input[name], select[name], textarea[name]")].map((control) => {
         const label = control.id ? form.querySelector('label[for="' + control.id + '"]') : null;
-        const labelText = label?.textContent?.trim() ||
-          control.closest("label")?.querySelector("span")?.textContent?.trim() || control.name;
-        const fieldValue = control.tagName === "SELECT"
-          ? control.selectedOptions[0]?.textContent?.trim()
-          : control.value.trim();
-        return `${labelText}: ${fieldValue || "—"}`;
+        const text = label?.textContent?.trim() || control.closest("label")?.querySelector("span")?.textContent?.trim() || control.name;
+        const value = control.tagName === "SELECT"
+          ? control.selectedOptions[0]?.textContent?.trim() : control.value.trim();
+        return text + ": " + (value || "—");
       });
-      const body = fields.join("\n");
+      const reference = createInquiryReference();
       const subject = subjects[lang] || subjects.en;
-      if (event.submitter?.dataset.send === "whatsapp") {
-        window.open("https://wa.me/375291552776?text=" + encodeURIComponent(subject + "\n\n" + body), "_blank", "noopener,noreferrer");
+      const summary = fields.join("\n");
+      const enquiry = { reference, subject, summary, createdAt: new Date().toISOString() };
+      try { sessionStorage.setItem("comfortline-enquiry:" + reference, JSON.stringify(enquiry)); }
+      catch (error) {
+        // Storage may be disabled; keep the user in the form rather than lose their enquiry.
+        window.alert("Your browser is blocking temporary storage. Please allow session storage to continue, or use the contact buttons.");
         return;
       }
-      window.location.href = "mailto:" + form.dataset.email +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(body);
+      if (Array.isArray(window.dataLayer)) {
+        window.dataLayer.push({ event: "booking_enquiry_prepared", enquiry_reference: reference, enquiry_language: lang });
+      }
+      window.location.assign("/" + lang + "/thank-you/?ref=" + encodeURIComponent(reference));
     });
   });
 
+  const thankyou = document.querySelector("[data-booking-thankyou]");
+  if (thankyou) {
+    const ref = new URLSearchParams(window.location.search).get("ref") || "";
+    let draft = null;
+    try { if (ref) draft = JSON.parse(sessionStorage.getItem("comfortline-enquiry:" + ref) || "null"); }
+    catch (error) { draft = null; }
+    const refNode = thankyou.querySelector("[data-inquiry-reference]");
+    const details = thankyou.querySelector("[data-inquiry-summary]");
+    const actions = thankyou.querySelector(".thanks-actions");
+    const missing = thankyou.querySelector(".thanks-missing");
+    if (refNode) refNode.textContent = ref || "—";
+    if (draft?.reference === ref) {
+      const text = draft.subject + "\nReference: " + ref + "\n\n" + draft.summary;
+      if (details) details.textContent = draft.summary;
+      const wa = thankyou.querySelector("[data-inquiry-whatsapp]");
+      const em = thankyou.querySelector("[data-inquiry-email]");
+      if (wa) wa.href = "https://wa.me/375291552776?text=" + encodeURIComponent(text);
+      if (em) em.href = "mailto:info@comfortline.by?subject=" + encodeURIComponent(draft.subject + " " + ref) + "&body=" + encodeURIComponent(text);
+      [wa, em].forEach(link => link?.addEventListener("click", () => {
+        if (Array.isArray(window.dataLayer)) window.dataLayer.push({ event: "booking_enquiry_send_intent", enquiry_reference: ref, channel: link === wa ? "whatsapp" : "email" });
+      }));
+    } else {
+      if (details?.parentElement) details.parentElement.hidden = true;
+      if (actions) actions.hidden = true;
+      if (missing) missing.hidden = false;
+    }
+    const copy = thankyou.querySelector("[data-copy-reference]");
+    copy?.addEventListener("click", async () => {
+      if (!ref) return;
+      try { await navigator.clipboard.writeText(ref); }
+      catch (error) { window.prompt("Copy reference:", ref); }
+    });
+  }
   const navigationMenus = [...document.querySelectorAll(".language-menu, .mobile-nav")];
   navigationMenus.forEach((menu) => {
     menu.addEventListener("toggle", () => {
