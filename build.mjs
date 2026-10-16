@@ -525,13 +525,14 @@ function thankYouPage(lang) {
     <script src="/assets/app.js" defer></script></head><body class="thanks-body">
     <header class="thanks-header"><a class="brand" href="${l.home}" aria-label="ComfortLine"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a></header>
     <main class="thanks-main"><section class="thanks-panel" data-booking-thankyou data-lang="${lang}">
+      <div data-inquiry-confirmation hidden>
       <div class="thanks-check" aria-hidden="true">✓</div><span class="eyebrow">ComfortLine</span><h1>${esc(ui.thanksTitle)}</h1>
       <p class="thanks-lead">${esc(ui.thanksLead)}</p>
       <div class="thanks-reference"><span>${esc(ui.ref)}</span><div><strong data-inquiry-reference>—</strong><button type="button" data-copy-reference>${esc(ui.copy)}</button></div></div>
       <section class="thanks-details"><h2>${esc(ui.details)}</h2><pre data-inquiry-summary></pre></section>
       <div class="thanks-actions"><a class="thanks-whatsapp" data-inquiry-whatsapp href="https://wa.me/375291552776" target="_blank" rel="noopener noreferrer"><img src="/assets/social/whatsapp.svg" width="21" height="21" alt="">${esc(ui.sendWa)}</a>
         <a class="thanks-email" data-inquiry-email href="mailto:${email}">${esc(ui.sendEmail)}</a></div>
-      <p class="thanks-notice">${esc(ui.thanksNotice)}</p><p class="thanks-missing" hidden>${esc(ui.noDraft)}</p>
+      <p class="thanks-notice">${esc(ui.thanksNotice)}</p></div><p class="thanks-missing">${esc(ui.noDraft)}</p>
       <a class="thanks-back" href="${l.home}">← ${esc(ui.back)}</a>
     </section></main>${floatingContact()}</body></html>`;
 }
