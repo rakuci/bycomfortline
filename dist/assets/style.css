@@ -1689,3 +1689,40 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .destination-option, .booking-dialog-close, .destination-close { transition: none; }
 }
+
+
+/* Real server-side booking submission feedback */
+.booking-spam-trap {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.booking-dialog .booking-form > .booking-status {
+  grid-column: 1 / -1;
+  margin: -3px 0 0;
+  padding: 14px 17px;
+  border: 1px solid #b9e4ce;
+  border-radius: 13px;
+  color: #135f42;
+  background: #effbf4;
+  font-size: .88rem;
+  font-weight: 740;
+  line-height: 1.65;
+}
+.booking-dialog .booking-form > .booking-status.booking-error {
+  border-color: #efc2bf;
+  color: #a13830;
+  background: #fff2f0;
+}
+.booking-dialog .booking-prepare[disabled] {
+  cursor: wait;
+  opacity: .65;
+  transform: none;
+}
+@media (max-width: 760px) {
+  .booking-dialog .booking-form > .booking-status { grid-column: 1; }
+}
