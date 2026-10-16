@@ -1,6 +1,7 @@
 import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import { routeSeo } from "./route-seo.mjs";
 import { locationCatalog, locationLabels } from "./booking-locations.mjs";
+import { bookingPopupUi } from "./booking-popup-i18n.mjs";
 import { dirname, join } from "node:path";
 
 const out = new URL("./dist/", import.meta.url).pathname;
@@ -255,9 +256,9 @@ function header(lang, type = "home", routeKey) {
       <img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56">
     </a>
     <nav class="main-nav" aria-label="${esc(l.nav.routes)}">
-      <a href="${l.home}#routes">${l.nav.routes}</a><a href="#service">${l.nav.service}</a><a href="#faq">${l.nav.faq}</a><a href="#contact">${l.nav.contact}</a>
+      <a href="${l.home}#routes">${l.nav.routes}</a><a href="#service">${l.nav.service}</a><a href="#faq">${l.nav.faq}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${l.nav.contact}</a>
     </nav>
-    <details class="mobile-nav"><summary aria-label="${esc(menuLabel)}"><span class="mobile-nav-icon" aria-hidden="true">☰</span><span>${esc(menuLabel)}</span></summary><nav class="mobile-nav-links" aria-label="${esc(menuLabel)}"><a href="${l.home}#routes">${esc(l.nav.routes)}</a><a href="#service">${esc(l.nav.service)}</a><a href="#faq">${esc(l.nav.faq)}</a><a href="#contact">${esc(l.nav.contact)}</a></nav></details>
+    <details class="mobile-nav"><summary aria-label="${esc(menuLabel)}"><span class="mobile-nav-icon" aria-hidden="true">☰</span><span>${esc(menuLabel)}</span></summary><nav class="mobile-nav-links" aria-label="${esc(menuLabel)}"><a href="${l.home}#routes">${esc(l.nav.routes)}</a><a href="#service">${esc(l.nav.service)}</a><a href="#faq">${esc(l.nav.faq)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.nav.contact)}</a></nav></details>
     <details class="language-menu"><summary>${l.code.toUpperCase()}<span aria-hidden="true">⌄</span></summary><div>${languageMenu(lang, type, routeKey)}</div></details>
   </header>`;
 }
@@ -385,7 +386,7 @@ function carOptions(lang) {
 
 function quickBooking(lang, routeKey = "vilnius") {
   const l = locale[lang], ui = bookingLabels[lang];
-  return `<form class="quick-booking" data-lang="${lang}" action="#contact">
+  return `<form class="quick-booking" data-lang="${lang}" action="#booking-dialog">
     ${locationFormField(lang, "fromPreset", "quick", l.fromNames[routeKey], "quick-from")}
     ${locationFormField(lang, "to", "quick", l.fieldValues.to, "quick-to")}
     <label class="quick-date"><span>${esc(ui.date)}</span><input name="date" type="datetime-local" required></label>
@@ -396,12 +397,14 @@ function quickBooking(lang, routeKey = "vilnius") {
 }
 
 function bookingForm(lang, routeKey = "vilnius") {
-  const l = locale[lang], ui = bookingLabels[lang];
-  return `<section class="booking-section" id="contact">
-    <div class="booking-copy"><span class="eyebrow">ComfortLine</span><h2>${esc(l.formTitle)}</h2><p>${esc(l.formLead)}</p><div class="direct-contact"><a href="tel:${phoneHref}">${icons.phone}<span>${esc(l.call)}<strong>${phoneDisplay}</strong></span></a><a href="mailto:${email}">${icons.mail}<span>${esc(l.emailLabel)}<strong>${email}</strong></span></a></div>${messengerButtons()}</div>
-    <div class="booking-card">
-      <h3>${esc(ui.detailTitle)}</h3>
-      <form class="booking-form" data-lang="${lang}" data-email="${email}">
+  const l = locale[lang], ui = bookingLabels[lang], popup = bookingPopupUi[lang];
+  return `<dialog class="booking-dialog" id="booking-dialog" aria-labelledby="booking-dialog-title">
+    <div class="booking-dialog-shell">
+      <div class="booking-dialog-header"><div><span class="eyebrow">${esc(popup.help)}</span>
+        <h2 id="booking-dialog-title">${esc(popup.header)}</h2><p>${esc(popup.subtitle)}</p></div>
+        <button type="button" class="booking-dialog-close" data-close-booking aria-label="${esc(popup.close)}"><span aria-hidden="true">×</span></button>
+      </div>
+      <form class="booking-form" data-lang="${lang}" data-email="${email}" action="/${lang}/thank-you/" method="get">
         ${locationFormField(lang, "fromPreset", "details", l.fromNames[routeKey])}
         ${locationFormField(lang, "to", "details", l.fieldValues.to)}
         <label><span>${esc(ui.pickupAddress)}</span><input name="pickupAddress" placeholder="${esc(l.fieldValues.fromPlaceholder)}"></label>
@@ -416,11 +419,11 @@ function bookingForm(lang, routeKey = "vilnius") {
         <label><span>${esc(ui.phone)}</span><input type="tel" name="phone" autocomplete="tel" placeholder="${esc(l.fieldValues.phone)}" required></label>
         <label class="full"><span>${esc(ui.email)}</span><input type="email" name="customerEmail" autocomplete="email"></label>
         <label class="full"><span>${esc(ui.notes)}</span><textarea name="notes" rows="3"></textarea></label>
-        <div class="booking-submit-actions"><button type="submit" data-send="email">${esc(ui.submit)} ${icons.arrow}</button><button type="submit" data-send="whatsapp" class="booking-via-whatsapp"><img src="/assets/social/whatsapp.svg" width="20" height="20" alt="" aria-hidden="true">${esc(ui.whatsapp)}</button></div>
-        <small class="booking-explanation">${esc(ui.info)}</small>
+        <button type="submit" class="booking-prepare">${esc(ui.submit)} ${icons.arrow}</button>
+        <small class="booking-explanation">${esc(popup.thanksNotice)}</small>
       </form>
     </div>
-  </section>`;
+  </dialog>`;
 }
 
 function faq(l) {
@@ -435,9 +438,9 @@ function floatingContact() {
   return `<nav class="floating-social" aria-label="ComfortLine messaging and social profiles">${socialChannels.map(channel => socialLink(channel, "social-floating")).join("")}</nav>`;
 }
 
-function layout({ lang, title, description, canonical, alternates, body, schema }) {
+function layout({ lang, title, description, canonical, alternates, body, schema, routeKey = "vilnius" }) {
   const l = locale[lang];
-  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="ComfortLine"><meta property="og:locale" content="${esc(l.locale)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${base}/assets/comfortline-transfer-van.webp"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${floatingContact()}</body></html>`;
+  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="ComfortLine"><meta property="og:locale" content="${esc(l.locale)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${base}/assets/comfortline-transfer-van.webp"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${bookingForm(lang, routeKey)}${floatingContact()}</body></html>`;
 }
 
 function businessSchema(lang, url) {
@@ -450,12 +453,12 @@ function hubPage(lang) {
   const canonical = `${base}/${lang}/`;
   const title = `${l.hubTitle} | ComfortLine`;
   const body = `${header(lang)}<main>
-    <section class="hero hero-home"><div class="hero-overlay"></div><div class="hero-content"><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(l.hubTitle)}</h1><p>${esc(l.hubDescription)}</p><div class="hero-actions"><a class="button primary" href="#contact">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang)}</div><div class="route-orbit" aria-hidden="true"><span>VNO</span><i></i><b>MSQ</b><i></i><span>WAW</span><i></i><span>RIX</span></div></section>
+    <section class="hero hero-home"><div class="hero-overlay"></div><div class="hero-content"><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(l.hubTitle)}</h1><p>${esc(l.hubDescription)}</p><div class="hero-actions"><a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang)}</div><div class="route-orbit" aria-hidden="true"><span>VNO</span><i></i><b>MSQ</b><i></i><span>WAW</span><i></i><span>RIX</span></div></section>
     ${trustStrip(l)}
     <section class="section routes-section" id="routes"><div class="section-head"><span class="eyebrow">Comfortline routes</span><h2>${esc(l.routesTitle)}</h2><p>${esc(l.routesLead)}</p></div><div class="route-grid three">${routeCards(lang)}</div></section>
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">Door to door</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     <section class="section steps-section"><div class="section-head"><span class="eyebrow">3 steps</span><h2>${esc(l.stepsTitle)}</h2></div><div class="steps">${l.steps.map(([n, h, p]) => `<article><span>${n}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
-    ${bookingForm(lang)}${faq(l)}</main>${footer(l)}`;
+    ${faq(l)}</main>${footer(l)}`;
   return layout({ lang, title, description: l.hubDescription, canonical, alternates: alternateLinks("home"), body, schema: businessSchema(lang, canonical) });
 }
 
@@ -483,16 +486,16 @@ function routePage(lang, key) {
   const faqSchema = { "@type": "FAQPage", mainEntity: [...seo.faqs, ...l.faqs].map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
   const schema = { "@context": "https://schema.org", "@graph": [businessSchema(lang, canonical), { "@type": "Service", name: h1, serviceType: "Private airport and intercity transfer", description: seo.intro, provider: { "@type": "TaxiService", name: "ComfortLine" }, areaServed: [l.fromNames[key], "Minsk"], url: canonical }, { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: l.nav.routes, item: `${base}/${lang}/` }, { "@type": "ListItem", position: 2, name: l.routeNames[key], item: canonical }] }, faqSchema] };
   const body = `${header(lang, "route", key)}<main>
-    <section class="route-hero"><div class="route-hero-bg"></div><div class="route-hero-content"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(l.routeNames[key])}</span></nav><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(h1)}</h1><p>${esc(seo.intro)}</p><div class="hero-actions"><a class="button primary" href="#contact">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang, key)}</div><div class="journey-card"><div><span>${esc(l.fromNames[key])}</span><b>${r.airport}</b></div><div class="journey-line"><i></i><em>${r.distance}</em><i></i></div><div><span>Minsk</span><b>MSQ</b></div></div></section>
+    <section class="route-hero"><div class="route-hero-bg"></div><div class="route-hero-content"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(l.routeNames[key])}</span></nav><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(h1)}</h1><p>${esc(seo.intro)}</p><div class="hero-actions"><a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang, key)}</div><div class="journey-card"><div><span>${esc(l.fromNames[key])}</span><b>${r.airport}</b></div><div class="journey-line"><i></i><em>${r.distance}</em><i></i></div><div><span>Minsk</span><b>MSQ</b></div></div></section>
     ${trustStrip(l)}
     <section class="facts-section"><article><span>${icons.pin}</span><div><small>${esc(l.facts.distance)}</small><strong>${r.distance}</strong></div></article><article><span class="clock">◷</span><div><small>${esc(l.facts.time)}</small><strong>${r.time}</strong><em>${esc(l.facts.note)}</em></div></article><article><span class="plane">✈</span><div><small>${esc(l.facts.airport)}</small><strong>${r.airport}</strong></div></article></section>
     ${routeEditorial(lang, key)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">${esc(l.routeNames[key])}</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     <section class="section steps-section"><div class="section-head"><span class="eyebrow">3 steps</span><h2>${esc(l.stepsTitle)}</h2></div><div class="steps">${l.steps.map(([n, h, p]) => `<article><span>${n}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
-    ${bookingForm(lang, key)}${faq(l)}
+    ${faq(l)}
     <section class="section other-routes"><div class="section-head"><span class="eyebrow">Comfortline</span><h2>${esc(l.otherTitle)}</h2></div><div class="route-grid">${routeCards(lang, key)}</div></section>
     </main>${footer(l)}`;
-  return layout({ lang, title: seo.title, description, canonical, alternates: alternateLinks("route", key), body, schema });
+  return layout({ lang, title: seo.title, description, canonical, alternates: alternateLinks("route", key), body, schema, routeKey: key });
 }
 
 function gateway() {
