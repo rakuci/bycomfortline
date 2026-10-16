@@ -303,7 +303,7 @@ const bookingLabels = {
     name: "Your name", phone: "Contact phone", email: "Email (optional)", notes: "Additional requests",
     sedan: "Sedan", minivan: "Minivan / minibus", premium: "Premium",
     whatsapp: "Send via WhatsApp",
-    submit: "Prepare booking enquiry", info: "Choose email or WhatsApp to open a pre-filled enquiry. Please send it; a booking is confirmed only after our manager replies.",
+    submit: "Send booking enquiry", info: "Choose email or WhatsApp to open a pre-filled enquiry. Please send it; a booking is confirmed only after our manager replies.",
     airport: { vno: "Vilnius Airport (VNO)", waw: "Warsaw Chopin Airport (WAW)", wmi: "Warsaw Modlin Airport (WMI)", rix: "Riga Airport (RIX)" }
   },
   ru: {
@@ -314,7 +314,7 @@ const bookingLabels = {
     name: "Ваше имя", phone: "Телефон для связи", email: "Email (необязательно)", notes: "Пожелания к поездке",
     sedan: "Седан", minivan: "Минивэн / микроавтобус", premium: "Премиум",
     whatsapp: "Отправить в WhatsApp",
-    submit: "Подготовить заявку", info: "Выберите email или WhatsApp, чтобы подготовить заявку. Отправьте сообщение; бронирование подтверждает менеджер после ответа.",
+    submit: "Отправить заявку", info: "Выберите email или WhatsApp, чтобы подготовить заявку. Отправьте сообщение; бронирование подтверждает менеджер после ответа.",
     airport: { vno: "Аэропорт Вильнюса (VNO)", waw: "Варшава Шопен (WAW)", wmi: "Варшава Модлин (WMI)", rix: "Аэропорт Риги (RIX)" }
   },
   pl: {
@@ -325,7 +325,7 @@ const bookingLabels = {
     name: "Imię i nazwisko", phone: "Telefon kontaktowy", email: "Email (opcjonalnie)", notes: "Dodatkowe uwagi",
     sedan: "Sedan", minivan: "Minivan / bus", premium: "Premium",
     whatsapp: "Wyślij przez WhatsApp",
-    submit: "Przygotuj zapytanie", info: "Wybierz e-mail lub WhatsApp, aby przygotować zapytanie. Wyślij wiadomość; rezerwację potwierdzi nasz koordynator.",
+    submit: "Wyślij zapytanie", info: "Wybierz e-mail lub WhatsApp, aby przygotować zapytanie. Wyślij wiadomość; rezerwację potwierdzi nasz koordynator.",
     airport: { vno: "Lotnisko Wilno (VNO)", waw: "Warszawa Chopin (WAW)", wmi: "Warszawa Modlin (WMI)", rix: "Lotnisko Ryga (RIX)" }
   },
   lt: {
@@ -336,7 +336,7 @@ const bookingLabels = {
     name: "Jūsų vardas", phone: "Kontaktinis telefonas", email: "El. paštas (nebūtina)", notes: "Papildomi pageidavimai",
     sedan: "Sedanas", minivan: "Minivenas / mikroautobusas", premium: "Premium",
     whatsapp: "Siųsti per WhatsApp",
-    submit: "Paruošti užklausą", info: "Pasirinkite el. paštą arba WhatsApp paruoštai užklausai atidaryti. Išsiųskite ją; užsakymą patvirtina vadybininkas.",
+    submit: "Siųsti užklausą", info: "Pasirinkite el. paštą arba WhatsApp paruoštai užklausai atidaryti. Išsiųskite ją; užsakymą patvirtina vadybininkas.",
     airport: { vno: "Vilniaus oro uostas (VNO)", waw: "Varšuvos Šopeno oro uostas (WAW)", wmi: "Varšuvos Modlino oro uostas (WMI)", rix: "Rygos oro uostas (RIX)" }
   },
   lv: {
@@ -347,7 +347,7 @@ const bookingLabels = {
     name: "Jūsu vārds", phone: "Kontakttālrunis", email: "E-pasts (nav obligāts)", notes: "Papildu vēlmes",
     sedan: "Sedans", minivan: "Minivens / mikroautobuss", premium: "Premium",
     whatsapp: "Sūtīt ar WhatsApp",
-    submit: "Sagatavot pieprasījumu", info: "Izvēlieties e-pastu vai WhatsApp, lai atvērtu sagatavotu pieprasījumu. Nosūtiet ziņu; rezervāciju apstiprina koordinators.",
+    submit: "Nosūtīt pieprasījumu", info: "Izvēlieties e-pastu vai WhatsApp, lai atvērtu sagatavotu pieprasījumu. Nosūtiet ziņu; rezervāciju apstiprina koordinators.",
     airport: { vno: "Viļņas lidosta (VNO)", waw: "Varšavas Šopēna lidosta (WAW)", wmi: "Varšavas Modlinas lidosta (WMI)", rix: "Rīgas lidosta (RIX)" }
   }
 };
@@ -420,7 +420,7 @@ function bookingForm(lang, routeKey = "vilnius") {
         <h2 id="booking-dialog-title">${esc(popup.header)}</h2><p>${esc(popup.subtitle)}</p></div>
         <button type="button" class="booking-dialog-close" data-close-booking aria-label="${esc(popup.close)}"><span aria-hidden="true">×</span></button>
       </div>
-      <form class="booking-form" data-lang="${lang}" data-email="${email}" method="dialog">
+      <form class="booking-form" data-lang="${lang}" data-email="${email}" data-sending="${esc(popup.sending)}" data-send-error="${esc(popup.sendError)}" data-storage-success="${esc(popup.storageSuccess)}" action="/api/booking" method="post">
         ${locationFormField(lang, "fromPreset", "details", l.fromNames[routeKey])}
         ${locationFormField(lang, "to", "details", l.fieldValues.to)}
         <label><span>${esc(ui.pickupAddress)}</span><input name="pickupAddress" placeholder="${esc(l.fieldValues.fromPlaceholder)}"></label>
@@ -435,8 +435,10 @@ function bookingForm(lang, routeKey = "vilnius") {
         <label><span>${esc(ui.phone)}</span><input type="tel" name="phone" autocomplete="tel" placeholder="${esc(l.fieldValues.phone)}" required></label>
         <label class="full"><span>${esc(ui.email)}</span><input type="email" name="customerEmail" autocomplete="email"></label>
         <label class="full"><span>${esc(ui.notes)}</span><textarea name="notes" rows="3"></textarea></label>
+        <div class="booking-spam-trap" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
         <button type="submit" class="booking-prepare">${esc(ui.submit)} ${icons.arrow}</button>
-        <small class="booking-explanation">${esc(popup.thanksNotice)}</small>
+        <p class="booking-status" role="status" aria-live="polite" hidden></p>
+        <small class="booking-explanation">${esc(popup.formNotice)}</small>
       </form>
     </div>
   </dialog>`;
