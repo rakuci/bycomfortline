@@ -130,40 +130,75 @@
     });
   });
 
-  function createInquiryReference() {
-    const day = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-    const bytes = new Uint8Array(5);
-    window.crypto.getRandomValues(bytes);
-    const suffix = [...bytes].map(n => n.toString(16).padStart(2, "0")).join("").toUpperCase();
-    return "CL-" + day + "-" + suffix;
-  }
-
   document.querySelectorAll(".booking-form").forEach((form) => {
-    form.addEventListener("submit", (event) => {
+    let sending = false;
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      if (!form.reportValidity()) return;
+      if (sending || !form.reportValidity()) return;
+
       const lang = form.dataset.lang || "en";
-      const fields = [...form.querySelectorAll("input[name], select[name], textarea[name]")].map((control) => {
-        const label = control.id ? form.querySelector('label[for="' + control.id + '"]') : null;
-        const text = label?.textContent?.trim() || control.closest("label")?.querySelector("span")?.textContent?.trim() || control.name;
-        const value = control.tagName === "SELECT"
-          ? control.selectedOptions[0]?.textContent?.trim() : control.value.trim();
-        return text + ": " + (value || "—");
-      });
-      const reference = createInquiryReference();
-      const subject = subjects[lang] || subjects.en;
-      const summary = fields.join("\n");
-      const enquiry = { reference, subject, summary, createdAt: new Date().toISOString() };
-      try { sessionStorage.setItem("comfortline-enquiry:" + reference, JSON.stringify(enquiry)); }
-      catch (error) {
-        // Storage may be disabled; keep the user in the form rather than lose their enquiry.
-        window.alert("Your browser is blocking temporary storage. Please allow session storage to continue, or use the contact buttons.");
-        return;
+      const sendButton = form.querySelector(".booking-prepare");
+      const message = form.querySelector(".booking-status");
+      const originalButtonMarkup = sendButton?.innerHTML || "";
+      const payload = Object.fromEntries(new FormData(form).entries());
+      const lines = [...form.querySelectorAll("input[name], select[name], textarea[name]")]
+        .filter((control) => control.name !== "website")
+        .map((control) => {
+          const label = control.id ? form.querySelector('label[for="' + control.id + '"]') : null;
+          const labelText = label?.textContent?.trim() ||
+            control.closest("label")?.querySelector("span")?.textContent?.trim() ||
+            control.name;
+          const fieldValue = control.tagName === "SELECT"
+            ? control.selectedOptions[0]?.textContent?.trim()
+            : control.value.trim();
+          return labelText + ": " + (fieldValue || "—");
+        });
+
+      sending = true;
+      if (message) { message.hidden = false; message.classList.remove("booking-error"); message.textContent = form.dataset.sending || "Sending…"; }
+      if (sendButton) { sendButton.disabled = true; sendButton.textContent = form.dataset.sending || "Sending…"; }
+
+      let accepted = false;
+      try {
+        const response = await fetch("/api/booking", {
+          method: "POST",
+          credentials: "same-origin",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ lang, fields: payload })
+        });
+        const result = await response.json();
+        if (!response.ok || result.success !== true || !/^CL-[0-9]{8}-[A-F0-9]{10}$/.test(result.reference)) {
+          throw new Error(result?.code || "email_dispatch_failed");
+        }
+
+        accepted = true; // Server confirms the mail service accepted the email for delivery.
+        const reference = result.reference;
+        const subject = subjects[lang] || subjects.en;
+        const enquiry = { reference, subject, summary: lines.join("\n"), createdAt: new Date().toISOString(), emailAccepted: true };
+        try {
+          sessionStorage.setItem("comfortline-enquiry:" + reference, JSON.stringify(enquiry));
+          if (Array.isArray(window.dataLayer)) {
+            window.dataLayer.push({ event: "booking_enquiry_email_accepted", enquiry_reference: reference, enquiry_language: lang });
+          }
+          window.location.assign("/" + lang + "/thank-you/?ref=" + encodeURIComponent(reference));
+        } catch (_) {
+          // The email was already accepted. Never ask for a retry when storage is blocked.
+          if (message) {
+            message.hidden = false;
+            message.textContent = (form.dataset.storageSuccess || "Enquiry emailed. Reference: ") + reference;
+          }
+        }
+      } catch (_) {
+        // No success response: keep every field visible and allow another attempt.
+        if (message) {
+          message.hidden = false;
+          message.classList.add("booking-error");
+          message.textContent = form.dataset.sendError || "Email sending failed. Please try again.";
+        }
+      } finally {
+        sending = false;
+        if (!accepted && sendButton) { sendButton.disabled = false; sendButton.innerHTML = originalButtonMarkup; }
       }
-      if (Array.isArray(window.dataLayer)) {
-        window.dataLayer.push({ event: "booking_enquiry_prepared", enquiry_reference: reference, enquiry_language: lang });
-      }
-      window.location.assign("/" + lang + "/thank-you/?ref=" + encodeURIComponent(reference));
     });
   });
 
