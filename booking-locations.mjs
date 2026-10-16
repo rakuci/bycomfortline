@@ -246,6 +246,10 @@ export const locationCatalog = [
 ];
 export const locationLabels = {
   "en": {
+    "popular": "Popular destinations",
+    "custom": "Use typed location",
+    "search": "Search cities, airports or type an address",
+
     "type": "Type a city, airport or address",
     "show": "Show suggested locations",
     "cities": "Nearby cities",
@@ -253,6 +257,10 @@ export const locationLabels = {
     "empty": "No matching suggestions. Enter any location."
   },
   "ru": {
+    "popular": "Популярные направления",
+    "custom": "Выбрать введённый адрес",
+    "search": "Поиск города, аэропорта или ввод адреса",
+
     "type": "Введите город, аэропорт или адрес",
     "show": "Показать варианты",
     "cities": "Города региона",
@@ -260,6 +268,10 @@ export const locationLabels = {
     "empty": "Нет совпадений. Можно ввести любой адрес."
   },
   "pl": {
+    "popular": "Popularne kierunki",
+    "custom": "Użyj wpisanej lokalizacji",
+    "search": "Wpisz miasto, lotnisko lub adres",
+
     "type": "Wpisz miasto, lotnisko lub adres",
     "show": "Pokaż proponowane miejsca",
     "cities": "Miasta w regionie",
@@ -267,6 +279,10 @@ export const locationLabels = {
     "empty": "Brak pasujących miejsc. Wpisz dowolny adres."
   },
   "lt": {
+    "popular": "Populiarios vietos",
+    "custom": "Naudoti įvestą vietą",
+    "search": "Ieškokite miesto, oro uosto arba įveskite adresą",
+
     "type": "Įveskite miestą, oro uostą ar adresą",
     "show": "Rodyti siūlomas vietas",
     "cities": "Regiono miestai",
@@ -274,6 +290,10 @@ export const locationLabels = {
     "empty": "Atitikmenų nėra. Galite įrašyti bet kurią vietą."
   },
   "lv": {
+    "popular": "Populāri galamērķi",
+    "custom": "Izmantot ievadīto vietu",
+    "search": "Meklēt pilsētu, lidostu vai ievadīt adresi",
+
     "type": "Ievadiet pilsētu, lidostu vai adresi",
     "show": "Rādīt ieteiktās vietas",
     "cities": "Reģiona pilsētas",
