@@ -212,8 +212,11 @@
     const details = thankyou.querySelector("[data-inquiry-summary]");
     const actions = thankyou.querySelector(".thanks-actions");
     const missing = thankyou.querySelector(".thanks-missing");
+    const confirmation = thankyou.querySelector("[data-inquiry-confirmation]");
     if (refNode) refNode.textContent = ref || "—";
-    if (draft?.reference === ref) {
+    if (draft?.reference === ref && draft.emailAccepted === true) {
+      if (confirmation) confirmation.hidden = false;
+      if (missing) missing.hidden = true;
       const text = draft.subject + "\nReference: " + ref + "\n\n" + draft.summary;
       if (details) details.textContent = draft.summary;
       const wa = thankyou.querySelector("[data-inquiry-whatsapp]");
