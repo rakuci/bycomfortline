@@ -57,6 +57,10 @@
       }).filter(Boolean);
       const body = fields.join("\n");
       const subject = subjects[lang] || subjects.en;
+      if (event.submitter?.dataset.send === "whatsapp") {
+        window.open("https://wa.me/375291552776?text=" + encodeURIComponent(subject + "\n\n" + body), "_blank", "noopener,noreferrer");
+        return;
+      }
       window.location.href = "mailto:" + form.dataset.email +
         "?subject=" + encodeURIComponent(subject) +
         "&body=" + encodeURIComponent(body);
