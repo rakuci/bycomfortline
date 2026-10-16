@@ -357,20 +357,36 @@ function locationField(lang, field, scope, initialValue) {
   const id = `${scope}-${field}-${lang}`;
   const labels = locationLabels[lang];
   const inputLabel = field === "fromPreset" ? bookingLabels[lang].from : bookingLabels[lang].to;
-  const categories = [["city", labels.cities], ["airport", labels.airports]];
-  const groups = categories.map(([type, label]) => {
-    const items = locationCatalog.filter(item => item.type === type).map(item => {
-      const value = item.names[lang];
-      const search = [item.id, ...Object.values(item.names)].join(" ");
-      return `<button type="button" class="location-choice" data-value="${esc(value)}" data-search="${esc(search)}">${esc(value)}</button>`;
-    }).join("");
-    return `<div class="location-group" data-location-group><strong class="location-group-name">${esc(label)}</strong><div class="location-group-items">${items}</div></div>`;
-  }).join("");
   return `<div class="location-control" data-location-picker>
-    <input id="${id}" type="text" name="${field}" value="${esc(initialValue)}" placeholder="${esc(labels.type)}" autocomplete="off" required>
-    <button type="button" class="location-open" aria-label="${esc(labels.show)}: ${esc(inputLabel)}" aria-controls="${id}-choices" aria-expanded="false"><span aria-hidden="true">⌄</span></button>
-    <div class="location-suggestions" id="${id}-choices" hidden>${groups}<p class="location-empty" hidden>${esc(labels.empty)}</p></div>
+    <input id="${id}" type="text" name="${field}" value="${esc(initialValue)}" placeholder="${esc(labels.type)}" autocomplete="off" readonly required aria-haspopup="dialog" aria-controls="destination-dialog">
+    <button type="button" class="location-open" aria-label="${esc(labels.show)}: ${esc(inputLabel)}" aria-haspopup="dialog" aria-controls="destination-dialog"><span aria-hidden="true">⌄</span></button>
   </div>`;
+}
+
+function destinationPopup(lang) {
+  const ui = locationLabels[lang];
+  const choices = (items) => items.map(item => {
+    const value = item.names[lang];
+    const search = [item.id, ...Object.values(item.names)].join(" ");
+    return `<button type="button" class="destination-option" data-value="${esc(value)}" data-search="${esc(search)}"><span class="destination-pin" aria-hidden="true">${item.type === "airport" ? "✈" : "⌖"}</span><span>${esc(value)}</span><span class="destination-option-arrow" aria-hidden="true">↗</span></button>`;
+  }).join("");
+  const featured = locationCatalog.filter(item => ["minsk", "vilnius", "warsaw", "riga", "vno", "waw", "rix"].includes(item.id));
+  const groups = [
+    ["popular", ui.popular, featured],
+    ["cities", ui.cities, locationCatalog.filter(item => item.type === "city")],
+    ["airports", ui.airports, locationCatalog.filter(item => item.type === "airport")]
+  ];
+  return `<dialog class="destination-dialog" id="destination-dialog" aria-labelledby="destination-dialog-title">
+    <div class="destination-dialog-body">
+      <div class="destination-dialog-top"><div><span class="eyebrow">ComfortLine</span><h2 id="destination-dialog-title">${esc(ui.popular)}</h2></div>
+        <button type="button" class="destination-close" data-close-destination aria-label="${esc(bookingPopupUi[lang].close)}">×</button></div>
+      <div class="destination-search-box"><svg aria-hidden="true" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+        <input type="search" class="destination-search" placeholder="${esc(ui.search)}" aria-label="${esc(ui.search)}" autocomplete="off"></div>
+      <div class="destination-list">${groups.map(([type, title, items]) => `<section class="destination-group" data-destination-group="${type}"><h3>${esc(title)}</h3><div>${choices(items)}</div></section>`).join("")}
+        <p class="destination-empty" hidden>${esc(ui.empty)}</p></div>
+      <button type="button" class="destination-custom" data-custom-destination hidden>${esc(ui.custom)} <span aria-hidden="true">↗</span></button>
+    </div>
+  </dialog>`;
 }
 
 function locationFormField(lang, field, scope, initialValue, className = "") {
@@ -440,7 +456,7 @@ function floatingContact() {
 
 function layout({ lang, title, description, canonical, alternates, body, schema, routeKey = "vilnius" }) {
   const l = locale[lang];
-  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="ComfortLine"><meta property="og:locale" content="${esc(l.locale)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${base}/assets/comfortline-transfer-van.webp"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${bookingForm(lang, routeKey)}${floatingContact()}</body></html>`;
+  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="ComfortLine"><meta property="og:locale" content="${esc(l.locale)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${base}/assets/comfortline-transfer-van.webp"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${bookingForm(lang, routeKey)}${destinationPopup(lang)}${floatingContact()}</body></html>`;
 }
 
 function businessSchema(lang, url) {
