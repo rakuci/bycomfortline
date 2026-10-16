@@ -301,7 +301,7 @@ const bookingLabels = {
     name: "Your name", phone: "Contact phone", email: "Email (optional)", notes: "Additional requests",
     sedan: "Sedan", minivan: "Minivan / minibus", premium: "Premium",
     whatsapp: "Send via WhatsApp",
-    submit: "Prepare booking enquiry", info: "This opens your email app with your trip details. The booking is confirmed only after our manager replies.",
+    submit: "Prepare booking enquiry", info: "Choose email or WhatsApp to open a pre-filled enquiry. Please send it; a booking is confirmed only after our manager replies.",
     airport: { vno: "Vilnius Airport (VNO)", waw: "Warsaw Chopin Airport (WAW)", wmi: "Warsaw Modlin Airport (WMI)", rix: "Riga Airport (RIX)" }
   },
   ru: {
@@ -312,7 +312,7 @@ const bookingLabels = {
     name: "Ваше имя", phone: "Телефон для связи", email: "Email (необязательно)", notes: "Пожелания к поездке",
     sedan: "Седан", minivan: "Минивэн / микроавтобус", premium: "Премиум",
     whatsapp: "Отправить в WhatsApp",
-    submit: "Подготовить заявку", info: "Откроется письмо с деталями поездки. Бронирование подтверждается менеджером после ответа.",
+    submit: "Подготовить заявку", info: "Выберите email или WhatsApp, чтобы подготовить заявку. Отправьте сообщение; бронирование подтверждает менеджер после ответа.",
     airport: { vno: "Аэропорт Вильнюса (VNO)", waw: "Варшава Шопен (WAW)", wmi: "Варшава Модлин (WMI)", rix: "Аэропорт Риги (RIX)" }
   },
   pl: {
@@ -323,7 +323,7 @@ const bookingLabels = {
     name: "Imię i nazwisko", phone: "Telefon kontaktowy", email: "Email (opcjonalnie)", notes: "Dodatkowe uwagi",
     sedan: "Sedan", minivan: "Minivan / bus", premium: "Premium",
     whatsapp: "Wyślij przez WhatsApp",
-    submit: "Przygotuj zapytanie", info: "Otworzy się wiadomość email ze szczegółami. Rezerwacja wymaga potwierdzenia przez koordynatora.",
+    submit: "Przygotuj zapytanie", info: "Wybierz e-mail lub WhatsApp, aby przygotować zapytanie. Wyślij wiadomość; rezerwację potwierdzi nasz koordynator.",
     airport: { vno: "Lotnisko Wilno (VNO)", waw: "Warszawa Chopin (WAW)", wmi: "Warszawa Modlin (WMI)", rix: "Lotnisko Ryga (RIX)" }
   },
   lt: {
@@ -334,7 +334,7 @@ const bookingLabels = {
     name: "Jūsų vardas", phone: "Kontaktinis telefonas", email: "El. paštas (nebūtina)", notes: "Papildomi pageidavimai",
     sedan: "Sedanas", minivan: "Minivenas / mikroautobusas", premium: "Premium",
     whatsapp: "Siųsti per WhatsApp",
-    submit: "Paruošti užklausą", info: "Atsidarys el. laiškas su kelionės duomenimis. Užsakymas patvirtinamas tik gavus vadybininko atsakymą.",
+    submit: "Paruošti užklausą", info: "Pasirinkite el. paštą arba WhatsApp paruoštai užklausai atidaryti. Išsiųskite ją; užsakymą patvirtina vadybininkas.",
     airport: { vno: "Vilniaus oro uostas (VNO)", waw: "Varšuvos Šopeno oro uostas (WAW)", wmi: "Varšuvos Modlino oro uostas (WMI)", rix: "Rygos oro uostas (RIX)" }
   },
   lv: {
@@ -345,7 +345,7 @@ const bookingLabels = {
     name: "Jūsu vārds", phone: "Kontakttālrunis", email: "E-pasts (nav obligāts)", notes: "Papildu vēlmes",
     sedan: "Sedans", minivan: "Minivens / mikroautobuss", premium: "Premium",
     whatsapp: "Sūtīt ar WhatsApp",
-    submit: "Sagatavot pieprasījumu", info: "Tiks atvērta e-pasta vēstule ar brauciena datiem. Rezervācija jāapstiprina koordinatoram.",
+    submit: "Sagatavot pieprasījumu", info: "Izvēlieties e-pastu vai WhatsApp, lai atvērtu sagatavotu pieprasījumu. Nosūtiet ziņu; rezervāciju apstiprina koordinators.",
     airport: { vno: "Viļņas lidosta (VNO)", waw: "Varšavas Šopēna lidosta (WAW)", wmi: "Varšavas Modlinas lidosta (WMI)", rix: "Rīgas lidosta (RIX)" }
   }
 };
