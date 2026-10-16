@@ -22,6 +22,27 @@
   }
 
 
+  // iOS Safari's on-screen keyboard changes the visual viewport but not always
+  // the CSS layout viewport. Keep dialogs inside the visible portion of screen.
+  function syncMobileDialogViewport() {
+    const viewport = window.visualViewport;
+    const mobile = window.matchMedia("(max-width: 760px)").matches;
+    const root = document.documentElement;
+    if (!mobile) {
+      root.style.removeProperty("--booking-visual-height");
+      root.style.removeProperty("--booking-visual-top");
+      return;
+    }
+    root.style.setProperty("--booking-visual-height",
+      Math.max(180, Math.floor(viewport?.height || window.innerHeight)) + "px");
+    root.style.setProperty("--booking-visual-top",
+      Math.max(0, Math.floor(viewport?.offsetTop || 0)) + "px");
+  }
+  syncMobileDialogViewport();
+  window.addEventListener("resize", syncMobileDialogViewport, { passive: true });
+  window.visualViewport?.addEventListener("resize", syncMobileDialogViewport, { passive: true });
+  window.visualViewport?.addEventListener("scroll", syncMobileDialogViewport, { passive: true });
+
   const bookingDialog = document.getElementById("booking-dialog");
   const destinationDialog = document.getElementById("destination-dialog");
   const destinationSearch = destinationDialog?.querySelector(".destination-search");
@@ -56,8 +77,9 @@
     destinationDialog.querySelector("#destination-dialog-title").textContent = label || "Location";
     destinationSearch.value = "";
     filterDestinationOptions("");
+    syncMobileDialogViewport();
     destinationDialog.showModal();
-    destinationSearch.focus();
+    destinationSearch.focus({ preventScroll: true });
   }
 
   document.querySelectorAll("[data-location-picker]").forEach((picker) => {
@@ -107,6 +129,7 @@
   document.querySelectorAll("[data-open-booking]").forEach((trigger) => {
     trigger.addEventListener("click", (event) => {
       event.preventDefault();
+      syncMobileDialogViewport();
       bookingDialog?.showModal();
     });
   });
@@ -241,8 +264,12 @@
       }
       const detailedPicker = details.querySelector("[data-passenger-picker]");
       if (detailedPicker) updatePassengerPicker(detailedPicker);
+      syncMobileDialogViewport();
       bookingDialog.showModal();
-      getControl(details, "pickupAddress")?.focus({ preventScroll: true });
+      // Do not show the mobile keyboard immediately: allow the user to review the form.
+      if (!window.matchMedia("(max-width: 760px)").matches) {
+        getControl(details, "pickupAddress")?.focus({ preventScroll: true });
+      }
     });
   });
 
