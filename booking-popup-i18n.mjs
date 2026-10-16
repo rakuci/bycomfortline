@@ -20,7 +20,8 @@ export const bookingPopupUi = {
     "fallback": "Our manager will confirm availability and price.",
     "sending": "Sending your enquiry…",
     "sendError": "We could not send your enquiry. Please try again, or contact us on WhatsApp. Your form details are still here.",
-    "storageSuccess": "Your enquiry was emailed successfully. Please note your reference: "
+    "storageSuccess": "Your enquiry was emailed successfully. Please note your reference: ",
+    "formNotice": "Press Send to email your trip details to info@comfortline.by. The coordinator will reply to confirm the price and availability."
   },
   "ru": {
     "header": "Оформление заявки на трансфер",
@@ -43,7 +44,8 @@ export const bookingPopupUi = {
     "fallback": "Менеджер подтвердит поездку и стоимость.",
     "sending": "Отправляем заявку…",
     "sendError": "Не удалось отправить заявку. Попробуйте ещё раз или напишите в WhatsApp. Введённые данные сохранены в форме.",
-    "storageSuccess": "Заявка отправлена по email. Номер для связи: "
+    "storageSuccess": "Заявка отправлена по email. Номер для связи: ",
+    "formNotice": "Нажмите «Отправить», чтобы отправить данные поездки на info@comfortline.by. Менеджер ответит и уточнит стоимость и возможность поездки."
   },
   "pl": {
     "header": "Dokończ zapytanie o transfer",
@@ -66,7 +68,8 @@ export const bookingPopupUi = {
     "fallback": "Koordynator potwierdzi dostępność i cenę.",
     "sending": "Wysyłanie zapytania…",
     "sendError": "Nie udało się wysłać zapytania. Spróbuj ponownie lub napisz na WhatsApp. Dane pozostają w formularzu.",
-    "storageSuccess": "Zapytanie zostało wysłane e-mailem. Numer: "
+    "storageSuccess": "Zapytanie zostało wysłane e-mailem. Numer: ",
+    "formNotice": "Kliknij „Wyślij”, aby przesłać szczegóły na info@comfortline.by. Koordynator potwierdzi dostępność i cenę."
   },
   "lt": {
     "header": "Užbaikite pervežimo užklausą",
@@ -89,7 +92,8 @@ export const bookingPopupUi = {
     "fallback": "Vadybininkas patvirtins galimybę ir kainą.",
     "sending": "Siunčiame užklausą…",
     "sendError": "Užklausos išsiųsti nepavyko. Bandykite dar kartą arba kreipkitės per WhatsApp. Forma liko užpildyta.",
-    "storageSuccess": "Užklausa sėkmingai išsiųsta el. paštu. Numeris: "
+    "storageSuccess": "Užklausa sėkmingai išsiųsta el. paštu. Numeris: ",
+    "formNotice": "Spauskite „Siųsti“, kad išsiųstumėte kelionės duomenis į info@comfortline.by. Vadybininkas patvirtins galimybę ir kainą."
   },
   "lv": {
     "header": "Pabeidziet transfēra pieprasījumu",
@@ -112,6 +116,7 @@ export const bookingPopupUi = {
     "fallback": "Koordinators apstiprinās pieejamību un cenu.",
     "sending": "Nosūtām pieprasījumu…",
     "sendError": "Neizdevās nosūtīt pieprasījumu. Mēģiniet vēlreiz vai rakstiet WhatsApp. Ievadītie dati saglabāti veidlapā.",
-    "storageSuccess": "Pieprasījums nosūtīts pa e-pastu. Numurs: "
+    "storageSuccess": "Pieprasījums nosūtīts pa e-pastu. Numurs: ",
+    "formNotice": "Nospiediet „Nosūtīt”, lai nosūtītu brauciena datus uz info@comfortline.by. Koordinators apstiprinās pieejamību un cenu."
   }
 };
