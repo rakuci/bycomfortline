@@ -13,6 +13,10 @@ const FIELD_RULES = {
   dropAddress: { max: 220 },
   date: { required: true, max: 22 },
   passengers: { required: true, max: 2 },
+  adults: { max: 2 },
+  children: { max: 2 },
+  infants: { max: 2 },
+  pets: { max: 2 },
   carClass: { required: true, max: 30 },
   luggage: { max: 2 },
   childSeats: { max: 2 },
@@ -31,6 +35,10 @@ const FIELD_LABELS = {
   dropAddress: "Адрес прибытия",
   date: "Дата и время поездки",
   passengers: "Пассажиры",
+  adults: "Взрослые",
+  children: "Дети",
+  infants: "Младенцы",
+  pets: "Питомцы",
   carClass: "Класс автомобиля",
   luggage: "Чемоданы",
   childSeats: "Детские кресла",
@@ -70,7 +78,21 @@ function validateBooking(body) {
   if (fields.fromPreset === fields.to) return null;
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(fields.date) || Number.isNaN(Date.parse(fields.date))) return null;
   if (!/^[1-8]$/.test(fields.passengers)) return null;
-  if (!["sedan", "minivan", "premium"].includes(fields.carClass)) return null;
+  const hasPassengerBreakdown = ["adults", "children", "infants"].some(name =>
+    Object.prototype.hasOwnProperty.call(incoming, name));
+  if (!hasPassengerBreakdown) {
+    // Continue accepting in-flight requests from users who opened the previous form.
+    fields.adults = fields.passengers;
+    fields.children = "0";
+    fields.infants = "0";
+  }
+  if (!Object.prototype.hasOwnProperty.call(incoming, "pets")) fields.pets = "0";
+  for (const name of ["adults", "children", "infants", "pets"]) {
+    if (!/^(?:0|[1-9][0-9]?)$/.test(fields[name]) || Number(fields[name]) > 8) return null;
+  }
+  if (Number(fields.adults) < 1 ||
+      Number(fields.adults) + Number(fields.children) + Number(fields.infants) !== Number(fields.passengers)) return null;
+  if (!["any", "comfort", "business", "premium", "sedan", "minivan"].includes(fields.carClass)) return null;
   if (!/^\d{0,2}$/.test(fields.luggage) || Number(fields.luggage || 0) > 25) return null;
   if (!/^\d{0,2}$/.test(fields.childSeats) || Number(fields.childSeats || 0) > 8) return null;
   if (fields.customerName.length < 2) return null;
@@ -84,7 +106,7 @@ function validateBooking(body) {
 }
 
 function bookingText({ lang, fields }, reference) {
-  const carLabels = { sedan: "Седан", minivan: "Минивэн / микроавтобус", premium: "Премиум" };
+  const carLabels = { any: "Любой", comfort: "Комфорт", business: "Бизнес", premium: "Премиум", sedan: "Седан", minivan: "Минивэн / микроавтобус" };
   const lines = [
     "byComfortLine — новая заявка на трансфер",
     "Отправитель: byComfortLine",
@@ -131,7 +153,11 @@ function bookingHtml({ lang, fields }, reference) {
   const trip = [
     fieldRow("Дата и время поездки", date, true),
     fieldRow("Пассажиры", fields.passengers, true),
-    fieldRow("Класс автомобиля", ({ sedan: "Седан", minivan: "Минивэн / микроавтобус", premium: "Премиум" })[fields.carClass] || fields.carClass),
+    fieldRow("Взрослые", fields.adults),
+    fieldRow("Дети", fields.children),
+    fieldRow("Младенцы", fields.infants),
+    fieldRow("Питомцы", fields.pets),
+    fieldRow("Класс автомобиля", ({ any: "Любой", comfort: "Комфорт", business: "Бизнес", premium: "Премиум", sedan: "Седан", minivan: "Минивэн / микроавтобус" })[fields.carClass] || fields.carClass),
     fieldRow("Чемоданы", fields.luggage),
     fieldRow("Детские кресла", fields.childSeats),
     fieldRow("Адрес подачи", fields.pickupAddress),
