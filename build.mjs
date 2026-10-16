@@ -420,7 +420,7 @@ function bookingForm(lang, routeKey = "vilnius") {
         <h2 id="booking-dialog-title">${esc(popup.header)}</h2><p>${esc(popup.subtitle)}</p></div>
         <button type="button" class="booking-dialog-close" data-close-booking aria-label="${esc(popup.close)}"><span aria-hidden="true">×</span></button>
       </div>
-      <form class="booking-form" data-lang="${lang}" data-email="${email}" action="/${lang}/thank-you/" method="get">
+      <form class="booking-form" data-lang="${lang}" data-email="${email}" method="dialog">
         ${locationFormField(lang, "fromPreset", "details", l.fromNames[routeKey])}
         ${locationFormField(lang, "to", "details", l.fieldValues.to)}
         <label><span>${esc(ui.pickupAddress)}</span><input name="pickupAddress" placeholder="${esc(l.fieldValues.fromPlaceholder)}"></label>
