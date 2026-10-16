@@ -1,5 +1,5 @@
-// Suggested cities and airports for transfer enquiries. This is not a live geocoding API,
-// a popularity ranking, or a guarantee that a requested route is available.
+// Curated route suggestions: pickups in Lithuania, Poland and Latvia, destinations in Belarus.
+// Not a live geocoding API or availability guarantee. Any custom address is allowed.
 export const locationCatalog = [
   {
     "id": "minsk",
@@ -242,6 +242,61 @@ export const locationCatalog = [
       "lt": "Minsko oro uostas (MSQ)",
       "lv": "Minskas lidosta (MSQ)"
     }
+  },
+  {
+    "id": "vitebsk",
+    "type": "city",
+    "names": {
+      "en": "Vitebsk",
+      "ru": "Витебск",
+      "pl": "Witebsk",
+      "lt": "Vitebskas",
+      "lv": "Vitebska"
+    }
+  },
+  {
+    "id": "gomel",
+    "type": "city",
+    "names": {
+      "en": "Gomel",
+      "ru": "Гомель",
+      "pl": "Homel",
+      "lt": "Gomelis",
+      "lv": "Gomeļa"
+    }
+  },
+  {
+    "id": "mogilev",
+    "type": "city",
+    "names": {
+      "en": "Mogilev",
+      "ru": "Могилёв",
+      "pl": "Mohylew",
+      "lt": "Mogiliovas",
+      "lv": "Mogiļeva"
+    }
+  },
+  {
+    "id": "baranovichi",
+    "type": "city",
+    "names": {
+      "en": "Baranovichi",
+      "ru": "Барановичи",
+      "pl": "Baranowicze",
+      "lt": "Baranovičiai",
+      "lv": "Baranaviči"
+    }
+  },
+  {
+    "id": "pinsk",
+    "type": "city",
+    "names": {
+      "en": "Pinsk",
+      "ru": "Пинск",
+      "pl": "Pińsk",
+      "lt": "Pinskas",
+      "lv": "Pinska"
+    }
   }
 ];
 export const locationLabels = {
@@ -249,55 +304,85 @@ export const locationLabels = {
     "popular": "Popular destinations",
     "custom": "Use typed location",
     "search": "Search cities, airports or type an address",
-
     "type": "Type a city, airport or address",
     "show": "Show suggested locations",
     "cities": "Nearby cities",
     "airports": "Airports",
-    "empty": "No matching suggestions. Enter any location."
+    "empty": "No matching suggestions. Enter any location.",
+    "fromPopular": "Popular pickup points",
+    "fromCities": "Cities in Lithuania, Poland and Latvia",
+    "fromAirports": "Neighbouring EU airports",
+    "toPopular": "Popular Belarus destinations",
+    "toCities": "Cities in Belarus",
+    "toAirports": "Belarus airports",
+    "destinationHint": "Select a city or airport, or search for an address"
   },
   "ru": {
     "popular": "Популярные направления",
     "custom": "Выбрать введённый адрес",
     "search": "Поиск города, аэропорта или ввод адреса",
-
     "type": "Введите город, аэропорт или адрес",
     "show": "Показать варианты",
     "cities": "Города региона",
     "airports": "Аэропорты",
-    "empty": "Нет совпадений. Можно ввести любой адрес."
+    "empty": "Нет совпадений. Можно ввести любой адрес.",
+    "fromPopular": "Популярные места отправления",
+    "fromCities": "Города Литвы, Польши и Латвии",
+    "fromAirports": "Аэропорты соседних стран ЕС",
+    "toPopular": "Популярные направления в Беларуси",
+    "toCities": "Города Беларуси",
+    "toAirports": "Аэропорты Беларуси",
+    "destinationHint": "Выберите город или аэропорт либо введите адрес"
   },
   "pl": {
     "popular": "Popularne kierunki",
     "custom": "Użyj wpisanej lokalizacji",
     "search": "Wpisz miasto, lotnisko lub adres",
-
     "type": "Wpisz miasto, lotnisko lub adres",
     "show": "Pokaż proponowane miejsca",
     "cities": "Miasta w regionie",
     "airports": "Lotniska",
-    "empty": "Brak pasujących miejsc. Wpisz dowolny adres."
+    "empty": "Brak pasujących miejsc. Wpisz dowolny adres.",
+    "fromPopular": "Popularne miejsca odbioru",
+    "fromCities": "Miasta Litwy, Polski i Łotwy",
+    "fromAirports": "Lotniska sąsiednich krajów UE",
+    "toPopular": "Popularne miejsca na Białorusi",
+    "toCities": "Miasta Białorusi",
+    "toAirports": "Lotniska Białorusi",
+    "destinationHint": "Wybierz miasto lub lotnisko albo wpisz adres"
   },
   "lt": {
     "popular": "Populiarios vietos",
     "custom": "Naudoti įvestą vietą",
     "search": "Ieškokite miesto, oro uosto arba įveskite adresą",
-
     "type": "Įveskite miestą, oro uostą ar adresą",
     "show": "Rodyti siūlomas vietas",
     "cities": "Regiono miestai",
     "airports": "Oro uostai",
-    "empty": "Atitikmenų nėra. Galite įrašyti bet kurią vietą."
+    "empty": "Atitikmenų nėra. Galite įrašyti bet kurią vietą.",
+    "fromPopular": "Populiarios paėmimo vietos",
+    "fromCities": "Lietuvos, Lenkijos ir Latvijos miestai",
+    "fromAirports": "Kaimyninių ES šalių oro uostai",
+    "toPopular": "Populiarios vietos Baltarusijoje",
+    "toCities": "Baltarusijos miestai",
+    "toAirports": "Baltarusijos oro uostai",
+    "destinationHint": "Pasirinkite miestą arba oro uostą, ar įveskite adresą"
   },
   "lv": {
     "popular": "Populāri galamērķi",
     "custom": "Izmantot ievadīto vietu",
     "search": "Meklēt pilsētu, lidostu vai ievadīt adresi",
-
     "type": "Ievadiet pilsētu, lidostu vai adresi",
     "show": "Rādīt ieteiktās vietas",
     "cities": "Reģiona pilsētas",
     "airports": "Lidostas",
-    "empty": "Nav atbilstošu vietu. Varat ievadīt jebkuru adresi."
+    "empty": "Nav atbilstošu vietu. Varat ievadīt jebkuru adresi.",
+    "fromPopular": "Populāras izbraukšanas vietas",
+    "fromCities": "Lietuvas, Polijas un Latvijas pilsētas",
+    "fromAirports": "Kaimiņu ES valstu lidostas",
+    "toPopular": "Populāri galamērķi Baltkrievijā",
+    "toCities": "Baltkrievijas pilsētas",
+    "toAirports": "Baltkrievijas lidostas",
+    "destinationHint": "Izvēlieties pilsētu vai lidostu, vai ierakstiet adresi"
   }
 };
