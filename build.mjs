@@ -400,14 +400,60 @@ function carOptions(lang) {
   return `<option value="sedan">${esc(l.sedan)}</option><option value="minivan">${esc(l.minivan)}</option><option value="premium">${esc(l.premium)}</option>`;
 }
 
+function passengerPicker(lang, scope) {
+  const ui = bookingLabels[lang], words = bookingPopupUi[lang].passengerPicker;
+  const id = `passenger-panel-${scope}-${lang}`;
+  const counters = [
+    ["adults", words.adults, 1],
+    ["children", words.children, 0],
+    ["infants", words.infants, 0],
+    ["pets", words.pets, 0],
+    ["luggage", words.suitcases, 1]
+  ];
+  const rows = counters.map(([name, label, defaultCount]) => `<div class="passenger-count-row" data-count-row="${name}">
+    <span class="passenger-count-label">${esc(label)}</span>
+    <div class="passenger-counter">
+      <button type="button" data-step="-1" data-field="${name}" aria-label="${esc(label)} −">−</button>
+      <output data-count-output="${name}">${defaultCount}</output>
+      <button type="button" data-step="1" data-field="${name}" aria-label="${esc(label)} +">+</button>
+    </div>
+  </div>`).join("");
+  const classes = ["any", "comfort", "business", "premium"];
+  const options = classes.map((value, index) => `<button type="button" data-vehicle-class="${value}" aria-pressed="${index === 0 ? "true" : "false"}">${esc(words[value])}</button>`).join("");
+  return `<div class="passenger-field" data-passenger-picker data-language="${lang}"
+      data-passenger-one="${esc(words.passengerOne)}" data-passenger-many="${esc(words.passengerMany)}"
+      data-max-warning="${esc(words.maxWarning)}">
+    <span class="passenger-label">${esc(ui.passengers)}, ${esc(ui.car)}</span>
+    <button type="button" class="passenger-toggle" aria-expanded="false" aria-controls="${id}" aria-label="${esc(words.open)}">
+      <span data-passenger-summary>1 ${esc(words.passengerOne)} · ${esc(words.any)}</span>
+      <span class="passenger-chevron" aria-hidden="true">⌄</span>
+    </button>
+    <div class="passenger-panel" id="${id}" hidden>
+      <div class="passenger-counters">${rows}</div>
+      <fieldset class="passenger-class">
+        <legend>${esc(words.classTitle)}</legend>
+        <div class="passenger-class-grid">${options}</div>
+      </fieldset>
+      <p class="passenger-limit-warning" role="status" hidden>${esc(words.maxWarning)}</p>
+      <button type="button" class="passenger-apply" data-apply-passengers>${esc(words.apply)}</button>
+    </div>
+    <input type="hidden" name="passengers" value="1">
+    <input type="hidden" name="adults" value="1">
+    <input type="hidden" name="children" value="0">
+    <input type="hidden" name="infants" value="0">
+    <input type="hidden" name="pets" value="0">
+    <input type="hidden" name="luggage" value="1">
+    <input type="hidden" name="carClass" value="any">
+  </div>`;
+}
+
 function quickBooking(lang, routeKey = "vilnius") {
   const l = locale[lang], ui = bookingLabels[lang];
   return `<form class="quick-booking" data-lang="${lang}" action="#booking-dialog">
     ${locationFormField(lang, "fromPreset", "quick", l.fromNames[routeKey], "quick-from")}
     ${locationFormField(lang, "to", "quick", l.fieldValues.to, "quick-to")}
     <label class="quick-date"><span>${esc(ui.date)}</span><input name="date" type="datetime-local" required></label>
-    <label class="quick-passengers"><span>${esc(ui.passengers)}</span><select name="passengers" required>${Array.from({length: 8}, (_, i) => `<option value="${i + 1}">${i + 1}</option>`).join("")}</select></label>
-    <label class="quick-car"><span>${esc(ui.car)}</span><select name="carClass" required>${carOptions(lang)}</select></label>
+    ${passengerPicker(lang, "quick")}
     <button type="submit" class="quick-submit">${esc(ui.quickButton)} <span aria-hidden="true">↗</span></button>
   </form>`;
 }
@@ -426,9 +472,7 @@ function bookingForm(lang, routeKey = "vilnius") {
         <label><span>${esc(ui.pickupAddress)}</span><input name="pickupAddress" placeholder="${esc(l.fieldValues.fromPlaceholder)}"></label>
         <label><span>${esc(ui.dropAddress)}</span><input name="dropAddress" placeholder="${esc(l.fieldValues.to)}"></label>
         <label><span>${esc(ui.date)}</span><input type="datetime-local" name="date" required></label>
-        <label><span>${esc(ui.passengers)}</span><input type="number" min="1" max="8" step="1" name="passengers" value="1" required></label>
-        <label><span>${esc(ui.car)}</span><select name="carClass" required>${carOptions(lang)}</select></label>
-        <label><span>${esc(ui.luggage)}</span><input type="number" min="0" max="25" name="luggage" value="1"></label>
+        ${passengerPicker(lang, "details")}
         <label><span>${esc(ui.seats)}</span><input type="number" min="0" max="8" name="childSeats" value="0"></label>
         <label><span>${esc(ui.flight)}</span><input name="flight" placeholder="VNO / WAW / WMI / RIX"></label>
         <label><span>${esc(ui.name)}</span><input name="customerName" autocomplete="name" required></label>
