@@ -22,86 +22,98 @@
   }
 
 
-  // Free-text location inputs with an optional, searchable list of regional suggestions.
-  // Suggestions are examples only; any typed city, airport or address is accepted.
-  const locationPickers = [...document.querySelectorAll("[data-location-picker]")];
+  const bookingDialog = document.getElementById("booking-dialog");
+  const destinationDialog = document.getElementById("destination-dialog");
+  const destinationSearch = destinationDialog?.querySelector(".destination-search");
+  let activeLocationInput = null;
+
   const normalizeLocation = (value) => String(value || "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLocaleLowerCase()
-    .trim();
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase().trim();
 
-  function closeLocation(picker) {
-    const list = picker.querySelector(".location-suggestions");
-    if (list) list.hidden = true;
-    const toggle = picker.querySelector(".location-open");
-    if (toggle) toggle.setAttribute("aria-expanded", "false");
-  }
-
-  function showLocation(picker, query = "") {
-    locationPickers.forEach((item) => {
-      if (item !== picker) closeLocation(item);
-    });
-    const searched = normalizeLocation(query);
-    let visibleCount = 0;
-    picker.querySelectorAll(".location-group").forEach((group) => {
-      let visibleInGroup = 0;
-      group.querySelectorAll(".location-choice").forEach((choice) => {
-        const isMatch = !searched || normalizeLocation(choice.dataset.search || choice.textContent).includes(searched);
-        choice.hidden = !isMatch;
-        if (isMatch) {
-          visibleInGroup += 1;
-          visibleCount += 1;
-        }
+  function filterDestinationOptions(text = "") {
+    if (!destinationDialog) return;
+    const term = normalizeLocation(text);
+    let count = 0;
+    destinationDialog.querySelectorAll(".destination-group").forEach((group) => {
+      let groupCount = 0;
+      group.querySelectorAll(".destination-option").forEach((option) => {
+        const match = !term || normalizeLocation(option.dataset.search || option.textContent).includes(term);
+        option.hidden = !match;
+        if (match) { count += 1; groupCount += 1; }
       });
-      group.hidden = visibleInGroup === 0;
+      group.hidden = groupCount === 0;
     });
-    picker.querySelector(".location-empty").hidden = visibleCount !== 0;
-    picker.querySelector(".location-suggestions").hidden = false;
-    picker.querySelector(".location-open").setAttribute("aria-expanded", "true");
+    const custom = destinationDialog.querySelector("[data-custom-destination]");
+    custom.hidden = !text.trim();
+    const empty = destinationDialog.querySelector(".destination-empty");
+    empty.hidden = count > 0;
   }
 
-  locationPickers.forEach((picker) => {
-    const input = picker.querySelector('input[type="text"]');
-    const toggle = picker.querySelector(".location-open");
-    toggle.addEventListener("click", (event) => {
-      event.preventDefault();
-      const wasOpen = !picker.querySelector(".location-suggestions").hidden;
-      if (wasOpen) closeLocation(picker);
-      else showLocation(picker); // Show the whole list, even if a place is already selected.
-    });
-    input.addEventListener("input", () => showLocation(picker, input.value));
+  function openDestinationPicker(input) {
+    if (!destinationDialog || !input) return;
+    activeLocationInput = input;
+    const label = input.closest(".location-form-field")?.querySelector("label")?.textContent?.trim();
+    destinationDialog.querySelector("#destination-dialog-title").textContent = label || "Location";
+    destinationSearch.value = "";
+    filterDestinationOptions("");
+    destinationDialog.showModal();
+    destinationSearch.focus();
+  }
+
+  document.querySelectorAll("[data-location-picker]").forEach((picker) => {
+    const input = picker.querySelector("input");
+    const button = picker.querySelector(".location-open");
+    input.addEventListener("click", () => openDestinationPicker(input));
     input.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowDown") {
+      if (event.key === "Enter" || event.key === " " || event.key === "ArrowDown") {
         event.preventDefault();
-        showLocation(picker, input.value);
-        picker.querySelector(".location-choice:not([hidden])")?.focus();
-      } else if (event.key === "Escape") {
-        closeLocation(picker);
+        openDestinationPicker(input);
       }
     });
-    picker.addEventListener("click", (event) => {
-      const option = event.target.closest(".location-choice");
-      if (!option) return;
-      event.preventDefault();
-      input.value = option.dataset.value;
-      input.dispatchEvent(new Event("change", { bubbles: true }));
-      closeLocation(picker);
-      input.focus({ preventScroll: true });
-    });
-    picker.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeLocation(picker);
-        input.focus({ preventScroll: true });
-      }
-    });
-  });
-  document.addEventListener("click", (event) => {
-    locationPickers.forEach((picker) => {
-      if (!picker.contains(event.target)) closeLocation(picker);
-    });
+    button.addEventListener("click", () => openDestinationPicker(input));
   });
 
+  function acceptDestination(value) {
+    if (!activeLocationInput || !value.trim()) return;
+    activeLocationInput.value = value.trim();
+    activeLocationInput.dispatchEvent(new Event("change", { bubbles: true }));
+    const input = activeLocationInput;
+    destinationDialog.close();
+    input.focus({ preventScroll: true });
+  }
+
+  if (destinationDialog) {
+    destinationDialog.querySelector("[data-close-destination]").addEventListener("click", () => destinationDialog.close());
+    destinationSearch.addEventListener("input", () => filterDestinationOptions(destinationSearch.value));
+    destinationDialog.querySelector("[data-custom-destination]").addEventListener("click", () => acceptDestination(destinationSearch.value));
+    destinationDialog.addEventListener("click", (event) => {
+      const option = event.target.closest(".destination-option");
+      if (option) { acceptDestination(option.dataset.value || ""); return; }
+      if (event.target === destinationDialog) destinationDialog.close();
+    });
+    destinationSearch.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown") {
+        const first = destinationDialog.querySelector(".destination-option:not([hidden])");
+        if (first) { event.preventDefault(); first.focus(); }
+      } else if (event.key === "Enter" && destinationSearch.value.trim()) {
+        event.preventDefault();
+        const matches = destinationDialog.querySelectorAll(".destination-option:not([hidden])");
+        if (matches.length === 1) acceptDestination(matches[0].dataset.value || "");
+        else acceptDestination(destinationSearch.value);
+      }
+    });
+  }
+
+  document.querySelectorAll("[data-open-booking]").forEach((trigger) => {
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      bookingDialog?.showModal();
+    });
+  });
+  bookingDialog?.querySelector("[data-close-booking]")?.addEventListener("click", () => bookingDialog.close());
+  bookingDialog?.addEventListener("click", (event) => {
+    if (event.target === bookingDialog) bookingDialog.close();
+  });
   document.querySelectorAll(".quick-booking").forEach((quick) => {
     quick.addEventListener("submit", (event) => {
       event.preventDefault();
