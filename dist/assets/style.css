@@ -1726,3 +1726,234 @@ footer {
 @media (max-width: 760px) {
   .booking-dialog .booking-form > .booking-status { grid-column: 1; }
 }
+
+
+/* Grouped passenger selector: adults, children, infants, pets, luggage and class */
+.hero-home, .route-hero { overflow: visible; }
+.quick-booking {
+  grid-template-columns: minmax(125px,1.16fr) minmax(120px,.98fr) minmax(190px,1.3fr) minmax(184px,1.25fr) minmax(150px,1fr);
+}
+.quick-booking > .passenger-field {
+  align-self: stretch;
+  padding: 7px 10px 7px 12px;
+  border-right: 1px solid #dfebeb;
+}
+.passenger-field {
+  position: relative;
+  min-width: 0;
+  color: #142b39;
+  isolation: isolate;
+}
+.passenger-field input[type="hidden"] { display: none !important; }
+.passenger-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #52717b;
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .065em;
+  text-transform: uppercase;
+}
+.passenger-toggle {
+  display: flex;
+  width: 100%;
+  min-height: 30px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 2px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #162d3e;
+  text-align: left;
+  font-family: inherit;
+  font-size: .86rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+.passenger-chevron {
+  flex-shrink: 0;
+  color: #708893;
+  font-size: 1.15rem;
+  transition: transform .2s;
+}
+.passenger-toggle[aria-expanded="true"] .passenger-chevron { transform: rotate(180deg); }
+.passenger-panel {
+  position: absolute;
+  z-index: 200;
+  top: calc(100% + 12px);
+  right: 0;
+  width: min(420px, calc(100vw - 30px));
+  max-height: min(590px, 72dvh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid #dae5e4;
+  border-radius: 18px;
+  padding: 16px;
+  background: #fff;
+  color: #162d3e;
+  box-shadow: 0 23px 60px rgba(11,28,43,.25);
+}
+.passenger-counters { display: grid; }
+.passenger-count-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 55px;
+  border-bottom: 1px solid #eef1f0;
+}
+.passenger-count-label {
+  flex: 1;
+  font-size: .91rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+.passenger-counter { display: flex; align-items: center; gap: 8px; }
+.passenger-counter > button {
+  display: grid;
+  place-items: center;
+  width: 33px;
+  height: 33px;
+  flex: 0 0 33px;
+  min-height: 33px;
+  padding: 0;
+  border: 1px solid #d3dddf;
+  border-radius: 50%;
+  background: #fff;
+  color: #537484;
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .18s, border-color .18s;
+}
+.passenger-counter > button:hover:not(:disabled) {
+  border-color: #a2c8bc;
+  background: #e9f8f1;
+  color: #14543f;
+}
+.passenger-counter > button:disabled { opacity: .36; cursor: not-allowed; }
+.passenger-counter > output {
+  min-width: 25px;
+  font-size: .91rem;
+  font-weight: 850;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.passenger-class {
+  min-width: 0;
+  margin: 15px 0 0;
+  padding: 0;
+  border: 0;
+}
+.passenger-class legend {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  color: #536c7a;
+  font-size: .79rem;
+  font-weight: 850;
+}
+.passenger-class-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+.passenger-class-grid > button {
+  min-width: 0;
+  min-height: 39px;
+  padding: 8px 10px;
+  border: 1px solid #d9e2e4;
+  border-radius: 9px;
+  background: #fff;
+  color: #192f41;
+  font-family: inherit;
+  font-size: .84rem;
+  font-weight: 760;
+  cursor: pointer;
+}
+.passenger-class-grid > button[aria-pressed="true"] {
+  border-color: #b69a6e;
+  background: #b89d73;
+  color: #101f30;
+}
+.passenger-apply {
+  display: block;
+  width: 100%;
+  min-height: 45px;
+  margin-top: 14px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: #b89d73;
+  color: #122536;
+  font-family: inherit;
+  font-size: .87rem;
+  font-weight: 840;
+  cursor: pointer;
+}
+.passenger-apply:hover { background: #d2b98b; }
+.passenger-limit-warning {
+  margin: 10px 0 0;
+  color: #a54336;
+  font-size: .77rem;
+  line-height: 1.5;
+}
+.booking-dialog .booking-form > .passenger-field {
+  grid-column: 1 / -1;
+  padding: 0;
+  z-index: 8;
+}
+.booking-dialog .booking-form > .passenger-field .passenger-label {
+  font-size: .82rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #375664;
+}
+.booking-dialog .booking-form .passenger-toggle {
+  min-height: 51px;
+  padding: 12px 15px;
+  border: 1px solid #d0e0df;
+  border-radius: 12px;
+  background: white;
+  font-size: .92rem;
+}
+.booking-dialog .booking-form .passenger-panel { width: min(450px,100%); }
+.booking-dialog .booking-form .passenger-counter > button,
+.booking-dialog .booking-form .passenger-class-grid > button,
+.booking-dialog .booking-form .passenger-apply,
+.booking-dialog .booking-form .passenger-toggle {
+  grid-column: auto;
+}
+.booking-dialog .booking-form .passenger-counter > button {
+  width: 33px; height: 33px; min-height: 33px; padding: 0;
+  border-radius: 50%; background: #fff; color: #537484;
+}
+.booking-dialog .booking-form .passenger-counter > button:hover:not(:disabled) { background: #e9f8f1; }
+.booking-dialog .booking-form .passenger-class-grid > button {
+  min-height: 39px;
+  padding: 8px 10px;
+  border-radius: 9px;
+  background: #fff;
+  color: #192f41;
+}
+.booking-dialog .booking-form .passenger-class-grid > button[aria-pressed="true"] { background: #b89d73; color: #101f30; }
+.booking-dialog .booking-form .passenger-apply {
+  min-height: 45px;
+  margin-top: 14px;
+  padding: 10px 12px;
+  background: #b89d73;
+  color: #122536;
+}
+@media (max-width: 1180px) {
+  .quick-booking { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .quick-booking > .passenger-field { border-right: 0; }
+}
+@media (max-width: 760px) {
+  .quick-booking { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .quick-booking > .passenger-field { grid-column: 1 / -1; padding: 8px 9px; border-right: 0; }
+  .quick-booking .passenger-panel { left: 0; right: auto; width: 100%; max-height: min(540px,75dvh); }
+  .booking-dialog .booking-form > .passenger-field { grid-column: 1; }
+  .booking-dialog .booking-form .passenger-panel { left: 0; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .passenger-chevron, .passenger-counter > button { transition: none; }
+}
