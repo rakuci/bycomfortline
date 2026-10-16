@@ -273,30 +273,134 @@ function routeCards(lang, current) {
   }).join("");
 }
 
-function messengerButtons() {
-  const channels = [
-    ["WhatsApp", "https://wa.me/375291552776"],
-    ["Viber", "viber://chat?number=%2B375291552776"],
-    ["Telegram", "https://t.me/transfer_comfortline"],
-    ["Instagram", "https://www.instagram.com/transfer_comfortline/"],
-    ["Facebook Messenger", "https://m.me/103816619260365"],
-    ["Threads", "https://www.threads.com/@transferwarsaw_taxi"],
-  ];
-  return `<div class="messenger-contact" aria-label="Messaging apps"><span class="messenger-heading">WhatsApp · Viber · Telegram · Instagram · Messenger · Threads</span><div class="messenger-buttons">${channels.map(([name, url]) => `<a class="messenger-button" href="${url}"${url.startsWith("https://") ? ' target="_blank" rel="noopener noreferrer"' : ""} aria-label="Contact ComfortLine on ${name}">${name} ↗</a>`).join("")}</div></div>`;
+
+const socialChannels = [
+  { id: "whatsapp", label: "WhatsApp", url: "https://wa.me/375291552776" },
+  { id: "viber", label: "Viber", url: "viber://chat?number=%2B375291552776" },
+  { id: "telegram", label: "Telegram", url: "https://t.me/transfer_comfortline" },
+  { id: "instagram", label: "Instagram", url: "https://www.instagram.com/transfer_comfortline/" },
+  { id: "messenger", label: "Messenger", url: "https://m.me/103816619260365" },
+  { id: "threads", label: "Threads", url: "https://www.threads.com/@transferwarsaw_taxi" },
+];
+
+function socialLink(channel, context) {
+  const target = channel.url.startsWith("https://") ? ' target="_blank" rel="noopener noreferrer"' : "";
+  return `<a class="social-link ${context} social-${channel.id}" href="${channel.url}"${target} aria-label="ComfortLine on ${channel.label}" title="${channel.label}" data-name="${channel.label}"><img src="/assets/social/${channel.id}.svg" alt="" aria-hidden="true" width="23" height="23"><span class="social-label">${channel.label}</span></a>`;
 }
 
-function bookingForm(lang, from = "") {
-  const l = locale[lang];
+function messengerButtons() {
+  return `<div class="messenger-contact" aria-label="ComfortLine social and messaging channels"><strong class="messenger-heading">ComfortLine · Social</strong><div class="messenger-buttons">${socialChannels.map(channel => socialLink(channel, "social-inline")).join("")}</div></div>`;
+}
+
+const bookingLabels = {
+  en: {
+    from: "From", to: "To", date: "Trip date & time", passengers: "Passengers", car: "Vehicle class",
+    quickButton: "Book a transfer", detailTitle: "Your transfer details",
+    departure: "Pickup city or airport", pickupAddress: "Exact pickup address", dropAddress: "Address in Minsk",
+    flight: "Flight number (if airport pickup)", luggage: "Suitcases", seats: "Child seats",
+    name: "Your name", phone: "Contact phone", email: "Email (optional)", notes: "Additional requests",
+    sedan: "Sedan", minivan: "Minivan / minibus", premium: "Premium",
+    submit: "Prepare booking enquiry", info: "This opens your email app with your trip details. The booking is confirmed only after our manager replies.",
+    airport: { vno: "Vilnius Airport (VNO)", waw: "Warsaw Chopin Airport (WAW)", wmi: "Warsaw Modlin Airport (WMI)", rix: "Riga Airport (RIX)" }
+  },
+  ru: {
+    from: "Откуда", to: "Куда", date: "Дата и время поездки", passengers: "Пассажиры", car: "Класс автомобиля",
+    quickButton: "Заказать трансфер", detailTitle: "Детали поездки",
+    departure: "Город или аэропорт подачи", pickupAddress: "Точный адрес подачи", dropAddress: "Адрес в Минске",
+    flight: "Номер рейса (если аэропорт)", luggage: "Чемоданы", seats: "Детские кресла",
+    name: "Ваше имя", phone: "Телефон для связи", email: "Email (необязательно)", notes: "Пожелания к поездке",
+    sedan: "Седан", minivan: "Минивэн / микроавтобус", premium: "Премиум",
+    submit: "Подготовить заявку", info: "Откроется письмо с деталями поездки. Бронирование подтверждается менеджером после ответа.",
+    airport: { vno: "Аэропорт Вильнюса (VNO)", waw: "Варшава Шопен (WAW)", wmi: "Варшава Модлин (WMI)", rix: "Аэропорт Риги (RIX)" }
+  },
+  pl: {
+    from: "Skąd", to: "Dokąd", date: "Data i godzina", passengers: "Pasażerowie", car: "Klasa samochodu",
+    quickButton: "Zamów transfer", detailTitle: "Szczegóły przejazdu",
+    departure: "Miasto lub lotnisko odbioru", pickupAddress: "Dokładny adres odbioru", dropAddress: "Adres w Mińsku",
+    flight: "Numer lotu (odbiór z lotniska)", luggage: "Walizki", seats: "Foteliki dziecięce",
+    name: "Imię i nazwisko", phone: "Telefon kontaktowy", email: "Email (opcjonalnie)", notes: "Dodatkowe uwagi",
+    sedan: "Sedan", minivan: "Minivan / bus", premium: "Premium",
+    submit: "Przygotuj zapytanie", info: "Otworzy się wiadomość email ze szczegółami. Rezerwacja wymaga potwierdzenia przez koordynatora.",
+    airport: { vno: "Lotnisko Wilno (VNO)", waw: "Warszawa Chopin (WAW)", wmi: "Warszawa Modlin (WMI)", rix: "Lotnisko Ryga (RIX)" }
+  },
+  lt: {
+    from: "Iš kur", to: "Į kur", date: "Kelionės data ir laikas", passengers: "Keleiviai", car: "Automobilio klasė",
+    quickButton: "Užsakyti pervežimą", detailTitle: "Kelionės duomenys",
+    departure: "Paėmimo miestas ar oro uostas", pickupAddress: "Tikslus paėmimo adresas", dropAddress: "Adresas Minske",
+    flight: "Skrydžio numeris (oro uostui)", luggage: "Lagaminai", seats: "Vaikiškos kėdutės",
+    name: "Jūsų vardas", phone: "Kontaktinis telefonas", email: "El. paštas (nebūtina)", notes: "Papildomi pageidavimai",
+    sedan: "Sedanas", minivan: "Minivenas / mikroautobusas", premium: "Premium",
+    submit: "Paruošti užklausą", info: "Atsidarys el. laiškas su kelionės duomenimis. Užsakymas patvirtinamas tik gavus vadybininko atsakymą.",
+    airport: { vno: "Vilniaus oro uostas (VNO)", waw: "Varšuvos Šopeno oro uostas (WAW)", wmi: "Varšuvos Modlino oro uostas (WMI)", rix: "Rygos oro uostas (RIX)" }
+  },
+  lv: {
+    from: "No kurienes", to: "Uz kurieni", date: "Brauciena datums un laiks", passengers: "Pasažieri", car: "Auto klase",
+    quickButton: "Pasūtīt transfēru", detailTitle: "Brauciena informācija",
+    departure: "Saņemšanas pilsēta vai lidosta", pickupAddress: "Precīza saņemšanas adrese", dropAddress: "Adrese Minskā",
+    flight: "Reisa numurs (lidostai)", luggage: "Koferi", seats: "Bērnu sēdeklīši",
+    name: "Jūsu vārds", phone: "Kontakttālrunis", email: "E-pasts (nav obligāts)", notes: "Papildu vēlmes",
+    sedan: "Sedans", minivan: "Minivens / mikroautobuss", premium: "Premium",
+    submit: "Sagatavot pieprasījumu", info: "Tiks atvērta e-pasta vēstule ar brauciena datiem. Rezervācija jāapstiprina koordinatoram.",
+    airport: { vno: "Viļņas lidosta (VNO)", waw: "Varšavas Šopēna lidosta (WAW)", wmi: "Varšavas Modlinas lidosta (WMI)", rix: "Rīgas lidosta (RIX)" }
+  }
+};
+
+function departureOptions(lang, selected = "vilnius") {
+  const l = locale[lang], ui = bookingLabels[lang];
+  const origins = [
+    ["vilnius", l.fromNames.vilnius],
+    ["vno", ui.airport.vno],
+    ["warsaw", l.fromNames.warsaw],
+    ["waw", ui.airport.waw],
+    ["wmi", ui.airport.wmi],
+    ["riga", l.fromNames.riga],
+    ["rix", ui.airport.rix]
+  ];
+  return origins.map(([code, label]) => `<option value="${code}"${code === selected ? ' selected' : ""}>${esc(label)}</option>`).join("");
+}
+
+function carOptions(lang) {
+  const l = bookingLabels[lang];
+  return `<option value="sedan">${esc(l.sedan)}</option><option value="minivan">${esc(l.minivan)}</option><option value="premium">${esc(l.premium)}</option>`;
+}
+
+function quickBooking(lang, routeKey = "vilnius") {
+  const l = locale[lang], ui = bookingLabels[lang];
+  return `<form class="quick-booking" data-lang="${lang}" action="#contact">
+    <label class="quick-from"><span>${esc(ui.from)}</span><select name="fromPreset" aria-label="${esc(ui.from)}" required>${departureOptions(lang, routeKey)}</select></label>
+    <label class="quick-to"><span>${esc(ui.to)}</span><input name="to" value="${esc(l.fieldValues.to)}" readonly></label>
+    <label class="quick-date"><span>${esc(ui.date)}</span><input name="date" type="datetime-local" required></label>
+    <label class="quick-passengers"><span>${esc(ui.passengers)}</span><select name="passengers" required>${Array.from({length: 8}, (_, i) => `<option value="${i + 1}">${i + 1}</option>`).join("")}</select></label>
+    <label class="quick-car"><span>${esc(ui.car)}</span><select name="carClass" required>${carOptions(lang)}</select></label>
+    <button type="submit" class="quick-submit">${esc(ui.quickButton)} <span aria-hidden="true">↗</span></button>
+  </form>`;
+}
+
+function bookingForm(lang, routeKey = "vilnius") {
+  const l = locale[lang], ui = bookingLabels[lang];
   return `<section class="booking-section" id="contact">
-    <div class="booking-copy"><span class="eyebrow">Comfortline</span><h2>${esc(l.formTitle)}</h2><p>${esc(l.formLead)}</p><div class="direct-contact"><a href="tel:${phoneHref}">${icons.phone}<span>${esc(l.call)}<strong>${phoneDisplay}</strong></span></a><a href="mailto:${email}">${icons.mail}<span>${esc(l.emailLabel)}<strong>${email}</strong></span></a></div>${messengerButtons()}</div>
-    <form class="booking-form" data-lang="${lang}" data-email="${email}">
-      <label><span>${esc(l.fields.from)}</span><input name="from" value="${esc(from)}" placeholder="${esc(l.fieldValues.fromPlaceholder)}" required></label>
-      <label><span>${esc(l.fields.to)}</span><input name="to" value="${esc(l.fieldValues.to)}" required></label>
-      <label><span>${esc(l.fields.date)}</span><input type="datetime-local" name="date" required></label>
-      <label><span>${esc(l.fields.passengers)}</span><input name="passengers" placeholder="${esc(l.fieldValues.passengers)}" required></label>
-      <label class="full"><span>${esc(l.fields.phone)}</span><input type="tel" name="phone" placeholder="${esc(l.fieldValues.phone)}" required></label>
-      <button type="submit">${esc(l.submit)} ${icons.arrow}</button><small>${esc(l.formNote)}</small>
-    </form>
+    <div class="booking-copy"><span class="eyebrow">ComfortLine</span><h2>${esc(l.formTitle)}</h2><p>${esc(l.formLead)}</p><div class="direct-contact"><a href="tel:${phoneHref}">${icons.phone}<span>${esc(l.call)}<strong>${phoneDisplay}</strong></span></a><a href="mailto:${email}">${icons.mail}<span>${esc(l.emailLabel)}<strong>${email}</strong></span></a></div>${messengerButtons()}</div>
+    <div class="booking-card">
+      <h3>${esc(ui.detailTitle)}</h3>
+      <form class="booking-form" data-lang="${lang}" data-email="${email}">
+        <label><span>${esc(ui.departure)}</span><select name="fromPreset" required>${departureOptions(lang, routeKey)}</select></label>
+        <label><span>${esc(ui.to)}</span><input name="to" value="${esc(l.fieldValues.to)}" readonly></label>
+        <label><span>${esc(ui.pickupAddress)}</span><input name="pickupAddress" placeholder="${esc(l.fieldValues.fromPlaceholder)}"></label>
+        <label><span>${esc(ui.dropAddress)}</span><input name="dropAddress" placeholder="${esc(l.fieldValues.to)}"></label>
+        <label><span>${esc(ui.date)}</span><input type="datetime-local" name="date" required></label>
+        <label><span>${esc(ui.passengers)}</span><input type="number" min="1" max="8" step="1" name="passengers" value="1" required></label>
+        <label><span>${esc(ui.car)}</span><select name="carClass" required>${carOptions(lang)}</select></label>
+        <label><span>${esc(ui.luggage)}</span><input type="number" min="0" max="25" name="luggage" value="1"></label>
+        <label><span>${esc(ui.seats)}</span><input type="number" min="0" max="8" name="childSeats" value="0"></label>
+        <label><span>${esc(ui.flight)}</span><input name="flight" placeholder="VNO / WAW / WMI / RIX"></label>
+        <label><span>${esc(ui.name)}</span><input name="customerName" autocomplete="name" required></label>
+        <label><span>${esc(ui.phone)}</span><input type="tel" name="phone" autocomplete="tel" placeholder="${esc(l.fieldValues.phone)}" required></label>
+        <label class="full"><span>${esc(ui.email)}</span><input type="email" name="customerEmail" autocomplete="email"></label>
+        <label class="full"><span>${esc(ui.notes)}</span><textarea name="notes" rows="3"></textarea></label>
+        <button type="submit">${esc(ui.submit)} ${icons.arrow}</button>
+        <small class="booking-explanation">${esc(ui.info)}</small>
+      </form>
+    </div>
   </section>`;
 }
 
@@ -309,7 +413,7 @@ function footer(l) {
 }
 
 function floatingContact() {
-  return `<a class="floating-contact" href="https://wa.me/375291552776" target="_blank" rel="noopener noreferrer" aria-label="Contact ComfortLine on WhatsApp"><span aria-hidden="true">✦</span><strong>WhatsApp</strong><span class="floating-arrow" aria-hidden="true">↗</span></a>`;
+  return `<nav class="floating-social" aria-label="ComfortLine messaging and social profiles">${socialChannels.map(channel => socialLink(channel, "social-floating")).join("")}</nav>`;
 }
 
 function layout({ lang, title, description, canonical, alternates, body, schema }) {
@@ -327,7 +431,7 @@ function hubPage(lang) {
   const canonical = `${base}/${lang}/`;
   const title = `${l.hubTitle} | ComfortLine`;
   const body = `${header(lang)}<main>
-    <section class="hero hero-home"><div class="hero-overlay"></div><div class="hero-content"><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(l.hubTitle)}</h1><p>${esc(l.hubDescription)}</p><div class="hero-actions"><a class="button primary" href="#contact">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div></div><div class="route-orbit" aria-hidden="true"><span>VNO</span><i></i><b>MSQ</b><i></i><span>WAW</span><i></i><span>RIX</span></div></section>
+    <section class="hero hero-home"><div class="hero-overlay"></div><div class="hero-content"><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(l.hubTitle)}</h1><p>${esc(l.hubDescription)}</p><div class="hero-actions"><a class="button primary" href="#contact">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang)}</div><div class="route-orbit" aria-hidden="true"><span>VNO</span><i></i><b>MSQ</b><i></i><span>WAW</span><i></i><span>RIX</span></div></section>
     ${trustStrip(l)}
     <section class="section routes-section" id="routes"><div class="section-head"><span class="eyebrow">Comfortline routes</span><h2>${esc(l.routesTitle)}</h2><p>${esc(l.routesLead)}</p></div><div class="route-grid three">${routeCards(lang)}</div></section>
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">Door to door</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
@@ -360,13 +464,13 @@ function routePage(lang, key) {
   const faqSchema = { "@type": "FAQPage", mainEntity: [...seo.faqs, ...l.faqs].map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
   const schema = { "@context": "https://schema.org", "@graph": [businessSchema(lang, canonical), { "@type": "Service", name: h1, serviceType: "Private airport and intercity transfer", description: seo.intro, provider: { "@type": "TaxiService", name: "ComfortLine" }, areaServed: [l.fromNames[key], "Minsk"], url: canonical }, { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: l.nav.routes, item: `${base}/${lang}/` }, { "@type": "ListItem", position: 2, name: l.routeNames[key], item: canonical }] }, faqSchema] };
   const body = `${header(lang, "route", key)}<main>
-    <section class="route-hero"><div class="route-hero-bg"></div><div class="route-hero-content"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(l.routeNames[key])}</span></nav><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(h1)}</h1><p>${esc(seo.intro)}</p><div class="hero-actions"><a class="button primary" href="#contact">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div></div><div class="journey-card"><div><span>${esc(l.fromNames[key])}</span><b>${r.airport}</b></div><div class="journey-line"><i></i><em>${r.distance}</em><i></i></div><div><span>Minsk</span><b>MSQ</b></div></div></section>
+    <section class="route-hero"><div class="route-hero-bg"></div><div class="route-hero-content"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(l.routeNames[key])}</span></nav><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(h1)}</h1><p>${esc(seo.intro)}</p><div class="hero-actions"><a class="button primary" href="#contact">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang, key)}</div><div class="journey-card"><div><span>${esc(l.fromNames[key])}</span><b>${r.airport}</b></div><div class="journey-line"><i></i><em>${r.distance}</em><i></i></div><div><span>Minsk</span><b>MSQ</b></div></div></section>
     ${trustStrip(l)}
     <section class="facts-section"><article><span>${icons.pin}</span><div><small>${esc(l.facts.distance)}</small><strong>${r.distance}</strong></div></article><article><span class="clock">◷</span><div><small>${esc(l.facts.time)}</small><strong>${r.time}</strong><em>${esc(l.facts.note)}</em></div></article><article><span class="plane">✈</span><div><small>${esc(l.facts.airport)}</small><strong>${r.airport}</strong></div></article></section>
     ${routeEditorial(lang, key)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">${esc(l.routeNames[key])}</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     <section class="section steps-section"><div class="section-head"><span class="eyebrow">3 steps</span><h2>${esc(l.stepsTitle)}</h2></div><div class="steps">${l.steps.map(([n, h, p]) => `<article><span>${n}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
-    ${bookingForm(lang, l.fromNames[key])}${faq(l)}
+    ${bookingForm(lang, key)}${faq(l)}
     <section class="section other-routes"><div class="section-head"><span class="eyebrow">Comfortline</span><h2>${esc(l.otherTitle)}</h2></div><div class="route-grid">${routeCards(lang, key)}</div></section>
     </main>${footer(l)}`;
   return layout({ lang, title: seo.title, description, canonical, alternates: alternateLinks("route", key), body, schema });
