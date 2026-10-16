@@ -452,8 +452,6 @@ function quickBooking(lang, routeKey = "vilnius") {
   return `<form class="quick-booking" data-lang="${lang}" action="#booking-dialog">
     ${locationFormField(lang, "fromPreset", "quick", l.fromNames[routeKey], "quick-from")}
     ${locationFormField(lang, "to", "quick", l.fieldValues.to, "quick-to")}
-    <label class="quick-date"><span>${esc(ui.date)}</span><input name="date" type="datetime-local" required></label>
-    ${passengerPicker(lang, "quick")}
     <button type="submit" class="quick-submit">${esc(ui.quickButton)} <span aria-hidden="true">↗</span></button>
   </form>`;
 }
