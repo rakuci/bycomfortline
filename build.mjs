@@ -1,5 +1,6 @@
 import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import { routeSeo } from "./route-seo.mjs";
+import { locationCatalog, locationLabels } from "./booking-locations.mjs";
 import { dirname, join } from "node:path";
 
 const out = new URL("./dist/", import.meta.url).pathname;
@@ -350,18 +351,31 @@ const bookingLabels = {
   }
 };
 
-function departureOptions(lang, selected = "vilnius") {
-  const l = locale[lang], ui = bookingLabels[lang];
-  const origins = [
-    ["vilnius", l.fromNames.vilnius],
-    ["vno", ui.airport.vno],
-    ["warsaw", l.fromNames.warsaw],
-    ["waw", ui.airport.waw],
-    ["wmi", ui.airport.wmi],
-    ["riga", l.fromNames.riga],
-    ["rix", ui.airport.rix]
-  ];
-  return origins.map(([code, label]) => `<option value="${code}"${code === selected ? ' selected' : ""}>${esc(label)}</option>`).join("");
+
+function locationField(lang, field, scope, initialValue) {
+  const id = `${scope}-${field}-${lang}`;
+  const labels = locationLabels[lang];
+  const inputLabel = field === "fromPreset" ? bookingLabels[lang].from : bookingLabels[lang].to;
+  const categories = [["city", labels.cities], ["airport", labels.airports]];
+  const groups = categories.map(([type, label]) => {
+    const items = locationCatalog.filter(item => item.type === type).map(item => {
+      const value = item.names[lang];
+      const search = [item.id, ...Object.values(item.names)].join(" ");
+      return `<button type="button" class="location-choice" data-value="${esc(value)}" data-search="${esc(search)}">${esc(value)}</button>`;
+    }).join("");
+    return `<div class="location-group" data-location-group><strong class="location-group-name">${esc(label)}</strong><div class="location-group-items">${items}</div></div>`;
+  }).join("");
+  return `<div class="location-control" data-location-picker>
+    <input id="${id}" type="text" name="${field}" value="${esc(initialValue)}" placeholder="${esc(labels.type)}" autocomplete="off" required>
+    <button type="button" class="location-open" aria-label="${esc(labels.show)}: ${esc(inputLabel)}" aria-controls="${id}-choices" aria-expanded="false"><span aria-hidden="true">⌄</span></button>
+    <div class="location-suggestions" id="${id}-choices" hidden>${groups}<p class="location-empty" hidden>${esc(labels.empty)}</p></div>
+  </div>`;
+}
+
+function locationFormField(lang, field, scope, initialValue, className = "") {
+  const id = `${scope}-${field}-${lang}`;
+  const label = field === "fromPreset" ? bookingLabels[lang].from : bookingLabels[lang].to;
+  return `<div class="location-form-field ${className}"><label for="${id}">${esc(label)}</label>${locationField(lang, field, scope, initialValue)}</div>`;
 }
 
 function carOptions(lang) {
@@ -372,8 +386,8 @@ function carOptions(lang) {
 function quickBooking(lang, routeKey = "vilnius") {
   const l = locale[lang], ui = bookingLabels[lang];
   return `<form class="quick-booking" data-lang="${lang}" action="#contact">
-    <label class="quick-from"><span>${esc(ui.from)}</span><select name="fromPreset" aria-label="${esc(ui.from)}" required>${departureOptions(lang, routeKey)}</select></label>
-    <label class="quick-to"><span>${esc(ui.to)}</span><input name="to" value="${esc(l.fieldValues.to)}" readonly></label>
+    ${locationFormField(lang, "fromPreset", "quick", l.fromNames[routeKey], "quick-from")}
+    ${locationFormField(lang, "to", "quick", l.fieldValues.to, "quick-to")}
     <label class="quick-date"><span>${esc(ui.date)}</span><input name="date" type="datetime-local" required></label>
     <label class="quick-passengers"><span>${esc(ui.passengers)}</span><select name="passengers" required>${Array.from({length: 8}, (_, i) => `<option value="${i + 1}">${i + 1}</option>`).join("")}</select></label>
     <label class="quick-car"><span>${esc(ui.car)}</span><select name="carClass" required>${carOptions(lang)}</select></label>
@@ -388,8 +402,8 @@ function bookingForm(lang, routeKey = "vilnius") {
     <div class="booking-card">
       <h3>${esc(ui.detailTitle)}</h3>
       <form class="booking-form" data-lang="${lang}" data-email="${email}">
-        <label><span>${esc(ui.departure)}</span><select name="fromPreset" required>${departureOptions(lang, routeKey)}</select></label>
-        <label><span>${esc(ui.to)}</span><input name="to" value="${esc(l.fieldValues.to)}" readonly></label>
+        ${locationFormField(lang, "fromPreset", "details", l.fromNames[routeKey])}
+        ${locationFormField(lang, "to", "details", l.fieldValues.to)}
         <label><span>${esc(ui.pickupAddress)}</span><input name="pickupAddress" placeholder="${esc(l.fieldValues.fromPlaceholder)}"></label>
         <label><span>${esc(ui.dropAddress)}</span><input name="dropAddress" placeholder="${esc(l.fieldValues.to)}"></label>
         <label><span>${esc(ui.date)}</span><input type="datetime-local" name="date" required></label>
