@@ -56,6 +56,10 @@
     const term = normalizeLocation(text);
     let count = 0;
     destinationDialog.querySelectorAll(".destination-group").forEach((group) => {
+      if (group.dataset.locationMode !== destinationDialog.dataset.mode) {
+        group.hidden = true;
+        return;
+      }
       let groupCount = 0;
       group.querySelectorAll(".destination-option").forEach((option) => {
         const match = !term || normalizeLocation(option.dataset.search || option.textContent).includes(term);
@@ -75,11 +79,18 @@
     activeLocationInput = input;
     const label = input.closest(".location-form-field")?.querySelector("label")?.textContent?.trim();
     destinationDialog.querySelector("#destination-dialog-title").textContent = label || "Location";
+    const mode = input.name === "to" ? "to" : "from";
+    destinationDialog.dataset.mode = mode;
+    destinationDialog.querySelectorAll("[data-location-mode]").forEach(group => {
+      group.hidden = group.dataset.locationMode !== mode;
+    });
     destinationSearch.value = "";
     filterDestinationOptions("");
     syncMobileDialogViewport();
     destinationDialog.showModal();
-    destinationSearch.focus({ preventScroll: true });
+    // Show the featured choices first. Search remains available on tap, avoiding
+    // the mobile keyboard covering the destination grid immediately.
+    destinationDialog.querySelector("[data-close-destination]")?.focus({ preventScroll: true });
   }
 
   document.querySelectorAll("[data-location-picker]").forEach((picker) => {
@@ -93,6 +104,23 @@
       }
     });
     button.addEventListener("click", () => openDestinationPicker(input));
+  });
+
+  // Move keyboard focus between visible suggested places without changing the
+  // selected location until Enter/Space is pressed.
+  destinationDialog?.addEventListener("keydown", (event) => {
+    const focused = event.target.closest(".destination-option");
+    if (!focused || !["ArrowDown", "ArrowUp", "Enter", " "].includes(event.key)) return;
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      focused.click();
+      return;
+    }
+    const visible = [...destinationDialog.querySelectorAll(".destination-group:not([hidden]) .destination-option:not([hidden])")];
+    const position = visible.indexOf(focused);
+    if (position === -1 || visible.length === 0) return;
+    event.preventDefault();
+    visible[(position + (event.key === "ArrowDown" ? 1 : -1) + visible.length) % visible.length].focus();
   });
 
   function acceptDestination(value) {
@@ -115,11 +143,11 @@
     });
     destinationSearch.addEventListener("keydown", (event) => {
       if (event.key === "ArrowDown") {
-        const first = destinationDialog.querySelector(".destination-option:not([hidden])");
+        const first = destinationDialog.querySelector(".destination-group:not([hidden]) .destination-option:not([hidden])");
         if (first) { event.preventDefault(); first.focus(); }
       } else if (event.key === "Enter" && destinationSearch.value.trim()) {
         event.preventDefault();
-        const matches = destinationDialog.querySelectorAll(".destination-option:not([hidden])");
+        const matches = destinationDialog.querySelectorAll(".destination-group:not([hidden]) .destination-option:not([hidden])");
         if (matches.length === 1) acceptDestination(matches[0].dataset.value || "");
         else acceptDestination(destinationSearch.value);
       }
