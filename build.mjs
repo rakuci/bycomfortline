@@ -514,6 +514,25 @@ function routePage(lang, key) {
   return layout({ lang, title: seo.title, description, canonical, alternates: alternateLinks("route", key), body, schema, routeKey: key });
 }
 
+function thankYouPage(lang) {
+  const l = locale[lang], ui = bookingPopupUi[lang];
+  const title = `${ui.thanksTitle} | ComfortLine`;
+  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>${esc(title)}</title><meta name="robots" content="noindex,follow"><meta name="description" content="${esc(ui.thanksNotice)}">
+    <link rel="canonical" href="${base}/${lang}/thank-you/"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <script src="/assets/app.js" defer></script></head><body class="thanks-body">
+    <header class="thanks-header"><a class="brand" href="${l.home}" aria-label="ComfortLine"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a></header>
+    <main class="thanks-main"><section class="thanks-panel" data-booking-thankyou data-lang="${lang}">
+      <div class="thanks-check" aria-hidden="true">✓</div><span class="eyebrow">ComfortLine</span><h1>${esc(ui.thanksTitle)}</h1>
+      <p class="thanks-lead">${esc(ui.thanksLead)}</p>
+      <div class="thanks-reference"><span>${esc(ui.ref)}</span><div><strong data-inquiry-reference>—</strong><button type="button" data-copy-reference>${esc(ui.copy)}</button></div></div>
+      <section class="thanks-details"><h2>${esc(ui.details)}</h2><pre data-inquiry-summary></pre></section>
+      <div class="thanks-actions"><a class="thanks-whatsapp" data-inquiry-whatsapp href="https://wa.me/375291552776" target="_blank" rel="noopener noreferrer"><img src="/assets/social/whatsapp.svg" width="21" height="21" alt="">${esc(ui.sendWa)}</a>
+        <a class="thanks-email" data-inquiry-email href="mailto:${email}">${esc(ui.sendEmail)}</a></div>
+      <p class="thanks-notice">${esc(ui.thanksNotice)}</p><p class="thanks-missing" hidden>${esc(ui.noDraft)}</p>
+      <a class="thanks-back" href="${l.home}">← ${esc(ui.back)}</a>
+    </section></main>${floatingContact()}</body></html>`;
+}
 function gateway() {
   const links = Object.entries(locale).map(([code, l]) => `<a href="/${code}/"><span>${code.toUpperCase()}</span><strong>${l.label}</strong>${icons.arrow}</a>`).join("");
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ComfortLine — private transfers to Minsk</title><meta name="description" content="Private transfers to Minsk from Vilnius, Warsaw and Riga in Russian, Polish, Lithuanian and Latvian."><meta name="robots" content="index,follow"><link rel="canonical" href="${base}/">${alternateLinks("home")}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"></head><body class="gateway"><main><div class="gateway-panel"><a class="brand" href="/"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>Private transfers to Minsk</p><h1>Choose your language</h1><div class="gateway-links">${links}</div><small>Vilnius · Warsaw · Riga · Minsk</small></div></main>${floatingContact()}</body></html>`;
@@ -528,6 +547,7 @@ async function put(relative, content) {
 await put("index.html", gateway());
 for (const lang of Object.keys(locale)) {
   await put(`${lang}/index.html`, hubPage(lang));
+  await put(`${lang}/thank-you/index.html`, thankYouPage(lang));
   for (const key of Object.keys(routes)) await put(`${lang}/${locale[lang].slugs[key]}/index.html`, routePage(lang, key));
 }
 
