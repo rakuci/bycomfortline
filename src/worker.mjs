@@ -1,9 +1,9 @@
-// Cloudflare Worker: static site plus authenticated transactional booking-enquiry dispatch.
-// To enable sending, verify info@comfortline.by as an Email Routing destination and
-// onboard bycomfortline.com under Cloudflare Email Service > Email Sending.
-// The EMAIL binding in wrangler.jsonc limits recipients to that single address.
+// Cloudflare Worker: static assets plus secure Resend-powered booking enquiries.
+// Uses the verified Resend sending domain comfortline.by, not Cloudflare Email Sending.
+// Set the RESEND_API_KEY as a Cloudflare Worker Secret; never commit it to GitHub.
 const RECIPIENT = "info@comfortline.by";
-const SENDER = "bookings@bycomfortline.com";
+const SENDER = "ComfortLine Bookings <bookings@comfortline.by>";
+const RESEND_SEND_URL = "https://api.resend.com/emails";
 const ALLOWED_LANGUAGES = new Set(["en", "ru", "pl", "lt", "lv"]);
 
 const FIELD_RULES = {
@@ -123,29 +123,53 @@ async function submitBooking(request, env) {
     return json({ success: false, code: "invalid_payload" }, 400);
   }
   if (!booking) return json({ success: false, code: "invalid_payload" }, 400);
-  if (!env.EMAIL || typeof env.EMAIL.send !== "function") {
-    console.error("Cloudflare EMAIL sending binding is not configured");
+  if (!env.RESEND_API_KEY || typeof env.RESEND_API_KEY !== "string") {
+    console.error("Missing RESEND_API_KEY Worker secret.");
     return json({ success: false, code: "email_unavailable" }, 503);
   }
 
   const reference = "CL-" + new Date().toISOString().slice(0, 10).replace(/-/g, "") +
     "-" + crypto.randomUUID().replace(/-/g, "").slice(0, 10).toUpperCase();
 
+  const payload = {
+    from: SENDER,
+    to: [RECIPIENT],
+    subject: "ComfortLine booking enquiry " + reference,
+    text: bookingText(booking, reference),
+    ...(booking.fields.customerEmail ? { reply_to: booking.fields.customerEmail } : {})
+  };
+
   try {
-    const result = await env.EMAIL.send({
-      to: RECIPIENT,
-      from: SENDER,
-      subject: "ComfortLine booking enquiry " + reference,
-      text: bookingText(booking, reference),
-      ...(booking.fields.customerEmail ? { replyTo: booking.fields.customerEmail } : {})
+    const response = await fetch(RESEND_SEND_URL, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + env.RESEND_API_KEY,
+        "Content-Type": "application/json",
+        "Idempotency-Key": reference
+      },
+      body: JSON.stringify(payload)
     });
-    if (!result?.messageId) throw new Error("Email sending returned no message ID");
-    console.log("Booking enquiry accepted for delivery", reference, result.messageId);
+
+    if (!response.ok) {
+      // Avoid logging message content, email addresses, or the API key.
+      console.error("Resend rejected booking email:", response.status);
+      return json({
+        success: false,
+        code: response.status === 429 ? "rate_limited" : "email_unavailable"
+      }, response.status === 429 ? 429 : 503);
+    }
+
+    const result = await response.json().catch(() => null);
+    if (typeof result?.id !== "string" || !result.id.trim()) {
+      console.error("Resend email accepted but returned no ID.");
+      return json({ success: false, code: "email_unavailable" }, 503);
+    }
+
+    console.log("Resend accepted booking email", reference, result.id);
     return json({ success: true, reference }, 200);
   } catch (error) {
-    console.error("Booking enquiry email dispatch failed:", error?.code || "unknown");
-    const busy = ["E_RATE_LIMIT_EXCEEDED", "E_DAILY_LIMIT_EXCEEDED"].includes(error?.code);
-    return json({ success: false, code: busy ? "rate_limited" : "email_unavailable" }, busy ? 429 : 503);
+    console.error("Resend booking email request failed:", error?.name || "unknown");
+    return json({ success: false, code: "email_unavailable" }, 503);
   }
 }
 
