@@ -73,7 +73,11 @@ function validateBooking(body) {
   if (!["sedan", "minivan", "premium"].includes(fields.carClass)) return null;
   if (!/^\d{0,2}$/.test(fields.luggage) || Number(fields.luggage || 0) > 25) return null;
   if (!/^\d{0,2}$/.test(fields.childSeats) || Number(fields.childSeats || 0) > 8) return null;
-  if (fields.customerName.length < 2 || fields.phone.replace(/\D/g, "").length < 6) return null;
+  if (fields.customerName.length < 2) return null;
+  const phoneDigits = fields.phone.replace(/\D/g, "");
+  if (phoneDigits.length < 6 || phoneDigits.length > 16 || !/^[+\d()\s.-]+$/.test(fields.phone)) {
+    return { invalid: "phone" };
+  }
   if (fields.customerEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.customerEmail)) return null;
 
   return { lang, fields };
@@ -121,6 +125,9 @@ async function submitBooking(request, env) {
   if (booking?.bot) {
     // Bots filling the honeypot get no email. Never claim the email was submitted.
     return json({ success: false, code: "invalid_payload" }, 400);
+  }
+  if (booking?.invalid === "phone") {
+    return json({ success: false, code: "invalid_phone", field: "phone" }, 422);
   }
   if (!booking) return json({ success: false, code: "invalid_payload" }, 400);
   if (!env.RESEND_API_KEY || typeof env.RESEND_API_KEY !== "string") {
