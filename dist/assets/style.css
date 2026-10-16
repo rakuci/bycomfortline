@@ -1029,3 +1029,242 @@ footer {
   .route-specific-questions details { padding: 19px 20px; }
   .related-comfortline { padding: 19px; }
 }
+
+
+/* Booking experience adapted from the ComfortLine search form */
+.quick-booking {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: minmax(145px, 1.3fr) minmax(100px, .82fr) minmax(195px, 1.38fr) minmax(100px, .82fr) minmax(120px, 1fr) minmax(155px, 1.12fr);
+  gap: 9px;
+  align-items: stretch;
+  width: 100%;
+  margin-top: 35px;
+  padding: 11px;
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 23px;
+  background: rgba(255,255,255,.96);
+  box-shadow: 0 20px 60px rgba(0,0,0,.28);
+  color: var(--ink);
+}
+.quick-booking label {
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  gap: 5px;
+  padding: 7px 11px 7px 14px;
+  border-right: 1px solid #dfebeb;
+}
+.quick-booking label span {
+  font-size: .68rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: #52717b;
+}
+.quick-booking :is(input, select) {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 3px 1px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #122c3b;
+  font: inherit;
+  font-size: .89rem;
+  font-weight: 750;
+  outline-offset: 3px;
+}
+.quick-booking input[readonly] { color: #145c58; cursor: default; }
+.quick-booking :is(input, select):focus-visible { outline: 2px solid #228e7f; outline-offset: 3px; border-radius: 4px; }
+.quick-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-height: 64px;
+  border: 0;
+  border-radius: 15px;
+  padding: 12px 13px;
+  background: #f5c66f;
+  color: #132a35;
+  font-size: .89rem;
+  font-weight: 850;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.quick-submit:hover { background: #ffdea3; transform: translateY(-2px); }
+.quick-submit > span { font-size: 1.25rem; flex-shrink: 0; }
+.hero-content, .route-hero-content { width: var(--wrap); }
+.hero-home { min-height: 770px; }
+.hero-home .hero-content { padding-bottom: 150px; }
+.route-hero { min-height: 700px; }
+.route-hero-content { padding-bottom: 167px; }
+.booking-section { grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: 38px; padding: 50px; }
+.booking-card {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding: 28px;
+  border: 1px solid #d4e5e3;
+  border-radius: 26px;
+  background: rgba(255,255,255,.91);
+  box-shadow: 0 18px 48px rgba(14,43,51,.08);
+}
+.booking-card h3 { margin: 0 0 24px; font-size: 1.38rem; font-weight: 850; letter-spacing: -.04em; }
+.booking-card .booking-form { gap: 14px; }
+.booking-form :is(input, select, textarea) {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #d0e0df;
+  border-radius: 12px;
+  padding: 12px 13px;
+  min-height: 51px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: .88rem;
+  line-height: 1.45;
+}
+.booking-form textarea { min-height: 94px; resize: vertical; }
+.booking-form :is(input, select, textarea):focus { border-color: #34af9b; outline: 2px solid rgba(47,171,146,.28); outline-offset: 0; }
+.booking-form input[readonly] { background: #f0f7f3; color: #42626a; }
+.booking-form button { grid-column: 1 / -1; border-radius: 13px; }
+.booking-explanation {
+  grid-column: 1 / -1;
+  font-size: .78rem;
+  color: #526b73;
+  line-height: 1.65;
+}
+.messenger-heading { display: block; font-weight: 850; font-size: .8rem; letter-spacing: .035em; }
+.messenger-buttons { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 10px; }
+
+/* Official service-brand vector glyphs (Simple Icons) */
+.social-link {
+  --service-color: #263b4d;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #fff;
+  background: var(--service-color);
+  font-size: .84rem;
+  font-weight: 850;
+  letter-spacing: -.01em;
+  transition: transform .2s, filter .2s, box-shadow .2s;
+}
+.social-link img { display:block; width: 23px; height: 23px; filter: brightness(0) invert(1); flex-shrink:0; }
+.social-link:hover { transform: translateY(-3px); filter: brightness(1.1); box-shadow: 0 8px 20px rgba(0,0,0,.17); }
+.social-link:focus-visible { outline: 3px solid #ffda86; outline-offset: 3px; }
+.social-whatsapp { --service-color: #25D366; }
+.social-viber { --service-color: #7360F2; }
+.social-telegram { --service-color: #26A5E4; }
+.social-instagram { background: linear-gradient(135deg,#833AB4 0%,#C13584 34%,#E1306C 60%,#FCAF45 100%); }
+.social-messenger { background: linear-gradient(135deg,#00B2FF,#006AFF 55%,#A033FF); }
+.social-threads { --service-color: #151515; }
+.social-inline {
+  border-radius: 999px;
+  min-height: 42px;
+  padding: 9px 14px;
+}
+.social-inline img { width: 19px; height: 19px; }
+.social-inline .social-label { display: inline; }
+.floating-social {
+  position: fixed;
+  z-index: 90;
+  top: 50%;
+  right: max(13px, env(safe-area-inset-right));
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 8px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 22px;
+  background: rgba(15,31,44,.86);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 16px 42px rgba(0,0,0,.22);
+}
+.social-floating {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+.social-floating .social-label { display: none; }
+.social-floating:hover { transform: translateX(-3px); }
+.social-floating::before {
+  content: attr(data-name);
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0;
+  white-space: nowrap;
+  padding: 8px 12px;
+  border-radius: 9px;
+  background: #142938;
+  color: #fff;
+  font-size: .77rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,.2);
+  transition: opacity .18s;
+}
+.social-floating:hover::before, .social-floating:focus-visible::before { opacity: 1; }
+@media (max-width: 1180px) {
+  .quick-booking { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .quick-booking label:nth-child(3) { border-right: 0; }
+  .quick-submit { min-height: 60px; }
+  .booking-section { grid-template-columns: 1fr; gap: 28px; }
+  .booking-card { max-width: 100%; }
+}
+@media (max-width: 760px) {
+  .quick-booking { grid-template-columns: repeat(2, minmax(0, 1fr)); border-radius: 18px; margin-top: 27px; }
+  .quick-booking label { padding: 8px 9px; }
+  .quick-booking label:nth-child(3) { border-right: 1px solid #dfebeb; }
+  .quick-booking label:nth-child(even) { border-right: 0; }
+  .quick-booking .quick-date { grid-column: 1 / -1; border-right: 0; }
+  .quick-booking .quick-car { border-right: 0; }
+  .quick-submit { grid-column: 1 / -1; min-height: 54px; }
+  .hero-home { min-height: 0; }
+  .hero-home .hero-content { padding: 58px 0 128px; }
+  .route-hero { min-height: 0; }
+  .route-hero-content { padding: 36px 0 168px; }
+  .booking-section { width: calc(100% - 20px); padding: 30px 15px; }
+  .booking-card { padding: 23px 17px; border-radius: 20px; }
+  .booking-form { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .social-inline { min-height: 43px; padding: 9px 12px; }
+  .floating-social {
+    top: auto;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    right: 50%;
+    transform: translateX(50%);
+    flex-direction: row;
+    gap: 5px;
+    max-width: calc(100vw - 20px);
+    border-radius: 20px;
+    padding: 7px;
+  }
+  .social-floating { width: clamp(39px, 12vw, 45px); height: 43px; border-radius: 13px; }
+  .social-floating img { width: 21px; height: 21px; }
+  .social-floating::before { display: none; }
+  .social-floating:hover { transform: translateY(-2px); }
+  body { padding-bottom: 75px; }
+  footer { padding-bottom: 88px; }
+}
+@media (max-width: 440px) {
+  .booking-form { grid-template-columns: 1fr; }
+  .booking-form label.full { grid-column: 1; }
+  .quick-booking :is(input,select) { font-size: .82rem; }
+  .quick-booking label span { font-size: .61rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .social-link, .quick-submit { transition: none; }
+  .social-link:hover, .quick-submit:hover { transform: none; }
+}
