@@ -114,17 +114,133 @@
   bookingDialog?.addEventListener("click", (event) => {
     if (event.target === bookingDialog) bookingDialog.close();
   });
+  // Passenger counts are kept as individual booking fields. Children and infants
+  // count towards the maximum of eight seats; pets and suitcases are separate.
+  const passengerPickers = [...document.querySelectorAll("[data-passenger-picker]")];
+
+  function formatPassengerCount(picker, total) {
+    if (picker.dataset.language === "ru" && total > 1 && total < 5) {
+      return total + " пассажира";
+    }
+    const word = total === 1 ? picker.dataset.passengerOne : picker.dataset.passengerMany;
+    return total + " " + word;
+  }
+
+  function updatePassengerPicker(picker) {
+    const form = picker.closest("form");
+    if (!form) return;
+    const field = (name) => getControl(form, name);
+    const number = (name) => Number(field(name)?.value || 0);
+    const total = number("adults") + number("children") + number("infants");
+    field("passengers").value = String(total);
+
+    picker.querySelectorAll("[data-count-output]").forEach((output) => {
+      const name = output.dataset.countOutput;
+      output.textContent = String(number(name));
+    });
+    picker.querySelectorAll("[data-count-row]").forEach((row) => {
+      const name = row.dataset.countRow;
+      const min = name === "adults" ? 1 : 0;
+      const max = name === "luggage" ? 25 : 8;
+      const value = number(name);
+      const minus = row.querySelector('[data-step="-1"]');
+      const plus = row.querySelector('[data-step="1"]');
+      if (minus) minus.disabled = value <= min;
+      if (plus) plus.disabled = value >= max ||
+        (["adults", "children", "infants"].includes(name) && total >= 8);
+    });
+    let classLabel = "";
+    picker.querySelectorAll("[data-vehicle-class]").forEach((button) => {
+      const selected = button.dataset.vehicleClass === field("carClass")?.value;
+      button.setAttribute("aria-pressed", String(selected));
+      if (selected) classLabel = button.textContent.trim();
+    });
+    const summary = picker.querySelector("[data-passenger-summary]");
+    if (summary) summary.textContent = formatPassengerCount(picker, total) + " · " + classLabel;
+  }
+
+  function closePassengerPicker(picker, restoreFocus = false) {
+    const panel = picker.querySelector(".passenger-panel");
+    const toggle = picker.querySelector(".passenger-toggle");
+    if (panel) panel.hidden = true;
+    if (toggle) toggle.setAttribute("aria-expanded", "false");
+    if (restoreFocus) toggle?.focus({ preventScroll: true });
+  }
+
+  passengerPickers.forEach((picker) => {
+    const form = picker.closest("form");
+    const panel = picker.querySelector(".passenger-panel");
+    const toggle = picker.querySelector(".passenger-toggle");
+    const warning = picker.querySelector(".passenger-limit-warning");
+    if (!form || !panel || !toggle) return;
+
+    toggle.addEventListener("click", () => {
+      const wasOpen = !panel.hidden;
+      passengerPickers.forEach((other) => closePassengerPicker(other));
+      panel.hidden = wasOpen;
+      toggle.setAttribute("aria-expanded", String(!wasOpen));
+      if (warning) warning.hidden = true;
+    });
+
+    picker.querySelectorAll("[data-step][data-field]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const name = button.dataset.field;
+        const field = getControl(form, name);
+        if (!field) return;
+        const current = Number(field.value || 0);
+        const change = Number(button.dataset.step);
+        const min = name === "adults" ? 1 : 0;
+        const max = name === "luggage" ? 25 : 8;
+        const total = ["adults", "children", "infants"].reduce(
+          (sum, key) => sum + Number(getControl(form, key)?.value || 0), 0);
+        if (change > 0 && ["adults", "children", "infants"].includes(name) && total >= 8) {
+          if (warning) warning.hidden = false;
+          return;
+        }
+        field.value = String(Math.max(min, Math.min(max, current + change)));
+        if (warning) warning.hidden = true;
+        updatePassengerPicker(picker);
+      });
+    });
+
+    picker.querySelectorAll("[data-vehicle-class]").forEach((button) => {
+      button.addEventListener("click", () => {
+        getControl(form, "carClass").value = button.dataset.vehicleClass;
+        updatePassengerPicker(picker);
+      });
+    });
+    picker.querySelector("[data-apply-passengers]")?.addEventListener("click", () => {
+      closePassengerPicker(picker, true);
+    });
+    picker.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !panel.hidden) {
+        event.preventDefault();
+        event.stopPropagation();
+        closePassengerPicker(picker, true);
+      }
+    });
+    updatePassengerPicker(picker);
+  });
+
+  document.addEventListener("click", (event) => {
+    passengerPickers.forEach((picker) => {
+      if (!picker.contains(event.target)) closePassengerPicker(picker);
+    });
+  });
+
   document.querySelectorAll(".quick-booking").forEach((quick) => {
     quick.addEventListener("submit", (event) => {
       event.preventDefault();
       if (!quick.reportValidity()) return;
       const details = document.querySelector(".booking-form");
       if (!details || !bookingDialog) return;
-      for (const name of ["fromPreset", "to", "date", "passengers", "carClass"]) {
+      for (const name of ["fromPreset", "to", "date", "passengers", "adults", "children", "infants", "pets", "luggage", "carClass"]) {
         const source = getControl(quick, name);
         const target = getControl(details, name);
         if (source && target) target.value = source.value;
       }
+      const detailedPicker = details.querySelector("[data-passenger-picker]");
+      if (detailedPicker) updatePassengerPicker(detailedPicker);
       bookingDialog.showModal();
       getControl(details, "pickupAddress")?.focus({ preventScroll: true });
     });
