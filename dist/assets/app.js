@@ -132,13 +132,46 @@
 
   document.querySelectorAll(".booking-form").forEach((form) => {
     let sending = false;
+    const phoneInput = form.elements.namedItem("phone");
+    const status = form.querySelector(".booking-status");
+
+    function showBookingError(text) {
+      if (!status) return;
+      status.hidden = false;
+      status.classList.add("booking-error");
+      status.textContent = text;
+    }
+
+    phoneInput?.addEventListener("input", () => {
+      phoneInput.setCustomValidity("");
+      if (status?.classList.contains("booking-error")) status.hidden = true;
+    });
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (sending || !form.reportValidity()) return;
 
+      const phone = String(phoneInput?.value || "").trim();
+      const digits = phone.replace(/\D/g, "");
+      if (digits.length < 6 || digits.length > 16 || !/^[+\d()\s.-]+$/.test(phone)) {
+        const explanation = form.dataset.invalidPhone || "Enter a valid contact phone number.";
+        phoneInput.setCustomValidity(explanation);
+        phoneInput.reportValidity();
+        showBookingError(explanation);
+        return;
+      }
+
+      const from = String(form.elements.namedItem("fromPreset")?.value || "").trim();
+      const to = String(form.elements.namedItem("to")?.value || "").trim();
+      if (from.toLocaleLowerCase() === to.toLocaleLowerCase()) {
+        showBookingError(form.dataset.invalidRoute || "Departure and destination must be different.");
+        form.elements.namedItem("fromPreset")?.focus();
+        return;
+      }
+
       const lang = form.dataset.lang || "en";
       const sendButton = form.querySelector(".booking-prepare");
-      const message = form.querySelector(".booking-status");
+      const message = status;
       const originalButtonMarkup = sendButton?.innerHTML || "";
       const payload = Object.fromEntries(new FormData(form).entries());
       const lines = [...form.querySelectorAll("input[name], select[name], textarea[name]")]
@@ -188,13 +221,24 @@
             message.textContent = (form.dataset.storageSuccess || "Enquiry emailed. Reference: ") + reference;
           }
         }
-      } catch (_) {
-        // No success response: keep every field visible and allow another attempt.
-        if (message) {
-          message.hidden = false;
-          message.classList.add("booking-error");
-          message.textContent = form.dataset.sendError || "Email sending failed. Please try again.";
+      } catch (error) {
+        // Keep all entered details and explain validation vs email-service errors.
+        const code = error?.message;
+        let explanation;
+        if (code === "invalid_phone") {
+          explanation = form.dataset.invalidPhone;
+          phoneInput?.setCustomValidity(explanation);
+          phoneInput?.reportValidity();
+        } else if (code === "invalid_payload") {
+          explanation = form.dataset.invalidForm;
+        } else if (code === "rate_limited") {
+          explanation = form.dataset.rateLimited;
+        } else if (code === "email_unavailable") {
+          explanation = form.dataset.serviceUnavailable;
+        } else if (error?.name === "TypeError") {
+          explanation = form.dataset.networkError;
         }
+        showBookingError(explanation || form.dataset.sendError || "Email sending failed. Please try again.");
       } finally {
         sending = false;
         if (!accepted && sendButton) { sendButton.disabled = false; sendButton.innerHTML = originalButtonMarkup; }
