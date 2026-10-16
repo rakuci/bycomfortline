@@ -255,9 +255,10 @@
     quick.addEventListener("submit", (event) => {
       event.preventDefault();
       if (!quick.reportValidity()) return;
+      // The date and passenger details are completed inside the booking dialog.
       const details = document.querySelector(".booking-form");
       if (!details || !bookingDialog) return;
-      for (const name of ["fromPreset", "to", "date", "passengers", "adults", "children", "infants", "pets", "luggage", "carClass"]) {
+      for (const name of ["fromPreset", "to"]) {
         const source = getControl(quick, name);
         const target = getControl(details, name);
         if (source && target) target.value = source.value;
