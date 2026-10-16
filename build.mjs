@@ -365,25 +365,38 @@ function locationField(lang, field, scope, initialValue) {
 
 function destinationPopup(lang) {
   const ui = locationLabels[lang];
-  const choices = (items) => items.map(item => {
+  const euIds = ["vilnius","vno","warsaw","waw","riga","rix","kaunas","kun","wmi","bialystok","suwalki","lublin","klaipeda","krakow","gdansk","daugavpils","jurmala"];
+  const byIds = ["minsk","msq","grodno","brest","lida","vitebsk","gomel","mogilev","baranovichi","pinsk"];
+  const euSet = new Set(euIds), bySet = new Set(byIds);
+  const entries = (ids) => ids.map(id => locationCatalog.find(item => item.id === id)).filter(Boolean);
+  const choice = (item, featured = false) => {
     const value = item.names[lang];
     const search = [item.id, ...Object.values(item.names)].join(" ");
-    return `<button type="button" class="destination-option" data-value="${esc(value)}" data-search="${esc(search)}"><span class="destination-pin" aria-hidden="true">${item.type === "airport" ? "✈" : "⌖"}</span><span>${esc(value)}</span><span class="destination-option-arrow" aria-hidden="true">↗</span></button>`;
-  }).join("");
-  const featured = locationCatalog.filter(item => ["minsk", "vilnius", "warsaw", "riga", "vno", "waw", "rix"].includes(item.id));
-  const groups = [
-    ["popular", ui.popular, featured],
-    ["cities", ui.cities, locationCatalog.filter(item => item.type === "city")],
-    ["airports", ui.airports, locationCatalog.filter(item => item.type === "airport")]
-  ];
+    return `<button type="button" class="destination-option${featured ? " destination-featured" : ""}" data-value="${esc(value)}" data-search="${esc(search)}">
+      <span class="destination-pin" aria-hidden="true">${item.type === "airport" ? "✈" : "⌖"}</span><span class="destination-choice-name">${esc(value)}</span><span class="destination-option-arrow" aria-hidden="true">↗</span>
+    </button>`;
+  };
+  const group = (mode, kind, heading, items, grid = false) =>
+    `<section class="destination-group${grid ? " destination-featured-group" : ""}" data-location-mode="${mode}" data-destination-group="${kind}">
+      <h3>${esc(heading)}</h3><div class="${grid ? "destination-featured-grid" : "destination-regular-list"}">${items.map(item => choice(item, grid)).join("")}</div>
+    </section>`;
+  const from = [
+    group("from","popular",ui.fromPopular,entries(["vilnius","vno","warsaw","waw","riga","rix"]),true),
+    group("from","cities",ui.fromCities,euIds.map(id => locationCatalog.find(x=>x.id===id)).filter(item=>item?.type==="city")),
+    group("from","airports",ui.fromAirports,euIds.map(id => locationCatalog.find(x=>x.id===id)).filter(item=>item?.type==="airport"))
+  ].join("");
+  const to = [
+    group("to","popular",ui.toPopular,entries(["minsk","msq","grodno","brest","lida","vitebsk"]),true),
+    group("to","cities",ui.toCities,byIds.map(id => locationCatalog.find(x=>x.id===id)).filter(item=>item?.type==="city")),
+    group("to","airports",ui.toAirports,byIds.map(id => locationCatalog.find(x=>x.id===id)).filter(item=>item?.type==="airport"))
+  ].join("");
   return `<dialog class="destination-dialog" id="destination-dialog" aria-labelledby="destination-dialog-title">
     <div class="destination-dialog-body">
-      <div class="destination-dialog-top"><div><span class="eyebrow">ComfortLine</span><h2 id="destination-dialog-title">${esc(ui.popular)}</h2></div>
+      <div class="destination-dialog-top"><div><span class="eyebrow">ComfortLine</span><h2 id="destination-dialog-title">${esc(ui.fromPopular)}</h2><p class="destination-dialog-hint">${esc(ui.destinationHint)}</p></div>
         <button type="button" class="destination-close" data-close-destination aria-label="${esc(bookingPopupUi[lang].close)}">×</button></div>
-      <div class="destination-search-box"><svg aria-hidden="true" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
-        <input type="search" class="destination-search" placeholder="${esc(ui.search)}" aria-label="${esc(ui.search)}" autocomplete="off"></div>
-      <div class="destination-list">${groups.map(([type, title, items]) => `<section class="destination-group" data-destination-group="${type}"><h3>${esc(title)}</h3><div>${choices(items)}</div></section>`).join("")}
-        <p class="destination-empty" hidden>${esc(ui.empty)}</p></div>
+      <div class="destination-search-box"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+        <input type="search" class="destination-search" placeholder="${esc(ui.search)}" aria-label="${esc(ui.search)}" autocomplete="off" enterkeyhint="done"></div>
+      <div class="destination-list">${from}${to}<p class="destination-empty" hidden>${esc(ui.empty)}</p></div>
       <button type="button" class="destination-custom" data-custom-destination hidden>${esc(ui.custom)} <span aria-hidden="true">↗</span></button>
     </div>
   </dialog>`;
