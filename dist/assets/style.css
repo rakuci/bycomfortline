@@ -2345,3 +2345,52 @@ footer {
   .airport-link-card { transition: none; }
   .airport-link-card:hover { transform: none; }
 }
+
+
+/* Root SEO landing page keeps a readable introduction and accessible route links */
+.gateway-panel > .gateway-route-intro {
+  margin: 0 0 24px;
+  max-width: 560px;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  font-weight: 470;
+  letter-spacing: normal;
+  text-transform: none;
+  color: #dce9e8;
+}
+.gateway-panel > h2 {
+  margin: 28px 0 16px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -.03em;
+}
+.gateway-panel .gateway-route-nav {
+  display: grid;
+  gap: 10px;
+  margin-top: 28px;
+}
+.gateway-panel .gateway-route-nav a {
+  display: flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 11px 15px;
+  border: 1px solid rgba(232,241,235,.25);
+  border-radius: 12px;
+  color: #15353a;
+  background: #eff9f3;
+  font-weight: 800;
+  line-height: 1.5;
+}
+.gateway-panel .gateway-route-nav a:hover,
+.gateway-panel .gateway-route-nav a:focus-visible {
+  background: #d9f5e7;
+  color: #0c473a;
+}
+@media (max-width: 760px) {
+  .gateway main { align-items: flex-start; }
+  .gateway-panel { padding: 45px 0 110px; }
+  .gateway-panel h1 { margin-bottom: 20px; font-size: clamp(2.05rem,8vw,3.15rem); }
+  .gateway-panel > .gateway-route-intro { font-size: .93rem; }
+  .gateway-panel > h2 { font-size: 1.15rem; }
+}
