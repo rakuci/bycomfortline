@@ -4,6 +4,7 @@ import { routeExtras } from "./route-extras.mjs";
 import { airportHubLinks } from "./airport-hub-links.mjs";
 import { bookingTrustContent, routeOfficialSources, reverseRoutePages } from "./booking-trust-content.mjs";
 import { fleetCatalog, fleetCopy, routeScenes, reverseJourneyCopy } from "./fleet-showcase.mjs";
+import { additionalLocales } from "./fr-de-localization.mjs";
 import { locationCatalog, locationLabels } from "./booking-locations.mjs";
 import { bookingPopupUi } from "./booking-popup-i18n.mjs";
 import { dirname, join } from "node:path";
@@ -16,6 +17,8 @@ const phoneHref = "+375291552776";
 const email = "info@comfortline.by";
 
 const destinationLabels = {
+  de: "Minsk, Belarus",
+  fr: "Minsk, Biélorussie",
   en: "Minsk, Belarus",
   ru: "Минск, Беларусь",
   pl: "Mińsk, Białoruś",
@@ -263,7 +266,7 @@ function languageMenu(lang, type, routeKey) {
 
 function header(lang, type = "home", routeKey) {
   const l = locale[lang];
-  const menuLabel = { en: "Menu", ru: "Меню", pl: "Menu", lt: "Meniu", lv: "Izvēlne" }[lang];
+  const menuLabel = { en: "Menu", ru: "Меню", pl: "Menu", lt: "Meniu", lv: "Izvēlne", de: "Menü", fr: "Menu" }[lang];
   return `<header class="site-header">
     <a class="brand" href="${l.home}" aria-label="Comfortline">
       <img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56">
@@ -365,6 +368,27 @@ const bookingLabels = {
   }
 };
 
+for (const lang of ["de", "fr"]) {
+  const translations = additionalLocales[lang];
+  locale[lang] = { ...translations.site,
+    routeTitle: key => translations.seo[key].h1
+  };
+  bookingLabels[lang] = translations.booking;
+  bookingPopupUi[lang] = translations.popup;
+  locationLabels[lang] = translations.location;
+  routeSeo[lang] = translations.seo;
+  routeExtras[lang] = translations.extras;
+  airportHubLinks[lang] = translations.airportHub;
+  bookingTrustContent[lang] = translations.trust;
+  fleetCopy[lang] = translations.fleet;
+  reverseJourneyCopy[lang] = translations.reverse;
+}
+// City and airport names remain searchable in their original spelling as well.
+for (const place of locationCatalog) {
+  place.names.de = place.names.en;
+  place.names.fr = place.names.en;
+  if (place.id === "minsk") place.names.fr = "Minsk";
+}
 
 function locationField(lang, field, scope, initialValue) {
   const id = `${scope}-${field}-${lang}`;
