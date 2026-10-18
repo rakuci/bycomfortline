@@ -2,6 +2,7 @@ import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import { routeSeo } from "./route-seo.mjs";
 import { routeExtras } from "./route-extras.mjs";
 import { airportHubLinks } from "./airport-hub-links.mjs";
+import { bookingTrustContent, routeOfficialSources } from "./booking-trust-content.mjs";
 import { locationCatalog, locationLabels } from "./booking-locations.mjs";
 import { bookingPopupUi } from "./booking-popup-i18n.mjs";
 import { dirname, join } from "node:path";
@@ -515,7 +516,7 @@ function faq(l) {
 }
 
 function footer(l) {
-  return `<footer><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}</div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
+  return `<footer id="operator-info"><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}</div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
 }
 
 function floatingContact() {
@@ -567,6 +568,7 @@ function hubPage(lang) {
     ${airportRouteLinks(lang)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">Door to door</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     <section class="section steps-section"><div class="section-head"><span class="eyebrow">3 steps</span><h2>${esc(l.stepsTitle)}</h2></div><div class="steps">${l.steps.map(([n, h, p]) => `<article><span>${n}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
+    ${homeBookingTransparency(lang)}
     ${faq(l)}</main>${footer(l)}`;
   return layout({ lang, title, description: l.hubDescription, canonical, alternates: alternateLinks("home"), body, schema: businessSchema(lang, canonical) });
 }
@@ -580,6 +582,70 @@ function airportRouteLinks(lang) {
     <div class="airport-links-grid">${content.items.map(([key,title,text]) =>
       `<article class="airport-link-card"><span class="airport-link-icon" aria-hidden="true">✈</span><h3><a href="${routePath(lang,key)}#airport-pickup">${esc(title)} ↗</a></h3><p>${esc(text)}</p></article>`
     ).join("")}</div>
+  </section>`;
+}
+
+
+function homeBookingTransparency(lang) {
+  const d = bookingTrustContent[lang];
+  return `<section class="section booking-confidence-home" id="booking-guide">
+    <span class="eyebrow">${esc(d.kicker)}</span>
+    <h2>${esc(d.hubTitle)}</h2>
+    <p>${esc(d.hubText)}</p>
+    <div class="booking-confidence-home-contact">
+      <a href="tel:${phoneHref}" class="booking-confidence-link">${icons.phone}${phoneDisplay}</a>
+      <a href="mailto:${email}" class="booking-confidence-link">${esc(email)} ↗</a>
+    </div>
+  </section>`;
+}
+
+function routeBookingTransparency(lang,key) {
+  const copy = bookingTrustContent[lang], references = routeOfficialSources[key];
+  const quoteRows = copy.quoteItems.map(([heading,detail]) =>
+    `<li class="booking-price-item"><strong>${esc(heading)}</strong><span>${esc(detail)}</span></li>`).join("");
+  const steps = copy.process.map(([number,title,description]) =>
+    `<li class="booking-process-step"><span aria-hidden="true">${esc(number)}</span>
+      <div><h3>${esc(title)}</h3><p>${esc(description)}</p></div></li>`).join("");
+  const official = references.map(([name,url]) =>
+    `<li><a href="${esc(url)}" rel="noopener noreferrer">${esc(name)} ↗</a></li>`).join("");
+  const checklist = copy.safetyChecklist.map(line=>`<li>${esc(line)}</li>`).join("");
+  return `<section class="booking-confidence section" id="booking-guide" aria-labelledby="booking-guide-title">
+    <div class="section-head">
+      <span class="eyebrow">${esc(copy.kicker)}</span>
+      <h2 id="booking-guide-title">${esc(copy.title)}</h2>
+      <p>${esc(copy.intro)}</p>
+    </div>
+    <div class="booking-confidence-layout">
+      <article class="booking-confidence-card booking-quote-clarity">
+        <h3>${esc(copy.quoteHeading)}</h3>
+        <p>${esc(copy.quoteIntro)}</p>
+        <ul class="booking-price-list">${quoteRows}</ul>
+      </article>
+      <article class="booking-confidence-card booking-process-clarity">
+        <h3>${esc(copy.processHeading)}</h3>
+        <ol class="booking-process-list">${steps}</ol>
+      </article>
+    </div>
+    <aside class="booking-border-guidance">
+      <div><h3>${esc(copy.safetyHeading)}</h3><p>${esc(copy.safetyLead)}</p>
+        <ul class="booking-border-checklist">${checklist}</ul></div>
+      <div class="booking-official-sources">
+        <strong>${esc(copy.sourceName)}</strong>
+        <ul>${official}</ul>
+      </div>
+    </aside>
+    <aside class="booking-operator-identity">
+      <div>
+        <h3>${esc(copy.identityHeading)}</h3>
+        <p>${esc(copy.identityText)}</p>
+        <p class="booking-operator-legal">${esc(locale[lang].license)}</p>
+        <small>${esc(copy.licensingNote)}</small>
+      </div>
+      <div class="booking-operator-contact">
+        <a href="tel:${phoneHref}">${icons.phone} ${phoneDisplay}</a>
+        <a href="mailto:${email}">${esc(email)}</a>
+      </div>
+    </aside>
   </section>`;
 }
 
@@ -644,6 +710,7 @@ function routePage(lang, key) {
     ${trustStrip(l)}
     <section class="facts-section"><article><span>${icons.pin}</span><div><small>${esc(l.facts.distance)}</small><strong>${r.distance}</strong></div></article><article><span class="clock">◷</span><div><small>${esc(l.facts.time)}</small><strong>${r.time}</strong><em>${esc(l.facts.note)}</em></div></article><article><span class="plane">✈</span><div><small>${esc(l.facts.airport)}</small><strong>${r.airport}</strong></div></article></section>
     ${routeEditorial(lang, key)}
+    ${routeBookingTransparency(lang, key)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">${esc(l.routeNames[key])}</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     <section class="section steps-section"><div class="section-head"><span class="eyebrow">3 steps</span><h2>${esc(l.stepsTitle)}</h2></div><div class="steps">${l.steps.map(([n, h, p]) => `<article><span>${n}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     ${faq(l)}
