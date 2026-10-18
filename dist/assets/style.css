@@ -2203,3 +2203,145 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .destination-featured-grid .destination-option { transition: none; }
 }
+
+
+/* Crawlable, human-readable route guidance and airport landing links */
+.route-intent-guide { display: grid; gap: 25px; margin: 34px 0 40px; }
+.route-intent-section, .route-intent-arrival {
+  border: 1px solid #d8e6e4;
+  border-radius: 24px;
+  padding: clamp(22px,3.1vw,35px);
+  background: #ffffff;
+}
+.route-intent-section h2, .route-intent-card h2, .route-intent-arrival h2 {
+  margin: 0 0 14px;
+  font-size: clamp(1.25rem,2.4vw,1.85rem);
+  font-weight: 830;
+  line-height: 1.25;
+  letter-spacing: -.04em;
+  color: #142f40;
+}
+.route-intent-section p, .route-intent-card p, .route-intent-arrival p {
+  margin: 0;
+  max-width: 850px;
+  color: #556e78;
+  line-height: 1.85;
+  font-size: .97rem;
+}
+.route-pickup-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+}
+.route-pickup-chips li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 8px 13px;
+  border: 1px solid #cde5dd;
+  border-radius: 999px;
+  background: #edf7f3;
+  color: #245d52;
+  font-size: .84rem;
+  font-weight: 740;
+  line-height: 1.45;
+}
+.route-pickup-chips li::before { content: "⌖"; font-size: 1.04rem; }
+.route-intent-cards { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
+.route-intent-card {
+  padding: clamp(22px,2.6vw,32px);
+  border: 1px solid #d8e6e4;
+  border-radius: 23px;
+  background: #f4faf8;
+  min-width: 0;
+}
+.route-intent-arrival { background: linear-gradient(135deg,#f1faf6,#fffaf0); }
+.route-intent-arrival .route-intent-disclaimer {
+  margin-top: 13px;
+  color: #51616b;
+  font-size: .84rem;
+  font-weight: 680;
+}
+.route-intent-cta { display: inline-flex; width: auto; min-height: 48px; margin-top: 23px; }
+.route-intent-related {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  border-radius: 17px;
+  background: #102d3c;
+  color: #fff;
+}
+.route-intent-related strong { font-size: .86rem; font-weight: 790; }
+.route-intent-related div { display: flex; flex-wrap: wrap; gap: 14px; }
+.route-intent-related a {
+  font-size: .86rem;
+  line-height: 1.5;
+  color: #f0d098;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.airport-links-section { padding-top: 50px; padding-bottom: 74px; }
+.airport-links-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+.airport-link-card {
+  min-width: 0;
+  border: 1px solid #dce8e7;
+  border-radius: 21px;
+  padding: 23px 20px;
+  background: #fff;
+  transition: border-color .2s,transform .2s,box-shadow .2s;
+}
+.airport-link-card:hover { transform: translateY(-3px); border-color: #8dc3b5; box-shadow: 0 12px 30px rgba(14,46,52,.08); }
+.airport-link-icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border-radius: 13px;
+  background: #e8f6f0;
+  color: #24715b;
+  font-size: 1.2rem;
+}
+.airport-link-card h3 { margin: 16px 0 12px; font-size: 1rem; line-height: 1.48; font-weight: 820; }
+.airport-link-card h3 a { color: #162d3d; text-decoration: none; }
+.airport-link-card h3 a:hover { color: #15715a; text-decoration: underline; text-underline-offset: 3px; }
+.airport-link-card p { margin: 0; color: #59727a; font-size: .83rem; line-height: 1.7; }
+.gateway-route-nav {
+  display: grid;
+  gap: 9px;
+  margin-top: 22px;
+}
+.gateway-route-nav a { display: block; padding: 11px 13px; border: 1px solid #d6e3e0; border-radius: 10px; color: #203c45; font-weight: 800; background: #f3faf7; }
+.gateway-route-nav a:hover { background: #e1f4eb; }
+.gateway-route-intro { margin: 0 auto 15px; max-width: 600px; line-height: 1.7; }
+@media (max-width: 1100px) {
+  .airport-links-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 760px) {
+  .route-intent-guide { gap: 16px; margin: 25px 0 32px; }
+  .route-intent-section, .route-intent-arrival, .route-intent-card { border-radius: 18px; padding: 22px 18px; }
+  .route-intent-cards { grid-template-columns: 1fr; gap: 15px; }
+  .route-pickup-chips { gap: 7px; margin-top: 17px; }
+  .route-pickup-chips li { padding: 7px 11px; font-size: .78rem; }
+  .route-intent-related { align-items: flex-start; padding: 19px; }
+  .route-intent-related div { flex-direction: column; gap: 10px; }
+  .route-intent-cta { display: flex; width: 100%; justify-content: center; }
+  .airport-links-section { padding: 33px 0 55px; }
+  .airport-links-grid { gap: 10px; }
+  .airport-link-card { border-radius: 15px; padding: 16px 13px; }
+  .airport-link-card h3 { font-size: .86rem; }
+  .airport-link-card p { font-size: .75rem; line-height: 1.6; }
+}
+@media (max-width: 430px) {
+  .airport-links-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .airport-link-card { transition: none; }
+  .airport-link-card:hover { transform: none; }
+}
