@@ -1,5 +1,6 @@
 import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import { routeSeo } from "./route-seo.mjs";
+import { routeExtras } from "./route-extras.mjs";
 import { locationCatalog, locationLabels } from "./booking-locations.mjs";
 import { bookingPopupUi } from "./booking-popup-i18n.mjs";
 import { dirname, join } from "node:path";
@@ -535,16 +536,50 @@ function hubPage(lang) {
   return layout({ lang, title, description: l.hubDescription, canonical, alternates: alternateLinks("home"), body, schema: businessSchema(lang, canonical) });
 }
 
+
+function routeIntentDetails(lang, key) {
+  const copy = routeExtras[lang], extra = copy[key], ui = copy.ui;
+  const city = locale[lang].fromNames[key];
+  const pickupHeading = ui.pickupTitle.replace("{city}", city);
+  const alternateRoutes = Object.keys(routes).filter(id => id !== key)
+    .map(id => `<a href="${routePath(lang,id)}">${esc(locale[lang].routeNames[id])} ↗</a>`).join("");
+  return `<div class="route-intent-guide">
+    <section class="route-intent-section" id="pickup-options">
+      <div class="route-intent-copy">
+        <h2>${esc(pickupHeading)}</h2><p>${esc(extra.pickupContext)}</p>
+      </div>
+      <ul class="route-pickup-chips">${extra.pickupPlaces.map(place => `<li>${esc(place)}</li>`).join("")}</ul>
+    </section>
+    <div class="route-intent-cards">
+      <section class="route-intent-card">
+        <h2>${esc(ui.vehicleTitle)}</h2><p>${esc(extra.vehicleContext)}</p>
+      </section>
+      <section class="route-intent-card">
+        <h2>${esc(ui.quoteTitle)}</h2><p>${esc(extra.quoteContext)}</p>
+      </section>
+    </div>
+    <section class="route-intent-arrival">
+      <h2>${esc(ui.arrivalTitle)}</h2><p>${esc(extra.arrivalContext)}</p>
+      <p class="route-intent-disclaimer">${esc(ui.notLocalTaxi)}</p>
+      <a class="button primary route-intent-cta" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(ui.miniCta)} ${icons.arrow}</a>
+    </section>
+    <nav class="route-intent-related" aria-label="${esc(ui.otherLinks)}">
+      <strong>${esc(ui.otherLinks)}</strong><div>${alternateRoutes}</div>
+    </nav>
+  </div>`;
+}
+
 function routeEditorial(lang, key) {
   const seo = routeSeo[lang][key], ui = routeSeo[lang].ui;
   return `<section class="route-editorial section" id="route-guide">
-    <div class="section-head"><span class="eyebrow">${esc(ui.overview)}</span><h2>${esc(seo.h1)}</h2><p>${esc(seo.intro)}</p></div>
+    <div class="section-head"><span class="eyebrow">${esc(ui.overview)}</span><h2>${esc(ui.overview)}: ${esc(locale[lang].routeNames[key])}</h2><p>${esc(seo.intro)}</p></div>
     <div class="route-editorial-grid">
       <article><span class="route-detail-symbol" aria-hidden="true">⌖</span><h3>${esc(ui.pickup)}</h3><p>${esc(seo.pickupText)}</p></article>
-      <article><span class="route-detail-symbol" aria-hidden="true">✈</span><h3>${esc(ui.airport)}</h3><p>${esc(seo.airportText)}</p></article>
+      <article id="airport-pickup"><span class="route-detail-symbol" aria-hidden="true">✈</span><h3>${esc(ui.airport)}</h3><p>${esc(seo.airportText)}</p></article>
       <article><span class="route-detail-symbol" aria-hidden="true">↗</span><h3>${esc(ui.planning)}</h3><p>${esc(seo.planningText)}</p></article>
     </div>
     <div class="route-checklist"><div><h3>${esc(ui.prepare)}</h3><ul>${ui.checklist.map(text => `<li>${esc(text)}</li>`).join("")}</ul></div><p>${esc(ui.border)}</p></div>
+    ${routeIntentDetails(lang,key)}
     <div class="route-specific-faq"><h3>${esc(ui.faqs)}</h3><div class="route-specific-questions">${seo.faqs.map(([question, answer]) => `<details><summary>${esc(question)}</summary><p>${esc(answer)}</p></details>`).join("")}</div></div>
     <aside class="related-comfortline"><p>${esc(ui.related)} <a href="https://comfortline.by/" rel="noopener">comfortline.by ↗</a></p></aside>
   </section>`;
