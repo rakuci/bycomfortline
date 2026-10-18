@@ -8,6 +8,7 @@ import { dirname, join } from "node:path";
 
 const out = new URL("./dist/", import.meta.url).pathname;
 const base = "https://bycomfortline.com";
+const seoLastmod = "2026-10-18";
 const phoneDisplay = "+375 29 155 27 76";
 const phoneHref = "+375291552776";
 const email = "info@comfortline.by";
@@ -515,12 +516,36 @@ function floatingContact() {
 
 function layout({ lang, title, description, canonical, alternates, body, schema, routeKey = "vilnius" }) {
   const l = locale[lang];
-  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="ComfortLine"><meta property="og:locale" content="${esc(l.locale)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${base}/assets/comfortline-transfer-van.webp"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${bookingForm(lang, routeKey)}${destinationPopup(lang)}${floatingContact()}</body></html>`;
+  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="byComfortLine"><meta property="og:locale" content="${esc(l.locale)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${base}/assets/comfortline-transfer-van.webp"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preload" as="image" href="/assets/comfortline-transfer-van.webp" fetchpriority="high"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${bookingForm(lang, routeKey)}${destinationPopup(lang)}${floatingContact()}</body></html>`;
 }
 
 function businessSchema(lang, url) {
   const l = locale[lang];
-  return { "@context": "https://schema.org", "@type": "TaxiService", name: "ComfortLine", url, telephone: phoneHref, email, foundingDate: "2015", areaServed: ["Belarus", "Lithuania", "Poland", "Latvia"], address: { "@type": "PostalAddress", streetAddress: "ул. Фёдорова, 19-10", addressLocality: "Минск", addressCountry: "BY" }, slogan: l.footerText };
+  return {
+    "@context": "https://schema.org",
+    "@type": "TaxiService",
+    "@id": base + "/#business",
+    name: "ComfortLine",
+    alternateName: "byComfortLine",
+    url: base + "/",
+    telephone: phoneHref,
+    email,
+    foundingDate: "2015",
+    areaServed: ["Belarus", "Lithuania", "Poland", "Latvia"],
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "ул. Фёдорова, 19-10",
+      addressLocality: "Минск",
+      addressCountry: "BY"
+    },
+    sameAs: [
+      "https://www.instagram.com/transfer_comfortline/",
+      "https://t.me/transfer_comfortline",
+      "https://m.me/103816619260365",
+      "https://www.threads.com/@transferwarsaw_taxi"
+    ],
+    slogan: l.footerText
+  };
 }
 
 function hubPage(lang) {
@@ -605,7 +630,7 @@ function routePage(lang, key) {
   const h1 = seo.h1;
   const description = seo.description;
   const faqSchema = { "@type": "FAQPage", mainEntity: [...seo.faqs, ...l.faqs].map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
-  const schema = { "@context": "https://schema.org", "@graph": [businessSchema(lang, canonical), { "@type": "Service", name: h1, serviceType: "Private airport and intercity transfer", description: seo.intro, provider: { "@type": "TaxiService", name: "ComfortLine" }, areaServed: [l.fromNames[key], "Minsk"], url: canonical }, { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: l.nav.routes, item: `${base}/${lang}/` }, { "@type": "ListItem", position: 2, name: l.routeNames[key], item: canonical }] }, faqSchema] };
+  const schema = { "@context": "https://schema.org", "@graph": [businessSchema(lang, canonical), { "@type": "Service", name: h1, serviceType: "Private cross-border airport transfer and chauffeur-driven intercity taxi", description: seo.intro, provider: { "@id": base + "/#business" }, areaServed: [l.fromNames[key], "Minsk"], url: canonical }, { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: l.nav.routes, item: `${base}/${lang}/` }, { "@type": "ListItem", position: 2, name: l.routeNames[key], item: canonical }] }, faqSchema] };
   const body = `${header(lang, "route", key)}<main>
     <section class="route-hero"><div class="route-hero-bg"></div><div class="route-hero-content"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(l.routeNames[key])}</span></nav><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(h1)}</h1><p>${esc(seo.intro)}</p><div class="hero-actions"><a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang, key)}</div><div class="journey-card"><div><span>${esc(l.fromNames[key])}</span><b>${r.airport}</b></div><div class="journey-line"><i></i><em>${r.distance}</em><i></i></div><div><span>Minsk</span><b>MSQ</b></div></div></section>
     ${trustStrip(l)}
@@ -658,12 +683,12 @@ for (const lang of Object.keys(locale)) {
 }
 
 const sitemapEntries = [
-  `<url><loc>${base}/</loc></url>`,
-  ...Object.keys(locale).map(lang => `<url><loc>${base}/${lang}/</loc>${Object.keys(locale).map(code => `<xhtml:link rel="alternate" hreflang="${code}" href="${base}/${code}/"/>`).join("")}<xhtml:link rel="alternate" hreflang="x-default" href="${base}/"/></url>`),
+  `<url><loc>${base}/</loc><lastmod>${seoLastmod}</lastmod></url>`,
+  ...Object.keys(locale).map(lang => `<url><loc>${base}/${lang}/</loc><lastmod>${seoLastmod}</lastmod>${Object.keys(locale).map(code => `<xhtml:link rel="alternate" hreflang="${code}" href="${base}/${code}/"/>`).join("")}<xhtml:link rel="alternate" hreflang="x-default" href="${base}/"/></url>`),
   ...Object.keys(routes).flatMap(key => Object.keys(locale).map(lang => {
     const url = `${base}${routePath(lang, key)}`;
     const localized = Object.keys(locale).map(code => `<xhtml:link rel="alternate" hreflang="${code}" href="${base}${routePath(code, key)}"/>`).join("");
-    return `<url><loc>${url}</loc>${localized}<xhtml:link rel="alternate" hreflang="x-default" href="${base}${routePath("en", key)}"/></url>`;
+    return `<url><loc>${url}</loc><lastmod>${seoLastmod}</lastmod>${localized}<xhtml:link rel="alternate" hreflang="x-default" href="${base}${routePath("en", key)}"/></url>`;
   }))
 ];
 await put("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
