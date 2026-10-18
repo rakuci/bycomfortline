@@ -1,5 +1,6 @@
 export const bookingTrustContent = {
   "en": {
+    "registryLabel": "Check provider licence in the official registry",
     "kicker": "Booking clarity",
     "title": "Before you book your private transfer",
     "intro": "An international transfer is arranged individually. The form sends a request to byComfortLine; it does not reserve a car or guarantee that a border crossing is possible.",
@@ -56,6 +57,7 @@ export const bookingTrustContent = {
     "hubText": "Choose your route and submit a request. We discuss the vehicle, border feasibility and total price before confirming; contact us directly if you need clarification."
   },
   "ru": {
+    "registryLabel": "Проверить лицензию перевозчика в государственном реестре",
     "kicker": "Прозрачное бронирование",
     "title": "Что важно знать перед заказом трансфера",
     "intro": "Международный трансфер согласовывается индивидуально. Форма отправляет заявку команде byComfortLine, но не бронирует автомобиль автоматически и не гарантирует возможность пересечения границы.",
@@ -112,6 +114,7 @@ export const bookingTrustContent = {
     "hubText": "Выберите маршрут и отправьте запрос. Мы обсуждаем автомобиль, возможность пересечения границы и полную цену до подтверждения. По вопросам можно связаться напрямую."
   },
   "pl": {
+    "registryLabel": "Sprawdź licencję przewoźnika w urzędowym rejestrze",
     "kicker": "Jasne zasady rezerwacji",
     "title": "Co warto wiedzieć przed zamówieniem transferu",
     "intro": "Transfer międzynarodowy wymaga indywidualnego uzgodnienia. Formularz wysyła zapytanie do byComfortLine, ale nie rezerwuje automatycznie samochodu ani nie gwarantuje możliwości przekroczenia granicy.",
@@ -168,6 +171,7 @@ export const bookingTrustContent = {
     "hubText": "Wybierz trasę i wyślij zapytanie. Dostępność pojazdu, możliwość przekroczenia granicy i cenę potwierdzimy przed rezerwacją."
   },
   "lt": {
+    "registryLabel": "Patikrinkite vežėjo licenciją oficialiame registre",
     "kicker": "Aiškus užsakymo procesas",
     "title": "Ką svarbu žinoti prieš užsakant pervežimą",
     "intro": "Tarptautinis pervežimas derinamas individualiai. Forma siunčia užklausą byComfortLine komandai, tačiau automobilis automatiškai nerezervuojamas, o galimybė kirsti sieną negarantuojama.",
@@ -224,6 +228,7 @@ export const bookingTrustContent = {
     "hubText": "Pasirinkite maršrutą ir išsiųskite užklausą. Automobilį, sienos kirtimo galimybę ir galutinę kainą suderiname prieš patvirtinimą."
   },
   "lv": {
+    "registryLabel": "Pārbaudīt pārvadātāja licenci oficiālajā reģistrā",
     "kicker": "Skaidra rezervācijas kārtība",
     "title": "Kas jāzina pirms privāta transfēra pieprasīšanas",
     "intro": "Starptautisks transfērs tiek saskaņots individuāli. Veidlapa nosūta pieprasījumu byComfortLine komandai, bet automātiski nerezervē auto un negarantē robežas šķērsošanas iespēju.",
@@ -311,4 +316,11 @@ export const routeOfficialSources = {
       "https://www.mfa.gov.lv/en/article/ministry-foreign-affairs-advises-latvian-nationals-leave-belarus"
     ]
   ]
+};
+
+// Related return journeys on the existing ComfortLine website (verified route pages).
+export const reverseRoutePages = {
+  "warsaw": "https://comfortline.by/warsaw-transfer",
+  "vilnius": "https://comfortline.by/minsk-vilnius-transfer",
+  "riga": "https://comfortline.by/трансфер-рига"
 };
