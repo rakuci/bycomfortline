@@ -49,8 +49,16 @@ Avoid reproducing competitor text, unsupported prices or unverified amenities.
 | Vilnius Minskas privatus taksi, Vilniaus oro uostas VNO Minskas | /lt/vilnius-minskas-pervezimas/ |
 | Вильнюс Минск такси, аэропорт Вильнюса Минск трансфер | /ru/vilnius-minsk-transfer/ |
 | Riga Minsk private transfer, Riga Airport RIX to Minsk taxi | /en/riga-minsk-transfer/ |
-| Rīga Minska privāts transfērs, Rīgas lidosta RIX Minska | /lv/ryga-minsk-transfer/ (confirm live slug from repo) |
+| Rīga Minska privāts transfērs, Rīgas lidosta RIX Minska | /lv/riga-minska-transfers/ |
 | Рига Минск такси, аэропорт Риги Минск трансфер | /ru/riga-minsk-transfer/ |
+| Vilnius Minsk, privatus pervežimas Vilnius Minskas | /lt/vilnius-minskas-pervezimas/ |
+| Varšuva Minskas, pervežimas Varšuva Minskas, WAW WMI | /lt/varsuva-minskas-pervezimas/ |
+| Ryga Minskas, Rygos oro uostas pervežimas | /lt/ryga-minskas-pervezimas/ |
+| Viļņa Minska, privāts transfērs, VNO lidosta | /lv/vilna-minska-transfers/ |
+| Varšava Minska, privāts taksometrs, WAW WMI | /lv/varsava-minska-transfers/ |
+| Rīga Minska, privāts taksometrs, RIX lidosta | /lv/riga-minska-transfers/ |
+| Wilno Mińsk Białoruś taksówka, transfer z lotniska VNO | /pl/wilno-minsk-transfer/ |
+| Ryga Mińsk Białoruś, prywatny transfer z RIX | /pl/ryga-minsk-transfer/ |
 
 **Caution:** `taxi in Warsaw` without a Minsk/Belarus qualifier typically
 expresses *local Warsaw taxi* intent. Targeting this broad phrase through a
