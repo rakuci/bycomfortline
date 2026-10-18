@@ -2738,3 +2738,56 @@ footer {
   .fleet-show-card:hover { transform: none; }
   .fleet-show-card:hover .fleet-photo img { transform: none; }
 }
+
+
+/* Related return journey: explicit opposite direction and on-request quote */
+.return-trip-panel {
+  width: var(--wrap);
+  max-width: 100%;
+  margin: 0 auto clamp(40px,5vw,72px);
+  border-radius: 24px;
+  overflow: hidden;
+  background: #102e3c;
+  color: #fff;
+  box-shadow: 0 18px 45px rgba(10,35,47,.15);
+}
+.return-trip-route {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 11px;
+  padding: 17px clamp(22px,3vw,35px);
+  background: #1a4f52; color: #e5faf1;
+  font-size: .9rem; font-weight: 830; line-height: 1.5;
+}
+.return-trip-route span:nth-child(2) { color: #e7bc79; font-size: 1.5rem; line-height: 1; }
+.return-trip-main {
+  display: grid;
+  grid-template-columns: minmax(0,1.7fr) minmax(230px,.8fr);
+  gap: 35px;
+  padding: clamp(23px,3vw,37px);
+}
+.return-trip-main h2 { margin: 0 0 16px; font-size: clamp(1.35rem,2.3vw,1.85rem); line-height: 1.26; color: white; }
+.return-trip-main p { margin: 0 0 12px; color: #c7dcdf; font-size: .9rem; line-height: 1.78; }
+.return-trip-main .return-trip-detail { color: #f2f5e8; font-weight: 700; }
+.return-trip-main .return-trip-terms { margin-top: 20px; color: #a7c0c5; font-size: .8rem; }
+.return-trip-action { display: grid; align-content: center; justify-items: start; gap: 18px; }
+.return-trip-action strong { color: #f4d49e; font-size: 1.04rem; letter-spacing: -.015em; }
+.return-trip-action a {
+  display: inline-flex; align-items: center;
+  padding: 13px 18px; min-height: 50px; max-width: 100%;
+  border-radius: 12px;
+  background: #e5bf86; color: #122939;
+  line-height: 1.5;
+  font-size: .87rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+.return-trip-action a:hover { background: #f4d49e; }
+@media (max-width: 850px) {
+  .return-trip-main { grid-template-columns: 1fr; gap: 17px; }
+  .return-trip-action { gap: 12px; }
+}
+@media (max-width: 760px) {
+  .return-trip-panel { border-radius: 17px; margin-bottom: 42px; }
+  .return-trip-route { padding: 16px 18px; font-size: .8rem; gap: 8px; }
+  .return-trip-main { padding: 23px 18px 25px; }
+  .return-trip-action a { width: 100%; justify-content: center; }
+}
