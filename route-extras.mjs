@@ -162,7 +162,7 @@ export const routeExtras = {
       "pickupContext": "Nurodykite tikslų adresą Vilniuje, viešbutį arba Vilniaus oro uostą (VNO). Atvykstant lėktuvu svarbu įrašyti skrydžio numerį ir nusileidimo laiką, kad iš anksto būtų galima suderinti susitikimo vietą.",
       "vehicleContext": "Tai individualus pervežimas tik jūsų keleivių grupei. Galite pasirinkti pageidaujamą komforto, verslo ar premium klasę, nurodyti vaikus, kėdutes, augintinius ir lagaminus. Konkretaus automobilio prieinamumą patvirtina vadybininkas.",
       "quoteContext": "Pervežimo Vilnius–Minskas kaina priklauso nuo paėmimo adreso, datos, keleivių ir transporto klasės; tai nėra įprastas taksi tarifas Vilniuje. Užpildykite užklausą ir prieš kelionę gausite kainos bei galimybės patvirtinimą.",
-      "arrivalContext": "Galamērķis – Minskas Baltarusijoje. Įrašykite viešbučio arba kitą tikslų adresą Minske; jei reikia kito Baltarusijos miesto, jį nurodykite atskirai. Prieš išvykstant patikrinkite pasienio punktų veikimą ir kelionės dokumentus."
+      "arrivalContext": "Kelionės tikslas – Minskas Baltarusijoje. Įrašykite viešbučio arba kitą tikslų adresą Minske; jei reikia kito Baltarusijos miesto, jį nurodykite atskirai. Prieš išvykstant patikrinkite pasienio punktų veikimą ir kelionės dokumentus."
     },
     "warsaw": {
       "pickupPlaces": [
@@ -174,7 +174,7 @@ export const routeExtras = {
       "pickupContext": "Galite nurodyti viešbutį ar adresą Varšuvos Śródmieście, Mokotów ar Wola rajone, Warszawa Centralna stotį arba Šopeno (WAW) bei Modlino (WMI) oro uostą. Tai skirtingi oro uostai, todėl nurodykite tikslų ir pridėkite skrydžio numerį.",
       "vehicleContext": "Kelionei Varšuva–Minskas galite prašyti asmeninio vairuotojo ir komforto, verslo arba premium automobilio. Nurodykite suaugusiųjų, vaikų, kūdikių, lagaminų ir augintinių skaičių. Pageidaujama automobilio klasė ir modelis patvirtinami prieš kelionę.",
       "quoteContext": "Privataus taksi Varšuva–Minskas kaina derinama individualiai pagal adresus, datą ir transporto poreikius. Vadybininkas patikrina maršruto ir sienos kirtimo galimybes. Tai nėra įprastos taksi paslaugos po Varšuvą pasiūlymas.",
-      "arrivalContext": "Galamērķis – Minskas Baltarusijoje, ne Mińsk Mazowiecki miestas Lenkijoje. Įrašykite tikslų adresą Minske ir prieš kelionę pasitikrinkite galiojančius įvažiavimo reikalavimus bei pasienio punktus."
+      "arrivalContext": "Kelionės tikslas – Minskas Baltarusijoje, o ne Mińsk Mazowiecki miestas Lenkijoje. Įrašykite tikslų adresą Minske ir prieš kelionę pasitikrinkite galiojančius įvažiavimo reikalavimus bei pasienio punktus."
     },
     "riga": {
       "pickupPlaces": [
