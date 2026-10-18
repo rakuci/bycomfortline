@@ -227,3 +227,66 @@ export const routeScenes = {
     }
   }
 };
+
+export const reverseJourneyCopy = {
+  "en": {
+    "heading": "Need the journey in the opposite direction?",
+    "intro": "ComfortLine also publishes a dedicated Minsk-to-departure-city service. Return journeys can be requested together or separately. Ask for a new quote for each direction; the price and vehicle are not automatically identical.",
+    "view": "View the return transfer at comfortline.by",
+    "label": "Price: on request",
+    "terms": "ComfortLine's published international transfer guidance states that settlement terms are agreed before departure, with BYN used for payments. Confirm the amount and currency with the coordinator.",
+    "extras": {
+      "warsaw": "Minsk → Warsaw city or Warsaw airports (WAW/WMI). Book your return pickup point and luggage requirements.",
+      "vilnius": "Minsk → Vilnius city or Vilnius Airport (VNO). Give the exact destination and any flight details.",
+      "riga": "Minsk → Riga city or Riga Airport (RIX). Confirm the allowed crossing and pickup arrangement."
+    }
+  },
+  "ru": {
+    "heading": "Нужен обратный трансфер?",
+    "intro": "На comfortline.by есть отдельная информация о поездках из Минска в город отправления. Обратную дорогу можно запросить вместе с первой или отдельно. Каждое направление рассчитывается индивидуально — цена и машина могут отличаться.",
+    "view": "Посмотреть обратный маршрут на comfortline.by",
+    "label": "Стоимость: по запросу",
+    "terms": "По опубликованным условиям ComfortLine международные поездки оплачиваются в BYN после согласования. Итоговую сумму, валюту и условия уточните у менеджера.",
+    "extras": {
+      "warsaw": "Минск → Варшава или аэропорты Шопена (WAW) и Модлин (WMI). Укажите адрес прибытия, дату и багаж.",
+      "vilnius": "Минск → Вильнюс или аэропорт VNO. Сообщите конечный адрес и данные рейса.",
+      "riga": "Минск → Рига или аэропорт RIX. Маршрут и пограничный переход согласовываются на дату поездки."
+    }
+  },
+  "pl": {
+    "heading": "Potrzebujesz przejazdu powrotnego?",
+    "intro": "ComfortLine publikuje również trasę z Mińska do miasta wyjazdu. Obie strony można zamówić razem lub osobno. Cena i dostępne auto są ustalane niezależnie dla każdej trasy.",
+    "view": "Sprawdź trasę powrotną na comfortline.by",
+    "label": "Cena: na zapytanie",
+    "terms": "Według informacji ComfortLine płatności za transfery międzynarodowe rozliczane są w BYN po uzgodnieniu. Potwierdź kwotę i zasady przed wyjazdem.",
+    "extras": {
+      "warsaw": "Mińsk → Warszawa lub lotniska WAW/WMI. Podaj dokładny adres i bagaż.",
+      "vilnius": "Mińsk → Wilno lub lotnisko VNO. Ustal miejsce docelowe i numer lotu.",
+      "riga": "Mińsk → Ryga lub lotnisko RIX. Potwierdź dostępne przejście graniczne."
+    }
+  },
+  "lt": {
+    "heading": "Reikia kelionės atgal?",
+    "intro": "ComfortLine skelbia ir maršrutą iš Minsko į išvykimo miestą. Kelionę atgal galite užklausti kartu arba atskirai. Kaina bei automobilis tikslinami kiekvienai krypčiai.",
+    "view": "Peržiūrėti atgalinį maršrutą comfortline.by",
+    "label": "Kaina: pagal užklausą",
+    "terms": "ComfortLine skelbia, kad tarptautinių kelionių atsiskaitymai vykdomi BYN pagal suderintas sąlygas. Pasitikslinkite sumą ir taisykles prieš išvykstant.",
+    "extras": {
+      "warsaw": "Minskas → Varšuva arba WAW/WMI oro uostai. Nurodykite adresą ir bagažą.",
+      "vilnius": "Minskas → Vilnius ar VNO oro uostas. Nurodykite skrydį ir tikslų adresą.",
+      "riga": "Minskas → Ryga arba RIX oro uostas. Pasitikrinkite pasienio perėją."
+    }
+  },
+  "lv": {
+    "heading": "Vajadzīgs atpakaļceļa transfērs?",
+    "intro": "ComfortLine piedāvā informāciju arī par braucienu no Minskas uz sākotnējo izbraukšanas pilsētu. Abus virzienus var pieprasīt kopā vai atsevišķi; cena un auto katram virzienam tiek saskaņoti no jauna.",
+    "view": "Apskatīt atpakaļceļu comfortline.by",
+    "label": "Cena: pēc pieprasījuma",
+    "terms": "ComfortLine norāda, ka starptautisko transfēru norēķini tiek veikti BYN pēc vienošanās. Precizējiet summu un nosacījumus pie koordinatora.",
+    "extras": {
+      "warsaw": "Minska → Varšava vai WAW/WMI lidostas. Precizējiet adresi un bagāžu.",
+      "vilnius": "Minska → Viļņa vai VNO lidosta. Norādiet reisu un galamērķi.",
+      "riga": "Minska → Rīga vai RIX lidosta. Pārbaudiet robežšķērsošanas iespējas."
+    }
+  }
+};
