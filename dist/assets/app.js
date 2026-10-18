@@ -257,6 +257,14 @@
     picker.querySelectorAll("[data-vehicle-class]").forEach((button) => {
       button.addEventListener("click", () => {
         getControl(form, "carClass").value = button.dataset.vehicleClass;
+        const model = getControl(form, "vehicleModel");
+        if (model?.value) {
+          const matching = document.querySelector(`[data-request-model="${model.value}"]`);
+          if (matching?.dataset.requestClass !== button.dataset.vehicleClass) {
+            model.value = "";
+            model.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+        }
         updatePassengerPicker(picker);
       });
     });
@@ -276,6 +284,57 @@
   document.addEventListener("click", (event) => {
     passengerPickers.forEach((picker) => {
       if (!picker.contains(event.target)) closePassengerPicker(picker);
+    });
+  });
+
+
+  // Show actual fleet models as optional preferences. This never confirms a
+  // vehicle or a price; the coordinator checks availability per route.
+  const modelForm = bookingDialog?.querySelector(".booking-form");
+  const modelSelect = modelForm?.elements.namedItem("vehicleModel");
+  const carPicker = modelForm?.querySelector("[data-passenger-picker]");
+  const modelButtons = [...document.querySelectorAll("[data-request-model]")];
+  const modelKind = Object.fromEntries(modelButtons.map(button => [
+    button.dataset.requestModel, button.dataset.requestClass
+  ]));
+
+  function highlightRequestedModel() {
+    const selected = modelSelect?.value || "";
+    modelButtons.forEach((button) => {
+      const active = selected !== "" && button.dataset.requestModel === selected;
+      button.setAttribute("aria-pressed", String(active));
+      button.closest(".fleet-show-card")?.classList.toggle("fleet-selected", active);
+    });
+  }
+
+  modelSelect?.addEventListener("change", () => {
+    const matchedClass = modelKind[modelSelect.value];
+    if (matchedClass && modelForm) {
+      const classInput = getControl(modelForm, "carClass");
+      if (classInput) classInput.value = matchedClass;
+      if (carPicker) updatePassengerPicker(carPicker);
+    }
+    highlightRequestedModel();
+  });
+
+  modelButtons.forEach(button => button.addEventListener("click", () => {
+    if (!modelSelect || !bookingDialog || !modelForm) return;
+    modelSelect.value = button.dataset.requestModel;
+    modelSelect.dispatchEvent(new Event("change", { bubbles: true }));
+    if (!bookingDialog.open) bookingDialog.showModal();
+    syncMobileDialogViewport();
+    const field = modelSelect.closest(".vehicle-model-field");
+    field?.scrollIntoView({ block: "center", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    // Do not focus the select here: focusing it may open the iPhone picker
+    // and cover the dialog before the visitor can review the choice.
+  }));
+
+  // Photos are served by ComfortLine's original fleet site and a licensed
+  // city photographer. Retain a useful local fallback when remote images fail.
+  document.querySelectorAll(".fleet-photo img, .route-local-scene img").forEach((img) => {
+    img.addEventListener("error", () => {
+      if (img.getAttribute("src") === "/assets/comfortline-transfer-van.webp") return;
+      img.setAttribute("src", "/assets/comfortline-transfer-van.webp");
     });
   });
 
