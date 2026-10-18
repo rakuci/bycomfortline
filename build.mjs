@@ -490,7 +490,7 @@ function bookingForm(lang, routeKey = "vilnius") {
         <h2 id="booking-dialog-title">${esc(popup.header)}</h2><p>${esc(popup.subtitle)}</p></div>
         <button type="button" class="booking-dialog-close" data-close-booking aria-label="${esc(popup.close)}"><span aria-hidden="true">×</span></button>
       </div>
-      <form class="booking-form" data-lang="${lang}" data-email="${email}" data-sending="${esc(popup.sending)}" data-send-error="${esc(popup.sendError)}" data-storage-success="${esc(popup.storageSuccess)}" data-invalid-phone="${esc(popup.invalidPhone)}" data-invalid-route="${esc(popup.invalidRoute)}" data-invalid-form="${esc(popup.invalidForm)}" data-rate-limited="${esc(popup.rateLimited)}" data-service-unavailable="${esc(popup.serviceUnavailable)}" data-network-error="${esc(popup.networkError)}" action="/api/booking" method="post">
+      <form class="booking-form" data-lang="${lang}" data-email="${email}" data-sending="${esc(popup.sending)}" data-send-error="${esc(popup.sendError)}" data-storage-success="${esc(popup.storageSuccess)}" data-invalid-phone="${esc(popup.invalidPhone)}" data-invalid-route="${esc(popup.invalidRoute)}" data-invalid-form="${esc(popup.invalidForm)}" data-rate-limited="${esc(popup.rateLimited)}" data-service-unavailable="${esc(popup.serviceUnavailable)}" data-network-error="${esc(popup.networkError)}" data-capacity-error="${esc(fleetCopy[lang].capacityError)}" action="/api/booking" method="post">
         ${locationFormField(lang, "fromPreset", "details", l.fromNames[routeKey])}
         ${locationFormField(lang, "to", "details", l.fieldValues.to)}
         <label><span>${esc(ui.pickupAddress)}</span><input name="pickupAddress" placeholder="${esc(l.fieldValues.fromPlaceholder)}"></label>
@@ -500,7 +500,7 @@ function bookingForm(lang, routeKey = "vilnius") {
         <label class="vehicle-model-field full"><span>${esc(fleetCopy[lang].choiceLabel)}</span>
           <select name="vehicleModel" aria-describedby="vehicle-choice-note">
             <option value="">${esc(fleetCopy[lang].placeholder)}</option>
-            ${fleetCatalog.map(car => `<option value="${car.id}">${esc(car.name)} · ${car.seats} ${esc(fleetCopy[lang].seats)}</option>`).join("")}
+            ${fleetCatalog.map(car => `<option value="${car.id}" data-seats="${car.seats}">${esc(car.name)} · ${car.seats} ${esc(fleetCopy[lang].seats)}</option>`).join("")}
           </select>
           <small id="vehicle-choice-note">${esc(fleetCopy[lang].choiceNote)}</small>
         </label>
@@ -677,7 +677,7 @@ function fleetShowcase(lang) {
         <strong class="fleet-on-request">${esc(ui.price)}</strong>
         <div class="fleet-card-actions">
           <button type="button" class="fleet-select-button" data-request-model="${car.id}"
-            data-request-class="${car.kind}">${esc(ui.choose)} ↗</button>
+            data-request-class="${car.kind}" data-request-seats="${car.seats}">${esc(ui.choose)} ↗</button>
           <a href="${esc(car.detail)}" rel="noopener noreferrer" target="_blank">${esc(ui.showMore)} ↗</a>
         </div>
       </div>
