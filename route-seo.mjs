@@ -16,9 +16,9 @@ export const routeSeo = {
       ]
     },
     "vilnius": {
-      "title": "Vilnius to Minsk Transfer & Private Taxi | ComfortLine",
-      "description": "Private Vilnius–Minsk transfer from the city or Vilnius Airport (VNO). Door-to-door car for your group, luggage assistance and a quote before travel.",
-      "h1": "Vilnius to Minsk private transfer and taxi",
+      "title": "Vilnius–Minsk Private Transfer & Airport Taxi | byComfortLine",
+      "description": "Private taxi from Vilnius city or Vilnius Airport (VNO) to Minsk, Belarus. Door-to-door transfers, child seats on request and a tailored price quote.",
+      "h1": "Vilnius to Minsk private taxi and airport transfer",
       "intro": "Travelling from Lithuania to Belarus? Arrange a pre-booked private car from Vilnius or Vilnius Airport (VNO) to an address in Minsk. Your group travels together without shared shuttle stops, and we agree on a pickup plan before departure.",
       "pickupText": "Choose a hotel, home, office or other agreed address in Vilnius. Tell us exactly where to meet, the number of travellers and how much luggage you have so we can discuss an appropriate vehicle.",
       "airportText": "Flying into Vilnius International Airport (VNO)? Send your flight number and expected landing time when you request the transfer. We will agree on the meeting point and pickup time in advance.",
@@ -31,13 +31,17 @@ export const routeSeo = {
         [
           "Is the Vilnius–Minsk taxi shared with other passengers?",
           "No. The vehicle is arranged for your own group. Send your passenger count and luggage details to receive a tailored quote."
+        ],
+        [
+          "Can I arrange a Vilnius Airport (VNO) to Minsk transfer for my family?",
+          "Yes. Give us your flight details, number of adults and children, suitcase count and Minsk address. We'll check a suitable private vehicle and quote before confirming."
         ]
       ]
     },
     "warsaw": {
-      "title": "Warsaw to Minsk Transfer | Chopin & Modlin Taxi | ComfortLine",
-      "description": "Private Warsaw–Minsk transfer from Warsaw, Chopin Airport (WAW) or Modlin (WMI). Door-to-door taxi, space for luggage and an agreed quote.",
-      "h1": "Warsaw to Minsk private transfer and airport taxi",
+      "title": "Warsaw to Minsk, Belarus: Private Taxi | byComfortLine",
+      "description": "Book a private Warsaw–Minsk, Belarus transfer from the city, Chopin Airport (WAW) or Modlin (WMI). Chauffeur-style car options on request; ask for a quote.",
+      "h1": "Warsaw to Minsk, Belarus: private taxi and transfer",
       "intro": "Need transport from Poland to Minsk? ComfortLine arranges individual road transfers from Warsaw city, Warsaw Chopin Airport or Warsaw Modlin Airport to an agreed destination in Minsk. The car is reserved for your group.",
       "pickupText": "For a Warsaw city pickup, include your hotel, home or business address and your preferred departure time. We discuss the route, vehicle class and luggage needs before confirming the transfer.",
       "airportText": "Warsaw Chopin (WAW) and Warsaw Modlin (WMI) are different airports. Please tell us which one you will arrive at, your flight number and landing time so the correct pickup can be arranged.",
@@ -50,13 +54,17 @@ export const routeSeo = {
         [
           "Can I travel with children and large bags?",
           "Tell us the child's age and the number or size of suitcases in advance. We will discuss child seats and a suitable car."
+        ],
+        [
+          "Can I request a private chauffeur or limousine-class ride from Warsaw to Minsk?",
+          "Tell us whether you prefer comfort, business or premium class and your luggage needs. We confirm the actual vehicle and price before the journey; a specific limousine is not guaranteed."
         ]
       ]
     },
     "riga": {
-      "title": "Riga to Minsk Transfer & Airport Taxi | ComfortLine",
-      "description": "Private Riga–Minsk taxi from Riga city or Riga Airport (RIX), direct to your address. Book a vehicle for your group and request a price quote.",
-      "h1": "Riga to Minsk private transfer and taxi",
+      "title": "Riga–Minsk Private Transfer & Airport Taxi | byComfortLine",
+      "description": "Private taxi from Riga or Riga Airport (RIX) to Minsk, Belarus. Choose a door-to-door transfer for your group and request a price for your date.",
+      "h1": "Riga to Minsk private transfer and airport taxi",
       "intro": "Travelling from Latvia to Minsk? Request a private road transfer from Riga or Riga Airport (RIX) to your chosen address in the Belarusian capital. We agree on pickup details and the vehicle for your group in advance.",
       "pickupText": "Let us know the exact Riga pickup address, desired departure time and number of travellers. Hotel, residential and business pickups can be discussed when planning the journey.",
       "airportText": "If you are arriving at Riga International Airport (RIX), share your flight number, landing time and baggage details. We will confirm the meeting arrangements before your flight.",
@@ -69,6 +77,10 @@ export const routeSeo = {
         [
           "How much does a Riga–Minsk private taxi cost?",
           "The price depends on your date, pickup point, car and number of passengers. We provide a quote before the journey instead of advertising a fixed fare."
+        ],
+        [
+          "Can you arrange pickup from Riga Airport (RIX) after a flight?",
+          "Include your flight number, scheduled landing time and Minsk destination. We will discuss a meeting point and confirm the vehicle, route and price in advance."
         ]
       ]
     }
@@ -90,9 +102,9 @@ export const routeSeo = {
       ]
     },
     "vilnius": {
-      "title": "Vilnius–Minskas: privatus pervežimas ir taksi | ComfortLine",
-      "description": "Taksi Vilnius–Minskas ir privatus pervežimas iš Vilniaus ar oro uosto VNO. Kelionė iki adreso, automobilis jūsų grupei, išankstinė kainos užklausa.",
-      "h1": "Vilnius–Minskas: privatus pervežimas ir taksi",
+      "title": "Vilnius–Minskas: privatus taksi ir pervežimas | byComfortLine",
+      "description": "Privatus pervežimas Vilnius–Minskas iš miesto arba Vilniaus oro uosto VNO. Kelionė iki adreso Baltarusijoje, automobilis jūsų grupei, kainos užklausa.",
+      "h1": "Vilnius–Minskas: privatus taksi ir pervežimas",
       "intro": "Ieškote pervežimo iš Vilniaus į Minską? ComfortLine organizuoja individualias keliones iš Vilniaus miesto arba Vilniaus oro uosto (VNO) į sutartą adresą Minske. Važiuojate tik su savo grupe, o paėmimo laiką suderiname iš anksto.",
       "pickupText": "Galime aptarti paėmimą iš Vilniaus viešbučio, namų, biuro ar kito konkretaus adreso. Užklausoje nurodykite vietą, kelionės datą, keleivių skaičių ir bagažą, kad parinktume tinkamą automobilį.",
       "airportText": "Atvykstate į Vilniaus oro uostą (VNO)? Atsiųskite skrydžio numerį ir planuojamą nusileidimo laiką. Susitikimo vietą ir pervežimo pradžią suderinsime prieš kelionę.",
@@ -105,13 +117,17 @@ export const routeSeo = {
         [
           "Ar pervežimas Vilnius–Minskas yra individualus?",
           "Taip, automobilis skirtas jūsų grupei, be kitų keleivių. Kaina priklauso nuo datos, adresų ir automobilio dydžio."
+        ],
+        [
+          "Ar galima užsisakyti pervežimą iš Vilniaus oro uosto VNO su vaikais?",
+          "Taip. Nurodykite skrydį, suaugusiųjų ir vaikų skaičių, lagaminus ir vaikiškų kėdučių poreikį. Automobilį ir kainą patvirtins vadybininkas."
         ]
       ]
     },
     "warsaw": {
-      "title": "Varšuva–Minskas: privatus pervežimas | ComfortLine",
-      "description": "Privatus pervežimas Varšuva–Minskas. Paėmimas Varšuvoje, Šopeno (WAW) ar Modlino (WMI) oro uoste, tiesiai iki adreso Minske.",
-      "h1": "Varšuva–Minskas: privatus pervežimas ir taksi",
+      "title": "Varšuva–Minskas: privatus taksi ir pervežimas | byComfortLine",
+      "description": "Privatus Varšuva–Minskas pervežimas į Baltarusiją iš Varšuvos, Šopeno oro uosto WAW ar Modlino WMI. Asmeninis vairuotojas, kainos užklausa.",
+      "h1": "Varšuva–Minskas: privatus taksi į Baltarusiją",
       "intro": "Kelionei iš Lenkijos į Minską galime pasiūlyti individualų pervežimą iš Varšuvos miesto, Šopeno ar Modlino oro uosto. Automobilis skirtas tik jūsų šeimai ar grupei, be persėdimų į bendrus autobusus.",
       "pickupText": "Nurodykite viešbučio, namų ar biuro adresą Varšuvoje, pageidaujamą laiką bei keleivių skaičių. Prieš kelionę aptarsime automobilio klasę ir bagažo vietą.",
       "airportText": "Varšuvos Šopeno (WAW) ir Modlino (WMI) oro uostai yra skirtingose vietose. Būtinai nurodykite konkretų oro uostą, skrydžio numerį ir atvykimo laiką.",
@@ -124,13 +140,17 @@ export const routeSeo = {
         [
           "Ar galima užsisakyti mikroautobusą į Minską?",
           "Nurodykite keleivių ir bagažo kiekį. Pagal poreikius aptarsime tinkamą transporto priemonę."
+        ],
+        [
+          "Ar galima prašyti verslo klasės automobilio iš Varšuvos į Minską?",
+          "Taip, pasirinkite verslo ar premium klasę ir nurodykite keleivius bei bagažą. Konkretaus automobilio galimybę ir kainą patvirtins vadybininkas."
         ]
       ]
     },
     "riga": {
-      "title": "Ryga–Minskas: privatus pervežimas ir taksi | ComfortLine",
-      "description": "Individualus pervežimas Ryga–Minskas iš Rygos ar RIX oro uosto. Nuvežimas iki adreso Minske, sutartas paėmimo laikas ir kainos užklausa.",
-      "h1": "Ryga–Minskas: privatus pervežimas ir taksi",
+      "title": "Ryga–Minskas: privatus taksi ir pervežimas | byComfortLine",
+      "description": "Individualus pervežimas Ryga–Minskas iš Rygos ar RIX oro uosto į Baltarusiją. Privatus automobilis, paėmimas sutartu laiku ir kainos pasiūlymas.",
+      "h1": "Ryga–Minskas: privatus taksi ir pervežimas",
       "intro": "Ieškote individualaus pervežimo iš Latvijos į Minską? ComfortLine organizuoja keliones iš Rygos miesto ar Rygos oro uosto (RIX) į pasirinktą adresą Minske. Automobilis skirtas tik jūsų grupei.",
       "pickupText": "Pateikite konkretų Rygos paėmimo adresą, pageidaujamą laiką, keleivių ir bagažo skaičių. Galime aptarti išvykimą iš viešbučio, namų ar darbo vietos.",
       "airportText": "Jeigu į Rygą atskrendate lėktuvu, užklausoje pažymėkite RIX oro uostą, skrydžio numerį ir nusileidimo laiką. Susitikimo tvarką sutarsime prieš kelionę.",
@@ -143,6 +163,10 @@ export const routeSeo = {
         [
           "Kiek kainuoja privatus taksi iš Rygos į Minską?",
           "Kaina priklauso nuo datos, paėmimo adreso, automobilio ir keleivių skaičiaus. Ją patiksliname prieš kelionę."
+        ],
+        [
+          "Ar galima užsisakyti paėmimą Rygos oro uoste RIX?",
+          "Taip, nurodykite skrydžio numerį, nusileidimo laiką ir adresą Minske. Vadybininkas suderins susitikimą bei kainą."
         ]
       ]
     }
@@ -164,9 +188,9 @@ export const routeSeo = {
       ]
     },
     "vilnius": {
-      "title": "Wilno–Mińsk: prywatny transfer i taksówka | ComfortLine",
-      "description": "Prywatny transfer Wilno–Mińsk z miasta lub lotniska VNO. Taksówka od drzwi do drzwi, samochód dla Twojej grupy i wycena przed wyjazdem.",
-      "h1": "Wilno–Mińsk: prywatny transfer i taksówka",
+      "title": "Wilno–Mińsk, Białoruś: prywatny transfer | byComfortLine",
+      "description": "Prywatne taxi Wilno–Mińsk na Białorusi z miasta lub lotniska VNO. Odbiór pod adresem, przejazd tylko dla Twojej grupy i indywidualna wycena.",
+      "h1": "Wilno–Mińsk na Białorusi: prywatne taxi i transfer",
       "intro": "Planujesz podróż z Litwy na Białoruś? Organizujemy indywidualny transfer z Wilna lub lotniska w Wilnie (VNO) pod wskazany adres w Mińsku. Jedziesz własną grupą, bez przypadkowych współpasażerów.",
       "pickupText": "Kierowca może odebrać Cię z uzgodnionego hotelu, domu albo biura w Wilnie. Podaj pełny adres, datę podróży i informacje o bagażu, aby ustalić odpowiedni samochód.",
       "airportText": "Przylatujesz do Wilna? W zapytaniu podaj kod lotniska VNO, numer rejsu i planowaną godzinę lądowania. Ustalimy miejsce spotkania i godzinę odbioru.",
@@ -179,13 +203,17 @@ export const routeSeo = {
         [
           "Czy transfer Wilno–Mińsk jest prywatny?",
           "Tak, samochód jest przeznaczony dla Twojej grupy. Cenę uzgadniamy zależnie od terminu, adresów i liczby osób."
+        ],
+        [
+          "Czy mogę zamówić przejazd z lotniska Wilno VNO do Mińska z dziećmi?",
+          "Tak. Podaj numer lotu, liczbę dorosłych i dzieci oraz bagaż, a ustalimy odpowiedni pojazd, foteliki i cenę przed potwierdzeniem."
         ]
       ]
     },
     "warsaw": {
-      "title": "Warszawa–Mińsk: prywatny transfer i taxi | ComfortLine",
-      "description": "Transfer Warszawa–Mińsk z adresu, lotniska Chopina (WAW) lub Modlina (WMI). Prywatny samochód, bagaże i wycena przed podróżą.",
-      "h1": "Warszawa–Mińsk: prywatny transfer i taksówka",
+      "title": "Warszawa–Mińsk, Białoruś: prywatne taxi | byComfortLine",
+      "description": "Prywatny transfer Warszawa–Mińsk na Białorusi. Odbiór z centrum, Lotniska Chopina WAW lub Modlina WMI. Auto z kierowcą i wycena przed podróżą.",
+      "h1": "Warszawa–Mińsk, Białoruś: prywatny transfer i taxi",
       "intro": "Szukasz taksówki z Warszawy do Mińska na Białorusi? ComfortLine organizuje prywatne przejazdy z Warszawy, Lotniska Chopina (WAW) oraz Modlina (WMI). Jedziecie wyłącznie we własnej grupie, z odbiorem o uzgodnionej godzinie.",
       "pickupText": "Odbiór można uzgodnić spod adresu w Warszawie: domu, hotelu lub biura. Wyślij lokalizację, dzień wyjazdu oraz liczbę podróżnych, żebyśmy mogli dopasować samochód.",
       "airportText": "Lotnisko Chopina (WAW) i Warszawa-Modlin (WMI) to dwa różne porty lotnicze. W zapytaniu napisz, z którego przylatujesz, podaj numer rejsu i godzinę przylotu.",
@@ -198,13 +226,17 @@ export const routeSeo = {
         [
           "Ile kosztuje prywatna taksówka Warszawa–Mińsk?",
           "Cena zależy od daty, adresów, liczby osób i wielkości auta. Indywidualną wycenę podajemy przed podróżą."
+        ],
+        [
+          "Czy to transfer do Mińska na Białorusi czy do Mińska Mazowieckiego?",
+          "Ta strona dotyczy podróży z Warszawy do Mińska na Białorusi (Minsk, Belarus), a nie krótkiej trasy do Mińska Mazowieckiego. Podaj adres docelowy na Białorusi."
         ]
       ]
     },
     "riga": {
-      "title": "Ryga–Mińsk: prywatny transfer i taxi | ComfortLine",
-      "description": "Prywatny transfer Ryga–Mińsk z miasta lub lotniska RIX. Odbiór o ustalonej porze, przejazd pod adres i indywidualna wycena.",
-      "h1": "Ryga–Mińsk: prywatny transfer i taksówka",
+      "title": "Ryga–Mińsk, Białoruś: prywatny transfer | byComfortLine",
+      "description": "Taksówka Ryga–Mińsk na Białorusi z centrum lub lotniska RIX. Prywatny samochód dla Twojej grupy, odbiór o ustalonej godzinie i wycena.",
+      "h1": "Ryga–Mińsk, Białoruś: prywatne taxi i transfer",
       "intro": "Jedziesz z Łotwy do Mińska? Oferujemy organizację prywatnego przejazdu z Rygi lub lotniska RIX do ustalonego adresu na Białorusi. Auto jest zarezerwowane tylko dla Twoich pasażerów.",
       "pickupText": "Podaj miejsce odbioru w Rydze — hotel, mieszkanie, biuro lub inny uzgodniony adres. Ustalimy godzinę wyjazdu i samochód zależnie od liczby podróżnych.",
       "airportText": "Przylatując na lotnisko w Rydze (RIX), prześlij numer lotu, godzinę lądowania i informacje o bagażu. Potwierdzimy instrukcje spotkania z kierowcą.",
@@ -217,6 +249,10 @@ export const routeSeo = {
         [
           "Jak ustalana jest cena transferu Ryga–Mińsk?",
           "Cena zależy od trasy, terminu, klasy pojazdu i liczby osób. Przekazujemy wycenę przed potwierdzeniem."
+        ],
+        [
+          "Jak zarezerwować transfer z lotniska w Rydze RIX do Mińska?",
+          "Wpisz numer lotu, przewidywaną godzinę przylotu i dokładny adres docelowy na Białorusi. Ustalimy odbiór, cenę i dostępność samochodu."
         ]
       ]
     }
@@ -238,9 +274,9 @@ export const routeSeo = {
       ]
     },
     "vilnius": {
-      "title": "Viļņa–Minska: privāts transfērs un taksometrs | ComfortLine",
-      "description": "Privāts transfērs Viļņa–Minska no pilsētas vai Viļņas lidostas VNO. Brauciens līdz adresei Minskā, auto jūsu grupai un individuāla cena.",
-      "h1": "Viļņa–Minska: privāts transfērs un taksometrs",
+      "title": "Viļņa–Minska: privāts taksometrs un transfērs | byComfortLine",
+      "description": "Privāts transfērs no Viļņas vai Viļņas lidostas VNO uz Minsku Baltkrievijā. Brauciens līdz adresei, auto jūsu grupai un cenas pieprasījums.",
+      "h1": "Viļņa–Minska: privāts taksometrs un transfērs",
       "intro": "Ceļojat no Lietuvas uz Minsku? ComfortLine organizē individuālu transfēru no Viļņas vai Viļņas lidostas (VNO) līdz norunātai adresei Minskā. Automobilis paredzēts tikai jūsu grupai.",
       "pickupText": "Norādiet viesnīcu, mājas, biroju vai citu konkrētu adresi Viļņā, vēlamo izbraukšanas laiku un pasažieru skaitu. Piemērotu automašīnu saskaņosim pirms brauciena.",
       "airportText": "Ielidojat Viļņas lidostā VNO? Paziņojiet lidojuma numuru, ielidošanas laiku un bagāžas daudzumu. Iepriekš vienosimies par satikšanās vietu ar vadītāju.",
@@ -253,13 +289,17 @@ export const routeSeo = {
         [
           "Vai transfērs Viļņa–Minska ir privāts?",
           "Jā, braucienā piedalās tikai jūsu grupa. Cenu saskaņojam atbilstoši datumam un pasažieru vajadzībām."
+        ],
+        [
+          "Vai iespējams transfērs no Viļņas lidostas VNO ar bērniem?",
+          "Jā, norādiet reisu, pieaugušos, bērnus, koferus un nepieciešamos sēdeklīšus. Koordinators apstiprinās automašīnu un cenu pirms brauciena."
         ]
       ]
     },
     "warsaw": {
-      "title": "Varšava–Minska: privāts transfērs un taksometrs | ComfortLine",
-      "description": "Privāts transfērs Varšava–Minska no Varšavas, Šopēna WAW vai Modlinas WMI lidostas. Brauciens līdz adresei un iepriekš saskaņota cena.",
-      "h1": "Varšava–Minska: privāts transfērs un taksometrs",
+      "title": "Varšava–Minska: privāts taksometrs un transfērs | byComfortLine",
+      "description": "Privāts brauciens no Varšavas, Šopēna lidostas WAW vai Modlinas WMI uz Minsku Baltkrievijā. Personīgs vadītājs un individuāla cenas tāme.",
+      "h1": "Varšava–Minska: privāts taksometrs uz Baltkrieviju",
       "intro": "Plānojat doties no Polijas uz Minsku? Piedāvājam iespēju pieteikt individuālu transfēru no Varšavas pilsētas, Šopēna vai Modlinas lidostas uz norunātu adresi Minskā.",
       "pickupText": "Pastāstiet, kur Varšavā jāierodas vadītājam: viesnīcā, mājās, pie biroja vai citā adresē. Pievienojiet brauciena datumu un pasažieru skaitu.",
       "airportText": "Varšavas Šopēna lidosta (WAW) un Modlinas lidosta (WMI) atrodas atšķirīgās vietās. Norādiet pareizo lidostu, reisa numuru un ielidošanas laiku.",
@@ -272,13 +312,17 @@ export const routeSeo = {
         [
           "Vai var ceļot ar bērniem un lielu bagāžu?",
           "Norādiet bērnu vecumu un bagāžas apjomu, lai varam apspriest piemērotu auto un sēdeklīšus."
+        ],
+        [
+          "Vai var pasūtīt biznesa klases auto ar šoferi no Varšavas uz Minsku?",
+          "Varat lūgt biznesa vai premium klasi. Norādiet pasažierus, bagāžu un datumu, lai koordinators apstiprinātu pieejamo auto un cenu."
         ]
       ]
     },
     "riga": {
-      "title": "Rīga–Minska: privāts transfērs un taksometrs | ComfortLine",
-      "description": "Privāts transfērs Rīga–Minska no Rīgas pilsētas vai lidostas RIX. Individuāls auto, brauciens līdz adresei Minskā un cenu piedāvājums.",
-      "h1": "Rīga–Minska: privāts transfērs un taksometrs",
+      "title": "Rīga–Minska: privāts taksometrs un transfērs | byComfortLine",
+      "description": "Privāts transfērs Rīga–Minska no pilsētas vai Rīgas lidostas RIX uz Baltkrieviju. Brauciens līdz adresei, auto jūsu grupai un cenu piedāvājums.",
+      "h1": "Rīga–Minska: privāts taksometrs un transfērs",
       "intro": "Meklējat taksometru no Rīgas uz Minsku? ComfortLine organizē privātu braucienu no Rīgas pilsētas vai Rīgas lidostas (RIX) līdz izvēlētai adresei Minskā. Automašīna paredzēta jūsu grupai, bez citiem pasažieriem.",
       "pickupText": "Varam apspriest saņemšanu no viesnīcas, dzīvesvietas vai biroja Rīgā. Norādiet konkrētu adresi, vēlamo izbraukšanas laiku un bagāžas daudzumu.",
       "airportText": "Ielidojat Rīgas lidostā (RIX)? Nosūtiet reisa numuru, plānoto ielidošanas laiku un pasažieru skaitu. Satikšanās vietu ar vadītāju saskaņosim iepriekš.",
@@ -291,6 +335,10 @@ export const routeSeo = {
         [
           "Cik maksā privāts taksometrs Rīga–Minska?",
           "Cena atkarīga no datuma, saņemšanas vietas, automašīnas un pasažieru skaita; piedāvājumu sniedzam pirms brauciena."
+        ],
+        [
+          "Vai transfēru no Rīgas lidostas RIX var saskaņot pēc reisa?",
+          "Jā, norādiet lidojuma numuru, ielidošanas laiku, pasažierus un galamērķa adresi. Koordinators apstiprinās saņemšanas plānu un cenu."
         ]
       ]
     }
@@ -312,9 +360,9 @@ export const routeSeo = {
       ]
     },
     "vilnius": {
-      "title": "Вильнюс–Минск: трансфер и такси из аэропорта | ComfortLine",
-      "description": "Индивидуальный трансфер Вильнюс–Минск из города или аэропорта VNO. Такси до адреса, машина только для вашей компании, расчёт до поездки.",
-      "h1": "Вильнюс — Минск: индивидуальный трансфер и такси",
+      "title": "Вильнюс — Минск: частное такси и трансфер | byComfortLine",
+      "description": "Индивидуальный трансфер Вильнюс–Минск из города или аэропорта VNO. Частное такси до адреса в Беларуси, детские кресла по запросу, расчёт цены.",
+      "h1": "Такси Вильнюс — Минск: индивидуальный трансфер",
       "intro": "Нужно такси из Вильнюса в Минск? ComfortLine организует индивидуальный трансфер из города или аэропорта Вильнюса (VNO) до согласованного адреса в Минске. Без попутчиков и пересадок, с предварительным подтверждением подачи.",
       "pickupText": "Можно согласовать подачу к отелю, дому, офису или другому адресу в Вильнюсе. Укажите точное место, дату, количество пассажиров и багаж, чтобы мы обсудили подходящий автомобиль.",
       "airportText": "Прилетаете в аэропорт Вильнюса VNO? Сообщите номер рейса и плановое время посадки. Заранее согласуем место встречи и время подачи водителя.",
@@ -327,13 +375,17 @@ export const routeSeo = {
         [
           "Поездка Вильнюс–Минск будет индивидуальной?",
           "Да, автомобиль только для вашей компании. Стоимость рассчитываем по дате, адресам и числу пассажиров."
+        ],
+        [
+          "Можно заказать такси из аэропорта Вильнюса VNO до Минска с детьми?",
+          "Да, в заявке укажите рейс, число взрослых, детей, младенцев и необходимость кресел. Менеджер уточнит автомобиль и цену до подтверждения."
         ]
       ]
     },
     "warsaw": {
-      "title": "Варшава–Минск: частный трансфер и такси | ComfortLine",
-      "description": "Трансфер Варшава–Минск из города, аэропорта Шопена WAW или Модлин WMI. Индивидуальное такси до адреса и стоимость до поездки.",
-      "h1": "Варшава — Минск: индивидуальный трансфер и такси",
+      "title": "Варшава — Минск: частное такси и трансфер | byComfortLine",
+      "description": "Такси Варшава–Минск, Беларусь: подача в городе, аэропорту Шопена WAW или Модлин WMI. Индивидуальный водитель, бизнес-класс по запросу, расчёт.",
+      "h1": "Такси Варшава — Минск: частный трансфер в Беларусь",
       "intro": "Планируете поездку из Польши в Минск? Организуем частный трансфер из Варшавы, аэропорта Шопена (WAW) либо Модлин (WMI) до нужного адреса в Минске. Поездка проходит на автомобиле для вашей компании.",
       "pickupText": "Укажите адрес в Варшаве — отель, квартира, офис или другая удобная точка — и желаемое время выезда. Обсудим класс машины, багаж и количество пассажиров.",
       "airportText": "Аэропорт Шопена (WAW) и Модлин (WMI) находятся в разных местах. Обязательно уточните аэропорт, номер рейса и время прилёта, чтобы правильно согласовать встречу.",
@@ -346,13 +398,17 @@ export const routeSeo = {
         [
           "Сколько стоит такси Варшава–Минск?",
           "Цена зависит от даты, адресов подачи, размера машины и количества пассажиров. Итоговую стоимость согласуем заранее."
+        ],
+        [
+          "Можно заказать бизнес-такси или лимузин с водителем из Варшавы в Минск?",
+          "Можно запросить бизнес- или премиум-класс с личным водителем. Конкретную модель, доступность и стоимость менеджер подтвердит отдельно; лимузин не гарантируется."
         ]
       ]
     },
     "riga": {
-      "title": "Рига–Минск: индивидуальный трансфер и такси | ComfortLine",
-      "description": "Трансфер Рига–Минск из города или аэропорта RIX. Частное такси до адреса, машина без попутчиков, предварительное согласование стоимости.",
-      "h1": "Рига — Минск: индивидуальный трансфер и такси",
+      "title": "Рига — Минск: частное такси и трансфер | byComfortLine",
+      "description": "Индивидуальное такси Рига–Минск, Беларусь из города или аэропорта RIX. Трансфер до адреса, комфортный автомобиль для вашей компании, расчёт цены.",
+      "h1": "Такси Рига — Минск: индивидуальный трансфер",
       "intro": "Ищете трансфер из Риги в Минск? ComfortLine организует поездку из столицы Латвии или аэропорта Риги (RIX) до согласованного адреса в Минске. Автомобиль предоставляется только вашей компании.",
       "pickupText": "Укажите место подачи в Риге: отель, жилой адрес, офис или другую точку. Сообщите дату, пассажиров и багаж, чтобы мы предложили подходящий транспорт.",
       "airportText": "Если прилетаете в аэропорт Риги RIX, передайте номер рейса, время прилёта и количество пассажиров. Место встречи с водителем согласуем до поездки.",
@@ -365,6 +421,10 @@ export const routeSeo = {
         [
           "Как рассчитывается стоимость трансфера Рига–Минск?",
           "Зависит от даты, точки подачи, выбранного автомобиля и числа пассажиров. Цену согласуем до выезда."
+        ],
+        [
+          "Можно заказать трансфер из аэропорта Риги RIX в Минск?",
+          "Укажите номер рейса, время прилёта, число пассажиров и багаж. Менеджер согласует место встречи, автомобиль и стоимость перед поездкой."
         ]
       ]
     }
