@@ -362,6 +362,110 @@ export const additionalLocales = {
           ]
         ]
       }
+    },
+    "extras": {
+      "ui": {
+        "pickupTitle": "Abholorte in {city} und am Flughafen",
+        "vehicleTitle": "Privater Fahrer, Gepäck und Fahrzeugwahl",
+        "quoteTitle": "Preis und Buchungsablauf",
+        "arrivalTitle": "Ankunft in Minsk, Belarus",
+        "miniCta": "Individuelles Transferangebot anfragen",
+        "otherLinks": "Weitere Abfahrtsorte vergleichen",
+        "notLocalTaxi": "Internationale Fahrt nach Minsk, Belarus; kein gewöhnlicher Stadttaxidienst."
+      },
+      "vilnius": {
+        "pickupPlaces": [
+          "Altstadt Vilnius",
+          "Bahnhof Vilnius",
+          "Flughafen Vilnius (VNO)",
+          "Hotel oder Adresse in Vilnius"
+        ],
+        "pickupContext": "Bitte geben Sie in Vilnius die Adresse oder Flughafen VNO an. Beim Flug benötigen wir Flugnummer und Landezeit, damit Treffpunkt und Fahrzeug vorab abgestimmt werden können.",
+        "vehicleContext": "Eine private Fahrt für Ihre Gruppe kann mit Komfort-, Business- oder Premiumfahrzeug angefragt werden. Bitte nennen Sie Kindersitze, Haustiere und größere Gepäckstücke. Fahrzeugmodell und Sitzplätze werden bestätigt.",
+        "quoteContext": "Vilnius–Minsk ist eine internationale Fahrt, kein gewöhnlicher Taxameterpreis. Die Kalkulation richtet sich nach Datum, Abholort, Zieladresse, Gruppengröße und Grenzsituation; eine Anfrage ist noch keine Reservierung.",
+        "arrivalContext": "Ziel ist Minsk in Belarus. Nennen Sie die vollständige Adresse und prüfen Sie vor Abfahrt gültige Einreisebestimmungen und Grenzübergänge."
+      },
+      "warsaw": {
+        "pickupPlaces": [
+          "Bahnhof Warszawa Centralna",
+          "Warschauer Stadtzentrum (Śródmieście)",
+          "Flughafen Chopin (WAW)",
+          "Flughafen Modlin (WMI)"
+        ],
+        "pickupContext": "Abholung in Warschau kann an der Hoteladresse, am Bahnhof oder an den beiden Flughäfen angefragt werden. WAW und WMI liegen getrennt; nennen Sie unbedingt den richtigen Flughafen und Ihre Flugnummer.",
+        "vehicleContext": "Für Warschau–Minsk ist ein privater Fahrer mit Komfort-, Business- oder Premiumwagen möglich, sofern bestätigt. Ein konkretes Limousinenmodell ist nicht garantiert. Personen, Gepäck und Kindersitze sind wichtig für die Auswahl.",
+        "quoteContext": "Der Preis ab Warschau wird für die gewünschte Strecke und den Reisetag berechnet. Grenzübergänge, Wartezeiten und mögliche Beschränkungen sind zu prüfen. Wir bieten keinen allgemeinen innerstädtischen Taxidienst in Warschau an.",
+        "arrivalContext": "Gemeint ist Minsk, Hauptstadt von Belarus, nicht Mińsk Mazowiecki in Polen. Bitte geben Sie die belarussische Zieladresse an und prüfen Sie aktuelle Reisehinweise."
+      },
+      "riga": {
+        "pickupPlaces": [
+          "Altstadt Riga (Vecrīga)",
+          "Hauptbahnhof Riga",
+          "Flughafen Riga (RIX)",
+          "Hoteladresse in Riga"
+        ],
+        "pickupContext": "Vereinbaren Sie die Abholung am Hotel, an der Adresse in Riga oder am Flughafen RIX. Bei Flugankunft helfen Flugnummer und Landezeit, den Treffpunkt abzustimmen.",
+        "vehicleContext": "Sie können eine private Fahrt mit Komfort-, Business- oder Premiumwagen anfragen. Teilen Sie uns die Anzahl der Fahrgäste, Kindersitze, Tiere und das Gepäck mit. Das Fahrzeug wird individuell bestätigt.",
+        "quoteContext": "Für Riga–Minsk ist ein individuelles Angebot nötig. Die Grenzbedingungen Lettland–Belarus können sich ändern; die Anfrage garantiert keine Durchführung oder feste Ankunftszeit.",
+        "arrivalContext": "Ziel ist Minsk in Belarus. Bitte nennen Sie Ihre Minsk-Adresse, prüfen Sie Einreisedokumente und die aktuelle Nutzbarkeit des Grenzübergangs."
+      }
+    },
+    "trust": {
+      "registryLabel": "Lizenz im öffentlichen Register prüfen",
+      "kicker": "Klare Buchungsbedingungen",
+      "title": "Wissenswertes vor Ihrer Transferanfrage",
+      "intro": "Die internationale Fahrt wird individuell geprüft. Das Formular sendet eine Anfrage und reserviert nicht automatisch ein Fahrzeug; die Grenzüberfahrt kann nicht zugesichert werden.",
+      "quoteHeading": "Wie entsteht Ihr Gesamtpreis?",
+      "quoteIntro": "Ein verbindliches Angebot hängt unter anderem von diesen Angaben ab:",
+      "quoteItems": [
+        [
+          "Abhol- und Zielort",
+          "Vollständige Adressen beziehungsweise Flughafen und Terminal angeben."
+        ],
+        [
+          "Gruppe und Fahrzeug",
+          "Anzahl Erwachsene, Kinder, Koffer, Sitze und gewünschte Fahrzeugklasse."
+        ],
+        [
+          "Zeit und Wartezeiten",
+          "Reisedatum, Flugangaben, eventuell nötige Wartezeit und Grenzlage."
+        ],
+        [
+          "Gesamtkonditionen",
+          "Endpreis, Währung, Maut, Wartezeiten, Zahlungsmethode und Stornierung vorab klären."
+        ]
+      ],
+      "processHeading": "Was geschieht nach dem Absenden?",
+      "process": [
+        [
+          "1",
+          "Anfrage senden",
+          "Strecke, Datum, Passagiere und Kontakt angeben. Die Webseite zeigt eine Anfragenummer."
+        ],
+        [
+          "2",
+          "Prüfung durch Koordinator",
+          "Route, Grenzregeln und Fahrzeugverfügbarkeit werden für Ihren Tag geprüft."
+        ],
+        [
+          "3",
+          "Bedingungen vereinbaren",
+          "Erst nach Einigung über Preis, Fahrzeug und Treffpunkt gilt die Fahrt als bestätigt."
+        ]
+      ],
+      "safetyHeading": "Grenze, Reisedokumente und behördliche Hinweise",
+      "safetyLead": "Sie reisen möglicherweise über eine EU-Außengrenze. Prüfen Sie behördliche Warnungen für Belarus, Ihre Einreiseberechtigung und die geltenden Beschränkungen unmittelbar vor der Fahrt.",
+      "safetyChecklist": [
+        "Reisepass, Visum und Einreiseberechtigung aller Personen prüfen.",
+        "Geeigneten Grenzübergang und Zulässigkeit des Fahrzeugs klären.",
+        "Kurz vor Abreise aktuelle Grenzmeldungen prüfen; keine feste Fahrtdauer garantiert."
+      ],
+      "sourceName": "Offizielle Reise- und Grenzinformationen",
+      "identityHeading": "An wen geht die Anfrage?",
+      "identityText": "Die Anfrage wird vom byComfortLine-Team persönlich bearbeitet. Kontakt- und Unternehmensangaben finden Sie auf dieser Seite.",
+      "licensingNote": "Aktuelle Gültigkeit der Genehmigungen und die Möglichkeit Ihrer internationalen Fahrt sind gesondert zu prüfen.",
+      "hubTitle": "Erst Anfrage und Angebot, dann Bestätigung",
+      "hubText": "Präzisieren Sie Ihre Route, Fahrzeugwünsche und Kontaktdaten; Durchführbarkeit und Endpreis werden vor einer Zusage geprüft."
     }
   },
   "fr": {
@@ -727,6 +831,110 @@ export const additionalLocales = {
           ]
         ]
       }
+    },
+    "extras": {
+      "ui": {
+        "pickupTitle": "Prise en charge à {city} ou à l'aéroport",
+        "vehicleTitle": "Chauffeur privé, catégorie et bagages",
+        "quoteTitle": "Devis et modalités de réservation",
+        "arrivalTitle": "Destination : Minsk, Biélorussie",
+        "miniCta": "Demander un devis personnalisé",
+        "otherLinks": "Autres villes de départ",
+        "notLocalTaxi": "Il s'agit d'un transfert international vers Minsk en Biélorussie, et non d'un taxi urbain ordinaire."
+      },
+      "vilnius": {
+        "pickupPlaces": [
+          "Vieille ville de Vilnius",
+          "Gare de Vilnius",
+          "Aéroport de Vilnius (VNO)",
+          "Hôtel ou adresse à Vilnius"
+        ],
+        "pickupContext": "Pour Vilnius, précisez l'adresse exacte ou l'aéroport VNO. À l'arrivée d'un vol, communiquez le numéro et l'heure prévue pour organiser la prise en charge.",
+        "vehicleContext": "Demandez une voiture de confort, d'affaires ou premium pour votre groupe. Ajoutez les enfants, sièges, animaux et valises. La disponibilité d'un modèle précis est toujours à confirmer.",
+        "quoteContext": "Vilnius–Minsk est un parcours international, pas une course au compteur. Le prix tient compte des deux adresses, de la date, du groupe, du véhicule et de la frontière. Le formulaire n'est pas une réservation instantanée.",
+        "arrivalContext": "La destination est Minsk, en Biélorussie. Indiquez une adresse complète et vérifiez les conditions d'entrée et de passage à la frontière."
+      },
+      "warsaw": {
+        "pickupPlaces": [
+          "Gare Warszawa Centralna",
+          "Centre de Varsovie (Śródmieście)",
+          "Aéroport Chopin (WAW)",
+          "Aéroport Modlin (WMI)"
+        ],
+        "pickupContext": "Précisez votre hôtel, la gare ou l'aéroport concerné. Chopin WAW et Modlin WMI sont deux sites distincts ; indiquez le bon code et le numéro de vol.",
+        "vehicleContext": "Une catégorie confort, affaires ou premium peut être demandée avec chauffeur privé. Aucun modèle de limousine précis n'est garanti. Le nombre de voyageurs et les bagages guident le choix.",
+        "quoteContext": "Varsovie–Minsk nécessite un devis spécifique : la frontière et les contrôles varient selon la date. Ce service n'est pas une offre de taxis urbains dans Varsovie.",
+        "arrivalContext": "Il s'agit de Minsk en Biélorussie, et non de Mińsk Mazowiecki en Pologne. Mentionnez votre adresse en Biélorussie et vérifiez les avertissements officiels."
+      },
+      "riga": {
+        "pickupPlaces": [
+          "Vieille ville de Riga (Vecrīga)",
+          "Gare centrale de Riga",
+          "Aéroport de Riga (RIX)",
+          "Hôtel ou adresse à Riga"
+        ],
+        "pickupContext": "Le départ peut être demandé depuis la vieille ville, un hôtel, la gare ou l'aéroport RIX. Avec un vol, indiquez numéro, heure d'arrivée et bagages.",
+        "vehicleContext": "Un véhicule privé peut être envisagé en catégorie confort, affaires ou premium, après examen du groupe, des enfants et des bagages. La voiture exacte doit être confirmée.",
+        "quoteContext": "Le prix Riga–Minsk dépend de l'itinéraire, de la date et des conditions aux frontières. La demande ne promet ni passage de frontière ni horaire d'arrivée garanti.",
+        "arrivalContext": "L'arrivée est prévue à Minsk en Biélorussie. Précisez votre adresse et consultez les règles d'entrée et les informations officielles avant le départ."
+      }
+    },
+    "trust": {
+      "registryLabel": "Consulter la licence dans le registre officiel",
+      "kicker": "Réservation transparente",
+      "title": "À savoir avant de demander un transfert",
+      "intro": "Un trajet international demande une vérification individuelle. Le formulaire envoie une demande mais ne réserve pas un véhicule et ne garantit pas le passage à la frontière.",
+      "quoteHeading": "Comment le devis est-il calculé ?",
+      "quoteIntro": "Le tarif est établi pour votre situation, notamment selon :",
+      "quoteItems": [
+        [
+          "Itinéraire précis",
+          "Adresse de départ ou aéroport et adresse complète d'arrivée à Minsk."
+        ],
+        [
+          "Voyageurs et voiture",
+          "Nombre d'adultes, enfants, valises, sièges bébé et catégorie souhaitée."
+        ],
+        [
+          "Date et attente",
+          "Horaire, informations du vol, attentes possibles et situation aux frontières."
+        ],
+        [
+          "Conditions finales",
+          "Vérifier le total et la devise, péages, temps d'attente, paiement et annulation."
+        ]
+      ],
+      "processHeading": "Après l'envoi de votre demande",
+      "process": [
+        [
+          "1",
+          "Envoyez les informations",
+          "Complétez les lieux, la date et vos coordonnées ; une référence est affichée."
+        ],
+        [
+          "2",
+          "Étude de faisabilité",
+          "Un coordinateur examine l'itinéraire, la frontière et la disponibilité de la voiture."
+        ],
+        [
+          "3",
+          "Confirmez le voyage",
+          "Mettez-vous d'accord sur le prix, le véhicule et le rendez-vous : la référence n'est pas une réservation."
+        ]
+      ],
+      "safetyHeading": "Frontière, documents et conseils officiels",
+      "safetyLead": "Le trajet peut franchir la frontière extérieure de l'UE. Les autorités publient des avertissements importants concernant la Biélorussie. Vérifiez les conditions d'entrée et les points de passage avant de voyager.",
+      "safetyChecklist": [
+        "Vérifier les passeports, visas et conditions d'entrée de tous les passagers.",
+        "Vérifier la possibilité de traverser la frontière avec le véhicule prévu.",
+        "Consulter les avis officiels juste avant le départ ; durée de trajet non garantie."
+      ],
+      "sourceName": "Sources officielles pour votre voyage",
+      "identityHeading": "Qui reçoit la demande ?",
+      "identityText": "La demande est étudiée par l'équipe byComfortLine. Les contacts et les données de l'opérateur sont publiés sur le site.",
+      "licensingNote": "La validité des autorisations et la faisabilité du trajet doivent être vérifiées pour la date concernée.",
+      "hubTitle": "Demande et devis avant toute confirmation",
+      "hubText": "Choisissez les points de départ et d'arrivée : l'équipe confirme ensuite la faisabilité et le prix du véhicule avant toute réservation."
     }
   }
 };
