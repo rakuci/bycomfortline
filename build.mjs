@@ -3,7 +3,7 @@ import { routeSeo } from "./route-seo.mjs";
 import { routeExtras } from "./route-extras.mjs";
 import { airportHubLinks } from "./airport-hub-links.mjs";
 import { bookingTrustContent, routeOfficialSources, reverseRoutePages } from "./booking-trust-content.mjs";
-import { fleetCatalog, fleetCopy, routeScenes } from "./fleet-showcase.mjs";
+import { fleetCatalog, fleetCopy, routeScenes, reverseJourneyCopy } from "./fleet-showcase.mjs";
 import { locationCatalog, locationLabels } from "./booking-locations.mjs";
 import { bookingPopupUi } from "./booking-popup-i18n.mjs";
 import { dirname, join } from "node:path";
@@ -694,6 +694,25 @@ function fleetShowcase(lang) {
   </section>`;
 }
 
+
+function returnTripInfo(lang,key) {
+  const data = reverseJourneyCopy[lang];
+  const link = reverseRoutePages[key];
+  return `<aside class="return-trip-panel" id="return-transfer">
+    <div class="return-trip-route"><span>${esc(destinationLabels[lang])}</span><span aria-hidden="true">→</span><span>${esc(locale[lang].fromNames[key])}</span></div>
+    <div class="return-trip-main"><div>
+      <h2>${esc(data.heading)}</h2>
+      <p>${esc(data.intro)}</p>
+      <p class="return-trip-detail">${esc(data.extras[key])}</p>
+      <p class="return-trip-terms">${esc(data.terms)}</p>
+    </div>
+    <div class="return-trip-action">
+      <strong>${esc(data.label)}</strong>
+      <a href="${esc(link)}" rel="noopener noreferrer" target="_blank">${esc(data.view)} ↗</a>
+    </div></div>
+  </aside>`;
+}
+
 function routeScene(lang, key) {
   const scene = routeScenes[key];
   const note = scene.credit
@@ -767,6 +786,7 @@ function routePage(lang, key) {
     ${trustStrip(l)}
     <section class="facts-section"><article><span>${icons.pin}</span><div><small>${esc(l.facts.distance)}</small><strong>${r.distance}</strong></div></article><article><span class="clock">◷</span><div><small>${esc(l.facts.time)}</small><strong>${r.time}</strong><em>${esc(l.facts.note)}</em></div></article><article><span class="plane">✈</span><div><small>${esc(l.facts.airport)}</small><strong>${r.airport}</strong></div></article></section>
     ${routeEditorial(lang, key)}
+    ${returnTripInfo(lang,key)}
     ${fleetShowcase(lang)}
     ${routeBookingTransparency(lang, key)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">${esc(l.routeNames[key])}</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
