@@ -665,8 +665,27 @@ function thankYouPage(lang) {
     </section></main>${floatingContact()}</body></html>`;
 }
 function gateway() {
-  const links = Object.entries(locale).map(([code, l]) => `<a href="/${code}/"><span>${code.toUpperCase()}</span><strong>${l.label}</strong>${icons.arrow}</a>`).join("");
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ComfortLine — private transfers to Minsk</title><meta name="description" content="Private transfers to Minsk from Vilnius, Warsaw and Riga in Russian, Polish, Lithuanian and Latvian."><meta name="robots" content="index,follow"><link rel="canonical" href="${base}/">${alternateLinks("home")}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"></head><body class="gateway"><main><div class="gateway-panel"><a class="brand" href="/"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>Private transfers to Minsk</p><h1>Choose your language</h1><div class="gateway-links">${links}</div><small>Vilnius · Warsaw · Riga · Minsk</small></div></main>${floatingContact()}</body></html>`;
+  const links = Object.entries(locale).map(([code,l]) => `<a href="/${code}/"><span>${code.toUpperCase()}</span><strong>${l.label}</strong>${icons.arrow}</a>`).join("");
+  const popular = [
+    ["Warsaw to Minsk, Belarus · private taxi", routePath("en","warsaw")],
+    ["Vilnius Airport to Minsk · private transfer", routePath("en","vilnius") + "#airport-pickup"],
+    ["Riga Airport to Minsk · private car", routePath("en","riga") + "#airport-pickup"]
+  ].map(([title,link]) => `<a href="${link}">${esc(title)} ↗</a>`).join("");
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Private Transfers to Minsk, Belarus | byComfortLine</title>
+    <meta name="description" content="Request private transfers to Minsk, Belarus from Warsaw, Vilnius, Riga and their airports. Choose your language, route and pickup location.">
+    <meta name="robots" content="index,follow"><link rel="canonical" href="${base}/">${alternateLinks("home")}
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    </head><body class="gateway"><main><div class="gateway-panel"><a class="brand" href="/"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a>
+      <h1>Private transfers to Minsk, Belarus</h1>
+      <p class="gateway-route-intro">Request a door-to-door private taxi or chauffeur-style transfer from Warsaw, Vilnius, Riga or their airports to Minsk, Belarus. Select your preferred language to discuss a vehicle and price.</p>
+      <h2>Choose your language</h2>
+      <div class="gateway-links">${links}</div>
+      <nav class="gateway-route-nav" aria-label="Popular private transfers">${popular}</nav>
+      <small>Vilnius VNO · Warsaw WAW/WMI · Riga RIX · Minsk</small>
+    </div></main>${floatingContact()}</body></html>`;
 }
 
 async function put(relative, content) {
