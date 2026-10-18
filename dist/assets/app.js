@@ -400,6 +400,20 @@
         return;
       }
 
+      const modelChoice = form.elements.namedItem("vehicleModel");
+      const modelOption = modelChoice?.selectedOptions?.[0];
+      const maximumSeats = Number(modelOption?.dataset.seats || 0);
+      const people = Number(form.elements.namedItem("passengers")?.value || 1);
+      if (modelChoice?.value && maximumSeats > 0 && people > maximumSeats) {
+        const explanation = (form.dataset.capacityError || "Choose a larger vehicle for your group.")
+          .replace("{seats}", String(maximumSeats))
+          .replace("{people}", String(people));
+        showBookingError(explanation);
+        modelChoice.focus({ preventScroll: true });
+        modelChoice.closest("label")?.scrollIntoView({ block: "center", behavior: "smooth" });
+        return;
+      }
+
       const lang = form.dataset.lang || "en";
       const sendButton = form.querySelector(".booking-prepare");
       const message = status;
