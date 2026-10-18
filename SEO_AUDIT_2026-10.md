@@ -149,3 +149,58 @@ claiming a local Warsaw office.
 - [Core Web Vitals](https://developers.google.com/search/docs/appearance/core-web-vitals)
 - [FAQ-rich-result restrictions](https://developers.google.com/search/blog/2023/08/howto-faq-changes)
 - [Google Business Profile eligibility](https://support.google.com/business/answer/3038177)
+
+
+## Customer-visible content expansion — 18 October 2026
+
+A follow-up site-wide editorial upgrade added the following sections to **all 15
+route pages**, in the language of each page (EN/RU/PL/LT/LV):
+
+- Transparent explanation of how a trip-specific quote is prepared:
+  pickup/drop-off addresses, passengers, children, luggage, class and flight data.
+  Customers are asked to clarify total price, currency, waiting/tolls and
+  payment/cancellation conditions before confirmation; no fake fares are shown.
+- Three-stage process: **send enquiry → coordinator checks → agree and confirm**.
+  An enquiry reference is explicitly **not** a confirmed reservation.
+- A clear travel checklist and outbound links to official country-specific
+  authorities. Poland: Gov.pl (including travel warning). Lithuania: MFA
+  travel advice and State Border Guard. Latvia: state-operated external-border
+  electronic queue system (ERRS) and MFA.
+- Legal identity and contact details repeated where users need them, with a
+  link to the **licensing register listing that ComfortLine itself publishes**
+  (`https://license.gov.by/onelicense/157966`). Current validity was **not
+  independently authenticated** and should be confirmed by the operator.
+- Contextual links to verified return-route pages on comfortline.by:
+  Warsaw, Vilnius and Riga.
+- Five language homepages now summarize that the request does not
+  reserve a vehicle until terms are agreed.
+
+All 26 pages were generated in a source-level test; all 15 localized route
+pages contained the sections, business details, official sources and booking
+form action. This does not verify the production deployment.
+
+### Search Console source from the site owner
+
+The owner provided the following private performance-report URL:
+https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Abycomfortline.com
+
+An authenticated Google Search Console account is required; the link by itself
+is not usable for anonymous third-party access. To ground the next SEO
+iteration, the owner should choose **Search results → Last 3 months → Export →
+CSV or Google Sheets** and provide **Queries, Pages, Countries and Devices**.
+Review impressions, CTR and avg. position, then improve copy where actual
+demand/intent warrants it. No Search Console metrics have been accessed by
+this change.
+
+### Credibility items to validate with the operator
+
+- Legal carrier/licensing registry record and address match the actual provider.
+- Actual vehicle makes/models and capacity, if specific model pages are added.
+- Whether airport waiting, tolls, border waiting and child-seat provision are
+  included in the individual quote.
+- Approved payment methods, settlement currency, and cancellation policy.
+- Genuine photos and testimonials supplied or authorized by their owners.
+- Live border-crossing routes, restrictions and traffic conditions remain dynamic.
+
+Avoid inserting unsupported prices, a false Warsaw office, guaranteed border
+priority, unsupported 24/7 promises, or fictitious review stars.
