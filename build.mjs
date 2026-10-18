@@ -3,6 +3,7 @@ import { routeSeo } from "./route-seo.mjs";
 import { routeExtras } from "./route-extras.mjs";
 import { airportHubLinks } from "./airport-hub-links.mjs";
 import { bookingTrustContent, routeOfficialSources, reverseRoutePages } from "./booking-trust-content.mjs";
+import { fleetCatalog, fleetCopy, routeScenes } from "./fleet-showcase.mjs";
 import { locationCatalog, locationLabels } from "./booking-locations.mjs";
 import { bookingPopupUi } from "./booking-popup-i18n.mjs";
 import { dirname, join } from "node:path";
@@ -496,6 +497,13 @@ function bookingForm(lang, routeKey = "vilnius") {
         <label><span>${esc(ui.dropAddress)}</span><input name="dropAddress" placeholder="${esc(l.fieldValues.to)}"></label>
         <label><span>${esc(ui.date)}</span><input type="datetime-local" name="date" required></label>
         ${passengerPicker(lang, "details")}
+        <label class="vehicle-model-field full"><span>${esc(fleetCopy[lang].choiceLabel)}</span>
+          <select name="vehicleModel" aria-describedby="vehicle-choice-note">
+            <option value="">${esc(fleetCopy[lang].placeholder)}</option>
+            ${fleetCatalog.map(car => `<option value="${car.id}">${esc(car.name)} · ${car.seats} ${esc(fleetCopy[lang].seats)}</option>`).join("")}
+          </select>
+          <small id="vehicle-choice-note">${esc(fleetCopy[lang].choiceNote)}</small>
+        </label>
         <label><span>${esc(ui.seats)}</span><input type="number" min="0" max="8" name="childSeats" value="0"></label>
         <label><span>${esc(ui.flight)}</span><input name="flight" placeholder="VNO / WAW / WMI / RIX"></label>
         <label><span>${esc(ui.name)}</span><input name="customerName" autocomplete="name" required></label>
@@ -566,6 +574,7 @@ function hubPage(lang) {
     ${trustStrip(l)}
     <section class="section routes-section" id="routes"><div class="section-head"><span class="eyebrow">Comfortline routes</span><h2>${esc(l.routesTitle)}</h2><p>${esc(l.routesLead)}</p></div><div class="route-grid three">${routeCards(lang)}</div></section>
     ${airportRouteLinks(lang)}
+    ${fleetShowcase(lang)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">Door to door</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     <section class="section steps-section"><div class="section-head"><span class="eyebrow">3 steps</span><h2>${esc(l.stepsTitle)}</h2></div><div class="steps">${l.steps.map(([n, h, p]) => `<article><span>${n}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     ${homeBookingTransparency(lang)}
@@ -650,6 +659,52 @@ function routeBookingTransparency(lang,key) {
   </section>`;
 }
 
+
+function fleetShowcase(lang) {
+  const ui = fleetCopy[lang];
+  const cards = fleetCatalog.map(car => {
+    const label = ui.descriptions[car.id];
+    return `<article class="fleet-show-card" data-fleet-model="${esc(car.id)}">
+      <div class="fleet-photo">
+        <img src="${esc(car.image)}" loading="lazy" decoding="async"
+          width="860" height="550" alt="${esc(car.name + " — " + label)}">
+        <span class="fleet-photo-chip">${esc(ui.category[car.kind])}</span>
+      </div>
+      <div class="fleet-card-body">
+        <h3>${esc(car.name)}</h3><p>${esc(label)}</p>
+        <div class="fleet-capacity"><span>♙ ${car.seats} ${esc(ui.seats)}</span>
+          <span>▣ ${car.bags} ${esc(ui.bags)}</span></div>
+        <strong class="fleet-on-request">${esc(ui.price)}</strong>
+        <div class="fleet-card-actions">
+          <button type="button" class="fleet-select-button" data-request-model="${car.id}"
+            data-request-class="${car.kind}">${esc(ui.choose)} ↗</button>
+          <a href="${esc(car.detail)}" rel="noopener noreferrer" target="_blank">${esc(ui.showMore)} ↗</a>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+  return `<section class="fleet-showcase section" id="fleet" aria-labelledby="fleet-heading">
+    <div class="section-head">
+      <span class="eyebrow">ComfortLine · Fleet</span>
+      <h2 id="fleet-heading">${esc(ui.title)}</h2>
+      <p>${esc(ui.lead)}</p>
+    </div>
+    <div class="fleet-show-grid">${cards}</div>
+    <p class="fleet-photo-footnote">${esc(ui.photoNote)}</p>
+  </section>`;
+}
+
+function routeScene(lang, key) {
+  const scene = routeScenes[key];
+  const note = scene.credit
+    ? `<a href="${esc(scene.credit)}" target="_blank" rel="noopener noreferrer">${esc(scene.source)} ↗</a>`
+    : `<span>${esc(scene.source)}</span>`;
+  return `<figure class="route-local-scene">
+    <img src="${esc(scene.src)}" width="1400" height="740" decoding="async" loading="lazy" alt="${esc(scene.alt[lang])}">
+    <figcaption><span>${esc(scene.alt[lang])}</span>${note}</figcaption>
+  </figure>`;
+}
+
 function routeIntentDetails(lang, key) {
   const copy = routeExtras[lang], extra = copy[key], ui = copy.ui;
   const city = locale[lang].fromNames[key];
@@ -657,6 +712,7 @@ function routeIntentDetails(lang, key) {
   const alternateRoutes = Object.keys(routes).filter(id => id !== key)
     .map(id => `<a href="${routePath(lang,id)}">${esc(locale[lang].routeNames[id])} ↗</a>`).join("");
   return `<div class="route-intent-guide">
+    ${routeScene(lang,key)}
     <section class="route-intent-section" id="pickup-options">
       <div class="route-intent-copy">
         <h2>${esc(pickupHeading)}</h2><p>${esc(extra.pickupContext)}</p>
@@ -711,6 +767,7 @@ function routePage(lang, key) {
     ${trustStrip(l)}
     <section class="facts-section"><article><span>${icons.pin}</span><div><small>${esc(l.facts.distance)}</small><strong>${r.distance}</strong></div></article><article><span class="clock">◷</span><div><small>${esc(l.facts.time)}</small><strong>${r.time}</strong><em>${esc(l.facts.note)}</em></div></article><article><span class="plane">✈</span><div><small>${esc(l.facts.airport)}</small><strong>${r.airport}</strong></div></article></section>
     ${routeEditorial(lang, key)}
+    ${fleetShowcase(lang)}
     ${routeBookingTransparency(lang, key)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">${esc(l.routeNames[key])}</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     <section class="section steps-section"><div class="section-head"><span class="eyebrow">3 steps</span><h2>${esc(l.stepsTitle)}</h2></div><div class="steps">${l.steps.map(([n, h, p]) => `<article><span>${n}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
