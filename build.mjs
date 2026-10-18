@@ -769,7 +769,6 @@ function routeEditorial(lang, key) {
     <div class="route-checklist"><div><h3>${esc(ui.prepare)}</h3><ul>${ui.checklist.map(text => `<li>${esc(text)}</li>`).join("")}</ul></div><p>${esc(ui.border)}</p></div>
     ${routeIntentDetails(lang,key)}
     <div class="route-specific-faq"><h3>${esc(ui.faqs)}</h3><div class="route-specific-questions">${seo.faqs.map(([question, answer]) => `<details><summary>${esc(question)}</summary><p>${esc(answer)}</p></details>`).join("")}</div></div>
-    <aside class="related-comfortline"><p>${esc(ui.related)} <a href="${esc(reverseRoutePages[key])}" rel="noopener noreferrer">${esc(destinationLabels[lang])} → ${esc(locale[lang].fromNames[key])} · comfortline.by ↗</a></p></aside>
   </section>`;
 }
 
