@@ -56,6 +56,7 @@ export const fleetCatalog = [
 ];
 export const fleetCopy = {
   "en": {
+    "capacityError": "The requested vehicle has up to {seats} passenger seats, but your group has {people}. Please choose a larger vehicle or remove the model preference.",
     "title": "Choose a vehicle for your transfer",
     "lead": "Explore the real vehicle models shown on comfortline.by. Select a preferred car for your enquiry; your coordinator will confirm availability, passenger/luggage capacity and the final quote for your journey.",
     "seats": "seats",
@@ -83,6 +84,7 @@ export const fleetCopy = {
     }
   },
   "ru": {
+    "capacityError": "В выбранной машине не более {seats} пассажирских мест, а у вас {people}. Выберите более вместительное авто или оставьте модель на усмотрение менеджера.",
     "title": "Выберите автомобиль для трансфера",
     "lead": "Посмотрите реальные модели из автопарка comfortline.by. Выберите желаемую машину для заявки: менеджер проверит её наличие, вместимость, багаж и окончательную цену на вашу дату.",
     "seats": "мест",
@@ -110,6 +112,7 @@ export const fleetCopy = {
     }
   },
   "pl": {
+    "capacityError": "Wybrane auto mieści maksymalnie {seats} pasażerów, a Twoja grupa liczy {people}. Wybierz większy pojazd lub usuń preferencję modelu.",
     "title": "Wybierz samochód na transfer",
     "lead": "Poznaj modele z floty comfortline.by. Wskaż preferowany pojazd w zapytaniu; koordynator potwierdzi dostępność, liczbę miejsc, bagaż i cenę dla Twojej trasy.",
     "seats": "miejsc",
@@ -137,6 +140,7 @@ export const fleetCopy = {
     }
   },
   "lt": {
+    "capacityError": "Pasirinktame automobilyje yra iki {seats} vietų, o grupėje – {people} keleiviai. Rinkitės didesnį automobilį arba nenurodykite modelio.",
     "title": "Pasirinkite automobilį pervežimui",
     "lead": "Peržiūrėkite comfortline.by automobilių parką. Nurodykite norimą modelį, o vadybininkas patvirtins jo prieinamumą, vietas, bagažą ir galutinę kelionės kainą.",
     "seats": "vietos",
@@ -164,6 +168,7 @@ export const fleetCopy = {
     }
   },
   "lv": {
+    "capacityError": "Izvēlētajā automobilī ir līdz {seats} pasažieru vietām, bet jūsu grupā ir {people} cilvēki. Izvēlieties lielāku auto vai noņemiet modeļa izvēli.",
     "title": "Izvēlieties automobili transfēram",
     "lead": "Apskatiet comfortline.by autoparkā redzamos modeļus. Norādiet vēlamo auto; koordinators precizēs pieejamību, vietu un bagāžas apjomu, kā arī cenu.",
     "seats": "vietas",
