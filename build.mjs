@@ -1,6 +1,7 @@
 import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import { routeSeo } from "./route-seo.mjs";
 import { routeExtras } from "./route-extras.mjs";
+import { airportHubLinks } from "./airport-hub-links.mjs";
 import { locationCatalog, locationLabels } from "./booking-locations.mjs";
 import { bookingPopupUi } from "./booking-popup-i18n.mjs";
 import { dirname, join } from "node:path";
@@ -530,12 +531,24 @@ function hubPage(lang) {
     <section class="hero hero-home"><div class="hero-overlay"></div><div class="hero-content"><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(l.hubTitle)}</h1><p>${esc(l.hubDescription)}</p><div class="hero-actions"><a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang)}</div><div class="route-orbit" aria-hidden="true"><span>VNO</span><i></i><b>MSQ</b><i></i><span>WAW</span><i></i><span>RIX</span></div></section>
     ${trustStrip(l)}
     <section class="section routes-section" id="routes"><div class="section-head"><span class="eyebrow">Comfortline routes</span><h2>${esc(l.routesTitle)}</h2><p>${esc(l.routesLead)}</p></div><div class="route-grid three">${routeCards(lang)}</div></section>
+    ${airportRouteLinks(lang)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">Door to door</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     <section class="section steps-section"><div class="section-head"><span class="eyebrow">3 steps</span><h2>${esc(l.stepsTitle)}</h2></div><div class="steps">${l.steps.map(([n, h, p]) => `<article><span>${n}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     ${faq(l)}</main>${footer(l)}`;
   return layout({ lang, title, description: l.hubDescription, canonical, alternates: alternateLinks("home"), body, schema: businessSchema(lang, canonical) });
 }
 
+
+
+function airportRouteLinks(lang) {
+  const content = airportHubLinks[lang];
+  return `<section class="section airport-links-section" id="airport-transfers">
+    <div class="section-head"><span class="eyebrow">VNO · WAW · WMI · RIX</span><h2>${esc(content.heading)}</h2><p>${esc(content.intro)}</p></div>
+    <div class="airport-links-grid">${content.items.map(([key,title,text]) =>
+      `<article class="airport-link-card"><span class="airport-link-icon" aria-hidden="true">✈</span><h3><a href="${routePath(lang,key)}#airport-pickup">${esc(title)} ↗</a></h3><p>${esc(text)}</p></article>`
+    ).join("")}</div>
+  </section>`;
+}
 
 function routeIntentDetails(lang, key) {
   const copy = routeExtras[lang], extra = copy[key], ui = copy.ui;
