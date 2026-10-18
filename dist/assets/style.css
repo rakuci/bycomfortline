@@ -2533,3 +2533,208 @@ footer {
   text-underline-offset: 3px;
 }
 .booking-operator-identity .booking-license-source:hover { color: #094733; }
+
+
+/* Real-model ComfortLine fleet gallery: large photos, transparent capacities, request CTA */
+.fleet-showcase {
+  padding-top: clamp(45px,5vw,78px);
+  padding-bottom: clamp(55px,6vw,94px);
+}
+.fleet-showcase .section-head { max-width: 920px; }
+.fleet-show-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 19px;
+  margin-top: 29px;
+}
+.fleet-show-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid #dae6e4;
+  border-radius: 23px;
+  background: #fff;
+  box-shadow: 0 13px 30px rgba(11,38,49,.055);
+  transition: box-shadow .2s,border-color .2s,transform .2s;
+}
+.fleet-show-card:hover { transform: translateY(-4px); box-shadow: 0 21px 42px rgba(11,38,49,.13); border-color: #9dcabe; }
+.fleet-show-card.fleet-selected { border: 2px solid #22876d; box-shadow: 0 0 0 4px rgba(48,161,126,.12); }
+.fleet-photo {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: #e2ecea url("/assets/comfortline-transfer-van.webp") center/cover no-repeat;
+}
+.fleet-photo::after {
+  content: "";
+  position: absolute;
+  inset: 40% 0 0;
+  pointer-events: none;
+  background: linear-gradient(transparent,rgba(7,24,36,.48));
+}
+.fleet-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .38s ease;
+}
+.fleet-show-card:hover .fleet-photo img { transform: scale(1.035); }
+.fleet-photo-chip {
+  position: absolute;
+  z-index: 1;
+  left: 13px;
+  bottom: 13px;
+  display: inline-flex;
+  max-width: calc(100% - 26px);
+  align-items: center;
+  padding: 7px 11px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 999px;
+  background: rgba(11,36,50,.82);
+  backdrop-filter: blur(5px);
+  color: #fff;
+  font-weight: 800;
+  line-height: 1.2;
+  font-size: .71rem;
+}
+.fleet-card-body { display: flex; flex-direction: column; flex: 1; padding: 20px 20px 23px; }
+.fleet-card-body h3 {
+  margin: 0 0 8px;
+  color: #142e3f;
+  font-size: clamp(1.05rem,1.5vw,1.27rem);
+  line-height: 1.32;
+  font-weight: 900;
+  letter-spacing: -.035em;
+}
+.fleet-card-body p { min-height: 48px; margin: 0 0 15px; color: #576d76; font-size: .83rem; line-height: 1.64; }
+.fleet-capacity { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 17px; }
+.fleet-capacity span {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #eff7f4;
+  color: #245f55;
+  font-size: .77rem;
+  line-height: 1.3;
+  font-weight: 800;
+}
+.fleet-on-request {
+  margin-top: auto;
+  display: block;
+  color: #156951;
+  font-size: .94rem;
+  font-weight: 900;
+  letter-spacing: -.01em;
+}
+.fleet-card-actions { display: grid; gap: 12px; align-items: center; margin-top: 15px; }
+.fleet-select-button {
+  min-height: 47px;
+  padding: 12px 10px;
+  border: 0;
+  border-radius: 12px;
+  background: #153947;
+  color: white;
+  font-size: .84rem;
+  font-family: inherit;
+  font-weight: 860;
+  cursor: pointer;
+  transition: background .2s,transform .2s;
+}
+.fleet-select-button:hover,.fleet-select-button:focus-visible { background: #16664f; transform: translateY(-1px); }
+.fleet-select-button[aria-pressed="true"] { background: #168267; }
+.fleet-card-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 26px;
+  color: #52717b;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: .79rem;
+  font-weight: 780;
+}
+.fleet-card-actions a:hover { color: #11644c; }
+.fleet-photo-footnote {
+  max-width: 880px;
+  margin: 18px 0 0;
+  color: #688088;
+  font-size: .8rem;
+  line-height: 1.65;
+}
+.route-local-scene {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  border-radius: 23px;
+  background: linear-gradient(130deg,#132b3c,#277366);
+  min-height: 210px;
+}
+.route-local-scene img { display: block; width: 100%; aspect-ratio: 2.45 / 1; min-height: 210px; max-height: 440px; object-fit: cover; }
+.route-local-scene::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  inset: 45% 0 0;
+  background: linear-gradient(transparent,rgba(7,24,34,.77));
+}
+.route-local-scene figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 10px;
+  flex-wrap: wrap;
+  position: absolute;
+  z-index: 1;
+  bottom: 0; left: 0; right: 0;
+  padding: 17px clamp(16px,3vw,28px);
+  color: white;
+  font-size: .84rem;
+  font-weight: 820;
+  line-height: 1.5;
+  text-shadow: 0 1px 3px #102c38;
+}
+.route-local-scene figcaption span:last-child,
+.route-local-scene figcaption a { color: #d6e7e9; font-weight: 650; font-size: .74rem; }
+.booking-dialog .booking-form > label.vehicle-model-field { grid-column: 1 / -1; }
+.booking-dialog .booking-form .vehicle-model-field select {
+  display: block;
+  width: 100%;
+  min-height: 51px;
+  border: 1px solid #ccdfda;
+  border-radius: 12px;
+  padding: 10px 13px;
+  background: #fff;
+  color: #163546;
+  font-size: 16px;
+  cursor: pointer;
+}
+.booking-dialog .booking-form .vehicle-model-field small {
+  display: block;
+  margin: 7px 0 0;
+  color: #67818a;
+  font-size: .75rem;
+  line-height: 1.55;
+}
+@media (max-width: 1100px) {
+  .fleet-show-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px; }
+}
+@media (max-width: 760px) {
+  .fleet-showcase { padding-top: 37px; padding-bottom: 46px; }
+  .fleet-show-grid { grid-template-columns: 1fr; gap: 15px; margin-top: 22px; }
+  .fleet-show-card { border-radius: 18px; }
+  .fleet-photo { aspect-ratio: 16 / 9; }
+  .fleet-card-body { padding: 18px; }
+  .fleet-card-body p { min-height: 0; }
+  .fleet-card-actions { grid-template-columns: 1fr; }
+  .route-local-scene { border-radius: 17px; }
+  .route-local-scene img { aspect-ratio: 1.5 / 1; }
+  .route-local-scene figcaption { gap: 3px; align-items: flex-start; flex-direction: column; font-size: .76rem; }
+  .booking-dialog .booking-form > label.vehicle-model-field { grid-column: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fleet-show-card,.fleet-photo img,.fleet-select-button { transition: none; }
+  .fleet-show-card:hover { transform: none; }
+  .fleet-show-card:hover .fleet-photo img { transform: none; }
+}
