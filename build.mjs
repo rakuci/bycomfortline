@@ -2,7 +2,7 @@ import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import { routeSeo } from "./route-seo.mjs";
 import { routeExtras } from "./route-extras.mjs";
 import { airportHubLinks } from "./airport-hub-links.mjs";
-import { bookingTrustContent, routeOfficialSources } from "./booking-trust-content.mjs";
+import { bookingTrustContent, routeOfficialSources, reverseRoutePages } from "./booking-trust-content.mjs";
 import { locationCatalog, locationLabels } from "./booking-locations.mjs";
 import { bookingPopupUi } from "./booking-popup-i18n.mjs";
 import { dirname, join } from "node:path";
@@ -639,6 +639,7 @@ function routeBookingTransparency(lang,key) {
         <h3>${esc(copy.identityHeading)}</h3>
         <p>${esc(copy.identityText)}</p>
         <p class="booking-operator-legal">${esc(locale[lang].license)}</p>
+        <a class="booking-license-source" href="https://license.gov.by/onelicense/157966" rel="noopener noreferrer">${esc(copy.registryLabel)} ↗</a>
         <small>${esc(copy.licensingNote)}</small>
       </div>
       <div class="booking-operator-contact">
@@ -693,7 +694,7 @@ function routeEditorial(lang, key) {
     <div class="route-checklist"><div><h3>${esc(ui.prepare)}</h3><ul>${ui.checklist.map(text => `<li>${esc(text)}</li>`).join("")}</ul></div><p>${esc(ui.border)}</p></div>
     ${routeIntentDetails(lang,key)}
     <div class="route-specific-faq"><h3>${esc(ui.faqs)}</h3><div class="route-specific-questions">${seo.faqs.map(([question, answer]) => `<details><summary>${esc(question)}</summary><p>${esc(answer)}</p></details>`).join("")}</div></div>
-    <aside class="related-comfortline"><p>${esc(ui.related)} <a href="https://comfortline.by/" rel="noopener">comfortline.by ↗</a></p></aside>
+    <aside class="related-comfortline"><p>${esc(ui.related)} <a href="${esc(reverseRoutePages[key])}" rel="noopener noreferrer">${esc(destinationLabels[lang])} → ${esc(locale[lang].fromNames[key])} · comfortline.by ↗</a></p></aside>
   </section>`;
 }
 
