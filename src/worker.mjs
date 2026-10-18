@@ -18,6 +18,7 @@ const FIELD_RULES = {
   infants: { max: 2 },
   pets: { max: 2 },
   carClass: { required: true, max: 30 },
+  vehicleModel: { max: 32 },
   luggage: { max: 2 },
   childSeats: { max: 2 },
   flight: { max: 60 },
@@ -40,6 +41,7 @@ const FIELD_LABELS = {
   infants: "Младенцы",
   pets: "Питомцы",
   carClass: "Класс автомобиля",
+  vehicleModel: "Желаемая модель авто",
   luggage: "Чемоданы",
   childSeats: "Детские кресла",
   flight: "Номер рейса",
@@ -93,6 +95,7 @@ function validateBooking(body) {
   if (Number(fields.adults) < 1 ||
       Number(fields.adults) + Number(fields.children) + Number(fields.infants) !== Number(fields.passengers)) return null;
   if (!["any", "comfort", "business", "premium", "sedan", "minivan"].includes(fields.carClass)) return null;
+  if (fields.vehicleModel && !["mercedes_e","kia_carnival","hyundai_palisade","mercedes_v","audi_a6","fiat_scudo"].includes(fields.vehicleModel)) return null;
   if (!/^\d{0,2}$/.test(fields.luggage) || Number(fields.luggage || 0) > 25) return null;
   if (!/^\d{0,2}$/.test(fields.childSeats) || Number(fields.childSeats || 0) > 8) return null;
   if (fields.customerName.length < 2) return null;
@@ -116,7 +119,9 @@ function bookingText({ lang, fields }, reference) {
     "Получена (UTC): " + new Date().toISOString(),
     "",
     ...Object.entries(FIELD_LABELS).map(([field, label]) => label + ": " +
-      (field === "carClass" ? (carLabels[fields.carClass] || fields.carClass) : (fields[field] || "—"))),
+      (field === "carClass" ? (carLabels[fields.carClass] || fields.carClass)
+        : field === "vehicleModel" ? (({ mercedes_e: "Mercedes-Benz E-Class 2021", kia_carnival: "Kia Carnival 2019", hyundai_palisade: "Hyundai Palisade 2020", mercedes_v: "Mercedes-Benz V-Class", audi_a6: "Audi A6 Avant", fiat_scudo: "Fiat Scudo 2015" })[fields.vehicleModel] || fields.vehicleModel || "—")
+        : (fields[field] || "—"))),
     "",
     "СТАТУС: Заявка получена по электронной почте. Поездка и стоимость ещё не подтверждены.",
     "Свяжитесь с клиентом по контактным данным выше для подтверждения наличия автомобиля и стоимости."
@@ -157,6 +162,7 @@ function bookingHtml({ lang, fields }, reference) {
     fieldRow("Дети", fields.children),
     fieldRow("Младенцы", fields.infants),
     fieldRow("Питомцы", fields.pets),
+    fieldRow("Желаемая модель авто", ({ mercedes_e: "Mercedes-Benz E-Class 2021", kia_carnival: "Kia Carnival 2019", hyundai_palisade: "Hyundai Palisade 2020", mercedes_v: "Mercedes-Benz V-Class", audi_a6: "Audi A6 Avant", fiat_scudo: "Fiat Scudo 2015" })[fields.vehicleModel] || fields.vehicleModel),
     fieldRow("Класс автомобиля", ({ any: "Любой", comfort: "Комфорт", business: "Бизнес", premium: "Премиум", sedan: "Седан", minivan: "Минивэн / микроавтобус" })[fields.carClass] || fields.carClass),
     fieldRow("Чемоданы", fields.luggage),
     fieldRow("Детские кресла", fields.childSeats),
