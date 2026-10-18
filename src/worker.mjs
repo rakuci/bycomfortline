@@ -95,7 +95,8 @@ function validateBooking(body) {
   if (Number(fields.adults) < 1 ||
       Number(fields.adults) + Number(fields.children) + Number(fields.infants) !== Number(fields.passengers)) return null;
   if (!["any", "comfort", "business", "premium", "sedan", "minivan"].includes(fields.carClass)) return null;
-  if (fields.vehicleModel && !["mercedes_e","kia_carnival","hyundai_palisade","mercedes_v","audi_a6","fiat_scudo"].includes(fields.vehicleModel)) return null;
+  const availableSeats = { mercedes_e: 3, kia_carnival: 5, hyundai_palisade: 4, mercedes_v: 7, audi_a6: 3, fiat_scudo: 8 };
+  if (fields.vehicleModel && (!Object.hasOwn(availableSeats, fields.vehicleModel) || Number(fields.passengers) > availableSeats[fields.vehicleModel])) return null;
   if (!/^\d{0,2}$/.test(fields.luggage) || Number(fields.luggage || 0) > 25) return null;
   if (!/^\d{0,2}$/.test(fields.childSeats) || Number(fields.childSeats || 0) > 8) return null;
   if (fields.customerName.length < 2) return null;
