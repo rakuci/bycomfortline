@@ -629,7 +629,7 @@ function floatingContact() {
 
 function layout({ lang, title, description, canonical, alternates, body, schema, routeKey = "vilnius", originOverride = null }) {
   const l = locale[lang];
-  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="byComfortLine"><meta property="og:locale" content="${esc(l.locale)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${base}/assets/comfortline-transfer-van.webp"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preload" as="image" href="/assets/comfortline-transfer-van.webp" fetchpriority="high"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${bookingForm(lang, routeKey, originOverride)}${destinationPopup(lang)}${floatingContact()}</body></html>`;
+  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="byComfortLine"><meta property="og:locale" content="${esc(l.locale)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${base}/assets/comfortline-transfer-van.webp"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preload" as="image" href="/assets/comfortline-transfer-van.webp" fetchpriority="high"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${bookingForm(lang, routeKey, originOverride)}${destinationPopup(lang)}${floatingContact()}</body></html>`;
 }
 
 function businessSchema(lang, url) {
@@ -1073,7 +1073,7 @@ function thankYouPage(lang) {
   const title = `${ui.thanksTitle} | ComfortLine`;
   return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
     <title>${esc(title)}</title><meta name="robots" content="noindex,follow"><meta name="description" content="${esc(ui.thanksNotice)}">
-    <link rel="canonical" href="${base}/${lang}/thank-you/"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="canonical" href="${base}/${lang}/thank-you/"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <script src="/assets/app.js" defer></script></head><body class="thanks-body">
     <header class="thanks-header"><a class="brand" href="${l.home}" aria-label="ComfortLine"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a></header>
     <main class="thanks-main"><section class="thanks-panel" data-booking-thankyou data-lang="${lang}">
@@ -1101,7 +1101,7 @@ function gateway() {
     <meta name="robots" content="index,follow"><link rel="canonical" href="${base}/">${alternateLinks("home")}
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
     </head><body class="gateway"><main><div class="gateway-panel"><a class="brand" href="/"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a>
       <h1>Private transfers to Minsk, Belarus</h1>
       <p class="gateway-route-intro">Request a door-to-door private taxi or chauffeur-style transfer from Warsaw, Vilnius, Riga or their airports to Minsk, Belarus. Select your preferred language to discuss a vehicle and price.</p>
@@ -1118,6 +1118,8 @@ async function put(relative, content) {
   await writeFile(file, content, "utf8");
 }
 
+// Yandex recommends a discoverable root favicon; keep this synced with the site logo.
+await copyFile(join(out,"assets/favicon.svg"), join(out,"favicon.svg"));
 await put("index.html", gateway());
 for (const lang of Object.keys(locale)) {
   await put(`${lang}/index.html`, hubPage(lang));
