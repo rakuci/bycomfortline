@@ -928,6 +928,229 @@ function routeEditorial(lang, key) {
   </section>`;
 }
 
+function destSeoName(dest,lang){
+ const raw=dest.names[lang];
+ return raw.replace(/,\s*(?:Belarus|Беларусь|Białoruś|Baltarusija|Baltkrievija|Biélorussie)$/u,"");
+}
+
+function destinationRouteUrl(lang,origin,dest){
+ if(dest.id==="minsk"){
+   if(["warsaw","vilnius","riga"].includes(origin.id))return routePath(lang,origin.id);
+   return geoPath(lang,origin);
+ }
+ return transferPairPath(lang,origin,dest);
+}
+
+function destinationCardList(lang,origin=null){
+ const ui=destinationLocale[lang];
+ return `<section class="section dest-discovery" id="destinations" aria-labelledby="dest-list-heading">
+    <div class="section-head"><span class="eyebrow">ComfortLine · Belarus</span>
+      <h2 id="dest-list-heading">${esc(ui.section)}</h2>
+      <p>${esc(ui.unlisted)} <a href="${destinationIndexPath(lang)}">${esc(ui.browse)} ↗</a></p></div>
+    <div class="dest-mini-grid">${belarusDestinations.map(dest=>{
+      const name=dest.names[lang],href=origin&&featuredOriginIds.includes(origin.id)?destinationRouteUrl(lang,origin,dest):destinationPath(lang,dest);
+      return `<a href="${href}" class="dest-mini-item"><span aria-hidden="true">${dest.type==="airport"?"✈":"⌖"}</span>
+        <strong>${esc(name)}</strong><span aria-hidden="true">↗</span></a>`;
+    }).join("")}</div>
+  </section>`;
+}
+
+function destinationIndexPage(lang){
+ const l=locale[lang],ui=destinationLocale[lang];
+ const canonical=base+destinationIndexPath(lang);
+ const schemas={"@context":"https://schema.org","@graph":[businessSchema(lang,canonical),
+  {"@type":"CollectionPage","name":ui.section,"url":canonical,"description":ui.hubLead},
+  {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":l.nav.routes,"item":base+l.home},
+   {"@type":"ListItem","position":2,"name":ui.section,"item":canonical}
+  ]}
+ ]};
+ const body=`${header(lang,"home")}<main>
+  <section class="dest-index-hero"><div class="dest-index-hero-inner">
+    <nav class="breadcrumbs"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(ui.browse)}</span></nav>
+    <span class="eyebrow light">ComfortLine · Belarus</span>
+    <h1>${esc(ui.section)}</h1><p>${esc(ui.hubLead)}</p>
+    <a href="#dest-index-list" class="button primary">${esc(ui.browse)} ${icons.arrow}</a>
+  </div></section>
+  <section class="section dest-index-section" id="dest-index-list">
+    <div class="dest-index-grid">${belarusDestinations.map(dest=>`
+    <article class="dest-index-card">
+      <span class="dest-index-icon" aria-hidden="true">${dest.type==="airport"?"✈":"⌖"}</span>
+      <h2><a href="${destinationPath(lang,dest)}">${esc(dest.names[lang])} ↗</a></h2>
+      <p>${esc(dest.specifics[lang])}</p>
+      <a class="dest-index-read" href="${destinationPath(lang,dest)}">${esc(ui.keyOrigin.replace("{dest}",destSeoName(dest,lang)))} ↗</a>
+    </article>`).join("")}</div>
+  </section>
+  <section class="section dest-journey-note" id="service">
+    <h2>${esc(ui.safety)}</h2><p>${esc(ui.borderAdvice)}</p>
+    <p>${esc(ui.priceAdvice)}</p>
+    <a href="#booking-dialog" data-open-booking aria-controls="booking-dialog" aria-haspopup="dialog" class="button primary">${esc(ui.booking)} ${icons.arrow}</a>
+  </section>
+  ${faq(l)}
+  </main>${footer(l)}`;
+ return layout({lang,title:ui.section+" | byComfortLine",description:ui.hubMeta.replace("{dest}",ui.section),
+   canonical,alternates:destinationIndexAlternates(),body,schema:schemas,
+   originOverride:"",destinationOverride:""});
+}
+
+function destinationPage(lang,dest){
+ const l=locale[lang],ui=destinationLocale[lang],to=dest.names[lang],short=destSeoName(dest,lang),values={dest:short,to:short};
+ const canonical=base+destinationPath(lang,dest);
+ const title=localeWords(ui.hubTitle,values);
+ const description=localeWords(ui.hubMeta,values);
+ const intro=localeWords(ui.hubLead,values);
+ const schema={"@context":"https://schema.org","@graph":[businessSchema(lang,canonical),
+  {"@type":"Service","name":localeWords(ui.hubHeading,values),"description":description,"url":canonical,
+    "serviceType":ui.service,"provider":{"@id":base+"/#business"},
+    "areaServed":{"@type":"Place","name":to}},
+  {"@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":l.nav.routes,"item":base+l.home},
+    {"@type":"ListItem","position":2,"name":ui.section,"item":base+destinationIndexPath(lang)},
+    {"@type":"ListItem","position":3,"name":to,"item":canonical}
+  ]}
+ ]};
+ const byCountry=["PL","LT","LV","DE","FR"].map(country=>{
+  const from=featuredOrigins.filter(origin=>origin.country===country);
+  return !from.length?"":`<section class="dest-origin-group">
+    <h3>${esc(geoLocale[lang].countryLabels[country])}</h3>
+    <div class="dest-route-grid">${from.map(origin=>`
+      <a href="${destinationRouteUrl(lang,origin,dest)}">
+        <span class="dest-route-symbol" aria-hidden="true">${origin.type==="airport"?"✈":"⌖"}</span>
+        <span><strong>${esc(origin.names[lang])} → ${esc(to)}</strong>
+         <small>${esc(ui.price)} · ${esc(origin.type==="airport"?ui.airportCode:ui.fromLabel)}</small></span>
+        <span aria-hidden="true">↗</span>
+      </a>`).join("")}</div>
+  </section>`;
+ }).join("");
+ const siblingLinks=belarusDestinations.filter(x=>x.id!==dest.id).map(x=>`<a href="${destinationPath(lang,x)}">${esc(x.names[lang])} ↗</a>`).join("");
+ const safetySources=[...new Map(Object.values(routeOfficialSources).flat().map(([label,url])=>[url,label])).entries()].slice(0,5)
+   .map(([url,label])=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`).join("");
+ const body=`${header(lang,"home")}<main>
+  <section class="dest-hero"><div class="dest-hero-inner">
+    <nav class="breadcrumbs"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span>
+      <a href="${destinationIndexPath(lang)}">${esc(ui.section)}</a><span>/</span><span>${esc(to)}</span></nav>
+    <span class="eyebrow light">${esc(ui.section)}</span>
+    <h1>${esc(localeWords(ui.hubHeading,values))}</h1><p>${esc(intro)}</p>
+    <div class="hero-actions"><a href="#booking-dialog" class="button primary"
+      data-open-booking aria-controls="booking-dialog" aria-haspopup="dialog">${esc(ui.booking)} ${icons.arrow}</a>
+      <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a></div>
+    ${quickBooking(lang,"vilnius","",to)}
+  </div></section>
+  <section class="section dest-local-guide" id="service">
+    <div class="dest-guide-grid">
+      <article><span class="dest-card-eyebrow">${esc(ui.arrivalTitle)}</span><h2>${esc(to)}</h2>
+        <p>${esc(ui.arrivalLead)}</p><p class="dest-arrival-places">${esc(dest.arrivalOptions[lang])}</p></article>
+      <article><span class="dest-card-eyebrow">${esc(ui.whyTitle)}</span><h2>${esc(ui.routePractical)}</h2>
+        <p>${esc(dest.specifics[lang])}</p><p class="dest-arrival-note">${esc(ui.toMinsk)}</p></article>
+    </div>
+  </section>
+  <section class="section dest-origin-directory" id="departure-routes">
+    <div class="section-head"><span class="eyebrow">${esc(ui.findByOrigin)}</span>
+      <h2>${esc(localeWords(ui.keyOrigin,values))}</h2><p>${esc(ui.available)}</p></div>
+    ${byCountry}
+    <p class="dest-directory-help">${esc(ui.unlisted)}</p>
+  </section>
+  <section class="section dest-border-guide"><h2>${esc(ui.safety)}</h2>
+    <p>${esc(ui.borderAdvice)}</p><p>${esc(ui.priceAdvice)}</p>
+    <div class="dest-safety-links">${safetySources}</div>
+  </section>
+  <section class="section dest-switcher">
+    <h2>${esc(ui.destinationsLink)}</h2><div>${siblingLinks}</div>
+    <a href="${destinationIndexPath(lang)}">${esc(ui.browse)} ↗</a>
+  </section>
+  ${faq(l)}
+  </main>${footer(l)}`;
+ return layout({lang,title,description,canonical,alternates:destinationAlternates(dest),
+   body,schema,routeKey:"vilnius",originOverride:"",destinationOverride:to});
+}
+
+function transferPairPage(lang,origin,dest){
+ const l=locale[lang],ui=destinationLocale[lang];
+ const from=origin.names[lang],to=dest.names[lang],short=destSeoName(dest,lang);
+ const values={from,to:short,dest:short};
+ const canonical=base+transferPairPath(lang,origin,dest);
+ const title=localeWords(ui.routeTitle,values)+" | byComfortLine";
+ const description=localeWords(ui.routeMeta,values);
+ const h1=localeWords(ui.routeH1,values);
+ const facts=origin.type==="airport"?origin.facts[lang]:origin.pickup[lang];
+ const originAirport=origin.type==="airport";
+ const advice=routeOfficialSources[origin.parent]||[];
+ const adviceLinks=advice.map(([text,url])=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(text)} ↗</a>`).join("");
+ const similar=featuredOrigins.filter(o=>o.id!==origin.id&&o.country===origin.country).slice(0,5);
+ const siblings=belarusDestinations.filter(d=>d.id!==dest.id).slice(0,6);
+ const schema={"@context":"https://schema.org","@graph":[
+   businessSchema(lang,canonical),
+   {"@type":"Service","name":h1,"description":description,"url":canonical,"serviceType":ui.service,
+    "provider":{"@id":base+"/#business"},
+    "areaServed":[{"@type":"Place","name":from},{"@type":"Place","name":to}]},
+   {"@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":l.nav.routes,"item":base+l.home},
+    {"@type":"ListItem","position":2,"name":ui.section,"item":base+destinationIndexPath(lang)},
+    {"@type":"ListItem","position":3,"name":to,"item":base+destinationPath(lang,dest)},
+    {"@type":"ListItem","position":4,"name":h1,"item":canonical}
+   ]}
+ ]};
+ const body=`${header(lang,"home")}<main>
+  <section class="dest-pair-hero"><div class="dest-hero-inner">
+    <nav class="breadcrumbs"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span>
+      <a href="${destinationIndexPath(lang)}">${esc(ui.section)}</a><span>/</span>
+      <a href="${destinationPath(lang,dest)}">${esc(to)}</a><span>/</span><span>${esc(from)}</span></nav>
+    <span class="eyebrow light">${esc(ui.service)} · ${esc(ui.price)}</span>
+    <h1>${esc(h1)}</h1><p>${esc(localeWords(ui.routeLead,values))}</p>
+    <div class="hero-actions">
+      <a href="#booking-dialog" data-open-booking class="button primary" aria-controls="booking-dialog" aria-haspopup="dialog">${esc(ui.booking)} ${icons.arrow}</a>
+      <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a>
+    </div>
+    ${quickBooking(lang,origin.parent,from,to)}
+  </div></section>
+  <section class="section dest-pair-main" id="service">
+    <div class="dest-pair-facts"><div><span>${esc(ui.fromLabel)}</span><strong>${esc(from)}</strong></div>
+      <div><span>${esc(ui.toLabel)}</span><strong>${esc(to)}</strong></div>
+      <div><span>${esc(ui.price)}</span><strong>${esc(ui.price)}</strong></div></div>
+    <div class="dest-guide-grid">
+      <article>
+        <span class="dest-card-eyebrow">${originAirport?esc(ui.airportCode):esc(ui.fromLabel)}</span>
+        <h2>${esc(localeWords(ui.originTitle,values))}</h2>
+        <p>${esc(facts)}</p><p>${esc(originAirport?ui.airportAdvice:ui.cityAdvice)}</p>
+        ${originAirport?`<a href="${geoPath(lang,origin)}">${esc(ui.compare)} ↗</a>`:""}
+      </article>
+      <article><span class="dest-card-eyebrow">${esc(ui.toLabel)}</span>
+        <h2>${esc(localeWords(ui.destTitle,values))}</h2>
+        <p>${esc(dest.specifics[lang])}</p>
+        <p class="dest-arrival-places">${esc(dest.arrivalOptions[lang])}</p>
+        <a href="${destinationPath(lang,dest)}">${esc(ui.destinationsLink)} ↗</a>
+      </article>
+    </div>
+    <div class="dest-pair-journey">
+      <h2>${esc(ui.routePractical)}</h2>
+      <p>${esc(ui.borderAdvice)}</p><p>${esc(ui.priceAdvice)}</p>
+      <p class="dest-not-confirmed">${esc(ui.confirmed)}</p>
+      <div class="dest-safety-links">${adviceLinks}</div>
+      <a href="#booking-dialog" class="button primary" data-open-booking
+         aria-controls="booking-dialog" aria-haspopup="dialog">${esc(ui.booking)} ${icons.arrow}</a>
+    </div>
+    <div class="dest-pair-related">
+      <section><h2>${esc(localeWords(ui.otherOrigins,values))}</h2><div>
+         ${similar.map(other=>`<a href="${destinationRouteUrl(lang,other,dest)}">${esc(other.names[lang])} ↗</a>`).join("")}
+         <a href="${destinationPath(lang,dest)}">${esc(ui.compare)} ↗</a>
+      </div></section>
+      <section><h2>${esc(ui.destinationsLink)}</h2><div>
+        ${siblings.map(other=>`<a href="${destinationRouteUrl(lang,origin,other)}">${esc(other.names[lang])} ↗</a>`).join("")}
+        <a href="${destinationIndexPath(lang)}">${esc(ui.browse)} ↗</a>
+      </div></section>
+    </div>
+    <section class="dest-pair-faq" id="faq"><h2>${esc(l.faqTitle)}</h2>
+      ${[[localeWords(ui.routeTitle,values)+"?",ui.quoteLead],
+          [ui.safety+"?",ui.borderAdvice],
+          [ui.price+"?",ui.priceAdvice]].map(([q,a])=>`
+        <details><summary>${esc(q)}<span aria-hidden="true">+</span></summary><p>${esc(a)}</p></details>`).join("")}
+    </section>
+  </section>
+  </main>${footer(l)}`;
+ return layout({lang,title,description,canonical,alternates:pairAlternates(origin,dest),
+  body,schema,routeKey:origin.parent,originOverride:from,destinationOverride:to});
+}
+
 function geoText(template, variables) {
   return String(template).replace(/\{(place|code)\}/g, (_, key) => variables[key] || "");
 }
