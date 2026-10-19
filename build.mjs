@@ -413,7 +413,7 @@ function header(lang, type = "home", routeKey) {
       <a href="${l.home}#routes">${l.nav.routes}</a><a href="#service">${l.nav.service}</a><a href="#faq">${l.nav.faq}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${l.nav.contact}</a>
     </nav>
     <details class="mobile-nav"><summary aria-label="${esc(menuLabel)}"><span class="mobile-nav-icon" aria-hidden="true">☰</span><span>${esc(menuLabel)}</span></summary><nav class="mobile-nav-links" aria-label="${esc(menuLabel)}"><a href="${l.home}#routes">${esc(l.nav.routes)}</a><a href="#service">${esc(l.nav.service)}</a><a href="#faq">${esc(l.nav.faq)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.nav.contact)}</a></nav></details>
-    <details class="language-menu"><summary>${l.code.toUpperCase()}<span aria-hidden="true">⌄</span></summary><div>${languageMenu(lang, type, routeKey)}</div></details>
+    <details class="language-menu"><summary aria-label="${esc(l.label)}"><svg class="language-globe" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4.5 6 4.5 9s-1.5 6-4.5 9c-3-3-4.5-6-4.5-9S9 6 12 3Z"/></svg><span class="language-current">${l.code.toUpperCase()}</span></summary><div class="language-options">${languageMenu(lang, type, routeKey)}</div></details>
   </header>`;
 }
 
@@ -530,51 +530,52 @@ for (const place of locationCatalog) {
 
 function locationField(lang, field, scope, initialValue) {
   const id = `${scope}-${field}-${lang}`;
+  const menuId = `${id}-suggestions`;
   const labels = locationLabels[lang];
   const inputLabel = field === "fromPreset" ? bookingLabels[lang].from : bookingLabels[lang].to;
-  return `<div class="location-control" data-location-picker>
-    <input id="${id}" type="text" name="${field}" value="${esc(initialValue)}" placeholder="${esc(labels.type)}" autocomplete="off" readonly required aria-haspopup="dialog" aria-controls="destination-dialog">
-    <button type="button" class="location-open" aria-label="${esc(labels.show)}: ${esc(inputLabel)}" aria-haspopup="dialog" aria-controls="destination-dialog"><span aria-hidden="true">⌄</span></button>
+  return `<div class="location-control" data-location-picker data-location-mode="${field === "to" ? "to" : "from"}">
+    <span class="location-leading-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+    <input id="${id}" type="text" name="${field}" value="${esc(initialValue)}"
+      placeholder="${esc(labels.type)}" autocomplete="off" spellcheck="false" enterkeyhint="next"
+      role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false"
+      aria-controls="${menuId}" aria-label="${esc(inputLabel)}" required>
+    <button type="button" class="location-clear" aria-label="${esc(labels.custom)}" title="${esc(labels.custom)}" hidden>
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+    <div class="location-suggestions" role="listbox" id="${menuId}" aria-label="${esc(labels.search)}" hidden></div>
   </div>`;
 }
 
 function destinationPopup(lang) {
-  const ui = locationLabels[lang];
-  const euIds = [...new Set(["vilnius","vno","warsaw","waw","riga","rix","kaunas","kun","wmi","bialystok","suwalki","lublin","klaipeda","krakow","gdansk","daugavpils","jurmala",...geoPlaces.map(place=>place.id)])];
-  const byIds = ["minsk","msq","grodno","brest","lida","vitebsk","gomel","mogilev","baranovichi","pinsk"];
-  const euSet = new Set(euIds), bySet = new Set(byIds);
-  const entries = (ids) => ids.map(id => locationCatalog.find(item => item.id === id)).filter(Boolean);
-  const choice = (item, featured = false) => {
-    const value = item.names[lang];
-    const search = [item.id, ...Object.values(item.names)].join(" ");
-    return `<button type="button" class="destination-option${featured ? " destination-featured" : ""}" data-value="${esc(value)}" data-search="${esc(search)}">
-      <span class="destination-pin" aria-hidden="true">${item.type === "airport" ? "✈" : "⌖"}</span><span class="destination-choice-name">${esc(value)}</span><span class="destination-option-arrow" aria-hidden="true">↗</span>
-    </button>`;
+  // Compact, client-filtered suggestions replace the former full-screen city modal.
+  // Provide all-language names and airport codes for cross-script search.
+  const fromIds = new Set([...geoPlaces.map(place => place.id), "warsaw", "vilnius", "riga"]);
+  const toIds = new Set(belarusDestinations.map(dest => dest.id));
+  const entries = locationCatalog.filter(place => fromIds.has(place.id) || toIds.has(place.id))
+    .map(place => ({
+      id: place.id,
+      mode: toIds.has(place.id) ? "to" : "from",
+      type: place.type,
+      label: place.names[lang] || place.names.en,
+      terms: [place.id, ...new Set(Object.values(place.names)), ...geoPlaces.filter(item => item.id === place.id).map(item => item.code).filter(Boolean)].join(" "),
+      country: belarusDestinations.some(dest => dest.id === place.id)
+        ? "Belarus"
+        : (geoPlaces.find(item => item.id === place.id)?.country || {warsaw:"PL",vilnius:"LT",riga:"LV"}[place.id] || ""),
+      popular: (toIds.has(place.id) ? ["minsk","grodno","brest","msq","lida","vitebsk"] : ["warsaw","vilnius","riga","waw","vno","rix"]).includes(place.id)
+    }));
+  const data = {
+    entries,
+    text: {
+      popular: locationLabels[lang].popular,
+      custom: locationLabels[lang].custom,
+      search: locationLabels[lang].search,
+      city: locationLabels[lang].cities,
+      airport: locationLabels[lang].airports,
+      noResults: locationLabels[lang].empty,
+      country: geoLocale[lang].countryLabels
+    }
   };
-  const group = (mode, kind, heading, items, grid = false) =>
-    `<section class="destination-group${grid ? " destination-featured-group" : ""}" data-location-mode="${mode}" data-destination-group="${kind}">
-      <h3>${esc(heading)}</h3><div class="${grid ? "destination-featured-grid" : "destination-regular-list"}">${items.map(item => choice(item, grid)).join("")}</div>
-    </section>`;
-  const from = [
-    group("from","popular",ui.fromPopular,entries(["vilnius","vno","warsaw","waw","riga","rix"]),true),
-    group("from","cities",ui.fromCities,euIds.map(id => locationCatalog.find(x=>x.id===id)).filter(item=>item?.type==="city")),
-    group("from","airports",ui.fromAirports,euIds.map(id => locationCatalog.find(x=>x.id===id)).filter(item=>item?.type==="airport"))
-  ].join("");
-  const to = [
-    group("to","popular",ui.toPopular,entries(["minsk","msq","grodno","brest","lida","vitebsk"]),true),
-    group("to","cities",ui.toCities,byIds.map(id => locationCatalog.find(x=>x.id===id)).filter(item=>item?.type==="city")),
-    group("to","airports",ui.toAirports,byIds.map(id => locationCatalog.find(x=>x.id===id)).filter(item=>item?.type==="airport"))
-  ].join("");
-  return `<dialog class="destination-dialog" id="destination-dialog" aria-labelledby="destination-dialog-title">
-    <div class="destination-dialog-body">
-      <div class="destination-dialog-top"><div><span class="eyebrow">ComfortLine</span><h2 id="destination-dialog-title">${esc(ui.fromPopular)}</h2><p class="destination-dialog-hint">${esc(ui.destinationHint)}</p></div>
-        <button type="button" class="destination-close" data-close-destination aria-label="${esc(bookingPopupUi[lang].close)}">×</button></div>
-      <div class="destination-search-box"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
-        <input type="search" class="destination-search" placeholder="${esc(ui.search)}" aria-label="${esc(ui.search)}" autocomplete="off" enterkeyhint="done"></div>
-      <div class="destination-list">${from}${to}<p class="destination-empty" hidden>${esc(ui.empty)}</p></div>
-      <button type="button" class="destination-custom" data-custom-destination hidden>${esc(ui.custom)} <span aria-hidden="true">↗</span></button>
-    </div>
-  </dialog>`;
+  return `<script type="application/json" id="location-autocomplete-data">${JSON.stringify(data).replace(/</g,"\\u003c").replace(/>/g,"\\u003e").replace(/&/g,"\\u0026")}</script>`;
 }
 
 function locationFormField(lang, field, scope, initialValue, className = "") {
@@ -640,7 +641,7 @@ function quickBooking(lang, routeKey = "vilnius", originOverride = null, destina
   return `<form class="quick-booking" data-lang="${lang}" action="#booking-dialog">
     ${locationFormField(lang, "fromPreset", "quick", originOverride !== null ? originOverride : l.fromNames[routeKey], "quick-from")}
     ${locationFormField(lang, "to", "quick", destinationOverride !== null ? destinationOverride : l.fieldValues.to, "quick-to")}
-    <button type="submit" class="quick-submit">${esc(ui.quickButton)} <span aria-hidden="true">↗</span></button>
+    <button type="submit" class="quick-submit">${esc(ui.quickButton)}</button>
   </form>`;
 }
 
@@ -732,7 +733,7 @@ function hubPage(lang) {
   const canonical = `${base}/${lang}/`;
   const title = `${l.hubTitle} | ComfortLine`;
   const body = `${header(lang)}<main>
-    <section class="hero hero-home"><div class="hero-overlay"></div><div class="hero-content"><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(l.hubTitle)}</h1><p>${esc(l.hubDescription)}</p><div class="hero-actions"><a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang)}</div><div class="route-orbit" aria-hidden="true"><span>VNO</span><i></i><b>MSQ</b><i></i><span>WAW</span><i></i><span>RIX</span></div></section>
+    <section class="hero hero-home"><div class="hero-overlay"></div><div class="hero-content"><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(l.hubTitle)}</h1><p>${esc(l.hubDescription)}</p><div class="hero-actions"><a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang)}</div></section>
     ${trustStrip(l)}
     <section class="section routes-section" id="routes"><div class="section-head"><span class="eyebrow">Comfortline routes</span><h2>${esc(l.routesTitle)}</h2><p>${esc(l.routesLead)}</p></div><div class="route-grid three">${routeCards(lang)}</div></section>
     ${airportRouteLinks(lang)}
