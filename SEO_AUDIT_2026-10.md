@@ -1,4 +1,18 @@
 # byComfortLine: organic search audit and rollout plan
+
+> **Current state (19 October 2026):** The original 15-page, five-language optimization
+> described below was the initial phase. A later expansion now generates **351 canonical,
+> indexable URLs across seven languages** (English, Russian, Polish, Lithuanian, Latvian,
+> German and French), including **19 airport origins, 25 additional cities**, two geographic
+> directory pages per language, and original Warsaw/Vilnius/Riga routes.
+> Additional source files: `geo-airports.mjs`, `geo-cities.mjs`,
+> `geo-locales.mjs`, `fr-de-localization.mjs`.
+> Two sitemaps are generated: `sitemap.xml` (Google) and
+> `sitemap-yandex.xml` (Yandex Webmaster). Validation: `node check-seo.mjs`,
+> automatically invoked after `node build.mjs`.
+> See [Yandex audit and owner setup](YANDEX_SEO_2026-10.md).
+> **The original performance baseline and external indexing/deployment checks
+> remain unavailable. No search-engine placement is guaranteed.**
 **Audit and implementation:** 2026-10-18
 **Website:** https://bycomfortline.com
 **GitHub:** https://github.com/rakuci/bycomfortline
