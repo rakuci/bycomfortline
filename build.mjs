@@ -390,7 +390,13 @@ function alternateLinks(pathType, routeKey) {
 
 function languageMenu(lang, type, routeKey) {
   return Object.entries(locale).map(([code, l]) => {
-    const href = type === "home" ? l.home : type === "geo" || type === "geo-index" ? (type === "geo" ? geoPath(code,routeKey) : geoIndexPath(code,routeKey)) : routePath(code, routeKey);
+    const href = type === "home" ? l.home
+      : type === "geo" ? geoPath(code,routeKey)
+      : type === "geo-index" ? geoIndexPath(code,routeKey)
+      : type === "destination-index" ? destinationIndexPath(code)
+      : type === "destination" ? destinationPath(code,routeKey)
+      : type === "pair" ? transferPairPath(code,routeKey.origin,routeKey.dest)
+      : routePath(code,routeKey);
     return `<a href="${href}" hreflang="${code}" lang="${code}"${code === lang ? ' aria-current="page"' : ""}>${l.label}</a>`;
   }).join("");
 }
@@ -679,7 +685,7 @@ function faq(l) {
 }
 
 function footer(l) {
-  return `<footer id="operator-info"><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}<a href="${geoIndexPath(l.code,"airport")}">${esc(geoLocale[l.code].browseAirports)}</a><a href="${geoIndexPath(l.code,"city")}">${esc(geoLocale[l.code].browseCities)}</a></div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
+  return `<footer id="operator-info"><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}<a href="${geoIndexPath(l.code,"airport")}">${esc(geoLocale[l.code].browseAirports)}</a><a href="${geoIndexPath(l.code,"city")}">${esc(geoLocale[l.code].browseCities)}</a><a href="${destinationIndexPath(l.code)}">${esc(destinationLocale[l.code].browse)}</a></div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
 }
 
 function floatingContact() {
@@ -730,6 +736,7 @@ function hubPage(lang) {
     <section class="section routes-section" id="routes"><div class="section-head"><span class="eyebrow">Comfortline routes</span><h2>${esc(l.routesTitle)}</h2><p>${esc(l.routesLead)}</p></div><div class="route-grid three">${routeCards(lang)}</div></section>
     ${airportRouteLinks(lang)}
     ${geoHubDirectoryLinks(lang)}
+    ${destinationCardList(lang)}
     ${fleetShowcase(lang)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">Door to door</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     <section class="section steps-section"><div class="section-head"><span class="eyebrow">3 steps</span><h2>${esc(l.stepsTitle)}</h2></div><div class="steps">${l.steps.map(([n, h, p]) => `<article><span>${n}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
@@ -965,7 +972,7 @@ function destinationIndexPage(lang){
    {"@type":"ListItem","position":2,"name":ui.section,"item":canonical}
   ]}
  ]};
- const body=`${header(lang,"home")}<main>
+ const body=`${header(lang,"destination-index")}<main>
   <section class="dest-index-hero"><div class="dest-index-hero-inner">
     <nav class="breadcrumbs"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(ui.browse)}</span></nav>
     <span class="eyebrow light">ComfortLine · Belarus</span>
@@ -1025,7 +1032,7 @@ function destinationPage(lang,dest){
  const siblingLinks=belarusDestinations.filter(x=>x.id!==dest.id).map(x=>`<a href="${destinationPath(lang,x)}">${esc(x.names[lang])} ↗</a>`).join("");
  const safetySources=[...new Map(Object.values(routeOfficialSources).flat().map(([label,url])=>[url,label])).entries()].slice(0,5)
    .map(([url,label])=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`).join("");
- const body=`${header(lang,"home")}<main>
+ const body=`${header(lang,"destination",dest)}<main>
   <section class="dest-hero"><div class="dest-hero-inner">
     <nav class="breadcrumbs"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span>
       <a href="${destinationIndexPath(lang)}">${esc(ui.section)}</a><span>/</span><span>${esc(to)}</span></nav>
@@ -1090,7 +1097,7 @@ function transferPairPage(lang,origin,dest){
     {"@type":"ListItem","position":4,"name":h1,"item":canonical}
    ]}
  ]};
- const body=`${header(lang,"home")}<main>
+ const body=`${header(lang,"pair",{origin,dest})}<main>
   <section class="dest-pair-hero"><div class="dest-hero-inner">
     <nav class="breadcrumbs"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span>
       <a href="${destinationIndexPath(lang)}">${esc(ui.section)}</a><span>/</span>
@@ -1309,6 +1316,7 @@ function geoLocationPage(lang,place) {
         <h2>${esc(t.reviews)}</h2><p>${esc(t.reviewsText)}</p>
         <a href="${parentRoute}#fleet">${esc(l.serviceTitle)} ↗</a>
       </section>
+      ${destinationCardList(lang,place)}
       <section class="geo-related" aria-label="${esc(t.localLinks)}">
         <h2>${esc(t.localLinks)}</h2>
         <div>${countyLinks}</div>
@@ -1339,6 +1347,7 @@ function routePage(lang, key) {
     ${trustStrip(l)}
     <section class="facts-section"><article><span>${icons.pin}</span><div><small>${esc(l.facts.distance)}</small><strong>${r.distance}</strong></div></article><article><span class="clock">◷</span><div><small>${esc(l.facts.time)}</small><strong>${r.time}</strong><em>${esc(l.facts.note)}</em></div></article><article><span class="plane">✈</span><div><small>${esc(l.facts.airport)}</small><strong>${r.airport}</strong></div></article></section>
     ${routeEditorial(lang, key)}
+    ${destinationCardList(lang,coreOriginProfiles.find(origin=>origin.id===key))}
     ${returnTripInfo(lang,key)}
     ${fleetShowcase(lang)}
     ${routeBookingTransparency(lang, key)}
