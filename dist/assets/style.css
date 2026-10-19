@@ -3225,3 +3225,9 @@ footer {
 }
 @media(max-width:430px){.dest-mini-grid {grid-template-columns:1fr;}}
 @media(prefers-reduced-motion:reduce){.dest-route-grid > a {transition:none;}}
+
+
+.dest-route-context {display:grid;gap:10px;margin:18px 0;padding:18px 19px;border:1px solid rgba(203,239,221,.25);border-radius:15px;background:rgba(243,255,251,.085);}
+.dest-route-context p {color:#e2f3ef!important;margin:0!important;font-size:.84rem!important;line-height:1.75!important;}
+.dest-route-context p + p {padding-top:10px;border-top:1px solid rgba(232,250,244,.13);}
+@media(max-width:760px){.dest-route-context{padding:16px 14px;}}
