@@ -412,7 +412,7 @@ function header(lang, type = "home", routeKey) {
     <nav class="main-nav" aria-label="${esc(l.nav.routes)}">
       <a href="${l.home}#routes">${l.nav.routes}</a><a href="#service">${l.nav.service}</a><a href="#faq">${l.nav.faq}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${l.nav.contact}</a>
     </nav>
-    <details class="mobile-nav"><summary aria-label="${esc(menuLabel)}"><span class="mobile-nav-icon" aria-hidden="true">☰</span><span>${esc(menuLabel)}</span></summary><nav class="mobile-nav-links" aria-label="${esc(menuLabel)}"><a href="${l.home}#routes">${esc(l.nav.routes)}</a><a href="#service">${esc(l.nav.service)}</a><a href="#faq">${esc(l.nav.faq)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.nav.contact)}</a></nav></details>
+    <details class="mobile-nav"><summary aria-label="${esc(menuLabel)}"><span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span>${esc(menuLabel)}</span></summary><nav class="mobile-nav-links" aria-label="${esc(menuLabel)}"><a href="${l.home}#routes">${esc(l.nav.routes)}</a><a href="#service">${esc(l.nav.service)}</a><a href="#faq">${esc(l.nav.faq)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.nav.contact)}</a></nav></details>
     <details class="language-menu"><summary aria-label="${esc(l.label)}"><svg class="language-globe" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4.5 6 4.5 9s-1.5 6-4.5 9c-3-3-4.5-6-4.5-9S9 6 12 3Z"/></svg><span class="language-current">${l.code.toUpperCase()}</span></summary><div class="language-options">${languageMenu(lang, type, routeKey)}</div></details>
   </header>`;
 }
@@ -615,7 +615,7 @@ function passengerPicker(lang, scope) {
     <span class="passenger-label">${esc(ui.passengers)}, ${esc(ui.car)}</span>
     <button type="button" class="passenger-toggle" aria-expanded="false" aria-controls="${id}" aria-label="${esc(words.open)}">
       <span data-passenger-summary>1 ${esc(words.passengerOne)} · ${esc(words.any)}</span>
-      <span class="passenger-chevron" aria-hidden="true">⌄</span>
+      <span class="passenger-chevron" aria-hidden="true"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m5 7 5 5 5-5"/></svg></span>
     </button>
     <div class="passenger-panel" id="${id}" hidden>
       <div class="passenger-counters">${rows}</div>
