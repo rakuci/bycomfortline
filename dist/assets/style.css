@@ -3041,3 +3041,7 @@ footer {
   .geo-directory-card { transition: none; }
   .geo-directory-card:hover { transform: none; }
 }
+
+
+.route-pickup-chips li a { color: inherit; text-decoration: underline; text-decoration-color: #97c9b1; text-underline-offset: 3px; }
+.route-pickup-chips li a:hover { color: #104b3b; text-decoration-color: currentColor; }
