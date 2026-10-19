@@ -833,7 +833,7 @@ function routeIntentDetails(lang, key) {
       <div class="route-intent-copy">
         <h2>${esc(pickupHeading)}</h2><p>${esc(extra.pickupContext)}</p>
       </div>
-      <ul class="route-pickup-chips">${extra.pickupPlaces.map(place => `<li>${esc(place)}</li>`).join("")}</ul>
+      <ul class="route-pickup-chips">${extra.pickupPlaces.map(place => { const airport = ["vno","waw","wmi","rix"].find(id=>place.includes("("+id.toUpperCase()+")")); return `<li>${airport?`<a href="${geoPath(lang,airport)}">${esc(place)} ↗</a>`:esc(place)}</li>`; }).join("")}</ul>
     </section>
     <div class="route-intent-cards">
       <section class="route-intent-card">
