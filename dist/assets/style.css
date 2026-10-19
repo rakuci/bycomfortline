@@ -3680,3 +3680,257 @@ footer {
   .language-menu summary { min-width: 61px; padding-inline: 8px; }
   .location-suggestion { padding-inline: 9px; }
 }
+
+
+/* Brand-forward contemporary chauffeur treatment, inspired by the clarity of
+   premium chauffeur sites, without copying third-party visual assets. */
+:root {
+  --ink: #112a37;
+  --navy: #102939;
+  --navy-2: #183b49;
+  --paper: #fafaf8;
+  --orange: #c2a477;
+  --orange-2: #d2b78e;
+  --muted: #647681;
+  --line: #e1e8e4;
+  --shadow: 0 18px 55px rgba(12,32,43,.095);
+}
+body { background:#fafaf8; color:#172d38; font-family:Manrope,Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+button, input, select, textarea { font-family:inherit; }
+:focus-visible { outline: 2px solid #a68c63; outline-offset: 3px; }
+.site-header {
+  background: rgba(12,31,43,.98);
+  border-bottom:1px solid rgba(252,247,233,.08);
+  box-shadow:0 4px 18px rgba(7,22,30,.075);
+  gap:24px;
+}
+.brand-logo { object-fit:contain; }
+.main-nav a {
+  color:#edf2f0;
+  font-size:13px;
+  font-weight:670;
+  letter-spacing:.006em;
+}
+.main-nav a:hover { color:#f0d09c; }
+.mobile-nav-icon { display:inline-flex;align-items:center;justify-content:center; color:#ebd2a3; }
+.mobile-nav-icon svg { width:20px;height:20px; }
+.mobile-nav summary {
+  width:45px;
+  min-width:45px;
+  min-height:43px;
+  display:flex;
+  justify-content:center;
+  padding:9px;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:999px;
+  background:transparent;
+}
+.mobile-nav summary span:not(.mobile-nav-icon) { display:none; }
+.mobile-nav-links {
+  border-radius:17px;
+  border:1px solid #e2e6e2;
+  padding:8px;
+  box-shadow:0 18px 44px rgba(4,19,30,.2);
+}
+.mobile-nav-links a {border-radius:9px;font-size:13px;font-weight:710;}
+
+/* Broader whitespace, stronger hierarchy, restrained gold. */
+.hero-home,.route-hero { background-color:#0f2838; }
+.hero-home::before,.route-hero-bg { filter:saturate(.72) contrast(1.03); }
+.hero-overlay,.route-hero::after {
+  background:linear-gradient(100deg,rgba(8,26,37,.98) 0%,rgba(11,34,47,.9) 48%,rgba(12,33,47,.48) 100%);
+}
+.hero-content h1,.route-hero-content h1 {
+  font-size:clamp(2.35rem,5.2vw,4.6rem);
+  font-weight:850;
+  letter-spacing:-.056em;
+  line-height:1.13;
+  max-width:900px;
+  text-wrap:balance;
+  text-shadow:none;
+}
+.hero-content > p,.route-hero-content > p {
+  max-width:670px;
+  color:#dbe7e8;
+  font-size:clamp(.95rem,1.38vw,1.08rem);
+  font-weight:480;
+  line-height:1.8;
+}
+.hero-content > .eyebrow.light,
+.route-hero-content > .eyebrow.light,
+.dest-hero-inner > .eyebrow.light,
+.geo-location-hero-inner > .eyebrow.light {
+  color:#dec89e;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.13em;
+}
+.hero-content,.route-hero-content { padding-top:clamp(45px,6vw,74px); }
+.hero-actions { margin-top:25px;gap:11px; }
+.button, .button.primary,.button.ghost {
+  border-radius:12px;
+  min-height:48px;
+  padding:12px 19px;
+  font-size:13px;
+  font-weight:760;
+  letter-spacing:0;
+  transition:background-color .18s ease,border-color .18s ease,transform .18s ease;
+}
+.button.primary {
+  background:#c5a676;
+  color:#0d2834;
+  border:1px solid #c5a676;
+  box-shadow:none;
+}
+.button.primary:hover {background:#dbc197;border-color:#dbc197;transform:translateY(-1px);}
+.button.ghost {background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.22);color:#f0f3f1;}
+.button.ghost:hover {background:rgba(255,255,255,.12);transform:none;}
+.section-head h2,.section > h2 {
+  font-weight:850;
+  letter-spacing:-.038em;
+  line-height:1.19;
+  text-wrap:balance;
+}
+.section-head > p,.section > p { color:#596f77;line-height:1.85; }
+.route-card,.service-grid article,.steps article,.dest-index-card,.geo-directory-card {
+  border-radius:19px;
+}
+.route-card {
+  background:#fff;
+  border:1px solid #e0e7e3;
+  min-height:273px;
+  padding:27px;
+}
+.route-card:hover {
+  border-color:#bdcfc6;
+  box-shadow:0 13px 37px rgba(12,42,49,.09);
+  transform:translateY(-2px);
+}
+.route-card strong { margin-top:31px;font-weight:820;letter-spacing:-.032em; }
+.route-card .route-link,.dest-index-read {font-weight:800;color:#346f59;}
+.trust-strip {background:#fbfaf7;border-block:1px solid #e5e7e3;}
+.trust-strip span {color:#305461;}
+.booking-dialog {
+  border-radius:24px;
+  border:1px solid #dde6e1;
+  background:#fff;
+  box-shadow:0 30px 90px rgba(3,19,28,.34);
+}
+.booking-dialog-header {
+  background:linear-gradient(105deg,#f3f9f6,#fdfaf3);
+  border-bottom:1px solid #e0eae3;
+}
+.booking-dialog-header h2 {
+  max-width:690px;
+  color:#183441;
+  font-weight:850;
+  font-size:clamp(1.48rem,3vw,2.15rem);
+  letter-spacing:-.04em;
+  line-height:1.25;
+  text-wrap:balance;
+}
+.booking-dialog-header p {color:#61757b;font-size:14px;line-height:1.7;}
+.booking-dialog-close {
+  align-self:flex-start;
+  border:1px solid #d4e2dc;
+  background:#fff;
+  color:#213b43;
+  box-shadow:none;
+}
+.booking-dialog .booking-form :is(input:not([type="hidden"]),select,textarea) {
+  border-radius:12px;
+  border-color:#d5e2dd;
+  box-shadow:none;
+  font-size:16px;
+}
+.booking-dialog .booking-form :is(input:not([type="hidden"]),select,textarea):focus {
+  border-color:#b29b76;
+  box-shadow:0 0 0 3px rgba(175,146,100,.14);
+}
+.booking-dialog .booking-form .location-control > input[type="text"]:focus {
+  border:0;
+  box-shadow:none;
+}
+.vehicle-model-field select {
+  min-height:52px;
+  padding:12px 38px 12px 14px;
+  -webkit-appearance:none;
+  appearance:none;
+  background-color:#fff;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23607b75' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  background-size:14px;
+}
+.passenger-toggle {border:1px solid #d6e3de;border-radius:12px;color:#1b3641;background:#fff;}
+.passenger-toggle:hover {border-color:#b5cabe;background:#fafcfb;}
+.passenger-chevron {display:inline-grid;place-items:center;color:#517c6d;line-height:1;}
+.passenger-chevron svg {display:block;width:15px;height:15px;}
+.booking-dialog .booking-prepare,.passenger-apply {
+  background:#173d49;
+  border-radius:12px;
+  color:#fff;
+  font-size:15px;
+  font-weight:820;
+}
+.booking-dialog .booking-prepare:hover,.passenger-apply:hover {background:#255664;transform:none;}
+
+/* The social dock is useful after choosing the route, not on top of form controls. */
+body.location-is-editing .floating-social,
+body.location-is-editing .floating-contact,
+body:has(.location-suggestions:not([hidden])) .floating-social,
+body:has(.location-suggestions:not([hidden])) .floating-contact,
+body:has(.booking-dialog[open]) .floating-social,
+body:has(.booking-dialog[open]) .floating-contact { display:none !important; }
+
+/* Passenger choices expand inside mobile booking sheet; they do not float over data fields. */
+@media (max-width:760px) {
+  .site-header {height:67px;padding-inline:13px;gap:8px;}
+  .brand-logo {width:min(37vw,147px);max-height:48px;}
+  .mobile-nav summary {width:42px;min-width:42px;min-height:41px;padding:8px;}
+  .hero-content h1,.route-hero-content h1,
+  .dest-hero-inner h1,.geo-location-hero-inner h1 {
+    font-size:clamp(1.95rem,8.2vw,2.95rem);
+    line-height:1.18;
+    letter-spacing:-.051em;
+  }
+  .hero-home {min-height:0;}
+  .hero-home .hero-content {padding:36px 0 66px;}
+  .hero-content > p,.route-hero-content > p {font-size:14px;line-height:1.8;}
+  .hero-actions {margin:16px 0 20px;gap:9px;}
+  .hero-actions .button {min-height:45px;padding:11px 14px;}
+  .quick-booking {box-shadow:0 13px 39px rgba(4,23,35,.23);}
+  .booking-dialog {
+    border-radius:19px;
+    box-shadow:0 18px 46px rgba(5,24,31,.31);
+  }
+  .booking-dialog-header {padding:19px 17px 16px;}
+  .booking-dialog-header h2 {font-size:clamp(1.35rem,5.2vw,1.85rem);line-height:1.25;}
+  .booking-dialog-header p {font-size:13px;line-height:1.55;}
+  .booking-dialog .booking-form {
+    padding:20px 17px calc(28px + env(safe-area-inset-bottom,0px));
+    gap:15px;
+  }
+  .booking-dialog .passenger-panel {
+    position:static;
+    inset:auto;
+    display:block;
+    width:100%;
+    max-height:none;
+    min-height:0;
+    overflow:visible;
+    margin-top:9px;
+    padding:13px;
+    box-shadow:none;
+    border:1px solid #dce6e1;
+    border-radius:14px;
+  }
+  .booking-dialog .passenger-panel[hidden] { display:none !important; }
+  .booking-dialog .passenger-toggle {min-height:52px;}
+  .section-head h2 {font-size:clamp(1.55rem,6.5vw,2rem);line-height:1.24;}
+  .route-card {min-height:220px;padding:22px;}
+  .route-card strong {margin:24px 0 17px;}
+}
+@media (prefers-reduced-motion:reduce) {
+  .quick-submit,.location-control,.route-card,.button,.location-suggestion {transition:none;}
+}
