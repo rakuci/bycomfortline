@@ -1418,11 +1418,35 @@ for (const lang of Object.keys(locale)) {
   for (const key of Object.keys(routes)) await put(`${lang}/${locale[lang].slugs[key]}/index.html`, routePage(lang, key));
   for (const type of ["airport","city"]) await put(geoIndexPath(lang,type).slice(1)+"index.html", geoDirectoryPage(lang,type));
   for (const place of geoPlaces) await put(geoPath(lang,place).slice(1)+"index.html", geoLocationPage(lang,place));
+  await put(destinationIndexPath(lang).slice(1)+"index.html", destinationIndexPage(lang));
+  for(const dest of belarusDestinations){
+    await put(destinationPath(lang,dest).slice(1)+"index.html",destinationPage(lang,dest));
+    if(dest.id!=="minsk")for(const origin of featuredOrigins){
+      await put(transferPairPath(lang,origin,dest).slice(1)+"index.html",transferPairPage(lang,origin,dest));
+    }
+  }
 }
 
 const sitemapEntries = [
   `<url><loc>${base}/</loc><lastmod>${seoLastmod}</lastmod></url>`,
   ...Object.keys(locale).map(lang => `<url><loc>${base}/${lang}/</loc><lastmod>${seoLastmod}</lastmod>${Object.keys(locale).map(code => `<xhtml:link rel="alternate" hreflang="${code}" href="${base}/${code}/"/>`).join("")}<xhtml:link rel="alternate" hreflang="x-default" href="${base}/"/></url>`),
+  ...Object.keys(locale).map(lang=>{
+    const url=base+destinationIndexPath(lang);
+    const alternates=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+destinationIndexPath(code)}"/>`).join("");
+    return `<url><loc>${url}</loc><lastmod>${seoLastmod}</lastmod>${alternates}<xhtml:link rel="alternate" hreflang="x-default" href="${base+destinationIndexPath("en")}"/></url>`;
+  }),
+  ...belarusDestinations.flatMap(dest=>Object.keys(locale).map(lang=>{
+    const url=base+destinationPath(lang,dest);
+    const alternates=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+destinationPath(code,dest)}"/>`).join("");
+    return `<url><loc>${url}</loc><lastmod>${seoLastmod}</lastmod>${alternates}<xhtml:link rel="alternate" hreflang="x-default" href="${base+destinationPath("en",dest)}"/></url>`;
+  })),
+  ...belarusDestinations.filter(dest=>dest.id!=="minsk").flatMap(dest=>
+    featuredOrigins.flatMap(origin=>Object.keys(locale).map(lang=>{
+      const url=base+transferPairPath(lang,origin,dest);
+      const alternates=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+transferPairPath(code,origin,dest)}"/>`).join("");
+      return `<url><loc>${url}</loc><lastmod>${seoLastmod}</lastmod>${alternates}<xhtml:link rel="alternate" hreflang="x-default" href="${base+transferPairPath("en",origin,dest)}"/></url>`;
+    }))
+  ),
   ...["airport","city"].flatMap(type => Object.keys(locale).map(lang => {
     const url=base+geoIndexPath(lang,type);
     const alternates=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+geoIndexPath(code,type)}"/>`).join("");
