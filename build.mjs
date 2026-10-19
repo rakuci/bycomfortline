@@ -5,6 +5,9 @@ import { airportHubLinks } from "./airport-hub-links.mjs";
 import { bookingTrustContent, routeOfficialSources, reverseRoutePages } from "./booking-trust-content.mjs";
 import { fleetCatalog, fleetCopy, routeScenes, reverseJourneyCopy } from "./fleet-showcase.mjs";
 import { additionalLocales } from "./fr-de-localization.mjs";
+import { geoAirports } from "./geo-airports.mjs";
+import { geoCities } from "./geo-cities.mjs";
+import { geoLocale } from "./geo-locales.mjs";
 import { locationCatalog, locationLabels } from "./booking-locations.mjs";
 import { bookingPopupUi } from "./booking-popup-i18n.mjs";
 import { dirname, join } from "node:path";
@@ -246,6 +249,55 @@ function esc(value) {
   return String(value).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 }
 
+
+const geoPlaces = [
+  ...geoAirports.map(place => ({ ...place, type: "airport" })),
+  ...geoCities.map(place => ({ ...place, type: "city" }))
+];
+const geoIds = new Map(geoPlaces.map(place => [place.id, place]));
+const geoIndexPaths = {
+  en: { airport: "airport-transfers", city: "city-transfers" },
+  ru: { airport: "transfery-iz-aeroportov", city: "transfery-iz-gorodov" },
+  pl: { airport: "transfery-z-lotnisk", city: "transfery-z-miast" },
+  lt: { airport: "oro-uostu-pervezimai", city: "miestu-pervezimai" },
+  lv: { airport: "lidostu-transferi", city: "pilsetu-transferi" },
+  de: { airport: "flughafen-transfers", city: "staedte-transfers" },
+  fr: { airport: "transferts-aeroports", city: "transferts-villes" }
+};
+const geoSlugs = {
+  en: { airport: "airport", city: "private-transfer" },
+  ru: { airport: "aeroport", city: "taksi" },
+  pl: { airport: "lotnisko", city: "transfer" },
+  lt: { airport: "oro-uostas", city: "pervezimas" },
+  lv: { airport: "lidosta", city: "transfers" },
+  de: { airport: "flughafen", city: "privattransfer" },
+  fr: { airport: "aeroport", city: "transfert-prive" }
+};
+function geoPath(lang, place) {
+  const item = typeof place === "string" ? geoIds.get(place) : place;
+  if (!item) throw new Error("Unknown location");
+  return `/${lang}/${item.type === "airport"
+    ? `${geoSlugs[lang].airport}-${item.id}-minsk`
+    : `${item.id}-minsk-${geoSlugs[lang].city}`}/`;
+}
+function geoIndexPath(lang, type) { return `/${lang}/${geoIndexPaths[lang][type]}/`; }
+function geoAlternateLinks(place) {
+  const links = Object.keys(locale).map(lang =>
+    `<link rel="alternate" hreflang="${lang}" href="${base}${geoPath(lang,place)}">`);
+  links.push(`<link rel="alternate" hreflang="x-default" href="${base}${geoPath("en",place)}">`);
+  return links.join("\n");
+}
+function geoIndexAlternates(type) {
+  return [...Object.keys(locale).map(lang=>`<link rel="alternate" hreflang="${lang}" href="${base}${geoIndexPath(lang,type)}">`),
+    `<link rel="alternate" hreflang="x-default" href="${base}${geoIndexPath("en",type)}">`].join("\n");
+}
+function geoMenu(lang, type, place) {
+  return Object.entries(locale).map(([code,l]) => {
+    const href = type === "geo-index" ? geoIndexPath(code,place) : geoPath(code,place);
+    return `<a href="${href}" hreflang="${code}" lang="${code}"${code===lang?' aria-current="page"':""}>${l.label}</a>`;
+  }).join("");
+}
+
 function routePath(lang, key) { return `/${lang}/${locale[lang].slugs[key]}/`; }
 
 function alternateLinks(pathType, routeKey) {
@@ -259,7 +311,7 @@ function alternateLinks(pathType, routeKey) {
 
 function languageMenu(lang, type, routeKey) {
   return Object.entries(locale).map(([code, l]) => {
-    const href = type === "home" ? l.home : routePath(code, routeKey);
+    const href = type === "home" ? l.home : type === "geo" || type === "geo-index" ? (type === "geo" ? geoPath(code,routeKey) : geoIndexPath(code,routeKey)) : routePath(code, routeKey);
     return `<a href="${href}" hreflang="${code}" lang="${code}"${code === lang ? ' aria-current="page"' : ""}>${l.label}</a>`;
   }).join("");
 }
