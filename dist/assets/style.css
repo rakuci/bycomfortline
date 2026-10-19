@@ -3231,3 +3231,452 @@ footer {
 .dest-route-context p {color:#e2f3ef!important;margin:0!important;font-size:.84rem!important;line-height:1.75!important;}
 .dest-route-context p + p {padding-top:10px;border-top:1px solid rgba(232,250,244,.13);}
 @media(max-width:760px){.dest-route-context{padding:16px 14px;}}
+
+
+/* Premium booking design / October 2026: one explicit sizing model.
+   Replace old modal-list geometry with inline type-ahead suggestions. */
+.location-form-field, .location-control, .location-control *,
+.location-suggestions, .location-suggestions * { box-sizing: border-box; }
+.location-form-field {
+  display: grid;
+  min-width: 0;
+  max-width: 100%;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: center;
+  gap: 8px;
+}
+.location-form-field > label {
+  display: block;
+  min-width: 0;
+  height: auto;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  color: #536574;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .055em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+.location-control {
+  display: flex;
+  position: relative;
+  isolation: auto;
+  align-items: center;
+  flex-wrap: nowrap;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 51px;
+  width: 100%;
+  height: auto;
+  padding: 0 10px 0 12px;
+  overflow: visible;
+  border: 1px solid #d6e0df;
+  border-radius: 13px;
+  background: #fff;
+  color: #193442;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.location-control:focus-within {
+  border-color: #a48a62;
+  box-shadow: 0 0 0 3px rgba(175,146,100,.14);
+}
+.location-leading-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  margin-right: 10px;
+  color: #53796f;
+}
+.location-leading-icon svg { display: block; width: 19px; height: 19px; }
+.quick-booking .location-control > input[type="text"],
+.booking-dialog .booking-form .location-control > input[type="text"],
+.location-control > input[type="text"] {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 0;
+  min-height: 49px;
+  height: 49px;
+  max-width: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0 5px 0 0;
+  background: transparent;
+  color: #162f3a;
+  box-shadow: none;
+  outline: 0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -.018em;
+  line-height: normal;
+  text-align: left;
+  text-overflow: ellipsis;
+  cursor: text;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.location-control > input[type="text"]::placeholder {
+  color: #879698;
+  font-weight: 440;
+  opacity: 1;
+}
+.quick-booking .location-control > input[type="text"]:focus,
+.booking-dialog .booking-form .location-control > input[type="text"]:focus,
+.location-control > input[type="text"]:focus {
+  outline: 0;
+  box-shadow: none;
+  border: 0;
+  border-radius: 0;
+}
+.location-control > .location-clear,
+.booking-dialog .booking-form .location-control > .location-clear,
+.quick-booking .location-control > .location-clear {
+  position: static;
+  display: inline-flex;
+  flex: 0 0 28px;
+  align-items: center;
+  justify-content: center;
+  transform: none;
+  inset: auto;
+  width: 28px;
+  min-width: 28px;
+  max-width: 28px;
+  height: 28px;
+  min-height: 28px;
+  max-height: 28px;
+  margin: 0 0 0 3px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: #668186;
+  background: #edf2f0;
+  box-shadow: none;
+  cursor: pointer;
+  line-height: 1;
+}
+.location-control > .location-clear:hover { background: #e2ebe7; color: #203f41; }
+.location-control > .location-clear:focus-visible { outline: 2px solid #14836b; outline-offset: 2px; }
+.location-control > .location-clear svg { width: 14px; height: 14px; stroke: currentColor; }
+.location-control > .location-clear[hidden] { display: none !important; }
+
+/* The suggestions are fixed and positioned next to the focused input
+   by the autocomplete script using visualViewport. This keeps them clear
+   of ancestors' grid/scroll areas and the iOS keyboard. */
+.location-suggestions {
+  position: fixed;
+  z-index: 999;
+  display: block;
+  margin: 0;
+  padding: 7px;
+  min-width: 0;
+  max-width: calc(100vw - 24px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #d7e2df;
+  border-radius: 16px;
+  background: #fff;
+  color: #1a343c;
+  box-shadow: 0 18px 48px rgba(8,25,36,.22);
+  text-align: left;
+  transform: translateZ(0);
+}
+.location-suggestions[hidden] { display: none !important; }
+.location-suggestions-caption {
+  padding: 9px 12px 8px;
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 800;
+  letter-spacing: .085em;
+  text-transform: uppercase;
+  color: #718184;
+}
+.location-suggestion,
+.quick-booking .location-suggestion,
+.booking-dialog .booking-form .location-suggestion {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 56px;
+  margin: 0;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: #fff;
+  color: #192f39;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  box-shadow: none;
+}
+.location-suggestion:hover,
+.location-suggestion[aria-selected="true"],
+.location-suggestion:focus-visible {
+  background: #f1f6f3;
+  color: #183c38;
+  outline: none;
+}
+.location-suggestion-icon {
+  flex: 0 0 34px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  color: #356b5f;
+  background: #eaf3ee;
+  font-size: 18px;
+  font-weight: 700;
+}
+.location-suggestion-copy {
+  display: block;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+.location-suggestion-copy strong {
+  display: block;
+  color: inherit;
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.38;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.location-suggestion-copy small {
+  display: block;
+  margin-top: 3px;
+  color: #708089;
+  font-size: 12px;
+  font-weight: 450;
+  line-height: 1.45;
+  white-space: normal;
+}
+.location-suggestion-custom { border-top: 1px solid #edf1f0; border-radius: 0; }
+
+/* Search card: clean input rows and no inherited grid label padding */
+.quick-booking {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(178px, .64fr);
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
+  max-width: 1000px;
+  min-width: 0;
+  margin-top: 30px;
+  padding: 14px;
+  overflow: visible;
+  border: 1px solid rgba(233,235,231,.9);
+  border-radius: 23px;
+  background: #fff;
+  box-shadow: 0 20px 58px rgba(4,22,34,.18);
+  color: #1b323b;
+}
+.quick-booking > .location-form-field,
+.quick-booking > .quick-from,
+.quick-booking > .quick-to {
+  display: grid;
+  grid-column: auto;
+  min-width: 0;
+  padding: 3px 0;
+  border: 0;
+  border-right: 0;
+}
+.quick-booking .location-form-field > label {
+  display: block;
+  padding: 0;
+  border: 0;
+  min-height: 0;
+  color: #526b70;
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.quick-booking > .quick-submit {
+  display: flex;
+  grid-column: auto;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  width: 100%;
+  min-height: 51px;
+  padding: 12px 15px;
+  border: 0;
+  border-radius: 13px;
+  background: #be9e6d;
+  color: #112b36;
+  font-size: 14px;
+  font-weight: 820;
+  line-height: 1.35;
+  text-align: center;
+}
+.quick-booking > .quick-submit:hover {
+  background: #d0b181;
+  transform: none;
+}
+
+/* Restrained premium language selector with no default triangle. */
+.language-menu summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  min-width: 76px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  color: #f5f7f7;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .045em;
+  list-style: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.language-menu summary::marker { content: ""; }
+.language-menu summary::-webkit-details-marker { display: none; }
+.language-menu summary .language-globe { flex: 0 0 auto; stroke: #f2f3f1; }
+.language-menu summary .language-current { color: #d5b179; }
+.language-menu > .language-options {
+  display: grid;
+  gap: 2px;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(180px, calc(100vw - 24px));
+  padding: 7px;
+  border: 1px solid #e0e6e3;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 17px 36px rgba(5,19,32,.2);
+}
+.language-menu .language-options a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 9px;
+  color: #1e3640;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+}
+.language-menu .language-options a:hover,
+.language-menu .language-options a[aria-current="page"] {
+  background: #f1f5f2;
+  color: #125b49;
+}
+
+/* Avoid conspicuous decorative orbit/sparkle above the form. */
+.hero-home::after { content: none; }
+.route-orbit { display: none; }
+
+@media (max-width: 760px) {
+  .quick-booking,
+  .hero-home .quick-booking,
+  .route-hero .quick-booking,
+  .geo-location-hero .quick-booking,
+  .dest-hero .quick-booking,
+  .dest-pair-hero .quick-booking {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 13px;
+    width: 100%;
+    max-width: 100%;
+    padding: 18px;
+    margin-top: 24px;
+    border-radius: 19px;
+  }
+  .quick-booking > .location-form-field,
+  .quick-booking > .quick-from,
+  .quick-booking > .quick-to,
+  .quick-booking > .quick-submit {
+    grid-column: 1 / -1;
+    min-width: 0;
+    width: 100%;
+    border: 0;
+    padding: 0;
+  }
+  .quick-booking > .quick-submit {
+    min-height: 53px;
+    margin-top: 3px;
+    border-radius: 12px;
+    font-size: 15px;
+  }
+  .quick-booking .location-form-field > label {
+    color: #4c6068;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .065em;
+    margin-bottom: 0;
+  }
+  .quick-booking .location-control {
+    width: 100%;
+    min-width: 0;
+    min-height: 54px;
+    border-radius: 12px;
+  }
+  .booking-dialog .booking-form > .location-form-field {
+    min-width: 0;
+    grid-column: 1 / -1;
+  }
+  .booking-dialog .booking-form .location-control {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding-left: 12px;
+    padding-right: 10px;
+  }
+  .location-control > input[type="text"],
+  .quick-booking .location-control > input[type="text"],
+  .booking-dialog .booking-form .location-control > input[type="text"] {
+    font-size: 16px;
+    min-height: 52px;
+    height: 52px;
+    width: 0;
+  }
+  .site-header { gap: 9px; }
+  .language-menu summary { min-height: 41px; min-width: 67px; padding: 7px 10px; }
+  .language-menu summary .language-globe { width: 17px; height: 17px; }
+  /* Dock stays available outside booking. It never overlays the keyboard. */
+  body:has(.location-control input:focus) .floating-social,
+  body:has(.booking-dialog input:focus) .floating-social,
+  body:has(.location-control input:focus) .floating-contact,
+  body:has(.booking-dialog input:focus) .floating-contact {
+    display: none !important;
+  }
+  .floating-social {
+    border-radius: 17px;
+    padding: 5px;
+    gap: 4px;
+    max-width: calc(100vw - 26px);
+    box-shadow: 0 9px 25px rgba(5,20,33,.17);
+  }
+  .social-floating {
+    width: clamp(36px, 10vw, 42px);
+    height: 40px;
+    border-radius: 11px;
+  }
+  .hero-home .hero-content {
+    padding-top: 42px;
+    padding-bottom: 86px;
+  }
+  .route-hero-content { padding-bottom: 86px; }
+}
+@media (max-width: 390px) {
+  .quick-booking { padding: 14px; gap: 11px; }
+  .language-menu summary { min-width: 61px; padding-inline: 8px; }
+  .location-suggestion { padding-inline: 9px; }
+}
