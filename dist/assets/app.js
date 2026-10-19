@@ -44,115 +44,232 @@
   window.visualViewport?.addEventListener("scroll", syncMobileDialogViewport, { passive: true });
 
   const bookingDialog = document.getElementById("booking-dialog");
-  const destinationDialog = document.getElementById("destination-dialog");
-  const destinationSearch = destinationDialog?.querySelector(".destination-search");
-  let activeLocationInput = null;
-
-  const normalizeLocation = (value) => String(value || "")
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase().trim();
-
-  function filterDestinationOptions(text = "") {
-    if (!destinationDialog) return;
-    const term = normalizeLocation(text);
-    let count = 0;
-    destinationDialog.querySelectorAll(".destination-group").forEach((group) => {
-      if (group.dataset.locationMode !== destinationDialog.dataset.mode) {
-        group.hidden = true;
-        return;
+  function initializeLocationAutocomplete() {
+    const dataNode = document.getElementById("location-autocomplete-data");
+    if (!dataNode) return;
+    let catalog;
+    try { catalog = JSON.parse(dataNode.textContent); }
+    catch (error) { console.error("Location suggestions unavailable", error); return; }
+    const entries = Array.isArray(catalog.entries) ? catalog.entries : [];
+    const words = catalog.text || {};
+    const pickers = [...document.querySelectorAll("[data-location-picker]")];
+    let activePicker = null;
+  
+    const normalize = (text) => String(text || "")
+      .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+      .toLowerCase().replace(/ё/g,"е").replace(/ł/g,"l").replace(/æ/g,"ae")
+      .replace(/[^\p{L}\p{N}]+/gu," ").trim();
+  
+    const candidates = (mode, value) => {
+      const term = normalize(value);
+      const pool = entries.filter(item => item.mode === mode);
+      if (!term) {
+        return pool.filter(item => item.popular).sort((a,b) => {
+          const popular = mode === "to"
+            ? ["minsk","grodno","brest","msq","lida","vitebsk"]
+            : ["warsaw","vilnius","riga","waw","vno","rix"];
+          return popular.indexOf(a.id)-popular.indexOf(b.id);
+        }).slice(0,6);
       }
-      let groupCount = 0;
-      group.querySelectorAll(".destination-option").forEach((option) => {
-        const match = !term || normalizeLocation(option.dataset.search || option.textContent).includes(term);
-        option.hidden = !match;
-        if (match) { count += 1; groupCount += 1; }
-      });
-      group.hidden = groupCount === 0;
-    });
-    const custom = destinationDialog.querySelector("[data-custom-destination]");
-    custom.hidden = !text.trim();
-    const empty = destinationDialog.querySelector(".destination-empty");
-    empty.hidden = count > 0;
-  }
-
-  function openDestinationPicker(input) {
-    if (!destinationDialog || !input) return;
-    activeLocationInput = input;
-    const label = input.closest(".location-form-field")?.querySelector("label")?.textContent?.trim();
-    destinationDialog.querySelector("#destination-dialog-title").textContent = label || "Location";
-    const mode = input.name === "to" ? "to" : "from";
-    destinationDialog.dataset.mode = mode;
-    destinationDialog.querySelectorAll("[data-location-mode]").forEach(group => {
-      group.hidden = group.dataset.locationMode !== mode;
-    });
-    destinationSearch.value = "";
-    filterDestinationOptions("");
-    syncMobileDialogViewport();
-    destinationDialog.showModal();
-    // Show the featured choices first. Search remains available on tap, avoiding
-    // the mobile keyboard covering the destination grid immediately.
-    destinationDialog.querySelector("[data-close-destination]")?.focus({ preventScroll: true });
-  }
-
-  document.querySelectorAll("[data-location-picker]").forEach((picker) => {
-    const input = picker.querySelector("input");
-    const button = picker.querySelector(".location-open");
-    input.addEventListener("click", () => openDestinationPicker(input));
-    input.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " " || event.key === "ArrowDown") {
-        event.preventDefault();
-        openDestinationPicker(input);
-      }
-    });
-    button.addEventListener("click", () => openDestinationPicker(input));
-  });
-
-  // Move keyboard focus between visible suggested places without changing the
-  // selected location until Enter/Space is pressed.
-  destinationDialog?.addEventListener("keydown", (event) => {
-    const focused = event.target.closest(".destination-option");
-    if (!focused || !["ArrowDown", "ArrowUp", "Enter", " "].includes(event.key)) return;
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      focused.click();
-      return;
+      const scored = pool.map(item => {
+        const label = normalize(item.label);
+        const all = normalize(item.terms || item.label);
+        const words = all.split(" ");
+        const value = normalize(item.id);
+        const score = label.startsWith(term) || value.startsWith(term) ? 0
+          : words.some(word => word.startsWith(term)) ? 1
+          : all.includes(term) ? 2 : 99;
+        return { item, score };
+      }).filter(result => result.score < 99);
+      scored.sort((a,b) => a.score-b.score || Number(b.item.popular)-Number(a.item.popular)
+        || a.item.label.localeCompare(b.item.label));
+      return scored.slice(0,7).map(result=>result.item);
+    };
+  
+    function updatePosition(picker) {
+      if (!picker || picker !== activePicker) return;
+      const input = picker.querySelector("input");
+      const panel = picker.querySelector(".location-suggestions");
+      if (panel.hidden) return;
+      const viewport = window.visualViewport;
+      const topLimit = viewport?.offsetTop || 0;
+      const bottomLimit = topLimit+(viewport?.height || window.innerHeight);
+      const rect = input.getBoundingClientRect();
+      const width = Math.min(Math.max(270,rect.width+18),window.innerWidth-24);
+      const left = Math.max(12,Math.min(rect.left-9,window.innerWidth-width-12));
+      const below = bottomLimit-rect.bottom-15;
+      const above = rect.top-topLimit-15;
+      const upward = below < 205 && above > below;
+      const available = upward ? above : below;
+      const height = Math.min(340,Math.max(118,available-5));
+      panel.style.width = width+"px";
+      panel.style.left = left+"px";
+      panel.style.maxHeight = height+"px";
+      panel.style.top = (upward ? Math.max(topLimit+8,rect.top-height-9) : rect.bottom+9)+"px";
+      panel.classList.toggle("location-suggestions-up",upward);
     }
-    const visible = [...destinationDialog.querySelectorAll(".destination-group:not([hidden]) .destination-option:not([hidden])")];
-    const position = visible.indexOf(focused);
-    if (position === -1 || visible.length === 0) return;
-    event.preventDefault();
-    visible[(position + (event.key === "ArrowDown" ? 1 : -1) + visible.length) % visible.length].focus();
-  });
-
-  function acceptDestination(value) {
-    if (!activeLocationInput || !value.trim()) return;
-    activeLocationInput.value = value.trim();
-    activeLocationInput.dispatchEvent(new Event("change", { bubbles: true }));
-    const input = activeLocationInput;
-    destinationDialog.close();
-    input.focus({ preventScroll: true });
-  }
-
-  if (destinationDialog) {
-    destinationDialog.querySelector("[data-close-destination]").addEventListener("click", () => destinationDialog.close());
-    destinationSearch.addEventListener("input", () => filterDestinationOptions(destinationSearch.value));
-    destinationDialog.querySelector("[data-custom-destination]").addEventListener("click", () => acceptDestination(destinationSearch.value));
-    destinationDialog.addEventListener("click", (event) => {
-      const option = event.target.closest(".destination-option");
-      if (option) { acceptDestination(option.dataset.value || ""); return; }
-      if (event.target === destinationDialog) destinationDialog.close();
-    });
-    destinationSearch.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowDown") {
-        const first = destinationDialog.querySelector(".destination-group:not([hidden]) .destination-option:not([hidden])");
-        if (first) { event.preventDefault(); first.focus(); }
-      } else if (event.key === "Enter" && destinationSearch.value.trim()) {
-        event.preventDefault();
-        const matches = destinationDialog.querySelectorAll(".destination-group:not([hidden]) .destination-option:not([hidden])");
-        if (matches.length === 1) acceptDestination(matches[0].dataset.value || "");
-        else acceptDestination(destinationSearch.value);
+  
+    function closePicker(picker) {
+      if (!picker) return;
+      const input = picker.querySelector("input");
+      const panel = picker.querySelector(".location-suggestions");
+      panel.hidden = true;
+      panel.replaceChildren();
+      input.setAttribute("aria-expanded","false");
+      input.removeAttribute("aria-activedescendant");
+      picker.classList.remove("is-suggesting");
+      picker._activeIndex = -1;
+      picker._suggestions = [];
+      if (activePicker === picker) activePicker = null;
+    }
+  
+    function activate(picker,index) {
+      const panel = picker.querySelector(".location-suggestions");
+      const opts = [...panel.querySelectorAll("[role=option]")];
+      if (!opts.length) return;
+      const active = (index+opts.length)%opts.length;
+      opts.forEach((option,i)=>option.setAttribute("aria-selected",String(i===active)));
+      picker._activeIndex = active;
+      const target = opts[active];
+      picker.querySelector("input").setAttribute("aria-activedescendant",target.id);
+      target.scrollIntoView({block:"nearest"});
+    }
+  
+    function choose(picker,value) {
+      const input = picker.querySelector("input");
+      input.value = value;
+      input.dispatchEvent(new Event("change",{bubbles:true}));
+      picker.querySelector(".location-clear").hidden = !input.value.trim();
+      closePicker(picker);
+      input.focus({preventScroll:true});
+    }
+  
+    function render(picker,query) {
+      if (activePicker && activePicker!==picker) closePicker(activePicker);
+      activePicker=picker;
+      picker.classList.add("is-suggesting");
+      const input=picker.querySelector("input");
+      const panel=picker.querySelector(".location-suggestions");
+      const mode=picker.dataset.locationMode;
+      const matches=candidates(mode,query);
+      picker._suggestions=matches;
+      picker._activeIndex=-1;
+      input.removeAttribute("aria-activedescendant");
+      panel.replaceChildren();
+  
+      if (!query.trim()) {
+        const caption=document.createElement("div");
+        caption.className="location-suggestions-caption";
+        caption.textContent=words.popular || "Popular places";
+        panel.append(caption);
       }
+      matches.forEach((item,i)=>{
+        const opt=document.createElement("button");
+        opt.type="button";
+        opt.className="location-suggestion";
+        opt.id=panel.id+"-option-"+i;
+        opt.setAttribute("role","option");
+        opt.setAttribute("aria-selected","false");
+        const icon=document.createElement("span");
+        icon.className="location-suggestion-icon";
+        icon.setAttribute("aria-hidden","true");
+        icon.textContent=item.type==="airport"?"✈":"⌖";
+        const names=document.createElement("span");
+        names.className="location-suggestion-copy";
+        const heading=document.createElement("strong");
+        heading.textContent=item.label;
+        const supporting=document.createElement("small");
+        const category=item.type==="airport" ? words.airport : words.city;
+        const area=words.country?.[item.country] || item.country;
+        supporting.textContent=[category,area].filter(Boolean).join(" · ");
+        names.append(heading,supporting);
+        opt.append(icon,names);
+        opt.addEventListener("pointerdown",(event)=>event.preventDefault());
+        opt.addEventListener("click",()=>choose(picker,item.label));
+        panel.append(opt);
+      });
+  
+      const customText=query.trim();
+      const exact=matches.some(item=>normalize(item.label)===normalize(customText));
+      if (customText && !exact) {
+        const custom=document.createElement("button");
+        custom.type="button";
+        custom.id=panel.id+"-option-custom";
+        custom.className="location-suggestion location-suggestion-custom";
+        custom.setAttribute("role","option");
+        custom.setAttribute("aria-selected","false");
+        const icon=document.createElement("span");
+        icon.className="location-suggestion-icon";
+        icon.setAttribute("aria-hidden","true");
+        icon.textContent="+";
+        const title=document.createElement("span");
+        title.className="location-suggestion-copy";
+        const strong=document.createElement("strong");
+        strong.textContent=words.custom || "Use entered address";
+        const small=document.createElement("small");
+        small.textContent=customText;
+        title.append(strong,small);
+        custom.append(icon,title);
+        custom.addEventListener("pointerdown",(event)=>event.preventDefault());
+        custom.addEventListener("click",()=>choose(picker,customText));
+        panel.append(custom);
+      }
+  
+      panel.hidden=false;
+      input.setAttribute("aria-expanded","true");
+      updatePosition(picker);
+    }
+  
+    pickers.forEach((picker)=>{
+      const input=picker.querySelector("input");
+      const clear=picker.querySelector(".location-clear");
+      clear.hidden=!input.value.trim();
+      input.addEventListener("focus",()=>{
+        if (input.value) input.select();
+        render(picker,"");
+      });
+      input.addEventListener("input",()=>{
+        clear.hidden=!input.value.trim();
+        render(picker,input.value);
+      });
+      input.addEventListener("keydown",(event)=>{
+        if (event.key==="ArrowDown" || event.key==="ArrowUp"){
+          event.preventDefault();
+          if (picker!==activePicker) render(picker,input.value);
+          const total=picker.querySelectorAll(".location-suggestions [role=option]").length;
+          if (total) activate(picker,event.key==="ArrowDown"?picker._activeIndex+1:picker._activeIndex===-1?total-1:picker._activeIndex-1);
+        } else if (event.key==="Enter" && picker===activePicker) {
+          const options=[...picker.querySelectorAll(".location-suggestions [role=option]")];
+          if (options.length) {
+            event.preventDefault();
+            options[picker._activeIndex>=0?picker._activeIndex:0].click();
+          } else closePicker(picker);
+        } else if (event.key==="Escape" && picker===activePicker) {
+          event.preventDefault();
+          closePicker(picker);
+        } else if (event.key==="Tab") closePicker(picker);
+      });
+      clear.addEventListener("click",()=>{
+        input.value="";
+        input.dispatchEvent(new Event("change",{bubbles:true}));
+        input.focus({preventScroll:true});
+        render(picker,"");
+        clear.hidden=true;
+      });
     });
+    document.addEventListener("pointerdown",(event)=>{
+      if (activePicker && !activePicker.contains(event.target)) closePicker(activePicker);
+    },true);
+    document.addEventListener("focusin",(event)=>{
+      if (activePicker && !activePicker.contains(event.target)) closePicker(activePicker);
+    });
+    const reposition=()=>{if(activePicker) updatePosition(activePicker)};
+    window.addEventListener("resize",reposition,{passive:true});
+    document.addEventListener("scroll",reposition,true);
+    window.visualViewport?.addEventListener("resize",reposition,{passive:true});
+    window.visualViewport?.addEventListener("scroll",reposition,{passive:true});
   }
+  initializeLocationAutocomplete();
 
   document.querySelectorAll("[data-open-booking]").forEach((trigger) => {
     trigger.addEventListener("click", (event) => {
