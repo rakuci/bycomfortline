@@ -1166,3 +1166,5 @@ await put("robots.txt", `User-agent: *
 Allow: /
 Sitemap: ${base}/sitemap.xml
 `);
+// Stop Cloudflare deployment builds if a generated route, asset link, locale or sitemap is inconsistent.
+await import("./check-seo.mjs");
