@@ -4,7 +4,7 @@
 const RECIPIENT = "info@comfortline.by";
 const SENDER = "byComfortLine <bookings@comfortline.by>";
 const RESEND_SEND_URL = "https://api.resend.com/emails";
-const ALLOWED_LANGUAGES = new Set(["en", "ru", "pl", "lt", "lv"]);
+const ALLOWED_LANGUAGES = new Set(["en", "ru", "pl", "lt", "lv", "de", "fr"]);
 
 const FIELD_RULES = {
   fromPreset: { required: true, max: 160 },
