@@ -14,7 +14,7 @@ import { dirname, join } from "node:path";
 
 const out = new URL("./dist/", import.meta.url).pathname;
 const base = "https://bycomfortline.com";
-const seoLastmod = "2026-10-18";
+const seoLastmod = "2026-10-19";
 const phoneDisplay = "+375 29 155 27 76";
 const phoneHref = "+375291552776";
 const email = "info@comfortline.by";
@@ -620,7 +620,7 @@ function faq(l) {
 }
 
 function footer(l) {
-  return `<footer id="operator-info"><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}</div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
+  return `<footer id="operator-info"><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}<a href="${geoIndexPath(l.code,"airport")}">${esc(geoLocale[l.code].browseAirports)}</a><a href="${geoIndexPath(l.code,"city")}">${esc(geoLocale[l.code].browseCities)}</a></div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
 }
 
 function floatingContact() {
@@ -670,6 +670,7 @@ function hubPage(lang) {
     ${trustStrip(l)}
     <section class="section routes-section" id="routes"><div class="section-head"><span class="eyebrow">Comfortline routes</span><h2>${esc(l.routesTitle)}</h2><p>${esc(l.routesLead)}</p></div><div class="route-grid three">${routeCards(lang)}</div></section>
     ${airportRouteLinks(lang)}
+    ${geoHubDirectoryLinks(lang)}
     ${fleetShowcase(lang)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">Door to door</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     <section class="section steps-section"><div class="section-head"><span class="eyebrow">3 steps</span><h2>${esc(l.stepsTitle)}</h2></div><div class="steps">${l.steps.map(([n, h, p]) => `<article><span>${n}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
@@ -1122,11 +1123,23 @@ for (const lang of Object.keys(locale)) {
   await put(`${lang}/index.html`, hubPage(lang));
   await put(`${lang}/thank-you/index.html`, thankYouPage(lang));
   for (const key of Object.keys(routes)) await put(`${lang}/${locale[lang].slugs[key]}/index.html`, routePage(lang, key));
+  for (const type of ["airport","city"]) await put(geoIndexPath(lang,type).slice(1)+"index.html", geoDirectoryPage(lang,type));
+  for (const place of geoPlaces) await put(geoPath(lang,place).slice(1)+"index.html", geoLocationPage(lang,place));
 }
 
 const sitemapEntries = [
   `<url><loc>${base}/</loc><lastmod>${seoLastmod}</lastmod></url>`,
   ...Object.keys(locale).map(lang => `<url><loc>${base}/${lang}/</loc><lastmod>${seoLastmod}</lastmod>${Object.keys(locale).map(code => `<xhtml:link rel="alternate" hreflang="${code}" href="${base}/${code}/"/>`).join("")}<xhtml:link rel="alternate" hreflang="x-default" href="${base}/"/></url>`),
+  ...["airport","city"].flatMap(type => Object.keys(locale).map(lang => {
+    const url=base+geoIndexPath(lang,type);
+    const alternates=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+geoIndexPath(code,type)}"/>`).join("");
+    return `<url><loc>${url}</loc><lastmod>${seoLastmod}</lastmod>${alternates}<xhtml:link rel="alternate" hreflang="x-default" href="${base+geoIndexPath("en",type)}"/></url>`;
+  })),
+  ...geoPlaces.flatMap(place => Object.keys(locale).map(lang => {
+    const url=base+geoPath(lang,place);
+    const alternates=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+geoPath(code,place)}"/>`).join("");
+    return `<url><loc>${url}</loc><lastmod>${seoLastmod}</lastmod>${alternates}<xhtml:link rel="alternate" hreflang="x-default" href="${base+geoPath("en",place)}"/></url>`;
+  })),
   ...Object.keys(routes).flatMap(key => Object.keys(locale).map(lang => {
     const url = `${base}${routePath(lang, key)}`;
     const localized = Object.keys(locale).map(code => `<xhtml:link rel="alternate" hreflang="${code}" href="${base}${routePath(code, key)}"/>`).join("");
@@ -1137,4 +1150,17 @@ await put("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${sitemapEntries.join("\n")}
 </urlset>`);
-await put("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${base}/sitemap.xml\n`);
+// Yandex no longer uses hreflang attributes in sitemaps. Provide a simple
+// canonical-URL version for manual submission in Yandex Webmaster.
+await put("sitemap-yandex.xml", `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapEntries.map(row=>{
+  const loc=row.match(/<loc>([^<]+)<\/loc>/)?.[1];
+  const lastmod=row.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1];
+  return `<url><loc>${loc}</loc><lastmod>${lastmod}</lastmod></url>`;
+}).join("\n")}
+</urlset>`);
+await put("robots.txt", `User-agent: *
+Allow: /
+Sitemap: ${base}/sitemap.xml
+`);
