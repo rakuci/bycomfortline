@@ -8,6 +8,8 @@ import { additionalLocales } from "./fr-de-localization.mjs";
 import { geoAirports } from "./geo-airports.mjs";
 import { geoCities } from "./geo-cities.mjs";
 import { geoLocale } from "./geo-locales.mjs";
+import { belarusDestinations } from "./belarus-destinations.mjs";
+import { destinationLocale } from "./destination-locales.mjs";
 import { locationCatalog, locationLabels } from "./booking-locations.mjs";
 import { bookingPopupUi } from "./booking-popup-i18n.mjs";
 import { dirname, join } from "node:path";
@@ -293,6 +295,63 @@ const geoSlugs = {
   de: { airport: "flughafen", city: "privattransfer" },
   fr: { airport: "aeroport", city: "transfert-prive" }
 };
+
+const destinationLookup = new Map(belarusDestinations.map(dest=>[dest.id,dest]));
+const destinationIndexSlugs = {
+  en: "belarus-destinations",
+  ru: "goroda-belarusi",
+  pl: "miasta-bialorusi",
+  lt: "baltarusijos-miestai",
+  lv: "baltkrievijas-galamerki",
+  de: "ziele-in-belarus",
+  fr: "destinations-bielorussie"
+};
+const destinationRoutePrefixes = {
+  en:"transfers",ru:"transfery",pl:"transfery",
+  lt:"pervezimai",lv:"transferi",de:"privattransfers",fr:"transferts"
+};
+const featuredOriginIds = [
+  "warsaw","waw","wmi","bialystok","suwalki",
+  "vilnius","vno","kaunas","kun",
+  "riga","rix","daugavpils",
+  "berlin","ber","paris","cdg","ory"
+];
+const coreOriginCountries = { warsaw:"PL",vilnius:"LT",riga:"LV" };
+const coreOriginProfiles = Object.keys(coreOriginCountries).map(id=>({
+  id,type:"city",country:coreOriginCountries[id],parent:id,
+  names:Object.fromEntries(Object.keys(locale).map(lang=>[lang,locale[lang].fromNames[id]])),
+  pickup:Object.fromEntries(Object.keys(locale).map(lang=>[lang,routeExtras[lang][id].pickupContext]))
+}));
+const featuredOrigins = featuredOriginIds.map(id=>{
+  const place=coreOriginProfiles.find(p=>p.id===id)||geoIds.get(id);
+  if(!place)throw new Error("Missing featured transfer origin "+id);
+  return place;
+});
+for(const dest of belarusDestinations){
+  const entry=locationCatalog.find(x=>x.id===dest.id);
+  if(entry)Object.assign(entry.names,dest.names);
+}
+const destinationIndexPath = lang=>`/${lang}/${destinationIndexSlugs[lang]}/`;
+const destinationPath = (lang,dest)=>`${destinationIndexPath(lang)}${typeof dest==="string"?dest:dest.id}/`;
+function transferPairPath(lang,origin,dest){
+  const a=typeof origin==="string"?origin:origin.id;
+  const b=typeof dest==="string"?dest:dest.id;
+  return `/${lang}/${destinationRoutePrefixes[lang]}/${a}-${b}/`;
+}
+function destinationAlternates(dest){
+  return [...Object.keys(locale).map(lang=>`<link rel="alternate" hreflang="${lang}" href="${base}${destinationPath(lang,dest)}">`),
+    `<link rel="alternate" hreflang="x-default" href="${base}${destinationPath("en",dest)}">`].join("\n");
+}
+function destinationIndexAlternates(){
+  return [...Object.keys(locale).map(lang=>`<link rel="alternate" hreflang="${lang}" href="${base}${destinationIndexPath(lang)}">`),
+    `<link rel="alternate" hreflang="x-default" href="${base}${destinationIndexPath("en")}">`].join("\n");
+}
+function pairAlternates(origin,dest){
+  return [...Object.keys(locale).map(lang=>`<link rel="alternate" hreflang="${lang}" href="${base}${transferPairPath(lang,origin,dest)}">`),
+    `<link rel="alternate" hreflang="x-default" href="${base}${transferPairPath("en",origin,dest)}">`].join("\n");
+}
+const localeWords=(text,values)=>String(text).replace(/\{(from|to|dest)\}/g,(_,key)=>values[key]||"");
+
 function geoPath(lang, place) {
   const item = typeof place === "string" ? geoIds.get(place) : place;
   if (!item) throw new Error("Unknown location");
@@ -569,16 +628,16 @@ function passengerPicker(lang, scope) {
   </div>`;
 }
 
-function quickBooking(lang, routeKey = "vilnius", originOverride = null) {
+function quickBooking(lang, routeKey = "vilnius", originOverride = null, destinationOverride = null) {
   const l = locale[lang], ui = bookingLabels[lang];
   return `<form class="quick-booking" data-lang="${lang}" action="#booking-dialog">
-    ${locationFormField(lang, "fromPreset", "quick", originOverride || l.fromNames[routeKey], "quick-from")}
-    ${locationFormField(lang, "to", "quick", l.fieldValues.to, "quick-to")}
+    ${locationFormField(lang, "fromPreset", "quick", originOverride !== null ? originOverride : l.fromNames[routeKey], "quick-from")}
+    ${locationFormField(lang, "to", "quick", destinationOverride !== null ? destinationOverride : l.fieldValues.to, "quick-to")}
     <button type="submit" class="quick-submit">${esc(ui.quickButton)} <span aria-hidden="true">↗</span></button>
   </form>`;
 }
 
-function bookingForm(lang, routeKey = "vilnius", originOverride = null) {
+function bookingForm(lang, routeKey = "vilnius", originOverride = null, destinationOverride = null) {
   const l = locale[lang], ui = bookingLabels[lang], popup = bookingPopupUi[lang];
   return `<dialog class="booking-dialog" id="booking-dialog" aria-labelledby="booking-dialog-title">
     <div class="booking-dialog-shell">
@@ -587,8 +646,8 @@ function bookingForm(lang, routeKey = "vilnius", originOverride = null) {
         <button type="button" class="booking-dialog-close" data-close-booking aria-label="${esc(popup.close)}"><span aria-hidden="true">×</span></button>
       </div>
       <form class="booking-form" data-lang="${lang}" data-email="${email}" data-sending="${esc(popup.sending)}" data-send-error="${esc(popup.sendError)}" data-storage-success="${esc(popup.storageSuccess)}" data-invalid-phone="${esc(popup.invalidPhone)}" data-invalid-route="${esc(popup.invalidRoute)}" data-invalid-form="${esc(popup.invalidForm)}" data-rate-limited="${esc(popup.rateLimited)}" data-service-unavailable="${esc(popup.serviceUnavailable)}" data-network-error="${esc(popup.networkError)}" data-capacity-error="${esc(fleetCopy[lang].capacityError)}" action="/api/booking" method="post">
-        ${locationFormField(lang, "fromPreset", "details", originOverride || l.fromNames[routeKey])}
-        ${locationFormField(lang, "to", "details", l.fieldValues.to)}
+        ${locationFormField(lang, "fromPreset", "details", originOverride !== null ? originOverride : l.fromNames[routeKey])}
+        ${locationFormField(lang, "to", "details", destinationOverride !== null ? destinationOverride : l.fieldValues.to)}
         <label><span>${esc(ui.pickupAddress)}</span><input name="pickupAddress" placeholder="${esc(l.fieldValues.fromPlaceholder)}"></label>
         <label><span>${esc(ui.dropAddress)}</span><input name="dropAddress" placeholder="${esc(l.fieldValues.to)}"></label>
         <label><span>${esc(ui.date)}</span><input type="datetime-local" name="date" required></label>
@@ -627,9 +686,9 @@ function floatingContact() {
   return `<nav class="floating-social" aria-label="ComfortLine messaging and social profiles">${socialChannels.map(channel => socialLink(channel, "social-floating")).join("")}</nav>`;
 }
 
-function layout({ lang, title, description, canonical, alternates, body, schema, routeKey = "vilnius", originOverride = null }) {
+function layout({ lang, title, description, canonical, alternates, body, schema, routeKey = "vilnius", originOverride = null, destinationOverride = null }) {
   const l = locale[lang];
-  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="byComfortLine"><meta property="og:locale" content="${esc(l.locale)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${base}/assets/comfortline-transfer-van.webp"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preload" as="image" href="/assets/comfortline-transfer-van.webp" fetchpriority="high"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${bookingForm(lang, routeKey, originOverride)}${destinationPopup(lang)}${floatingContact()}</body></html>`;
+  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="byComfortLine"><meta property="og:locale" content="${esc(l.locale)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${base}/assets/comfortline-transfer-van.webp"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preload" as="image" href="/assets/comfortline-transfer-van.webp" fetchpriority="high"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${bookingForm(lang, routeKey, originOverride, destinationOverride)}${destinationPopup(lang)}${floatingContact()}</body></html>`;
 }
 
 function businessSchema(lang, url) {
