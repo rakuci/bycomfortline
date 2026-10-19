@@ -685,8 +685,8 @@ function airportRouteLinks(lang) {
   const content = airportHubLinks[lang];
   return `<section class="section airport-links-section" id="airport-transfers">
     <div class="section-head"><span class="eyebrow">VNO · WAW · WMI · RIX</span><h2>${esc(content.heading)}</h2><p>${esc(content.intro)}</p></div>
-    <div class="airport-links-grid">${content.items.map(([key,title,text]) =>
-      `<article class="airport-link-card"><span class="airport-link-icon" aria-hidden="true">✈</span><h3><a href="${routePath(lang,key)}#airport-pickup">${esc(title)} ↗</a></h3><p>${esc(text)}</p></article>`
+    <div class="airport-links-grid">${content.items.map(([key,title,text],i) =>
+      `<article class="airport-link-card"><span class="airport-link-icon" aria-hidden="true">✈</span><h3><a href="${geoPath(lang,["vno","waw","wmi","rix"][i])}">${esc(title)} ↗</a></h3><p>${esc(text)}</p></article>`
     ).join("")}</div>
   </section>`;
 }
