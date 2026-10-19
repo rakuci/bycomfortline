@@ -54,6 +54,10 @@
     const words = catalog.text || {};
     const pickers = [...document.querySelectorAll("[data-location-picker]")];
     let activePicker = null;
+    const setLocationEditing = () => {
+      document.body.classList.toggle("location-is-editing",
+        pickers.some(picker => picker.querySelector("input") === document.activeElement));
+    };
   
     const normalize = (text) => String(text || "")
       .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
@@ -69,7 +73,7 @@
             ? ["minsk","grodno","brest","msq","lida","vitebsk"]
             : ["warsaw","vilnius","riga","waw","vno","rix"];
           return popular.indexOf(a.id)-popular.indexOf(b.id);
-        }).slice(0,6);
+        }).slice(0,4);
       }
       const scored = pool.map(item => {
         const label = normalize(item.label);
@@ -83,7 +87,7 @@
       }).filter(result => result.score < 99);
       scored.sort((a,b) => a.score-b.score || Number(b.item.popular)-Number(a.item.popular)
         || a.item.label.localeCompare(b.item.label));
-      return scored.slice(0,7).map(result=>result.item);
+      return scored.slice(0,5).map(result=>result.item);
     };
   
     function updatePosition(picker) {
@@ -121,6 +125,7 @@
       picker._activeIndex = -1;
       picker._suggestions = [];
       if (activePicker === picker) activePicker = null;
+      setLocationEditing();
     }
   
     function activate(picker,index) {
@@ -141,7 +146,14 @@
       input.dispatchEvent(new Event("change",{bubbles:true}));
       picker.querySelector(".location-clear").hidden = !input.value.trim();
       closePicker(picker);
-      input.focus({preventScroll:true});
+      const nextInput = picker.closest(".quick-booking, .booking-form")?.querySelector(
+        'input[name="to"]'
+      );
+      if (input.name === "fromPreset" && nextInput && nextInput !== input) {
+        nextInput.focus();
+      } else {
+        input.blur();
+      }
     }
   
     function render(picker,query) {
@@ -151,6 +163,10 @@
       const input=picker.querySelector("input");
       const panel=picker.querySelector(".location-suggestions");
       const mode=picker.dataset.locationMode;
+      if (!query.trim()) {
+        closePicker(picker);
+        return;
+      }
       const matches=candidates(mode,query);
       picker._suggestions=matches;
       picker._activeIndex=-1;
@@ -225,25 +241,46 @@
       const clear=picker.querySelector(".location-clear");
       clear.hidden=!input.value.trim();
       input.addEventListener("focus",()=>{
+        setLocationEditing();
         if (input.value) input.select();
-        render(picker,"");
+        closePicker(picker);
+      });
+      input.addEventListener("blur",()=>{
+        closePicker(picker);
+        document.body.classList.toggle("location-is-editing",
+          pickers.some(p => p.querySelector("input") === document.activeElement));
       });
       input.addEventListener("input",()=>{
         clear.hidden=!input.value.trim();
-        render(picker,input.value);
+        setLocationEditing();
+        if (input.value.trim()) render(picker,input.value);
+        else closePicker(picker);
       });
       input.addEventListener("keydown",(event)=>{
         if (event.key==="ArrowDown" || event.key==="ArrowUp"){
           event.preventDefault();
-          if (picker!==activePicker) render(picker,input.value);
+          if (picker!==activePicker) {
+            if (!input.value.trim()) {
+              const suggested=candidates(picker.dataset.locationMode,"");
+              input.setAttribute("aria-expanded","true");
+              const panel=picker.querySelector(".location-suggestions");
+              render(picker,suggested[0]?.label || "");
+            } else render(picker,input.value);
+          }
           const total=picker.querySelectorAll(".location-suggestions [role=option]").length;
           if (total) activate(picker,event.key==="ArrowDown"?picker._activeIndex+1:picker._activeIndex===-1?total-1:picker._activeIndex-1);
         } else if (event.key==="Enter" && picker===activePicker) {
           const options=[...picker.querySelectorAll(".location-suggestions [role=option]")];
-          if (options.length) {
+          if (picker._activeIndex >= 0 && options[picker._activeIndex]) {
             event.preventDefault();
-            options[picker._activeIndex>=0?picker._activeIndex:0].click();
-          } else closePicker(picker);
+            options[picker._activeIndex].click();
+          } else {
+            event.preventDefault();
+            closePicker(picker);
+            const next=picker.closest(".quick-booking, .booking-form")?.querySelector('input[name="to"]');
+            if (input.name==="fromPreset" && next) next.focus();
+            else input.blur();
+          }
         } else if (event.key==="Escape" && picker===activePicker) {
           event.preventDefault();
           closePicker(picker);
@@ -253,12 +290,14 @@
         input.value="";
         input.dispatchEvent(new Event("change",{bubbles:true}));
         input.focus({preventScroll:true});
-        render(picker,"");
+        closePicker(picker);
         clear.hidden=true;
       });
     });
     document.addEventListener("pointerdown",(event)=>{
-      if (activePicker && !activePicker.contains(event.target)) closePicker(activePicker);
+      if (!activePicker) return;
+      const panel=activePicker.querySelector(".location-suggestions");
+      if (!activePicker.contains(event.target) && !panel.contains(event.target)) closePicker(activePicker);
     },true);
     document.addEventListener("focusin",(event)=>{
       if (activePicker && !activePicker.contains(event.target)) closePicker(activePicker);
