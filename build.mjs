@@ -1233,7 +1233,7 @@ function geoDirectoryPage(lang,type) {
     ${homeBookingTransparency(lang)}
     ${faq(l)}
   </main>${footer(l)}`;
-  return layout({lang,title:label+" | byComfortLine",description:t.directoryLead,canonical,
+  return layout({lang,title:label+" | byComfortLine",description:label+". "+t.directoryLead,canonical,
     alternates:geoIndexAlternates(type),body,schema});
 }
 
