@@ -68,15 +68,24 @@ for (const path of htmlFiles) {
     if (!known.has(file)) issues.push(local + ': broken internal link ' + href);
   }
 }
-if (htmlFiles.length !== 358) issues.push('Expected 358 HTML files; found ' + htmlFiles.length);
-if (googleLocs.length !== 351) issues.push('Expected 351 indexable URLs; found ' + googleLocs.length);
+if (htmlFiles.length !== 1506) issues.push('Expected 1506 HTML files; found ' + htmlFiles.length);
+if (googleLocs.length !== 1499) issues.push('Expected 1499 indexable URLs; found ' + googleLocs.length);
 if (!known.has('/ru/aeroport-ber-minsk/index.html')) issues.push('Russian BER page missing');
 if (!known.has('/de/berlin-minsk-privattransfer/index.html')) issues.push('German Berlin page missing');
 if (!known.has('/fr/paris-minsk-transfert-prive/index.html')) issues.push('French Paris page missing');
 if (!known.has('/ru/transfery-iz-aeroportov/index.html')) issues.push('Airport index missing');
+for (const key of ['grodno','brest','lida','vitebsk','gomel','mogilev','baranovichi','pinsk','msq','minsk']) {
+  if (!known.has('/ru/goroda-belarusi/' + key + '/index.html')) issues.push('Russian destination missing: ' + key);
+}
+for (const lang of langs) {
+  if (!known.has('/' + lang + '/' + ({en:'belarus-destinations',ru:'goroda-belarusi',pl:'miasta-bialorusi',lt:'baltarusijos-miestai',lv:'baltkrievijas-galamerki',de:'ziele-in-belarus',fr:'destinations-bielorussie'})[lang] + '/index.html')) issues.push('Destination directory missing for ' + lang);
+}
+for (const route of ['/en/transfers/warsaw-brest/','/ru/transfery/waw-grodno/','/pl/transfery/vno-lida/','/de/privattransfers/berlin-gomel/','/fr/transferts/paris-msq/']) {
+  if (!known.has(route + 'index.html')) issues.push('Example route missing: ' + route);
+}
 if (issues.length) {
   console.error(issues.slice(0,35).join('\n'));
   throw new Error(issues.length + ' SEO/static routing check errors');
 }
 console.log('SEO OK: ' + htmlFiles.length + ' HTML pages; ' + googleLocs.length +
-  ' indexable URLs; ' + langs.length + ' languages; 19 airports; 25 cities.');
+  ' indexable URLs; ' + langs.length + ' languages; 19 airports; 25 EU cities; 10 Belarus destinations.');
