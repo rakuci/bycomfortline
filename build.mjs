@@ -319,8 +319,8 @@ const featuredOriginIds = [
 const coreOriginCountries = { warsaw:"PL",vilnius:"LT",riga:"LV" };
 const coreOriginProfiles = Object.keys(coreOriginCountries).map(id=>({
   id,type:"city",country:coreOriginCountries[id],parent:id,
-  names:Object.fromEntries(Object.keys(locale).map(lang=>[lang,locale[lang].fromNames[id]])),
-  pickup:Object.fromEntries(Object.keys(locale).map(lang=>[lang,routeExtras[lang][id].pickupContext]))
+  names:Object.fromEntries(["en","ru","pl","lt","lv","de","fr"].map(lang=>[lang,(locale[lang]||additionalLocales[lang].site).fromNames[id]])),
+  pickup:Object.fromEntries(["en","ru","pl","lt","lv","de","fr"].map(lang=>[lang,(routeExtras[lang]||additionalLocales[lang].extras)[id].pickupContext]))
 }));
 const featuredOrigins = featuredOriginIds.map(id=>{
   const place=coreOriginProfiles.find(p=>p.id===id)||geoIds.get(id);
@@ -516,8 +516,8 @@ for (const lang of ["de", "fr"]) {
 }
 // City and airport names remain searchable in their original spelling as well.
 for (const place of locationCatalog) {
-  place.names.de = place.names.en;
-  place.names.fr = place.names.en;
+  place.names.de ??= place.names.en;
+  place.names.fr ??= place.names.en;
   if (place.id === "minsk") place.names.fr = "Minsk";
 }
 
