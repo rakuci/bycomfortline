@@ -868,6 +868,181 @@ function routeEditorial(lang, key) {
   </section>`;
 }
 
+function geoText(template, variables) {
+  return String(template).replace(/\{(place|code)\}/g, (_, key) => variables[key] || "");
+}
+
+function geoCountryGroups(lang, items, compact = false) {
+  const t = geoLocale[lang];
+  const countryOrder = ["PL","LT","LV","DE","FR"];
+  return countryOrder.map(country=>{
+    const subset = items.filter(place=>place.country===country);
+    if(!subset.length)return "";
+    return `<section class="geo-country-group" id="country-${country.toLowerCase()}">
+      <h3>${esc(t.countryLabels[country])} <small>${subset.length}</small></h3>
+      <div class="geo-directory-grid${compact?" compact":""}">${subset.map(place=>{
+        const name=place.names[lang];
+        return `<a class="geo-directory-card" href="${geoPath(lang,place)}">
+          <span class="geo-directory-card-mark" aria-hidden="true">${place.type==="airport"?"✈":"⌖"}</span>
+          <span><strong>${esc(name)}</strong><small>${esc(place.type==="airport"?place.code:t.arrival)}</small></span>
+          <span aria-hidden="true">↗</span>
+        </a>`;
+      }).join("")}</div>
+    </section>`;
+  }).join("");
+}
+
+function geoHubDirectoryLinks(lang) {
+  const t=geoLocale[lang];
+  return `<section class="section geo-hub-links" id="more-departures">
+    <div class="section-head"><span class="eyebrow">ComfortLine · Cities & Airports</span>
+      <h2>${esc(t.indexes)}</h2><p>${esc(t.directoryLead)}</p></div>
+    <div class="geo-hub-link-cards">
+      <a href="${geoIndexPath(lang,"airport")}"><span aria-hidden="true">✈</span>
+        <strong>${esc(t.browseAirports)}</strong><small>VNO · KUN · PLQ · WAW · WMI · RIX · BER · CDG · ORY</small><b aria-hidden="true">↗</b></a>
+      <a href="${geoIndexPath(lang,"city")}"><span aria-hidden="true">⌖</span>
+        <strong>${esc(t.browseCities)}</strong><small>Berlin · Paris · Kaunas · Białystok · Daugavpils</small><b aria-hidden="true">↗</b></a>
+    </div>
+  </section>`;
+}
+
+function geoDirectoryPage(lang,type) {
+  const l=locale[lang], t=geoLocale[lang],items=geoPlaces.filter(place=>place.type===type);
+  const label=type==="airport"?t.directoryAirports:t.directoryCities;
+  const canonical=base+geoIndexPath(lang,type);
+  const schema={"@context":"https://schema.org","@graph":[businessSchema(lang,canonical),
+    {"@type":"CollectionPage","name":label,"url":canonical,"description":t.directoryLead,
+      "isPartOf":{"@type":"WebSite","name":"byComfortLine","url":base+"/"}},
+    {"@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":l.nav.routes,"item":base+l.home},
+      {"@type":"ListItem","position":2,"name":label,"item":canonical}
+    ]}
+  ]};
+  const nav=`<nav class="breadcrumbs"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(label)}</span></nav>`;
+  const body=`${header(lang,"geo-index",type)}<main>
+    <section class="geo-index-hero"><div class="geo-index-inner">${nav}
+      <span class="eyebrow light">ComfortLine · Minsk, Belarus</span>
+      <h1>${esc(label)}</h1><p>${esc(t.directoryLead)}</p>
+      <div class="geo-type-toggle">
+        <a href="${geoIndexPath(lang,"airport")}"${type==="airport"?' aria-current="page"':""}>✈ ${esc(t.browseAirports)}</a>
+        <a href="${geoIndexPath(lang,"city")}"${type==="city"?' aria-current="page"':""}>⌖ ${esc(t.browseCities)}</a>
+      </div>
+    </div></section>
+    <div class="geo-directory-wrap section">${geoCountryGroups(lang,items)}
+      <p class="geo-directory-note">${esc(t.directoryNote)}</p>
+      <a class="button primary geo-list-cta" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a>
+    </div>
+    <section class="geo-simple-service section" id="service"><h2>${esc(t.why)}</h2><p>${esc(t.whyText)}</p></section>
+    ${homeBookingTransparency(lang)}
+    ${faq(l)}
+  </main>${footer(l)}`;
+  return layout({lang,title:label+" | byComfortLine",description:t.directoryLead,canonical,
+    alternates:geoIndexAlternates(type),body,schema});
+}
+
+function geoLocationPage(lang,place) {
+  const l=locale[lang], t=geoLocale[lang];
+  const name=place.names[lang], opts={place:name,code:place.code||""};
+  const isAirport=place.type==="airport";
+  const title=geoText(isAirport?t.airportTitle:t.cityTitle,opts)+" | byComfortLine";
+  const description=geoText(isAirport?t.airportMeta:t.cityMeta,opts);
+  const h1=geoText(isAirport?t.airportH1:t.cityH1,opts);
+  const canonical=base+geoPath(lang,place);
+  const parentRoute=routePath(lang,place.parent);
+  const related=geoPlaces.filter(item=>item.country===place.country&&item.id!==place.id);
+  const countyLinks=related.sort((a,b)=>a.type===b.type? a.names[lang].localeCompare(b.names[lang]) : a.type==="airport"?-1:1).slice(0,8)
+    .map(item=>`<a href="${geoPath(lang,item)}">${esc(item.names[lang])}${item.code?` · ${item.code}`:""} ↗</a>`).join("");
+  const locationFact=(place.type==="airport"?place.facts:place.pickup)[lang];
+  const applicableAdvice=routeOfficialSources[place.parent] || [];
+  const adviceLinks=applicableAdvice.map(([text,url])=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(text)} ↗</a>`).join("");
+  const official=isAirport?`<a class="geo-official-link" target="_blank" rel="noopener noreferrer" href="${esc(place.official)}">${esc(t.official)} ↗</a>`:"";
+  const extraLong=["DE","FR"].includes(place.country)
+    ?`<p class="geo-long-disclaimer">${esc(t.limited)}</p>`:"";
+  const faqs=[
+    [geoText(t.faq1,opts),t.answer1],
+    [geoText(t.faq2,opts),t.answer2],
+    [t.faq3,t.answer3]
+  ];
+  const schema={"@context":"https://schema.org","@graph":[
+    businessSchema(lang,canonical),
+    {"@type":"Service","name":h1,"serviceType":"Private international transfer enquiry",
+      "provider":{"@id":base+"/#business"},
+      "areaServed":[{"@type":"Place","name":name},{"@type":"Place","name":"Minsk, Belarus"}],
+      "description":description,"url":canonical},
+    {"@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":l.nav.routes,"item":base+l.home},
+      {"@type":"ListItem","position":2,"name":isAirport?t.directoryAirports:t.directoryCities,"item":base+geoIndexPath(lang,place.type)},
+      {"@type":"ListItem","position":3,"name":name,"item":canonical}
+    ]}
+  ]};
+  const body=`${header(lang,"geo",place)}<main>
+    <section class="geo-location-hero">
+      <div class="geo-location-hero-inner">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span>
+          <a href="${geoIndexPath(lang,place.type)}">${esc(isAirport?t.browseAirports:t.browseCities)}</a><span>/</span><span>${esc(name)}</span>
+        </nav>
+        <span class="eyebrow light">${esc(t.countryLabels[place.country])} · ${isAirport?esc(t.airport):esc(t.city)}${place.code?" · "+place.code:""}</span>
+        <h1>${esc(h1)}</h1>
+        <p>${esc(geoText(isAirport?t.introAirport:t.introCity,opts))}</p>
+        <div class="hero-actions">
+          <a href="#booking-dialog" data-open-booking class="button primary" aria-haspopup="dialog" aria-controls="booking-dialog">${esc(t.quote)} ${icons.arrow}</a>
+          <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a>
+        </div>
+        ${quickBooking(lang,place.parent,name)}
+      </div>
+    </section>
+    <div class="geo-content-wrap section">
+      <div class="geo-page-facts">
+        <div><span>${esc(isAirport?t.airport:t.city)}</span><strong>${esc(name)}</strong></div>
+        <div><span>${esc(l.fields.to)}</span><strong>${esc(t.arrival)}</strong></div>
+        <div><span>${esc(t.cost)}</span><strong>${esc(reverseJourneyCopy[lang].label)}</strong></div>
+      </div>
+      <div class="geo-detail-grid">
+        <article class="geo-detail-card geo-distinct">
+          <span class="geo-card-index">01 · ${esc(t.special)}</span>
+          <h2>${esc(name)}${place.code?" · "+place.code:""}</h2>
+          <p>${esc(locationFact)}</p>${official}
+          <p>${esc(isAirport?t.flight:t.station)}</p>
+        </article>
+        <article class="geo-detail-card">
+          <span class="geo-card-index">02 · ${esc(t.cost)}</span>
+          <h2>${esc(t.why)}</h2>
+          <p>${esc(t.whyText)}</p><p>${esc(t.costText)}</p>
+          ${extraLong}
+        </article>
+      </div>
+      <section class="geo-how-book" id="service">
+        <h2>${esc(t.quote)}</h2><p>${esc(t.quoteInfo)}</p>
+        <div class="geo-how-steps">${bookingTrustContent[lang].process.map(([n,title,body])=>`
+          <article><span>${esc(n)}</span><h3>${esc(title)}</h3><p>${esc(body)}</p></article>`).join("")}</div>
+        <a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a>
+      </section>
+      <section class="geo-border-guidance">
+        <h2>${esc(t.checklist)}</h2><ul>${t.checkItems.map(item=>`<li>${esc(item)}</li>`).join("")}</ul>
+        <div class="geo-safety-sources">${adviceLinks}</div>
+      </section>
+      <section class="geo-vehicle-note">
+        <h2>${esc(t.reviews)}</h2><p>${esc(t.reviewsText)}</p>
+        <a href="${parentRoute}#fleet">${esc(l.serviceTitle)} ↗</a>
+      </section>
+      <section class="geo-related" aria-label="${esc(t.localLinks)}">
+        <h2>${esc(t.localLinks)}</h2>
+        <div>${countyLinks}</div>
+        <p><a href="${parentRoute}">${esc(t.backHub)} ↗</a>
+          <a href="${geoIndexPath(lang,"airport")}">${esc(t.browseAirports)} ↗</a>
+          <a href="${geoIndexPath(lang,"city")}">${esc(t.browseCities)} ↗</a></p>
+      </section>
+      <section class="geo-unique-faq" id="faq">
+        <h2>${esc(l.faqTitle)}</h2>
+        ${faqs.map(([q,a])=>`<details><summary>${esc(q)}<span aria-hidden="true">+</span></summary><p>${esc(a)}</p></details>`).join("")}
+      </section>
+    </div>
+  </main>${footer(l)}`;
+  return layout({lang,title,description,canonical,alternates:geoAlternateLinks(place),
+    body,schema,routeKey:place.parent,originOverride:name});
+}
+
 function routePage(lang, key) {
   const l = locale[lang], r = routes[key];
   const canonical = `${base}${routePath(lang, key)}`;
