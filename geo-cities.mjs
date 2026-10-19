@@ -16,10 +16,10 @@ export const geoCities = [
       "en": "Białystok railway station, city centre and hotel pickups; specify the agreed address, not a presumed border crossing.",
       "ru": "Железнодорожный вокзал Белостока, центр и отели; укажите адрес и проверьте доступность погранпереходов.",
       "pl": "Dworzec Białystok, centrum oraz hotele; podaj dokładny adres i sprawdź czynne przejścia graniczne.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Białystok railway station, city centre and hotel pickups; specify the agreed address, not a presumed border crossing.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Białystok railway station, city centre and hotel pickups; specify the agreed address, not a presumed border crossing.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Białystok railway station, city centre and hotel pickups; specify the agreed address, not a presumed border crossing.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Białystok railway station, city centre and hotel pickups; specify the agreed address, not a presumed border crossing."
+      "lt": "Balstogės stotis, miesto centras ir viešbučiai – skirtingos paėmimo vietos. Patikrinkite pasienio perėją.",
+      "lv": "Bjalistokas stacija, centrs un viesnīcas ir atsevišķas vietas. Pārbaudiet robežpunktu.",
+      "de": "Bahnhof Białystok, Innenstadt und Hotels: genaue Adresse und den verfügbaren Grenzübergang klären.",
+      "fr": "Gare de Białystok, centre-ville ou hôtel : précisez l’adresse et vérifiez le passage frontalier."
     },
     "parent": "warsaw"
   },
@@ -40,10 +40,10 @@ export const geoCities = [
       "en": "Suwałki railway station or an address in the city; border geography differs from routes via Warsaw.",
       "ru": "Вокзал Сувалки или адрес в городе; граница и возможный маршрут отличаются от Варшавы.",
       "pl": "Dworzec Suwałki lub konkretny adres; warunki trasy granicznej różnią się od wyjazdu z Warszawy.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Suwałki railway station or an address in the city; border geography differs from routes via Warsaw.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Suwałki railway station or an address in the city; border geography differs from routes via Warsaw.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Suwałki railway station or an address in the city; border geography differs from routes via Warsaw.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Suwałki railway station or an address in the city; border geography differs from routes via Warsaw."
+      "lt": "Suvalkų stotis ar miesto adresas; kelias į Baltarusiją skiriasi nuo Varšuvos maršruto.",
+      "lv": "Suvalku stacija vai pilsētas adrese; robežšķērsošanas plāns atšķiras no Varšavas.",
+      "de": "Bahnhof Suwałki oder Stadtadresse; Grenzführung unterscheidet sich von einer Abfahrt in Warschau.",
+      "fr": "Gare de Suwałki ou adresse en ville ; les passages frontaliers diffèrent de Varsovie."
     },
     "parent": "warsaw"
   },
@@ -64,10 +64,10 @@ export const geoCities = [
       "en": "Lublin Główny railway station, old town hotels and Lublin Airport LUZ at Świdnik are separate pickup points.",
       "ru": "Вокзал Lublin Główny, отели Старого города и аэропорт LUZ в Свиднике — разные места подачи.",
       "pl": "Dworzec Lublin Główny, hotele na Starym Mieście i lotnisko LUZ w Świdniku to różne miejsca odbioru.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Lublin Główny railway station, old town hotels and Lublin Airport LUZ at Świdnik are separate pickup points.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Lublin Główny railway station, old town hotels and Lublin Airport LUZ at Świdnik are separate pickup points.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Lublin Główny railway station, old town hotels and Lublin Airport LUZ at Świdnik are separate pickup points.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Lublin Główny railway station, old town hotels and Lublin Airport LUZ at Świdnik are separate pickup points."
+      "lt": "Liublino pagrindinė stotis, senamiesčio viešbučiai ir Švidniko LUZ oro uostas nėra ta pati vieta.",
+      "lv": "Ļubļinas galvenā stacija, vecpilsētas viesnīcas un Švidņikas LUZ lidosta ir atšķirīgas vietas.",
+      "de": "Lublin Główny, Altstadthotels und Flughafen LUZ in Świdnik sind verschiedene Abholpunkte.",
+      "fr": "Lublin Główny, hôtels du centre historique et aéroport LUZ à Świdnik sont distincts."
     },
     "parent": "warsaw"
   },
@@ -88,10 +88,10 @@ export const geoCities = [
       "en": "Kraków Główny, Kazimierz and Balice Airport (KRK) need distinct meeting instructions for a long journey to Belarus.",
       "ru": "Вокзал Kraków Główny, район Казимеж и аэропорт Балице (KRK) требуют разных точек встречи; дорога дальняя.",
       "pl": "Kraków Główny, Kazimierz i lotnisko Balice (KRK) wymagają osobnych ustaleń; dojazd do Mińska jest długi.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Kraków Główny, Kazimierz and Balice Airport (KRK) need distinct meeting instructions for a long journey to Belarus.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Kraków Główny, Kazimierz and Balice Airport (KRK) need distinct meeting instructions for a long journey to Belarus.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Kraków Główny, Kazimierz and Balice Airport (KRK) need distinct meeting instructions for a long journey to Belarus.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Kraków Główny, Kazimierz and Balice Airport (KRK) need distinct meeting instructions for a long journey to Belarus."
+      "lt": "Krokuvos pagrindinė stotis, Kazimiežo rajonas ir Balicų KRK oro uostas turi skirtingus susitikimo taškus.",
+      "lv": "Krakovas galvenā stacija, Kazimiežas rajons un KRK lidosta Balicē ir dažādas vietas.",
+      "de": "Kraków Główny, Kazimierz und der Flughafen Balice (KRK) brauchen getrennte Treffpunkte.",
+      "fr": "Kraków Główny, le quartier de Kazimierz et l’aéroport de Balice (KRK) sont distincts."
     },
     "parent": "warsaw"
   },
@@ -112,10 +112,10 @@ export const geoCities = [
       "en": "Pickup in Gdańsk Old Town, at Gdańsk Główny or at airport GDN; clarify if your address is in nearby Gdynia or Sopot.",
       "ru": "Старый город Гданьска, вокзал Gdańsk Główny или аэропорт GDN; уточните, не находится ли адрес в Гдыне или Сопоте.",
       "pl": "Stare Miasto Gdańska, dworzec Gdańsk Główny i lotnisko GDN; wskaż, czy odbiór nie jest w Gdyni lub Sopocie.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Pickup in Gdańsk Old Town, at Gdańsk Główny or at airport GDN; clarify if your address is in nearby Gdynia or Sopot.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Pickup in Gdańsk Old Town, at Gdańsk Główny or at airport GDN; clarify if your address is in nearby Gdynia or Sopot.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Pickup in Gdańsk Old Town, at Gdańsk Główny or at airport GDN; clarify if your address is in nearby Gdynia or Sopot.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Pickup in Gdańsk Old Town, at Gdańsk Główny or at airport GDN; clarify if your address is in nearby Gdynia or Sopot."
+      "lt": "Gdansko senamiestis, pagrindinė stotis ir GDN oro uostas; Gdynė ir Sopotas turi atskirus adresus.",
+      "lv": "Gdaņskas vecpilsēta, galvenā stacija un GDN lidosta; Gdiņai un Sopotai jānorāda adrese.",
+      "de": "Gdańsk Altstadt, Hauptbahnhof und GDN: bei Adressen in Gdynia oder Sopot bitte präzisieren.",
+      "fr": "Vieille ville, gare de Gdańsk et aéroport GDN ; précisez si vous êtes à Gdynia ou Sopot."
     },
     "parent": "warsaw"
   },
@@ -136,10 +136,10 @@ export const geoCities = [
       "en": "Katowice railway station and Pyrzowice Airport (KTW) are well separated. A road journey to Minsk requires an individual feasibility check.",
       "ru": "Вокзал Катовице и аэропорт Пыжовице (KTW) далеко друг от друга. Международный трансфер требует подтверждения.",
       "pl": "Dworzec Katowice i lotnisko Pyrzowice (KTW) są oddalone od siebie. Długi transfer wymaga potwierdzenia.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Katowice railway station and Pyrzowice Airport (KTW) are well separated. A road journey to Minsk requires an individual feasibility check.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Katowice railway station and Pyrzowice Airport (KTW) are well separated. A road journey to Minsk requires an individual feasibility check.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Katowice railway station and Pyrzowice Airport (KTW) are well separated. A road journey to Minsk requires an individual feasibility check.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Katowice railway station and Pyrzowice Airport (KTW) are well separated. A road journey to Minsk requires an individual feasibility check."
+      "lt": "Katovicų stotis ir Pyržovicų (KTW) oro uostas yra nutolę; tiksliai nurodykite paėmimą.",
+      "lv": "Katovices stacija un Pižovices (KTW) lidosta ir tālu viena no otras.",
+      "de": "Katowice Bahnhof und Flughafen KTW in Pyrzowice liegen weit auseinander.",
+      "fr": "La gare de Katowice et l’aéroport KTW à Pyrzowice sont éloignés."
     },
     "parent": "warsaw"
   },
@@ -160,10 +160,10 @@ export const geoCities = [
       "en": "Specify whether pickup is at Wrocław Główny, the Market Square or Wrocław Airport (WRO) to the west.",
       "ru": "Уточните подачу: вокзал Wrocław Główny, Рыночная площадь или аэропорт WRO к западу от центра.",
       "pl": "Podaj, czy odbiór ma być z Wrocławia Głównego, Rynku czy lotniska WRO na zachód od centrum.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Specify whether pickup is at Wrocław Główny, the Market Square or Wrocław Airport (WRO) to the west.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Specify whether pickup is at Wrocław Główny, the Market Square or Wrocław Airport (WRO) to the west.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Specify whether pickup is at Wrocław Główny, the Market Square or Wrocław Airport (WRO) to the west.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Specify whether pickup is at Wrocław Główny, the Market Square or Wrocław Airport (WRO) to the west."
+      "lt": "Vroclavo pagrindinė stotis, Turgaus aikštė ir vakaruose esantis WRO oro uostas.",
+      "lv": "Vroclavas galvenā stacija, Tirgus laukums un lidosta WRO pilsētas rietumos.",
+      "de": "Wrocław Główny, Marktplatz oder Flughafen WRO im Westen – Abholort genau nennen.",
+      "fr": "Wrocław Główny, place du Marché ou aéroport WRO à l’ouest : précisez le lieu."
     },
     "parent": "warsaw"
   },
@@ -184,10 +184,10 @@ export const geoCities = [
       "en": "Pickup at Poznań Główny, the Old Market or Poznań–Ławica Airport (POZ) requires different timing.",
       "ru": "Вокзал Poznań Główny, Старый рынок и аэропорт Познань-Лавица (POZ) требуют разного времени подачи.",
       "pl": "Dworzec Poznań Główny, Stary Rynek i lotnisko Poznań–Ławica (POZ) wymagają odrębnych ustaleń odbioru.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Pickup at Poznań Główny, the Old Market or Poznań–Ławica Airport (POZ) requires different timing.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Pickup at Poznań Główny, the Old Market or Poznań–Ławica Airport (POZ) requires different timing.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Pickup at Poznań Główny, the Old Market or Poznań–Ławica Airport (POZ) requires different timing.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Pickup at Poznań Główny, the Old Market or Poznań–Ławica Airport (POZ) requires different timing."
+      "lt": "Poznanės pagrindinė stotis, Senasis turgus ir Lavicos (POZ) oro uostas.",
+      "lv": "Poznaņas galvenā stacija, Vecais tirgus un Lavicas (POZ) lidosta.",
+      "de": "Poznań Główny, Alter Markt und Flughafen Ławica (POZ) sind getrennte Abholstellen.",
+      "fr": "Poznań Główny, vieux marché et aéroport Ławica (POZ) sont distincts."
     },
     "parent": "warsaw"
   },
@@ -208,10 +208,10 @@ export const geoCities = [
       "en": "Rzeszów Główny and Jasionka Airport (RZE) are separate meeting points; provide flight details for the airport.",
       "ru": "Вокзал Rzeszów Główny и аэропорт Ясёнка (RZE) — разные места подачи; при прилёте укажите рейс.",
       "pl": "Rzeszów Główny i lotnisko Jasionka (RZE) są osobnymi punktami odbioru; dla lotniska podaj lot.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Rzeszów Główny and Jasionka Airport (RZE) are separate meeting points; provide flight details for the airport.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Rzeszów Główny and Jasionka Airport (RZE) are separate meeting points; provide flight details for the airport.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Rzeszów Główny and Jasionka Airport (RZE) are separate meeting points; provide flight details for the airport.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Rzeszów Główny and Jasionka Airport (RZE) are separate meeting points; provide flight details for the airport."
+      "lt": "Žešuvo pagrindinė stotis ir Jasionkos (RZE) oro uostas nėra viena vieta.",
+      "lv": "Žešuvas galvenā stacija un Jasionkas (RZE) lidosta ir atsevišķas vietas.",
+      "de": "Rzeszów Główny liegt in der Stadt, Flughafen RZE in Jasionka außerhalb.",
+      "fr": "Rzeszów Główny est en ville, l’aéroport RZE est à Jasionka."
     },
     "parent": "warsaw"
   },
@@ -232,10 +232,10 @@ export const geoCities = [
       "en": "Łódź Fabryczna, Piotrkowska Street and Łódź Airport (LCJ) are distinct locations. Request a quote for the long ride.",
       "ru": "Вокзал Лодзь-Фабрычная, улица Пётрковская и аэропорт LCJ — разные места встречи; цена по запросу.",
       "pl": "Łódź Fabryczna, ul. Piotrkowska i lotnisko LCJ to oddzielne miejsca odbioru; cena na zapytanie.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Łódź Fabryczna, Piotrkowska Street and Łódź Airport (LCJ) are distinct locations. Request a quote for the long ride.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Łódź Fabryczna, Piotrkowska Street and Łódź Airport (LCJ) are distinct locations. Request a quote for the long ride.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Łódź Fabryczna, Piotrkowska Street and Łódź Airport (LCJ) are distinct locations. Request a quote for the long ride.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Łódź Fabryczna, Piotrkowska Street and Łódź Airport (LCJ) are distinct locations. Request a quote for the long ride."
+      "lt": "Lodzės Fabryczna stotis, Piotrkovskos gatvė ir LCJ oro uostas yra skirtingi taškai.",
+      "lv": "Lodzas Fabryczna stacija, Pjotrkovskas iela un LCJ lidosta ir dažādas vietas.",
+      "de": "Łódź Fabryczna, Piotrkowska-Straße und Flughafen LCJ benötigen je eigene Treffpunkte.",
+      "fr": "Łódź Fabryczna, rue Piotrkowska et aéroport LCJ sont des rendez-vous différents."
     },
     "parent": "warsaw"
   },
@@ -256,10 +256,10 @@ export const geoCities = [
       "en": "Szczecin Główny is in the city while airport SZZ lies near Goleniów. A private Minsk road trip is very long.",
       "ru": "Вокзал Щецин-Главный — в городе, аэропорт SZZ — рядом с Голенювом. Дорога в Минск очень дальняя.",
       "pl": "Szczecin Główny leży w mieście, a lotnisko SZZ pod Goleniowem. Podróż do Mińska jest bardzo długa.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Szczecin Główny is in the city while airport SZZ lies near Goleniów. A private Minsk road trip is very long.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Szczecin Główny is in the city while airport SZZ lies near Goleniów. A private Minsk road trip is very long.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Szczecin Główny is in the city while airport SZZ lies near Goleniów. A private Minsk road trip is very long.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Szczecin Główny is in the city while airport SZZ lies near Goleniów. A private Minsk road trip is very long."
+      "lt": "Ščecino pagrindinė stotis mieste, o SZZ oro uostas prie Goleniuovo; kelionė ilga.",
+      "lv": "Ščecinas stacija ir pilsētā, bet SZZ lidosta pie Goļeņovas; ceļš ir tāls.",
+      "de": "Szczecin Hauptbahnhof ist in der Stadt, Flughafen SZZ dagegen bei Goleniów.",
+      "fr": "La gare de Szczecin est en ville, mais l’aéroport SZZ se trouve près de Goleniów."
     },
     "parent": "warsaw"
   },
@@ -280,10 +280,10 @@ export const geoCities = [
       "en": "Bydgoszcz Główna and Bydgoszcz Airport (BZG) are different pickup locations; quote and route are confirmed separately.",
       "ru": "Вокзал Быдгощ-Главная и аэропорт BZG — разные места подачи; маршрут и цена уточняются отдельно.",
       "pl": "Bydgoszcz Główna i lotnisko BZG to różne miejsca odbioru; trasa oraz wycena są sprawdzane osobno.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Bydgoszcz Główna and Bydgoszcz Airport (BZG) are different pickup locations; quote and route are confirmed separately.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Bydgoszcz Główna and Bydgoszcz Airport (BZG) are different pickup locations; quote and route are confirmed separately.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Bydgoszcz Główna and Bydgoszcz Airport (BZG) are different pickup locations; quote and route are confirmed separately.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Bydgoszcz Główna and Bydgoszcz Airport (BZG) are different pickup locations; quote and route are confirmed separately."
+      "lt": "Bydgoščiaus pagrindinė stotis ir BZG oro uostas yra atskiros paėmimo vietos.",
+      "lv": "Bidgoščas galvenā stacija un BZG lidosta ir atšķirīgas saņemšanas vietas.",
+      "de": "Bydgoszcz Główna und Flughafen BZG sind zwei verschiedene Treffpunkte.",
+      "fr": "Bydgoszcz Główna et l’aéroport BZG sont deux lieux de départ distincts."
     },
     "parent": "warsaw"
   },
@@ -304,10 +304,10 @@ export const geoCities = [
       "en": "Choose pickup at Olsztyn Główny or your Masurian accommodation; confirm your actual location before the Belarus journey.",
       "ru": "Укажите вокзал Ольштын-Главный или точный адрес отеля на Мазурах перед поездкой в Беларусь.",
       "pl": "Wybierz dworzec Olsztyn Główny lub dokładny adres noclegu na Mazurach przed przejazdem na Białoruś.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Choose pickup at Olsztyn Główny or your Masurian accommodation; confirm your actual location before the Belarus journey.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Choose pickup at Olsztyn Główny or your Masurian accommodation; confirm your actual location before the Belarus journey.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Choose pickup at Olsztyn Główny or your Masurian accommodation; confirm your actual location before the Belarus journey.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Choose pickup at Olsztyn Główny or your Masurian accommodation; confirm your actual location before the Belarus journey."
+      "lt": "Olštyno pagrindinė stotis arba viešbučio adresas Mozūruose – nurodykite tikslią vietą.",
+      "lv": "Olštinas galvenā stacija vai viesnīca Mazūrijā – precizējiet adresi.",
+      "de": "Olsztyn Główny oder eine Unterkunft in Masuren: den konkreten Ort angeben.",
+      "fr": "Gare d’Olsztyn Główny ou hébergement en Mazurie : précisez l’adresse."
     },
     "parent": "warsaw"
   },
@@ -328,10 +328,10 @@ export const geoCities = [
       "en": "Kaunas centre, railway station and Karmėlava Airport (KUN) differ. Specify whether collection is at the airport terminal.",
       "ru": "Центр Каунаса, вокзал и аэропорт Кармелава (KUN) — разные точки подачи. Уточните терминал.",
       "pl": "Centrum Kowna, dworzec i lotnisko KUN w Karmėlavie to różne punkty. Wskaż właściwe miejsce.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Kaunas centre, railway station and Karmėlava Airport (KUN) differ. Specify whether collection is at the airport terminal.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Kaunas centre, railway station and Karmėlava Airport (KUN) differ. Specify whether collection is at the airport terminal.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Kaunas centre, railway station and Karmėlava Airport (KUN) differ. Specify whether collection is at the airport terminal.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Kaunas centre, railway station and Karmėlava Airport (KUN) differ. Specify whether collection is at the airport terminal."
+      "lt": "Kauno centras, stotis ir Karmėlavos (KUN) oro uostas yra skirtingi taškai.",
+      "lv": "Kauņas centrs, stacija un Karmēlavas lidosta (KUN) ir atšķirīgas vietas.",
+      "de": "Zentrum Kaunas, Bahnhof und Karmėlava-Flughafen (KUN) sind verschiedene Abholorte.",
+      "fr": "Centre de Kaunas, gare et aéroport de Karmėlava (KUN) sont distincts."
     },
     "parent": "vilnius"
   },
@@ -352,10 +352,10 @@ export const geoCities = [
       "en": "Klaipėda port, Old Town and coach terminal require exact addresses; Palanga Airport (PLQ) is outside the city.",
       "ru": "Порт Клайпеды, Старый город и автовокзал требуют точного адреса; аэропорт Паланги (PLQ) за городом.",
       "pl": "Port w Kłajpedzie, Stare Miasto i dworzec autobusowy wymagają adresu; lotnisko PLQ jest poza miastem.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Klaipėda port, Old Town and coach terminal require exact addresses; Palanga Airport (PLQ) is outside the city.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Klaipėda port, Old Town and coach terminal require exact addresses; Palanga Airport (PLQ) is outside the city.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Klaipėda port, Old Town and coach terminal require exact addresses; Palanga Airport (PLQ) is outside the city.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Klaipėda port, Old Town and coach terminal require exact addresses; Palanga Airport (PLQ) is outside the city."
+      "lt": "Klaipėdos uostas, senamiestis ir autobusų stotis; Palangos (PLQ) oro uostas už miesto.",
+      "lv": "Klaipēdas osta, vecpilsēta un autoosta; Palangas (PLQ) lidosta atrodas ārpus pilsētas.",
+      "de": "Hafen, Altstadt und Busbahnhof Klaipėda; Flughafen Palanga (PLQ) liegt außerhalb.",
+      "fr": "Port, vieille ville et gare routière de Klaipėda ; l’aéroport PLQ est hors de la ville."
     },
     "parent": "vilnius"
   },
@@ -376,10 +376,10 @@ export const geoCities = [
       "en": "Šiauliai railway station or your exact city address can be a pickup point; the Hill of Crosses is outside town.",
       "ru": "Вокзал Шяуляя или городской адрес; Гора крестов находится за городом, уточните место подачи.",
       "pl": "Dworzec w Szawlach albo adres w mieście; Góra Krzyży leży poza miastem, więc doprecyzuj miejsce.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Šiauliai railway station or your exact city address can be a pickup point; the Hill of Crosses is outside town.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Šiauliai railway station or your exact city address can be a pickup point; the Hill of Crosses is outside town.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Šiauliai railway station or your exact city address can be a pickup point; the Hill of Crosses is outside town.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Šiauliai railway station or your exact city address can be a pickup point; the Hill of Crosses is outside town."
+      "lt": "Šiaulių geležinkelio stotis ar miesto adresas; Kryžių kalnas yra už miesto.",
+      "lv": "Šauļu dzelzceļa stacija vai pilsētas adrese; Krustu kalns atrodas ārpus pilsētas.",
+      "de": "Bahnhof Šiauliai oder Stadtadresse; der Berg der Kreuze liegt außerhalb.",
+      "fr": "Gare de Šiauliai ou adresse en ville ; la Colline des Croix est hors de la ville."
     },
     "parent": "vilnius"
   },
@@ -400,10 +400,10 @@ export const geoCities = [
       "en": "Panevėžys bus station and city hotels are possible pickup descriptions. Confirm the actual address and onward Belarus route.",
       "ru": "Автовокзал Паневежиса и городские гостиницы — разные адреса; укажите точную точку подачи.",
       "pl": "Dworzec autobusowy w Poniewieżu i hotele to różne miejsca; podaj dokładny adres.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Panevėžys bus station and city hotels are possible pickup descriptions. Confirm the actual address and onward Belarus route.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Panevėžys bus station and city hotels are possible pickup descriptions. Confirm the actual address and onward Belarus route.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Panevėžys bus station and city hotels are possible pickup descriptions. Confirm the actual address and onward Belarus route.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Panevėžys bus station and city hotels are possible pickup descriptions. Confirm the actual address and onward Belarus route."
+      "lt": "Panevėžio autobusų stotis ir miesto viešbučiai – įrašykite tikslų adresą.",
+      "lv": "Panevēžas autoosta un pilsētas viesnīcas – norādiet precīzu adresi.",
+      "de": "Busbahnhof Panevėžys oder Stadthotel: exakte Adresse angeben.",
+      "fr": "Gare routière de Panevėžys ou hôtel en ville : précisez l’adresse."
     },
     "parent": "vilnius"
   },
@@ -424,10 +424,10 @@ export const geoCities = [
       "en": "Druskininkai spa hotels and resort apartments can be pickup points, but border route availability must be checked carefully.",
       "ru": "Санатории и апартаменты Друскининкая — возможные адреса подачи; пограничные маршруты требуют проверки.",
       "pl": "Hotele uzdrowiskowe i apartamenty w Druskienikach to punkty odbioru; przejazd graniczny wymaga weryfikacji.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Druskininkai spa hotels and resort apartments can be pickup points, but border route availability must be checked carefully.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Druskininkai spa hotels and resort apartments can be pickup points, but border route availability must be checked carefully.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Druskininkai spa hotels and resort apartments can be pickup points, but border route availability must be checked carefully.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Druskininkai spa hotels and resort apartments can be pickup points, but border route availability must be checked carefully."
+      "lt": "Druskininkų sanatorijos ir apartamentai skirtingose gatvėse; sienos maršrutą tikrinkite.",
+      "lv": "Druskininku sanatorijas un apartamenti atrodas dažādās vietās; pārbaudiet robežu.",
+      "de": "Kurhotels und Apartments in Druskininkai: genaue Adresse und Grenzroute prüfen.",
+      "fr": "Hôtels thermaux et appartements à Druskininkai : précisez l’adresse et la frontière."
     },
     "parent": "vilnius"
   },
@@ -448,10 +448,10 @@ export const geoCities = [
       "en": "Daugavpils railway station, fortress area and hotels differ. Confirm crossing availability before planning your Minsk departure.",
       "ru": "Вокзал Даугавпилса, район крепости и отели — разные места подачи; проверьте переходы в Беларусь.",
       "pl": "Dworzec w Dyneburgu, okolice twierdzy i hotele to różne miejsca; zweryfikuj przejścia graniczne.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Daugavpils railway station, fortress area and hotels differ. Confirm crossing availability before planning your Minsk departure.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Daugavpils railway station, fortress area and hotels differ. Confirm crossing availability before planning your Minsk departure.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Daugavpils railway station, fortress area and hotels differ. Confirm crossing availability before planning your Minsk departure.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Daugavpils railway station, fortress area and hotels differ. Confirm crossing availability before planning your Minsk departure."
+      "lt": "Daugpilio stotis, tvirtovė ir viešbučiai – skirtingi paėmimo taškai.",
+      "lv": "Daugavpils stacija, cietoksnis un viesnīcas ir atšķirīgas saņemšanas vietas.",
+      "de": "Bahnhof Daugavpils, Festung und Hotels: den genauen Treffpunkt angeben.",
+      "fr": "Gare de Daugavpils, forteresse et hôtels : précisez le rendez-vous."
     },
     "parent": "riga"
   },
@@ -472,10 +472,10 @@ export const geoCities = [
       "en": "Jūrmala stretches along the coast. Specify whether pickup is in Majori, Dzintari or another district, not just 'Jūrmala'.",
       "ru": "Юрмала протяжённая: уточните Майори, Дзинтари или другой район, а не просто «Юрмала».",
       "pl": "Jurmała jest rozległa: podaj Majori, Dzintari lub inną dzielnicę, nie tylko nazwę miasta.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Jūrmala stretches along the coast. Specify whether pickup is in Majori, Dzintari or another district, not just 'Jūrmala'.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Jūrmala stretches along the coast. Specify whether pickup is in Majori, Dzintari or another district, not just 'Jūrmala'.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Jūrmala stretches along the coast. Specify whether pickup is in Majori, Dzintari or another district, not just 'Jūrmala'.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Jūrmala stretches along the coast. Specify whether pickup is in Majori, Dzintari or another district, not just 'Jūrmala'."
+      "lt": "Jūrmala ilga pakrantės juosta: nurodykite Majorus, Dzintarus ar kitą rajoną.",
+      "lv": "Jūrmala ir gara piekrastes pilsēta: norādiet Majorus, Dzintarus vai citu rajonu.",
+      "de": "Jūrmala liegt langgezogen an der Küste: Majori, Dzintari oder anderes Viertel angeben.",
+      "fr": "Jūrmala s’étend sur la côte : précisez Majori, Dzintari ou un autre quartier."
     },
     "parent": "riga"
   },
@@ -496,10 +496,10 @@ export const geoCities = [
       "en": "Liepāja city centre, railway station and the northern Karosta district are far apart for pickup scheduling.",
       "ru": "Центр Лиепаи, вокзал и северный район Кароста — разные места встречи; сообщите адрес заранее.",
       "pl": "Centrum Lipawy, dworzec i północna Karosta to różne punkty odbioru; podaj konkretny adres.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Liepāja city centre, railway station and the northern Karosta district are far apart for pickup scheduling.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Liepāja city centre, railway station and the northern Karosta district are far apart for pickup scheduling.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Liepāja city centre, railway station and the northern Karosta district are far apart for pickup scheduling.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Liepāja city centre, railway station and the northern Karosta district are far apart for pickup scheduling."
+      "lt": "Liepojos centras, geležinkelio stotis ir šiaurinė Karostos dalis yra nutolę.",
+      "lv": "Liepājas centrs, dzelzceļa stacija un ziemeļu Karosta ir attālinātas vietas.",
+      "de": "Innenstadt Liepāja, Bahnhof und das nördliche Karosta-Viertel liegen auseinander.",
+      "fr": "Centre de Liepāja, gare et quartier nord de Karosta sont éloignés."
     },
     "parent": "riga"
   },
@@ -520,10 +520,10 @@ export const geoCities = [
       "en": "Jelgava railway station, palace area and suburban addresses require a specific meeting point for an onward Minsk transfer.",
       "ru": "Вокзал Елгавы, дворцовый район и пригороды требуют точного места встречи.",
       "pl": "Dworzec w Jełgawie, okolice pałacu i przedmieścia wymagają dokładnego punktu odbioru.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Jelgava railway station, palace area and suburban addresses require a specific meeting point for an onward Minsk transfer.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Jelgava railway station, palace area and suburban addresses require a specific meeting point for an onward Minsk transfer.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Jelgava railway station, palace area and suburban addresses require a specific meeting point for an onward Minsk transfer.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Jelgava railway station, palace area and suburban addresses require a specific meeting point for an onward Minsk transfer."
+      "lt": "Jelgavos stotis, rūmų apylinkės ir priemiesčiai – nurodykite tikslų susitikimą.",
+      "lv": "Jelgavas stacija, pils apkārtne un priekšpilsētas – precīzu vietu norādiet iepriekš.",
+      "de": "Bahnhof Jelgava, Schlossgelände und Vororte: den Treffpunkt präzisieren.",
+      "fr": "Gare de Jelgava, palais et banlieue : indiquez le lieu de rendez-vous."
     },
     "parent": "riga"
   },
@@ -544,10 +544,10 @@ export const geoCities = [
       "en": "Rēzekne I and Rēzekne II railway stations are different. Specify the correct station and confirm the border plan.",
       "ru": "В Резекне есть станции Резекне I и Резекне II — не путайте их; уточните маршрут и границу.",
       "pl": "W Rzeżycy są osobne stacje Rēzekne I i II; wskaż właściwą i uzgodnij trasę graniczną.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Rēzekne I and Rēzekne II railway stations are different. Specify the correct station and confirm the border plan.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Rēzekne I and Rēzekne II railway stations are different. Specify the correct station and confirm the border plan.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Rēzekne I and Rēzekne II railway stations are different. Specify the correct station and confirm the border plan.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Rēzekne I and Rēzekne II railway stations are different. Specify the correct station and confirm the border plan."
+      "lt": "Rėzeknėje yra Rēzekne I ir Rēzekne II stotys; nurodykite tinkamą.",
+      "lv": "Rēzeknē ir divas stacijas: Rēzekne I un Rēzekne II. Norādiet pareizo.",
+      "de": "Rēzekne I und Rēzekne II sind verschiedene Bahnhöfe: den richtigen auswählen.",
+      "fr": "Rēzekne I et Rēzekne II sont deux gares différentes : précisez laquelle."
     },
     "parent": "riga"
   },
@@ -568,10 +568,10 @@ export const geoCities = [
       "en": "Berlin Hauptbahnhof, Ostbahnhof and Brandenburg Airport (BER) are distinct departure points; a multi-country road trip requires advance feasibility checks.",
       "ru": "Берлин-Главный, Восточный вокзал и аэропорт BER — разные точки подачи; маршрут через несколько стран нужно согласовать.",
       "pl": "Berlin Hauptbahnhof, Ostbahnhof i lotnisko BER to różne miejsca; długa trasa przez kilka państw wymaga weryfikacji.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Berlin Hauptbahnhof, Ostbahnhof and Brandenburg Airport (BER) are distinct departure points; a multi-country road trip requires advance feasibility checks.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Berlin Hauptbahnhof, Ostbahnhof and Brandenburg Airport (BER) are distinct departure points; a multi-country road trip requires advance feasibility checks.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Berlin Hauptbahnhof, Ostbahnhof and Brandenburg Airport (BER) are distinct departure points; a multi-country road trip requires advance feasibility checks.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Berlin Hauptbahnhof, Ostbahnhof and Brandenburg Airport (BER) are distinct departure points; a multi-country road trip requires advance feasibility checks."
+      "lt": "Berlyno pagrindinė, Rytų stotys ir BER oro uostas – skirtingi išvykimo taškai.",
+      "lv": "Berlīnes centrālā un Austrumu stacija, kā arī BER lidosta ir atšķirīgas vietas.",
+      "de": "Berlin Hauptbahnhof, Ostbahnhof und Flughafen BER: separate Abholpunkte und lange Reise.",
+      "fr": "Berlin Hauptbahnhof, Ostbahnhof et aéroport BER : trois lieux différents et trajet très long."
     },
     "parent": "warsaw"
   },
@@ -592,10 +592,10 @@ export const geoCities = [
       "en": "Paris Gare du Nord, Gare de l’Est, CDG and Orly (ORY) are widely separated. Long-distance cross-border road travel is subject to an individual assessment.",
       "ru": "Северный и Восточный вокзалы Парижа, CDG и Орли (ORY) — разные места; дальний международный маршрут требует проверки.",
       "pl": "Gare du Nord, Gare de l’Est, CDG i Orly (ORY) to odległe miejsca odbioru; długi transfer wymaga potwierdzenia.",
-      "lt": "Patikslinkite geležinkelio stotį, miesto adresą ar oro uostą. Įrašykite tikslų adresą ir bagažą. Paris Gare du Nord, Gare de l’Est, CDG and Orly (ORY) are widely separated. Long-distance cross-border road travel is subject to an individual assessment.",
-      "lv": "Precizējiet staciju, adresi pilsētā vai lidostu. Norādiet precīzu vietu un bagāžu. Paris Gare du Nord, Gare de l’Est, CDG and Orly (ORY) are widely separated. Long-distance cross-border road travel is subject to an individual assessment.",
-      "de": "Bitte Bahnhof, Stadtadresse oder Flughafen eindeutig angeben. Genaue Abholadresse und Gepäck helfen bei der Planung. Paris Gare du Nord, Gare de l’Est, CDG and Orly (ORY) are widely separated. Long-distance cross-border road travel is subject to an individual assessment.",
-      "fr": "Précisez la gare, l’adresse ou l’aéroport, avec le lieu exact de rendez-vous et les bagages. Paris Gare du Nord, Gare de l’Est, CDG and Orly (ORY) are widely separated. Long-distance cross-border road travel is subject to an individual assessment."
+      "lt": "Paryžiaus Gare du Nord, Gare de l’Est, CDG ir Orli – skirtingos vietos; kelionė labai ilga.",
+      "lv": "Parīzes Gare du Nord, Gare de l’Est, CDG un Orlī ir atšķirīgi punkti; brauciens ļoti tāls.",
+      "de": "Gare du Nord, Gare de l’Est, CDG und Orly sind weit auseinander; Fahrt nach Minsk sehr lang.",
+      "fr": "Gare du Nord, Gare de l’Est, CDG et Orly sont éloignés : très long trajet vers Minsk."
     },
     "parent": "warsaw"
   }
