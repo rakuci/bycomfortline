@@ -21,6 +21,7 @@ const known = new Set(allFiles.map(x => '/' + relative(root, x).replaceAll('\\',
 const htmlFiles = allFiles.filter(x => x.endsWith('.html'));
 const indexable = [];
 const titles = new Map();
+const descriptions = new Map();
 const issues = [];
 const urlToFile = url => {
   const normalized = url.replace(site, '').split(/[?#]/)[0];
@@ -47,6 +48,14 @@ for (const path of htmlFiles) {
   if (!isThankyou && (html.match(/<h1\b/g)||[]).length !== 1) issues.push(local + ': invalid H1');
   if (!isThankyou && !setOfCanonicalSitemap.has(canon)) issues.push(local + ': missing sitemap canonical');
   if (!isThankyou && !html.includes('name="description"')) issues.push(local + ': no description');
+  if (!isThankyou) {
+    const description = html.match(/<meta name="description" content="([^"]*)"/)?.[1];
+    if (!description) issues.push(local + ': missing description content');
+    else if (descriptions.has(description)) issues.push(local + ': duplicate description with ' + descriptions.get(description));
+    else descriptions.set(description, local);
+    const expectedCanonical = site + local.slice(0,-'index.html'.length);
+    if (canon !== expectedCanonical) issues.push(local + ': canonical mismatch ' + canon);
+  }
   if (!isThankyou && titles.has(title)) issues.push(local + ': duplicate title with ' + titles.get(title));
   if (!isThankyou) titles.set(title,local);
   const match = local.match(/^\/(en|ru|pl|lt|lv|de|fr)\//);
@@ -56,6 +65,12 @@ for (const path of htmlFiles) {
     for (const lang of langs) if (!alts.some(a=>a[1]===lang)) issues.push(local+': missing hreflang '+lang);
     for (const alt of alts) if (!known.has(urlToFile(alt[2]))) issues.push(local+': broken hreflang '+alt[2]);
     if (!html.includes('action="/api/booking"')) issues.push(local+': missing booking form');
+    if (/^\/(en|ru|pl|lt|lv|de|fr)\/(transfers|transfery|pervezimai|transferi|privattransfers|transferts)\/[^/]+\/index\.html$/.test(local)) {
+      if (!html.includes('class="dest-route-context"')) issues.push(local+': missing local journey context');
+      const to = html.match(/name="to" value="([^"]+)"/)?.[1] || '';
+      const from = html.match(/name="fromPreset" value="([^"]+)"/)?.[1] || '';
+      if (!to || !from || to === from) issues.push(local+': booking not prefilled for actual route');
+    }
   }
   if (isThankyou && !html.includes('content="noindex,follow"')) issues.push(local+': thank-you is indexable');
   if (!isThankyou && local !== '/index.html') indexable.push(local);
