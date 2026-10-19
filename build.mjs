@@ -10,6 +10,7 @@ import { geoCities } from "./geo-cities.mjs";
 import { geoLocale } from "./geo-locales.mjs";
 import { belarusDestinations } from "./belarus-destinations.mjs";
 import { destinationLocale } from "./destination-locales.mjs";
+import { sourceCountryContext, destinationZoneContext, routeModeContext } from "./route-pair-context.mjs";
 import { locationCatalog, locationLabels } from "./booking-locations.mjs";
 import { bookingPopupUi } from "./booking-popup-i18n.mjs";
 import { dirname, join } from "node:path";
@@ -1048,7 +1049,7 @@ function destinationPage(lang,dest){
       <article><span class="dest-card-eyebrow">${esc(ui.arrivalTitle)}</span><h2>${esc(to)}</h2>
         <p>${esc(ui.arrivalLead)}</p><p class="dest-arrival-places">${esc(dest.arrivalOptions[lang])}</p></article>
       <article><span class="dest-card-eyebrow">${esc(ui.whyTitle)}</span><h2>${esc(ui.routePractical)}</h2>
-        <p>${esc(dest.specifics[lang])}</p><p class="dest-arrival-note">${esc(ui.toMinsk)}</p></article>
+        <p>${esc(dest.specifics[lang])}</p><p>${esc(destinationZoneContext[dest.zone][lang])}</p><p class="dest-arrival-note">${esc(ui.toMinsk)}</p></article>
     </div>
   </section>
   <section class="section dest-origin-directory" id="departure-routes">
@@ -1130,7 +1131,13 @@ function transferPairPage(lang,origin,dest){
     </div>
     <div class="dest-pair-journey">
       <h2>${esc(ui.routePractical)}</h2>
-      <p>${esc(ui.borderAdvice)}</p><p>${esc(ui.priceAdvice)}</p>
+      <p>${esc(ui.borderAdvice)}</p>
+      <div class="dest-route-context">
+        <p>${esc(sourceCountryContext[origin.country][lang])}</p>
+        <p>${esc(destinationZoneContext[dest.zone][lang])}</p>
+        <p>${esc(routeModeContext[origin.type+"-"+dest.type][lang])}</p>
+      </div>
+      <p>${esc(ui.priceAdvice)}</p>
       <p class="dest-not-confirmed">${esc(ui.confirmed)}</p>
       <div class="dest-safety-links">${adviceLinks}</div>
       <a href="#booking-dialog" class="button primary" data-open-booking
