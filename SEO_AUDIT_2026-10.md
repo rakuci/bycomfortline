@@ -1,10 +1,17 @@
 # byComfortLine: organic search audit and rollout plan
 
 > **Current state (19 October 2026):** The original 15-page, five-language optimization
-> described below was the initial phase. A later expansion now generates **351 canonical,
+> described below was the initial phase. The destination-aware expansion now generates **1,499 canonical,
 > indexable URLs across seven languages** (English, Russian, Polish, Lithuanian, Latvian,
 > German and French), including **19 airport origins, 25 additional cities**, two geographic
 > directory pages per language, and original Warsaw/Vilnius/Riga routes.
+
+> A subsequent destination update adds **10 Belarus destination hubs** (Minsk,
+> Grodno, Brest, Lida, Vitebsk, Gomel, Mogilev, Baranovichi, Pinsk and MSQ)
+> and **153 curated origin–destination route pairs** per language for the
+> 9 non-Minsk destinations, from 17 strategically selected departure places.
+> This adds 1,148 indexable pages; original city-to-Minsk URLs remain unchanged.
+> There are 1,506 total HTML pages, including seven noindex thank-you pages.
 > Additional source files: `geo-airports.mjs`, `geo-cities.mjs`,
 > `geo-locales.mjs`, `fr-de-localization.mjs`.
 > Two sitemaps are generated: `sitemap.xml` (Google) and
@@ -218,3 +225,59 @@ this change.
 
 Avoid inserting unsupported prices, a false Warsaw office, guaranteed border
 priority, unsupported 24/7 promises, or fictitious review stars.
+
+
+## 19 October 2026: distinct Belarus destination and route hierarchy
+
+The original 351 canonical pages mostly served travel **to Minsk only**, even
+though the booking picker supported ten Belarus arrival points. New code creates:
+
+- **One landing page per Belarus destination** in each of seven languages,
+  including a distinct MSQ airport page separate from Minsk city. There is
+  also a localized, browseable Belarus destination directory.
+- **Dedicated point-to-point routes** for 17 selected pickup locations ×
+  9 destinations other than Minsk = 153 routes per language (1,071 pages).
+  The selected pickups are Warsaw, Chopin WAW, Modlin WMI, Białystok, Suwałki,
+  Vilnius, VNO, Kaunas, KUN, Riga, RIX, Daugavpils, Berlin, BER, Paris, CDG, ORY.
+- All route pages preselect both places in the one existing booking dialog,
+  use their own H1, title, meta description, canonical, language counterparts,
+  breadcrumb and TaxiService/Service details. Pricing remains **on request**.
+- Each route describes the exact **departure context** (airport/station/hotel),
+  **Belarus destination address options**, origin-country border considerations,
+  destination-region context and airport-to-airport versus city-to-city needs.
+- Every new page has internal HTML links to sibling destinations and
+  related departures; the homepages, core routes, geo-origin pages and footer
+  lead to the destination architecture.
+- Google and Yandex XML sitemaps contain **1,499** identical canonical URLs;
+  language hreflang variants are only in the Google sitemap and page HTML.
+  Search-only and thank-you pages are not added to the sitemap.
+- An automated `check-seo.mjs` pass now checks all **1,506 HTML pages**,
+  unique titles/descriptions, self-canonicals, booking defaults, internal links,
+  hreflang targets and both sitemaps during the build.
+
+Representative source-generated URLs (subject to live deployment):
+
+| Search intent | New page |
+| --- | --- |
+| Трансфер Варшава Брест | `/ru/transfery/warsaw-brest/` |
+| Warszawa Grodno transfer | `/pl/transfery/warsaw-grodno/` |
+| Vilnius Airport VNO to Lida | `/en/transfers/vno-lida/` |
+| Rīga RIX → Vitebska | `/lv/transferi/rix-vitebsk/` |
+| Berlin → Gomel Privattransfer | `/de/privattransfers/berlin-gomel/` |
+| Paris → Minsk Airport MSQ | `/fr/transferts/paris-msq/` |
+| Belarus destination Brest | `/en/belarus-destinations/brest/` |
+
+**SEO/editorial safety:** This is a curated high-intent matrix, not every
+theoretical combination of all 47 departure options and all Belarus
+destinations. Other origin combinations remain requestable through the form.
+Mass-producing near-identical pages for each mathematical combination could
+trigger Google's scaled content/doorway rules and Yandex duplicate clustering;
+the site should further expand only where independently verified service
+capacity and demand justify truly distinct guidance. See
+https://developers.google.com/search/docs/essentials/spam-policies and
+https://yandex.com/support/webmaster/en/yandex-indexing/about-doubles
+
+**Live and account checks remain open:** No evidence yet that Cloudflare
+deployed the latest commit, or that Google or Yandex accepted these URLs.
+After deployment, inspect representative HTTP responses, robots/sitemaps,
+Core Web Vitals, indexing, query impressions and booking conversions.
