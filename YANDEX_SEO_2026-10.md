@@ -12,8 +12,9 @@ Nobody can guarantee first place for all queries. Generic searches such as **«�
 - 7 human-translated site languages: **ru, pl, lt, lv, en, de, fr**, selected explicitly without IP-only redirection.
 - 19 airport-origin pages × 7 languages, covering WAW, WMI, KRK, GDN, KTW, WRO, POZ, RZE, LUZ, LCJ, SZZ, BZG, VNO, KUN, PLQ, RIX, BER, CDG, ORY.
 - 25 distinct city-origin pages × 7 languages. Core Warsaw, Vilnius and Riga routes stay at their existing original URLs, avoiding unnecessary 301 migrations.
+- Added one **Belarus destination hub for each of 10 arrivals**, including airport MSQ, and **153 curated distinct origin–destination route pages per language** for nine destinations other than Minsk. All routes have visible arrival and departure guidance, individual pricing information and unique Belarus city or airport details.
 - 2 country-grouped directories × 7 languages, one for airports and one for cities; every new page is reachable via internal HTML links, not only a sitemap.
-- All **351 indexable canonical URLs** have unique title tags, descriptions and localized on-page H1s. The original **7 thank-you URLs are noindex**.
+- All **1,499 indexable canonical URLs** have unique title tags, descriptions and localized on-page H1s. The **7 thank-you URLs are noindex**.
 - Self-referencing canonical tags, 7-language reciprocal HTML `hreflang`, one x-default option, localized menus.
 - Russian wording differentiates «такси / индивидуальный трансфер / аэропорт / по запросу» naturally on the appropriate page; no keyword-stuffed text.
 - Each origin includes its real IATA airport code or city identity, station/terminal specifics, individual quote, booking explanation, border caution, official airline/airport links when appropriate, related origins, and visible contact/identity.
@@ -81,3 +82,38 @@ After registration, save baseline top queries, indexed-page counts and click/imp
 - [Yandex query analytics](https://yandex.com/support/webmaster/en/service/queries-analytic)
 - [Yandex Business verified organizations](https://www.yandex.com/support/business-priority/en/add-company/add-org.html)
 - [Improving rankings](https://yandex.com/support/webmaster/en/yandex-indexing/rank.html)
+
+
+## Point-to-point Yandex queries (added 19 October 2026)
+
+The booking form already accepted Grodno, Brest, Lida, Vitebsk, Gomel,
+Mogilev, Baranovichi, Pinsk and Minsk Airport as destinations.
+Previously, these had no unique destination landing URL.
+They now have separate `/ru/goroda-belarusi/{id}/` destination hubs
+and localized, canonical point-to-point pages for **17 selected origins**.
+Examples:
+
+| Russian search intent | Distinct landing |
+| --- | --- |
+| Варшава Брест такси / трансфер | `/ru/transfery/warsaw-brest/` |
+| Варшава Гродно трансфер | `/ru/transfery/warsaw-grodno/` |
+| Аэропорт Вильнюса Лида трансфер | `/ru/transfery/vno-lida/` |
+| Рига Витебск индивидуальное такси | `/ru/transfery/riga-vitebsk/` |
+| Берлин Гомель частный трансфер | `/ru/transfery/berlin-gomel/` |
+| Париж Национальный аэропорт Минск MSQ | `/ru/transfery/paris-msq/` |
+
+**Special note:** A similar search string does not prove that a company
+offers a given route on every date, nor does the website claim that borders
+or premium vehicles are always available. The request is always reviewed.
+The route pages provide genuine origin/arrival distinctions, document checks
+and route-specific pickup details. Keep the **exact form values** consistent
+with the destination and display the operator contacts openly.
+
+To measure usefulness, monitor the **excluded DUPLICATE pages** report in
+Yandex Webmaster; if substantial groups emerge, consolidate weak routes
+into their stronger destination hubs instead of publishing still more
+template variants.
+
+The Yandex sitemap now lists **1,499 canonical URLs** and is regenerated
+automatically. Its reported live sitemap status, indexed-page count,
+positions and conversion performance remain unverified.
