@@ -1,0 +1,47 @@
+name: Build licensed city landmark WebPs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - city-landmark-photos.json
+      - scripts/prepare_city_landmark_images.py
+      - .github/workflows/city-landmark-images.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: city-landmark-images
+  cancel-in-progress: false
+
+jobs:
+  optimize-landmarks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Prepare Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image encoder
+        run: python -m pip install --disable-pip-version-check "Pillow>=10.4,<13"
+      - name: Validate Commons licence and render responsive WebP files
+        run: python scripts/prepare_city_landmark_images.py
+      - name: Save optimized assets and licences in the repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/assets/cities/*.webp dist/assets/cities/credits.json
+          if git diff --cached --quiet; then
+            echo "All 20 WebP variants already match the city manifest."
+            exit 0
+          fi
+          git commit -m "assets: publish 10 licensed city landmarks in responsive WebP"
+          git pull --rebase origin main
+          git push origin HEAD:main
