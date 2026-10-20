@@ -4202,3 +4202,92 @@ body { background:var(--cl-pearl); }
 .geo-city-landmark-placeholder small {font-size:13px;color:#e3d5b8;}
 .geo-city-landmark figcaption {margin-top:8px;color:#d6e3e3;font-size:12px;}
 @media(max-width:760px) {.geo-city-landmark{margin:18px 0 20px}.geo-city-landmark-placeholder{min-height:110px;padding:19px 20px;}}
+
+
+/* Licensed city imagery: optimized two-size WebP, uncluttered layout,
+   accessible photo credit, responsive image crop and no overflow. */
+.geo-city-landmark.has-photo {
+  width: min(100%, 675px);
+  max-width: 100%;
+  margin: 20px 0 26px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 18px;
+  background: #102d3a;
+  box-shadow: 0 15px 38px rgba(4,17,26,.22);
+}
+.geo-city-landmark.has-photo picture,
+.geo-city-landmark.has-photo img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+.geo-city-landmark.has-photo img {
+  aspect-ratio: 8 / 5;
+  object-fit: cover;
+  background: #1c3946;
+}
+.geo-city-landmark.has-photo figcaption {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 13px;
+  row-gap: 3px;
+  padding: 11px 15px 13px;
+  color: #eef5f3;
+  background: rgba(7,26,36,.92);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.geo-city-landmark.has-photo figcaption strong {
+  font-size: 13px;
+  font-weight: 760;
+  letter-spacing: -.01em;
+}
+.geo-city-landmark .geo-photo-credit {
+  color: #b9cbd0;
+  font-size: 10px;
+  line-height: 1.55;
+}
+.geo-city-landmark .geo-photo-credit a {
+  color: #dce4da;
+  text-decoration: underline;
+  text-decoration-color: rgba(231,237,230,.45);
+  text-underline-offset: 2px;
+}
+.geo-city-landmark .geo-photo-credit a:hover { color: #fff; }
+.geo-directory-card > .city-landmark-thumb {
+  display: block;
+  width: 40px;
+  height: 40px;
+  max-width: none;
+  margin: 0;
+  border-radius: 11px;
+  object-fit: cover;
+  background: #e5eeeb;
+}
+.dest-index-card > .city-landmark-thumb {
+  display: block;
+  width: 100%;
+  height: clamp(154px,17vw,205px);
+  margin: 0 0 17px;
+  border-radius: 13px;
+  object-fit: cover;
+  background: #e9efeb;
+}
+.dest-index-card:has(> .city-landmark-thumb) h2 { margin-top: 10px; }
+@media(max-width:760px) {
+  .geo-city-landmark.has-photo {
+    width: 100%;
+    margin: 16px 0 20px;
+    border-radius: 14px;
+  }
+  .geo-city-landmark.has-photo figcaption { padding: 10px 12px; }
+  .geo-city-landmark.has-photo figcaption strong { font-size: 12px; }
+  .dest-index-card > .city-landmark-thumb { height: 180px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .geo-city-landmark.has-photo { scroll-behavior: auto; }
+}
