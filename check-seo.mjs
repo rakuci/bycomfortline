@@ -61,6 +61,24 @@ for(const p of heritageRoutePhotos){
   }
 }
 
+const heritageCatalog = JSON.parse(await readFile(join(process.cwd(),'heritage-landmark-photos.json'),'utf8')).images;
+assert.equal(heritageCatalog.length, 4, 'Exactly four reviewed heritage photographs required');
+assert.deepEqual(new Set(heritageCatalog.map(p=>p.id)), photoIds, 'Heritage conversion catalogue must match the route photos');
+for(const photo of heritageCatalog) {
+  const source=heritageRoutePhotos.find(p=>p.id===photo.id);
+  assert(source&&source.sourcePage===photo.sourcePage&&source.file===photo.file,
+    'Heritage original file provenance mismatch: '+photo.id);
+  assert(source.credit===photo.credit&&source.license===photo.license&&source.licenseUrl===photo.licenseUrl,
+    'Heritage credit/licence mismatch: '+photo.id);
+}
+const heritageWebPs=heritageCatalog.flatMap(p=>[640,1200].map(w=>'/assets/heritage/'+p.id+'-'+w+'.webp'));
+const heritageCount=heritageWebPs.filter(path=>known.has(path)).length;
+if(heritageCount!==0&&heritageCount!==heritageWebPs.length)
+  throw new Error('Partial local heritage assets: '+heritageCount+' of '+heritageWebPs.length);
+if(heritageCount===heritageWebPs.length) {
+  assert(known.has('/assets/heritage/credits.json'), 'Heritage photo licence credits missing');
+}
+
 const cityPhotoManifest = JSON.parse(await readFile(join(process.cwd(),'city-landmark-photos.json'),'utf8')).images;
 const imageFiles = cityPhotoManifest.flatMap(photo=>
   photo.variants.map(width=>'/assets/cities/'+photo.base+'-'+width+'.webp'));
@@ -145,6 +163,7 @@ for(const airport of geoAirports) {
     if(!html.includes('class="geo-city-landmark has-photo geo-heritage-photo"')||
        !html.includes('data-heritage-photo')||
        !html.includes('data-fallback-src="/assets/cities/')||
+       (heritageCount===heritageWebPs.length&&!html.includes('/assets/heritage/'))||
        !html.includes('ImageObject')||
        !html.includes('creativecommons.org/licenses/')) {
       issues.push(lang+'/'+airport.id+': missing authentic credited Belarus destination image');
