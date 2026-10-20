@@ -66,7 +66,9 @@
   
     const candidates = (mode, value) => {
       const term = normalize(value);
-      const pool = entries.filter(item => item.mode === mode);
+      // Route requests work in both directions: Belarus, Europe and airports
+      // must be discoverable as either the departure or the destination.
+      const pool = entries;
       if (!term) {
         return pool.filter(item => item.popular).sort((a,b) => {
           const popular = mode === "to"
@@ -87,7 +89,7 @@
       }).filter(result => result.score < 99);
       scored.sort((a,b) => a.score-b.score || Number(b.item.popular)-Number(a.item.popular)
         || a.item.label.localeCompare(b.item.label));
-      return scored.slice(0,5).map(result=>result.item);
+      return scored.slice(0,6).map(result=>result.item);
     };
   
     function updatePosition(picker) {
@@ -173,11 +175,10 @@
       input.removeAttribute("aria-activedescendant");
       panel.replaceChildren();
   
-      if (!query.trim()) {
-        const caption=document.createElement("div");
-        caption.className="location-suggestions-caption";
-        caption.textContent=words.popular || "Popular places";
-        panel.append(caption);
+      // Never open a generic destination dropdown; only show actual type-ahead results.
+      if (!matches.length && normalize(query).length < 3) {
+        closePicker(picker);
+        return;
       }
       matches.forEach((item,i)=>{
         const opt=document.createElement("button");
@@ -207,7 +208,8 @@
   
       const customText=query.trim();
       const exact=matches.some(item=>normalize(item.label)===normalize(customText));
-      if (customText && !exact) {
+      // A single character should show matches, not a distracting "use X" row.
+      if (customText.length >= 3 && !exact) {
         const custom=document.createElement("button");
         custom.type="button";
         custom.id=panel.id+"-option-custom";
@@ -260,12 +262,10 @@
         if (event.key==="ArrowDown" || event.key==="ArrowUp"){
           event.preventDefault();
           if (picker!==activePicker) {
-            if (!input.value.trim()) {
-              const suggested=candidates(picker.dataset.locationMode,"");
-              input.setAttribute("aria-expanded","true");
-              const panel=picker.querySelector(".location-suggestions");
-              render(picker,suggested[0]?.label || "");
-            } else render(picker,input.value);
+            // Arrow keys move within suggestions created by typing; an empty
+            // field never invokes a classic dropdown of all destinations.
+            if (!input.value.trim()) return;
+            render(picker,input.value);
           }
           const total=picker.querySelectorAll(".location-suggestions [role=option]").length;
           if (total) activate(picker,event.key==="ArrowDown"?picker._activeIndex+1:picker._activeIndex===-1?total-1:picker._activeIndex-1);
