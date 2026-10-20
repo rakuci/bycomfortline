@@ -146,11 +146,11 @@ for (const path of htmlFiles) {
   // of the DESTINATION, never just the departure city, a CSS background, or an icon.
   if (!isThankyou) {
     const main = html.split('<main>')[1]?.split('</main>')[0] || '';
-    const landingPhotos = [...main.matchAll(/<figure\\b[^>]*\\bdata-destination-id="([^"]+)"[^>]*>([\\s\\S]*?)<\\/figure>/g)];
+    const landingPhotos = [...main.matchAll(/<figure\b[^>]*\bdata-destination-id="([^"]+)"[^>]*>([\s\S]*?)<\/figure>/g)];
     if (landingPhotos.length === 0) {
       issues.push(local+': missing recognizable destination photograph in main content');
     } else {
-      const slug=local.split('/').filter(Boolean).at(-2);
+      const slug=local.split('/').filter(Boolean).at(-2)||'';
       const routeDest=belarusDestinations.map(x=>x.id).filter(id=>id!=='minsk')
         .find(id=>slug===id || slug.endsWith('-'+id));
       const expectedDestination=routeDest||'minsk';
@@ -159,9 +159,9 @@ for (const path of htmlFiles) {
         issues.push(local+': wrong photo city; required '+expectedDestination+' (found '+landingPhotos.map(p=>p[1]).join(',' )+')');
       } else {
         const figure=destinationFigure[2];
-        const img=figure.match(/<img\\b[^>]*>/)?.[0] || '';
-        const src=img.match(/\\bsrc="([^"]+)"/)?.[1] || '';
-        const alt=img.match(/\\balt="([^"]+)"/)?.[1] || '';
+        const img=figure.match(/<img\b[^>]*>/)?.[0] || '';
+        const src=img.match(/\bsrc="([^"]+)"/)?.[1] || '';
+        const alt=img.match(/\balt="([^"]+)"/)?.[1] || '';
         if(!src.startsWith('/assets/')||!known.has(src)) {
           issues.push(local+': destination photo must use an existing, locally hosted asset ('+src+')');
         }
