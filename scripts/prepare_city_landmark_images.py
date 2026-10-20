@@ -74,10 +74,12 @@ def metadata(source: dict) -> tuple[str, dict]:
     ext = info.get("extmetadata", {})
     licence = html.unescape(ext.get("LicenseShortName", {}).get("value", ""))
     licence_url = html.unescape(ext.get("LicenseUrl", {}).get("value", ""))
-    expected = source["license"].lower().replace(" ","")
-    actual = licence.lower().replace(" ","")
-    expected_url = source["licenseUrl"].rstrip("/")
-    if (expected not in actual and not licence_url.rstrip("/").startswith(expected_url)):
+    expected = source["license"].lower().replace(" ","").replace("-", "")
+    actual = licence.lower().replace(" ","").replace("-", "")
+    expected_url = urllib.parse.urlparse(source["licenseUrl"]).path.rstrip("/")
+    actual_url = urllib.parse.urlparse(licence_url).path.rstrip("/")
+    if not ((expected in actual) or (expected_url and actual_url.startswith(expected_url))
+            or (expected.startswith("cc0") and actual.startswith("cc0"))):
         raise ValueError(f"Licence mismatch: expected {source['license']}, Commons says {licence} / {licence_url}")
     return info.get("thumburl") or info["url"], info
 
@@ -108,25 +110,41 @@ def convert(source: dict, data: bytes) -> list[dict]:
     return result
 
 def main() -> None:
+    import argparse
+    parser = argparse.ArgumentParser(description="Curated Wikimedia photo conversion in ordered batches")
+    parser.add_argument("--batch",type=int,choices=[1,2,3],required=True)
+    parser.add_argument("--verify-only",action="store_true",
+        help="Check source availability, metadata and licences without writing images")
+    args = parser.parse_args()
     spec = json.loads(MANIFEST.read_text("utf-8"))
     entries = spec["images"]
-    if len(entries)!=10 or len(set(p["id"] for p in entries))!=10:
-        raise ValueError("This job requires exactly ten unique cities")
+    ids = [p["id"] for p in entries]
+    if len(entries) != 30 or len(set(ids)) != 30:
+        raise ValueError("Expected 30 unique alphabetically sorted cities in 3 groups of 10")
+    ordered = sorted(ids, key=lambda value: value.lower())
+    if ids != ordered:
+        raise ValueError("City manifest not in alphabetical order")
+    start = (args.batch - 1) * 10
+    current = entries[start:start + 10]
     OUTPUT.mkdir(parents=True, exist_ok=True)
     report = []
-    for i, photo in enumerate(entries, 1):
-        print(f"[{i}/10] {photo['city']} — {photo['landmark']} ({photo['credit']})",flush=True)
+    for i, photo in enumerate(current, 1):
+        print(f"[Batch {args.batch}/3 · {i}/10] {photo['city']} — {photo['landmark']} ({photo['credit']})", flush=True)
         url, info = metadata(photo)
-        print(f"  source: {info['width']}x{info['height']}, Commons licence verified",flush=True)
-        data = urlopen_bytes(url)
-        variants = convert(photo, data)
-        for item in variants:
-            print(f"  {item['file']}: {item['bytes']} bytes",flush=True)
+        print(f"  Wikimedia source: {info['width']} x {info['height']}; licence verified", flush=True)
+        variants = []
+        if not args.verify_only:
+            binary = urlopen_bytes(url)
+            variants = convert(photo, binary)
+            for item in variants:
+                print(f"  {item['file']}: {item['bytes']} bytes", flush=True)
         report.append({"id":photo["id"],"city":photo["city"],"source":photo["sourcePage"],
-                       "credit":photo["credit"],"license":photo["license"],
-                       "licenseUrl":photo["licenseUrl"],"variants":variants})
-    (OUTPUT / "credits.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n","utf-8")
-    print(f"Verified and optimized {len(report)} city photographs / {len(report)*2} WebP files",flush=True)
+            "credit":photo["credit"],"license":photo["license"],
+            "licenseUrl":photo["licenseUrl"],"variants":variants})
+    if not args.verify_only:
+        (OUTPUT / f"credits-batch-{args.batch}.json").write_text(
+            json.dumps(report, ensure_ascii=False, indent=2)+"\n","utf-8")
+        print(f"Batch {args.batch}: {len(report)} licensed photos / {len(report)*2} optimized WebPs",flush=True)
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
