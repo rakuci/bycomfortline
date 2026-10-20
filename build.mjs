@@ -1277,7 +1277,7 @@ function heritagePhotoFigure(lang,origin,destinationId="minsk"){
   if(!photo)return "";
   const destination=destinationId==="grodno"?"grodno":"minsk";
   const fallbackPhoto=curatedCityPhotos[destination];
-  const fallback=cityPhotoPreviewUrl(destination).replace(base,"");
+  const fallback="/assets/cities/"+fallbackPhoto.base+"-1200.webp";
   const name=photo.names[lang]||photo.names.en;
   const caption=photo.context[lang]||photo.context.en;
   const fallbackName=fallbackPhoto?.labels[lang]||fallbackPhoto?.landmark||destination;
@@ -1438,7 +1438,7 @@ function geoLocationPage(lang,place) {
         </nav>
         <span class="eyebrow light">${esc(t.countryLabels[place.country])} · ${isAirport?esc(t.airport):esc(t.city)}${place.code?" · "+place.code:""}</span>
         <h1>${esc(h1)}</h1>
-        ${landmarkImage}
+        ${isAirport?"":landmarkImage}
         <p>${esc(geoText(isAirport?t.introAirport:t.introCity,opts))}</p>
         <div class="hero-actions">
           <a href="#booking-dialog" data-open-booking class="button primary" aria-haspopup="dialog" aria-controls="booking-dialog">${esc(t.quote)} ${icons.arrow}</a>
@@ -1447,6 +1447,7 @@ function geoLocationPage(lang,place) {
         ${quickBooking(lang,place.parent,name)}
       </div>
     </section>
+    ${isAirport?`<section class="section geo-airport-landmark-section">${landmarkImage}</section>`:""}
     <div class="geo-content-wrap section">
       <div class="geo-page-facts">
         <div><span>${esc(isAirport?t.airport:t.city)}</span><strong>${esc(name)}</strong></div>
@@ -1507,9 +1508,15 @@ function routePage(lang, key) {
   const description = seo.description;
   const faqSchema = { "@type": "FAQPage", mainEntity: [...seo.faqs, ...l.faqs].map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
   const schema = { "@context": "https://schema.org", "@graph": [businessSchema(lang, canonical), { "@type": "Service", name: h1, serviceType: "Private cross-border airport transfer and chauffeur-driven intercity taxi", description: seo.intro, provider: { "@id": base + "/#business" }, areaServed: [l.fromNames[key], "Minsk"], url: canonical }, { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: l.nav.routes, item: `${base}/${lang}/` }, { "@type": "ListItem", position: 2, name: l.routeNames[key], item: canonical }] }, faqSchema] };
+  const origin=coreOriginProfiles.find(place=>place.id===key);
+  const heritage=heritagePhotoObject(lang,origin,"minsk");
+  if(heritage)schema["@graph"].push(heritage);
   const body = `${header(lang, "route", key)}<main>
     <section class="route-hero"><div class="route-hero-bg"></div><div class="route-hero-content"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(l.routeNames[key])}</span></nav><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(h1)}</h1><p>${esc(seo.intro)}</p><div class="hero-actions"><a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang, key)}</div><div class="journey-card"><div><span>${esc(l.fromNames[key])}</span><b>${r.airport}</b></div><div class="journey-line"><i></i><em>${r.distance}</em><i></i></div><div><span>${esc(destinationLabels[lang])}</span><b>BY</b></div></div></section>
     ${trustStrip(l)}
+    <section class="section route-cultural-story" aria-label="${esc(destinationLabels[lang])}">
+      ${heritagePhotoFigure(lang,origin,"minsk")}
+    </section>
     <section class="facts-section"><article><span>${icons.pin}</span><div><small>${esc(l.facts.distance)}</small><strong>${r.distance}</strong></div></article><article><span class="clock">◷</span><div><small>${esc(l.facts.time)}</small><strong>${r.time}</strong><em>${esc(l.facts.note)}</em></div></article><article><span class="plane">✈</span><div><small>${esc(l.facts.airport)}</small><strong>${r.airport}</strong></div></article></section>
     ${routeEditorial(lang, key)}
     ${destinationCardList(lang,coreOriginProfiles.find(origin=>origin.id===key))}
@@ -1668,9 +1675,6 @@ ${sitemapImageEntries.map(row=>{
   return `<url><loc>${loc}</loc><lastmod>${lastmod}</lastmod></url>`;
 }).join("\n")}
 </urlset>`);
-await put("robots.txt", `User-agent: *
-Allow: /
-Sitemap: ${base}/sitemap.xml
-`);
+await put("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${base}/sitemap.xml\nSitemap: ${base}/sitemap-yandex.xml\n`);
 // Stop Cloudflare deployment builds if a generated route, asset link, locale or sitemap is inconsistent.
 await import("./check-seo.mjs");
