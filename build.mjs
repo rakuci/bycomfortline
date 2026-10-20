@@ -1585,7 +1585,7 @@ for (const lang of Object.keys(locale)) {
   }
 }
 const sitemapImageEntries=sitemapEntries.map(entry=>{
-  const url=entry.match(/<loc>([^<]+)<\\/loc>/)?.[1];
+  const url=entry.match(/<loc>([^<]+)<\/loc>/)?.[1];
   const image=imageSitemapIndex.get(url);
   if(!image)return entry;
   return entry.replace(`<lastmod>${seoLastmod}</lastmod>`,`<lastmod>${photoLastmod}</lastmod>`)
