@@ -1303,7 +1303,7 @@ function cityPhotoObject(lang,id) {
     "license":p.licenseUrl,
     "acquireLicensePage":p.sourcePage,
     "copyrightNotice":p.license,
-    "width":1200,"height":750
+    ...(local?{"width":1200,"height":750}:{})
   }:null;
 }
 function cityPhotoUrl(id) {
