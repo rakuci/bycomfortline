@@ -1304,7 +1304,7 @@ function heritagePhotoFigure(lang,origin,destinationId="minsk"){
       <span class="heritage-caption-main"><strong>${esc(name)}</strong>
         <span class="heritage-note">${esc(caption)}</span>
         <span class="geo-photo-credit">Photo: <a href="${esc(photo.sourcePage)}" target="_blank" rel="noopener noreferrer">${esc(photo.credit)}</a> ·
-          <a href="${esc(photo.licenseUrl)}" target="_blank" rel="license noopener noreferrer">${esc(photo.license)}</a> · Wikimedia Commons</span>
+          <a href="${esc(photo.licenseUrl)}" target="_blank" rel="license noopener noreferrer">${esc(photo.license)}</a> · ${local?"resized without cropping, converted to WebP from Wikimedia Commons":"Wikimedia Commons source photograph"}</span>
       </span>
       <span class="heritage-caption-fallback" hidden>
         <strong>${esc(fallbackName)}</strong>
