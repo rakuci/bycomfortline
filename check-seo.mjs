@@ -5,6 +5,7 @@ import { join, relative } from 'node:path';
 import assert from 'node:assert/strict';
 import { geoAirports } from './geo-airports.mjs';
 import { heritageRoutePhotos, heritagePhotoByCountry } from './heritage-route-photos.mjs';
+import { belarusDestinations } from './belarus-destinations.mjs';
 
 const root = join(process.cwd(), 'dist');
 const langs = ['en','ru','pl','lt','lv','de','fr'];
@@ -141,6 +142,38 @@ for (const path of htmlFiles) {
     }
   }
   if (isThankyou && !html.includes('content="noindex,follow"')) issues.push(local+': thank-you is indexable');
+  // Every indexable landing URL must show an actual, locally hosted photograph
+  // of the DESTINATION, never just the departure city, a CSS background, or an icon.
+  if (!isThankyou) {
+    const main = html.split('<main>')[1]?.split('</main>')[0] || '';
+    const landingPhotos = [...main.matchAll(/<figure\\b[^>]*\\bdata-destination-id="([^"]+)"[^>]*>([\\s\\S]*?)<\\/figure>/g)];
+    if (landingPhotos.length === 0) {
+      issues.push(local+': missing recognizable destination photograph in main content');
+    } else {
+      const slug=local.split('/').filter(Boolean).at(-2);
+      const routeDest=belarusDestinations.map(x=>x.id).filter(id=>id!=='minsk')
+        .find(id=>slug===id || slug.endsWith('-'+id));
+      const expectedDestination=routeDest||'minsk';
+      const destinationFigure=landingPhotos.find(p=>p[1]===expectedDestination);
+      if(!destinationFigure) {
+        issues.push(local+': wrong photo city; required '+expectedDestination+' (found '+landingPhotos.map(p=>p[1]).join(',' )+')');
+      } else {
+        const figure=destinationFigure[2];
+        const img=figure.match(/<img\\b[^>]*>/)?.[0] || '';
+        const src=img.match(/\\bsrc="([^"]+)"/)?.[1] || '';
+        const alt=img.match(/\\balt="([^"]+)"/)?.[1] || '';
+        if(!src.startsWith('/assets/')||!known.has(src)) {
+          issues.push(local+': destination photo must use an existing, locally hosted asset ('+src+')');
+        }
+        if(!alt || alt.length<8 || !img.includes('width=') || !img.includes('height=')) {
+          issues.push(local+': destination image missing helpful alt text or intrinsic dimensions');
+        }
+        if(!figure.includes('geo-photo-credit')||!figure.includes('rel="license')) {
+          issues.push(local+': photograph missing linked photographer/licence credit');
+        }
+      }
+    }
+  }
   if (!isThankyou && local !== '/index.html') indexable.push(local);
   const assetLinks = [...html.matchAll(/\bhref="(\/[^"]+)"|\bsrc="(\/[^"]+)"/g)]
     .map(m=>m[1]||m[2]);
