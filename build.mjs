@@ -9,6 +9,7 @@ import { additionalLocales } from "./fr-de-localization.mjs";
 import { geoAirports } from "./geo-airports.mjs";
 import { geoCities } from "./geo-cities.mjs";
 import { geoLocale } from "./geo-locales.mjs";
+import { heritageRoutePhotos, heritagePhotoByCountry } from "./heritage-route-photos.mjs";
 import { belarusDestinations } from "./belarus-destinations.mjs";
 import { destinationLocale } from "./destination-locales.mjs";
 import { sourceCountryContext, destinationZoneContext, routeModeContext } from "./route-pair-context.mjs";
@@ -1102,15 +1103,17 @@ function transferPairPage(lang,origin,dest){
     {"@type":"ListItem","position":4,"name":h1,"item":canonical}
    ]}
  ]};
- const relevantPhoto=curatedCityPhotos[origin.id]?origin.id:curatedCityPhotos[dest.id]?dest.id:null;
- if(relevantPhoto)schema["@graph"].push(cityPhotoObject(lang,relevantPhoto));
+ const relevantPhoto=curatedCityPhotos[dest.id]?dest.id:null;
+ const heritagePhoto=heritageForRoute(origin,dest.id);
+ if(heritagePhoto) schema["@graph"].push(heritagePhotoObject(lang,origin,dest.id));
+ else if(relevantPhoto) schema["@graph"].push(cityPhotoObject(lang,relevantPhoto));
  const body=`${header(lang,"pair",{origin,dest})}<main>
   <section class="dest-pair-hero"><div class="dest-hero-inner">
     <nav class="breadcrumbs"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span>
       <a href="${destinationIndexPath(lang)}">${esc(ui.section)}</a><span>/</span>
       <a href="${destinationPath(lang,dest)}">${esc(to)}</a><span>/</span><span>${esc(from)}</span></nav>
     <span class="eyebrow light">${esc(ui.service)} · ${esc(ui.price)}</span>
-    <h1>${esc(h1)}</h1>${relevantPhoto?cityPhotoFigure(lang,relevantPhoto):""}<p>${esc(localeWords(ui.routeLead,values))}</p>
+    <h1>${esc(h1)}</h1>${heritagePhoto?heritagePhotoFigure(lang,origin,dest.id):relevantPhoto?cityPhotoFigure(lang,relevantPhoto):""}<p>${esc(localeWords(ui.routeLead,values))}</p>
     <div class="hero-actions">
       <a href="#booking-dialog" data-open-booking class="button primary" aria-controls="booking-dialog" aria-haspopup="dialog">${esc(ui.booking)} ${icons.arrow}</a>
       <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a>
@@ -1263,6 +1266,42 @@ function cityPhotoRemote(id,width=1200) {
 function cityPhotoPreviewUrl(id) {
   return cityPhotoUrl(id)||cityPhotoRemote(id,1200);
 }
+function heritageForRoute(origin,destinationId="minsk") {
+  const id=destinationId==="minsk"?(heritagePhotoByCountry[origin.country]||"minsk-city-hall")
+    :destinationId==="grodno"&&["PL","LT"].includes(origin.country)?"grodno-francis-xavier":null;
+  return heritageRoutePhotos.find(item=>item.id===id)||null;
+}
+
+function heritagePhotoFigure(lang,origin,destinationId="minsk"){
+  const photo=heritageForRoute(origin,destinationId);
+  if(!photo)return "";
+  const destination=destinationId==="grodno"?"grodno":"minsk";
+  const fallback=cityPhotoPreviewUrl(destination).replace(base,"");
+  const name=photo.names[lang]||photo.names.en;
+  const alt=name;
+  const caption=photo.context[lang]||photo.context.en;
+  return `<figure class="geo-city-landmark has-photo geo-heritage-photo">
+    <img src="${esc(photo.url)}" data-heritage-photo data-fallback-src="${esc(fallback)}"
+      loading="lazy" decoding="async" width="${photo.imageWidth}" height="${photo.imageHeight}"
+      alt="${esc(alt)}" title="${esc(name)}" referrerpolicy="no-referrer">
+    <figcaption><strong>${esc(name)}</strong>
+      <span class="heritage-note">${esc(caption)}</span>
+      <span class="geo-photo-credit">Photo: <a href="${esc(photo.sourcePage)}" target="_blank" rel="noopener noreferrer">${esc(photo.credit)}</a> ·
+        <a href="${esc(photo.licenseUrl)}" target="_blank" rel="license noopener noreferrer">${esc(photo.license)}</a> · Wikimedia Commons</span>
+    </figcaption>
+  </figure>`;
+}
+
+function heritagePhotoObject(lang,origin,destinationId="minsk"){
+  const photo=heritageForRoute(origin,destinationId);
+  if(!photo)return null;
+  return {"@type":"ImageObject","contentUrl":photo.url,"name":photo.names[lang]||photo.names.en,
+    "description":photo.context[lang]||photo.context.en,"creator":{"@type":"Person","name":photo.credit},
+    "creditText":photo.credit+" / Wikimedia Commons","license":photo.licenseUrl,
+    "acquireLicensePage":photo.sourcePage,"copyrightNotice":photo.license,
+    "width":photo.imageWidth,"height":photo.imageHeight};
+}
+
 function cityPhotoFigure(lang,id) {
   const photo=curatedCityPhotos[id];
   if(!photo)return "";
@@ -1345,7 +1384,7 @@ function geoLocationPage(lang,place) {
   const isAirport=place.type==="airport";
   const landmark = !isAirport ? cityLandmarks[place.id] : null;
   const landmarkCaption = landmark ? `${landmark.landmark} · ${landmark.city}` : "";
-  const landmarkImage = !isAirport && curatedCityPhotos[place.id] ? cityPhotoFigure(lang,place.id) : landmark ? `<figure class="geo-city-landmark"><div class="geo-city-landmark-placeholder" role="img" aria-label="${esc(landmarkCaption)}"><span>${esc(landmark.landmark)}</span><small>${esc(landmark.city)}</small></div><figcaption>${esc(landmarkCaption)}</figcaption></figure>` : "";
+  const landmarkImage = isAirport ? heritagePhotoFigure(lang,place,"minsk") : curatedCityPhotos[place.id] ? cityPhotoFigure(lang,place.id) : landmark ? `<figure class="geo-city-landmark"><div class="geo-city-landmark-placeholder" role="img" aria-label="${esc(landmarkCaption)}"><span>${esc(landmark.landmark)}</span><small>${esc(landmark.city)}</small></div><figcaption>${esc(landmarkCaption)}</figcaption></figure>` : "";
 
   const title=geoText(isAirport?t.airportTitle:t.cityTitle,opts)+" | byComfortLine";
   const description=geoText(isAirport?t.airportMeta:t.cityMeta,opts);
@@ -1378,7 +1417,10 @@ function geoLocationPage(lang,place) {
       {"@type":"ListItem","position":3,"name":name,"item":canonical}
     ]}
   ]};
-  if (!isAirport && cityPhotoObject(lang,place.id)) schema["@graph"].push(cityPhotoObject(lang,place.id));
+  if(isAirport) {
+    const photo=heritagePhotoObject(lang,place,"minsk");
+    if(photo)schema["@graph"].push(photo);
+  } else if(cityPhotoObject(lang,place.id)) schema["@graph"].push(cityPhotoObject(lang,place.id));
   const body=`${header(lang,"geo",place)}<main>
     <section class="geo-location-hero">
       <div class="geo-location-hero-inner">
@@ -1446,7 +1488,7 @@ function geoLocationPage(lang,place) {
     </div>
   </main>${footer(l)}`;
   return layout({lang,title,description,canonical,alternates:geoAlternateLinks(place),
-    body,schema,routeKey:place.parent,originOverride:name,ogImage:!isAirport?cityPhotoPreviewUrl(place.id):null});
+    body,schema,routeKey:place.parent,originOverride:name,ogImage:isAirport?cityPhotoPreviewUrl("minsk"):cityPhotoPreviewUrl(place.id)});
 }
 
 function routePage(lang, key) {
@@ -1591,7 +1633,7 @@ for (const lang of Object.keys(locale)) {
   }
   for (const dest of belarusDestinations.filter(x=>x.id!=="minsk")) {
     for (const origin of featuredOrigins) {
-      const photoId=resolvedCityPhoto(origin.id)?origin.id:resolvedCityPhoto(dest.id)?dest.id:null;
+      const photoId=resolvedCityPhoto(dest.id)?dest.id:null;
       const image=photoId?cityPhotoUrl(photoId):null;
       if(image)imageSitemapIndex.set(base+transferPairPath(lang,origin,dest),image);
     }
