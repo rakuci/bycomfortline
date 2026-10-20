@@ -4,7 +4,7 @@ Updated 20 October 2026. Source file: `heritage-route-photos.mjs`.
 
 ## Editorial standard
 
-For international chauffeur/airport transfer pages, show an **authentic landmark in the Belarus destination** first, preferably with a documented connection to the departure region. Never display a departure-city landmark labelled as a Belarus arrival site. Image captions must not imply historical ties or transport availability that cannot be supported. Editorial copy is separate from the booking/quote process.
+For international chauffeur/airport transfer pages, show an **authentic landmark in the destination city** first and then prefer, in order, (1) a verified connection to the **departure city**, (2) a verified connection to its **country or region**, or (3) an accurately labelled, recognizable destination landmark when no defensible direct connection exists. Never show the departure landmark while calling it a destination, or invent a historical connection just to make a route unique. Image captions must not imply historical ties or transport availability that cannot be supported. Editorial copy is separate from the booking/quote process.
 
 | Origin context | Belarus landmark | Photo credit | Licence and source | Rationale |
 | --- | --- | --- | --- | --- |
@@ -14,7 +14,7 @@ For international chauffeur/airport transfer pages, show an **authentic landmark
 | **Latvia, France → Minsk** | Minsk City Hall | Hanna Zelenko | As above | Recognizable destination landmark. The source does not support a specifically Riga- or Paris-built monument, so no fictional direct connection is claimed. |
 | **Poland and Lithuania → Grodno** | St. Francis Xavier Cathedral, Grodno | Alexxx1979 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) · [Wikimedia file](https://commons.wikimedia.org/wiki/File:Grodno_Saint_Francis_Xavier_Cathedral_IMG_1355_2175.jpg) | The Jesuit cathedral was constructed in the era of the Polish–Lithuanian Commonwealth. |
 
-These four photographs are **real Creative Commons files from Wikimedia Commons**. They are currently delivered via the Wikimedia image service; the browser displays local, existing, destination-appropriate WebP photos if an upstream photograph cannot be loaded. Every image has translated alt/title, a factual photo caption, a credited source, a licence link, and an `ImageObject` with provenance. We do **not** claim the new Wikimedia photos have been committed locally as WebPs or validated in the live Cloudflare build.
+These four photographs are **real Creative Commons files from Wikimedia Commons**. The repository now includes `heritage-landmark-photos.json`, a source-checking converter (`scripts/prepare_heritage_images.py`) and a GitHub Actions job that **creates eight local WebPs** at 640 and 1200 px, preserving each photograph’s aspect ratio. The site uses local derivatives only if they actually exist in `dist/assets/heritage`, otherwise it uses the original Commons photograph with an existing local, destination-appropriate city WebP fallback. Every image has translated alt/title, a factual photo caption, photographer/licence links, and an `ImageObject` with provenance. **This is the automation/source setup; successful GitHub Actions encoding and live Cloudflare delivery must still be independently verified.**
 
 ### Coverage
 
@@ -33,6 +33,6 @@ These four photographs are **real Creative Commons files from Wikimedia Commons*
 
 ### Validation and deployment
 
-Run `node build.mjs` followed by `node check-seo.mjs`. The build itself imports the SEO checks after writing `dist`. Both `sitemap.xml` and `sitemap-yandex.xml` are declared in `robots.txt`.
+The photo workflow is triggered when the heritage catalogue, converter, or workflow changes. Confirm `dist/assets/heritage` contains 8 WebPs and `credits.json` before calling the image migration complete. Run `node build.mjs` followed by `node check-seo.mjs`. The build itself imports the SEO checks after writing `dist`. Both `sitemap.xml` and `sitemap-yandex.xml` are declared in `robots.txt`.
 
 The exact live deployment, CDN response codes, loading of third-party Commons thumbnails, and indexing in Google/Yandex **must be checked after Cloudflare publishes the corresponding commit**. Avoid claiming a successfully published picture from a source-level audit alone.
