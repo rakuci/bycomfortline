@@ -1276,18 +1276,26 @@ function heritagePhotoFigure(lang,origin,destinationId="minsk"){
   const photo=heritageForRoute(origin,destinationId);
   if(!photo)return "";
   const destination=destinationId==="grodno"?"grodno":"minsk";
+  const fallbackPhoto=curatedCityPhotos[destination];
   const fallback=cityPhotoPreviewUrl(destination).replace(base,"");
   const name=photo.names[lang]||photo.names.en;
-  const alt=name;
   const caption=photo.context[lang]||photo.context.en;
+  const fallbackName=fallbackPhoto?.labels[lang]||fallbackPhoto?.landmark||destination;
   return `<figure class="geo-city-landmark has-photo geo-heritage-photo">
     <img src="${esc(photo.url)}" data-heritage-photo data-fallback-src="${esc(fallback)}"
       loading="lazy" decoding="async" width="${photo.imageWidth}" height="${photo.imageHeight}"
-      alt="${esc(alt)}" title="${esc(name)}" referrerpolicy="no-referrer">
-    <figcaption><strong>${esc(name)}</strong>
-      <span class="heritage-note">${esc(caption)}</span>
-      <span class="geo-photo-credit">Photo: <a href="${esc(photo.sourcePage)}" target="_blank" rel="noopener noreferrer">${esc(photo.credit)}</a> ·
-        <a href="${esc(photo.licenseUrl)}" target="_blank" rel="license noopener noreferrer">${esc(photo.license)}</a> · Wikimedia Commons</span>
+      alt="${esc(name)}" title="${esc(name)}" data-fallback-caption="${esc(fallbackName)}" referrerpolicy="no-referrer">
+    <figcaption>
+      <span class="heritage-caption-main"><strong>${esc(name)}</strong>
+        <span class="heritage-note">${esc(caption)}</span>
+        <span class="geo-photo-credit">Photo: <a href="${esc(photo.sourcePage)}" target="_blank" rel="noopener noreferrer">${esc(photo.credit)}</a> ·
+          <a href="${esc(photo.licenseUrl)}" target="_blank" rel="license noopener noreferrer">${esc(photo.license)}</a> · Wikimedia Commons</span>
+      </span>
+      <span class="heritage-caption-fallback" hidden>
+        <strong>${esc(fallbackName)}</strong>
+        <span class="geo-photo-credit">Photo: <a href="${esc(fallbackPhoto.sourcePage)}" target="_blank" rel="noopener noreferrer">${esc(fallbackPhoto.credit)}</a> ·
+          <a href="${esc(fallbackPhoto.licenseUrl)}" target="_blank" rel="license noopener noreferrer">${esc(fallbackPhoto.license)}</a> · Wikimedia Commons</span>
+      </span>
     </figcaption>
   </figure>`;
 }
