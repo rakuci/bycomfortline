@@ -3,6 +3,8 @@
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import assert from 'node:assert/strict';
+import { geoAirports } from './geo-airports.mjs';
+import { heritageRoutePhotos, heritagePhotoByCountry } from './heritage-route-photos.mjs';
 
 const root = join(process.cwd(), 'dist');
 const langs = ['en','ru','pl','lt','lv','de','fr'];
@@ -42,6 +44,23 @@ for(const photo of cityPhotos){
   }
 }
 
+const photoIds = new Set(heritageRoutePhotos.map(p=>p.id));
+assert.equal(photoIds.size, heritageRoutePhotos.length, 'Duplicate heritage photo ID');
+for(const country of ['PL','LT','LV','DE','FR']){
+  assert(photoIds.has(heritagePhotoByCountry[country]), 'Missing country heritage photo '+country);
+}
+for(const p of heritageRoutePhotos){
+  assert(p.url.startsWith('https://upload.wikimedia.org/wikipedia/commons/thumb/'),
+    'Heritage photo must use a verified Wikimedia HTTPS source: '+p.id);
+  assert(p.sourcePage.startsWith('https://commons.wikimedia.org/wiki/File:'),
+    'Missing Wikimedia attribution file page: '+p.id);
+  assert(p.licenseUrl.startsWith('https://creativecommons.org/licenses/'),
+    'Missing Creative Commons licence: '+p.id);
+  for(const lang of langs){
+    assert(p.names[lang]&&p.context[lang], 'Missing photo translation '+p.id+'/'+lang);
+  }
+}
+
 const cityPhotoManifest = JSON.parse(await readFile(join(process.cwd(),'city-landmark-photos.json'),'utf8')).images;
 const imageFiles = cityPhotoManifest.flatMap(photo=>
   photo.variants.map(width=>'/assets/cities/'+photo.base+'-'+width+'.webp'));
@@ -59,6 +78,7 @@ const urlToFile = url => {
 };
 const robots = await readFile(join(root,'robots.txt'),'utf8');
 assert(robots.includes('Sitemap: ' + site + '/sitemap.xml'));
+assert(robots.includes('Sitemap: ' + site + '/sitemap-yandex.xml'));
 assert(known.has('/favicon.svg'), 'Root SVG favicon missing');
 const google = await readFile(join(root,'sitemap.xml'),'utf8');
 const yandex = await readFile(join(root,'sitemap-yandex.xml'),'utf8');
@@ -111,6 +131,24 @@ for (const path of htmlFiles) {
     if (!target || target === '/' || !target.startsWith('/')) continue;
     const file = target.endsWith('/') ? target + 'index.html' : target;
     if (!known.has(file)) issues.push(local + ': broken internal link ' + href);
+  }
+}
+// Every airport-to-Minsk URL must show a real Minsk destination photograph,
+// with accurate Commons attribution, not an airport or departure-city photo.
+for(const airport of geoAirports) {
+  for(const lang of langs) {
+    const suffix='-'+airport.id+'-minsk/index.html';
+    const matches=htmlFiles.filter(p=>p.replaceAll('\\','/').includes('/'+lang+'/') &&
+      p.replaceAll('\\','/').endsWith(suffix));
+    if(matches.length!==1) { issues.push(lang+': missing/duplicated airport heritage page '+airport.id);continue; }
+    const html=await readFile(matches[0],'utf8');
+    if(!html.includes('class="geo-city-landmark has-photo geo-heritage-photo"')||
+       !html.includes('data-heritage-photo')||
+       !html.includes('data-fallback-src="/assets/cities/')||
+       !html.includes('ImageObject')||
+       !html.includes('creativecommons.org/licenses/')) {
+      issues.push(lang+'/'+airport.id+': missing authentic credited Belarus destination image');
+    }
   }
 }
 if (htmlFiles.length !== 1506) issues.push('Expected 1506 HTML files; found ' + htmlFiles.length);
