@@ -112,24 +112,39 @@ def convert(source: dict, data: bytes) -> list[dict]:
 def main() -> None:
     import argparse
     parser = argparse.ArgumentParser(description="Curated Wikimedia photo conversion in ordered batches")
-    parser.add_argument("--batch",type=int,choices=[1,2,3],required=True)
+    parser.add_argument("--batch",type=int,choices=[1,2,3,4],help="Optional alphabetical batch of ten")
+    parser.add_argument("--missing",action="store_true",help="Regenerate missing or changed landmark photographs")
     parser.add_argument("--verify-only",action="store_true",
         help="Check source availability, metadata and licences without writing images")
     args = parser.parse_args()
     spec = json.loads(MANIFEST.read_text("utf-8"))
     entries = spec["images"]
     ids = [p["id"] for p in entries]
-    if len(entries) != 30 or len(set(ids)) != 30:
-        raise ValueError("Expected 30 unique alphabetically sorted cities in 3 groups of 10")
+    if len(entries)<30 or len(set(ids))!=len(ids):
+        raise ValueError("City image catalogue must contain at least 30 unique IDs")
     ordered = sorted(ids, key=lambda value: value.lower())
     if ids != ordered:
         raise ValueError("City manifest not in alphabetical order")
-    start = (args.batch - 1) * 10
-    current = entries[start:start + 10]
+    if args.missing:
+        old=OUTPUT/"credits.json"
+        previous={item["id"]: item for item in json.loads(old.read_text("utf-8"))} if old.exists() else {}
+        current=[entry for entry in entries if (
+            entry["id"] not in previous
+            or previous[entry["id"]].get("source")!=entry["sourcePage"]
+            or previous[entry["id"]].get("credit")!=entry["credit"]
+            or previous[entry["id"]].get("license")!=entry["license"]
+            or any(not (OUTPUT/f"{entry['base']}-{size}.webp").is_file() for size in (640,1200))
+        )]
+    elif args.batch:
+        start=(args.batch-1)*10
+        current=entries[start:start+10]
+    else:
+        parser.error("Specify --missing or --batch")
+    mode="repair" if args.missing else f"batch-{args.batch}"
     OUTPUT.mkdir(parents=True, exist_ok=True)
     report = []
     for i, photo in enumerate(current, 1):
-        print(f"[Batch {args.batch}/3 · {i}/10] {photo['city']} — {photo['landmark']} ({photo['credit']})", flush=True)
+        print(f"[{mode} · {i}/{len(current)}] {photo['city']} — {photo['landmark']} ({photo['credit']})", flush=True)
         url, info = metadata(photo)
         print(f"  Wikimedia source: {info['width']} x {info['height']}; licence verified", flush=True)
         variants = []
@@ -142,9 +157,9 @@ def main() -> None:
             "credit":photo["credit"],"license":photo["license"],
             "licenseUrl":photo["licenseUrl"],"variants":variants})
     if not args.verify_only:
-        (OUTPUT / f"credits-batch-{args.batch}.json").write_text(
+        (OUTPUT / f"credits-{mode}.json").write_text(
             json.dumps(report, ensure_ascii=False, indent=2)+"\n","utf-8")
-        print(f"Batch {args.batch}: {len(report)} licensed photos / {len(report)*2} optimized WebPs",flush=True)
+        print(f"{mode}: {len(report)} licensed photos / {len(report)*2} optimized WebPs",flush=True)
 
 if __name__ == "__main__":
     main()
