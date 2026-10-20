@@ -302,5 +302,6 @@
       ],
       "updated": "2026-10-20"
     }
-  ]
+  ],
+  "workflowTrigger": "First alphabetic batch — 2026-10-20; generate and commit 640/1200 WebP pairs"
 }
