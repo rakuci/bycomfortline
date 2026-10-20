@@ -1,0 +1,98 @@
+[
+  {
+    "id": "minsk-red-church",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Church_of_Saints_Simon_and_Alena_(Red_Church).jpg",
+    "credit": "Julia Boda",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "adjustment": "Resized and converted to WebP without cropping",
+    "variants": [
+      {
+        "path": "minsk-red-church-640.webp",
+        "width": 640,
+        "height": 424,
+        "bytes": 56510,
+        "sha256": "7f09c9a2640a276cf2e331e3700b9ac0fc1b47c137b25c36b525ffba850e47b7"
+      },
+      {
+        "path": "minsk-red-church-1200.webp",
+        "width": 1200,
+        "height": 794,
+        "bytes": 179646,
+        "sha256": "84e05790cca9e65d350773c7355c189cdc7ca5efd0387ab584fa2a521dbafb62"
+      }
+    ]
+  },
+  {
+    "id": "minsk-holy-name-cathedral",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Belarus-Minsk-Archcathedral_of_Name_of_Virgin_Mary-1.jpg",
+    "credit": "Hanna Zelenko",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "adjustment": "Resized and converted to WebP without cropping",
+    "variants": [
+      {
+        "path": "minsk-holy-name-cathedral-640.webp",
+        "width": 640,
+        "height": 855,
+        "bytes": 56266,
+        "sha256": "28c1797d8cf7337abf5563a8bda2a2fbf8624f79a06aca8b2169c372ecf12938"
+      },
+      {
+        "path": "minsk-holy-name-cathedral-1200.webp",
+        "width": 1200,
+        "height": 1604,
+        "bytes": 140246,
+        "sha256": "d9eceeee00217e84caf6be41f07de9e0f5f9f655eb396b5b536c708d12630ffe"
+      }
+    ]
+  },
+  {
+    "id": "minsk-city-hall",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Belarus-Minsk-City_Hall-1.jpg",
+    "credit": "Hanna Zelenko",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "adjustment": "Resized and converted to WebP without cropping",
+    "variants": [
+      {
+        "path": "minsk-city-hall-640.webp",
+        "width": 640,
+        "height": 479,
+        "bytes": 53228,
+        "sha256": "cac2c7bf98122836e5557cba38b04026462f2324388ecacec56859ec5fa9f85f"
+      },
+      {
+        "path": "minsk-city-hall-1200.webp",
+        "width": 1200,
+        "height": 898,
+        "bytes": 163744,
+        "sha256": "61d5437b45b9703d11253dc3f8b957c960945e7be8351348a4801190d429b55d"
+      }
+    ]
+  },
+  {
+    "id": "grodno-francis-xavier",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Grodno_Saint_Francis_Xavier_Cathedral_IMG_1355_2175.jpg",
+    "credit": "Alexxx1979",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "adjustment": "Resized and converted to WebP without cropping",
+    "variants": [
+      {
+        "path": "grodno-francis-xavier-640.webp",
+        "width": 640,
+        "height": 421,
+        "bytes": 39762,
+        "sha256": "6249329409327db82449902fac8f9effb723d9530878c535139e7bc2e7449d29"
+      },
+      {
+        "path": "grodno-francis-xavier-1200.webp",
+        "width": 1200,
+        "height": 789,
+        "bytes": 121478,
+        "sha256": "3c3f68f1960a5edace40ec27cf93412e875c4829ffcb0b7ef0b44b46e102d891"
+      }
+    ]
+  }
+]
