@@ -1238,10 +1238,44 @@ function geoDirectoryPage(lang,type) {
     alternates:geoIndexAlternates(type),body,schema});
 }
 
+// Distinctive city landmarks. Wikimedia Commons Special:FilePath resolves an image
+// only when the filename is verified; never substitute a misleading stock image.
+const cityLandmarks = {
+  "bialystok": { landmark: "Branicki Palace", city: "Białystok" },
+  "suwalki": { landmark: "Suwałki Town Hall", city: "Suwałki" },
+  "lublin": { landmark: "Lublin Castle", city: "Lublin" },
+  "krakow": { landmark: "Wawel Castle", city: "Kraków" },
+  "gdansk": { landmark: "Neptune Fountain", city: "Gdańsk" },
+  "katowice": { landmark: "Spodek", city: "Katowice" },
+  "wroclaw": { landmark: "Wrocław Town Hall", city: "Wrocław" },
+  "poznan": { landmark: "Poznań Town Hall", city: "Poznań" },
+  "rzeszow": { landmark: "Rzeszów Town Hall", city: "Rzeszów" },
+  "lodz": { landmark: "Manufaktura", city: "Łódź" },
+  "szczecin": { landmark: "Pomeranian Dukes Castle", city: "Szczecin" },
+  "bydgoszcz": { landmark: "Mill Island", city: "Bydgoszcz" },
+  "olsztyn": { landmark: "Olsztyn Castle", city: "Olsztyn" },
+  "kaunas": { landmark: "Kaunas Castle", city: "Kaunas" },
+  "klaipeda": { landmark: "Meridianas", city: "Klaipėda" },
+  "siauliai": { landmark: "Hill of Crosses", city: "Šiauliai" },
+  "panevezys": { landmark: "Senvagė", city: "Panevėžys" },
+  "druskininkai": { landmark: "Druskininkai Church of Our Lady of the Scapular", city: "Druskininkai" },
+  "daugavpils": { landmark: "Daugavpils Fortress", city: "Daugavpils" },
+  "jurmala": { landmark: "Dzintari Concert Hall", city: "Jūrmala" },
+  "liepaja": { landmark: "Holy Trinity Cathedral", city: "Liepāja" },
+  "jelgava": { landmark: "Jelgava Palace", city: "Jelgava" },
+  "rezekne": { landmark: "GORS concert hall", city: "Rēzekne" },
+  "berlin": { landmark: "Brandenburg Gate", city: "Berlin" },
+  "paris": { landmark: "Eiffel Tower", city: "Paris" },
+};
+
 function geoLocationPage(lang,place) {
   const l=locale[lang], t=geoLocale[lang];
   const name=place.names[lang], opts={place:name,code:place.code||""};
   const isAirport=place.type==="airport";
+  const landmark = !isAirport ? cityLandmarks[place.id] : null;
+  const landmarkCaption = landmark ? `${landmark.landmark} · ${landmark.city}` : "";
+  const landmarkImage = landmark ? `<figure class="geo-city-landmark"><div class="geo-city-landmark-placeholder" role="img" aria-label="${esc(landmarkCaption)}"><span>${esc(landmark.landmark)}</span><small>${esc(landmark.city)}</small></div><figcaption>${esc(landmarkCaption)}</figcaption></figure>` : "";
+
   const title=geoText(isAirport?t.airportTitle:t.cityTitle,opts)+" | byComfortLine";
   const description=geoText(isAirport?t.airportMeta:t.cityMeta,opts);
   const h1=geoText(isAirport?t.airportH1:t.cityH1,opts);
@@ -1282,6 +1316,7 @@ function geoLocationPage(lang,place) {
         </nav>
         <span class="eyebrow light">${esc(t.countryLabels[place.country])} · ${isAirport?esc(t.airport):esc(t.city)}${place.code?" · "+place.code:""}</span>
         <h1>${esc(h1)}</h1>
+        ${landmarkImage}
         <p>${esc(geoText(isAirport?t.introAirport:t.introCity,opts))}</p>
         <div class="hero-actions">
           <a href="#booking-dialog" data-open-booking class="button primary" aria-haspopup="dialog" aria-controls="booking-dialog">${esc(t.quote)} ${icons.arrow}</a>
