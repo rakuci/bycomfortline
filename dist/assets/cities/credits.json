@@ -1,0 +1,602 @@
+[
+  {
+    "id": "baranovichi",
+    "city": "Baranovichi",
+    "source": "https://commons.wikimedia.org/wiki/File:The_railway_station_Baranavichy_-_Central%2C_Vilchousky_str.%2C_Baramovichi_city%2C_Baranavichy_Raion%2C_Brest_Region%2C_Republic_of_Belarus_03.JPG",
+    "credit": "Horakvlado",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "baranovichi-central-railway-station-private-transfer-640.webp",
+        "bytes": 29270,
+        "sha256": "90327dc79062aa69ac5399b193b2b1f5931e9da09127a68021c66399f2f06c3f"
+      },
+      {
+        "file": "baranovichi-central-railway-station-private-transfer-1200.webp",
+        "bytes": 80690,
+        "sha256": "0f2c8870bc9466ec518f6511f076ba2a16c710dd462cf2b2b731d132d3268507"
+      }
+    ]
+  },
+  {
+    "id": "berlin",
+    "city": "Berlin",
+    "source": "https://commons.wikimedia.org/wiki/File:Brandenburg_gate_at_sunset.jpg",
+    "credit": "Danielgoes94",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "berlin-brandenburg-gate-private-transfer-640.webp",
+        "bytes": 38256,
+        "sha256": "04ed78849f5a1c5e2ac73201ce15b2ce38133920f3d3c38b5284e4e9126130ae"
+      },
+      {
+        "file": "berlin-brandenburg-gate-private-transfer-1200.webp",
+        "bytes": 133824,
+        "sha256": "625e0fadb5239971fdf2e936db095858f0683dd7f7fb803d6af1ff69ad245876"
+      }
+    ]
+  },
+  {
+    "id": "bialystok",
+    "city": "Białystok",
+    "source": "https://commons.wikimedia.org/wiki/File:Panorama_of_the_Branicki_Palace_Bialystok.jpg",
+    "credit": "Ymblanter",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "bialystok-branicki-palace-private-transfer-640.webp",
+        "bytes": 29768,
+        "sha256": "a15116066e5b2ddd0cd0afaacafcc7087685f0bace7f73a9b1ef74cb71327a06"
+      },
+      {
+        "file": "bialystok-branicki-palace-private-transfer-1200.webp",
+        "bytes": 102440,
+        "sha256": "4c181e79d23615db2e467123d23aa91ca54810131e786d59e39a24a488e0cd71"
+      }
+    ]
+  },
+  {
+    "id": "brest",
+    "city": "Brest, Belarus",
+    "source": "https://commons.wikimedia.org/wiki/File:Brest_Fortress_(250186225).jpeg",
+    "credit": "Alexxx Malev",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "variants": [
+      {
+        "file": "brest-belarus-fortress-memorial-private-transfer-640.webp",
+        "bytes": 14004,
+        "sha256": "2beab51e18815207379aebd64c833499838c0806abf0ebf84da784fc30cc98b0"
+      },
+      {
+        "file": "brest-belarus-fortress-memorial-private-transfer-1200.webp",
+        "bytes": 42632,
+        "sha256": "5565d74f0db499cb09197afefeac2fd1ebd1ab0e37a5b62462379a8e0038ad80"
+      }
+    ]
+  },
+  {
+    "id": "bydgoszcz",
+    "city": "Bydgoszcz",
+    "source": "https://commons.wikimedia.org/wiki/File:Bdg_Spichrze_8_07-2013.jpg",
+    "credit": "Pit1233",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "variants": [
+      {
+        "file": "bydgoszcz-brda-river-granaries-private-transfer-640.webp",
+        "bytes": 67174,
+        "sha256": "45f4c0b806f8dac3f8659ccb49a1ca5844077a58195ce12b49580227ece96f94"
+      },
+      {
+        "file": "bydgoszcz-brda-river-granaries-private-transfer-1200.webp",
+        "bytes": 176384,
+        "sha256": "e11ada885a763d4ac9fccb119da915f874f66af9a447871e06730a4a432a5cf1"
+      }
+    ]
+  },
+  {
+    "id": "daugavpils",
+    "city": "Daugavpils",
+    "source": "https://commons.wikimedia.org/wiki/File:Daugavpils_fortress05.JPG",
+    "credit": "Alma Pater",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "variants": [
+      {
+        "file": "daugavpils-fortress-nicholas-gate-private-transfer-640.webp",
+        "bytes": 35352,
+        "sha256": "55debf5aa791cbcaac698c82f3b1da0139e7480099803216f1fb59245ddee1e8"
+      },
+      {
+        "file": "daugavpils-fortress-nicholas-gate-private-transfer-1200.webp",
+        "bytes": 131788,
+        "sha256": "4b66c79138b480718ffa2fd5d28c26b70b72b4db06ef2733bd3016f3b33bbd30"
+      }
+    ]
+  },
+  {
+    "id": "druskininkai",
+    "city": "Druskininkai",
+    "source": "https://commons.wikimedia.org/wiki/File:Druskinink%C5%B3_%C5%A0v%C4%8D._Mergel%C4%97s_Marijos_%C5%A0kaplierin%C4%97s_ba%C5%BEny%C4%8Dia.jpg",
+    "credit": "MHz`as",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "variants": [
+      {
+        "file": "druskininkai-scapular-church-private-transfer-640.webp",
+        "bytes": 67426,
+        "sha256": "f68bd2b05835fc3bd941896d8b303b28c06ee173676f3756b386d3e54a0257b9"
+      },
+      {
+        "file": "druskininkai-scapular-church-private-transfer-1200.webp",
+        "bytes": 257010,
+        "sha256": "6ac139b4b593c0a39a8ef8fa0f7b61fc040df6c6149758bfc4afa097e67ee6e9"
+      }
+    ]
+  },
+  {
+    "id": "gdansk",
+    "city": "Gdańsk",
+    "source": "https://commons.wikimedia.org/wiki/File:Neptune_fountain_in_Gda%C5%84sk_during_Wikimania_2010.jpg",
+    "credit": "Ragesoss (Sage Ross)",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "variants": [
+      {
+        "file": "gdansk-neptune-fountain-old-town-private-transfer-640.webp",
+        "bytes": 6630,
+        "sha256": "9ea28246bde6697c62f0e288b0ba1f9b19fff70344143c2b91c782f075274002"
+      },
+      {
+        "file": "gdansk-neptune-fountain-old-town-private-transfer-1200.webp",
+        "bytes": 17148,
+        "sha256": "b0b717c77c572fc25935effe74417eedf34a98176869665ee5bcc4ea9005530e"
+      }
+    ]
+  },
+  {
+    "id": "gomel",
+    "city": "Gomel",
+    "source": "https://commons.wikimedia.org/wiki/File:Homiel._%D0%93%D0%BE%D0%BC%D0%B5%D0%BB%D1%8C_(19.10.2008).jpg",
+    "credit": "Andrei Suslov",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "variants": [
+      {
+        "file": "gomel-rumyantsev-paskevich-palace-private-transfer-640.webp",
+        "bytes": 33576,
+        "sha256": "cae684b6557e9b120e1606fe226a3f729b90bc8eb1bbd54a9f2117783471612d"
+      },
+      {
+        "file": "gomel-rumyantsev-paskevich-palace-private-transfer-1200.webp",
+        "bytes": 119882,
+        "sha256": "dec9586d5d8f7ba27272fb7b7c9d75b215335526538f88aad3f5587e304e5b1c"
+      }
+    ]
+  },
+  {
+    "id": "grodno",
+    "city": "Grodno",
+    "source": "https://commons.wikimedia.org/wiki/File:Old_Castle_in_Hrodna_-_%D0%A1%D1%82%D0%B0%D1%80%D1%8B_%D0%B7%D0%B0%D0%BC%D0%B0%D0%BA_%D1%83_%D0%93%D1%80%D0%BE%D0%B4%D0%BD%D0%B0_-_panoramio.jpg",
+    "credit": "Viktar Palstsiuk",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "variants": [
+      {
+        "file": "grodno-old-castle-private-transfer-640.webp",
+        "bytes": 22160,
+        "sha256": "765d29b86b8a089351f74ccf8aba4308b32ce80b2d4492d2441b880338fdc28b"
+      },
+      {
+        "file": "grodno-old-castle-private-transfer-1200.webp",
+        "bytes": 85890,
+        "sha256": "545f55866f4fc66e39fc4ed6e59c4ba1a35016d93f9be9d9380202f25ff1bb06"
+      }
+    ]
+  },
+  {
+    "id": "jelgava",
+    "city": "Jelgava",
+    "source": "https://commons.wikimedia.org/wiki/File:JelgavaPalace2024.jpg",
+    "credit": "Dejelnieks",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "variants": [
+      {
+        "file": "jelgava-palace-private-transfer-640.webp",
+        "bytes": 41372,
+        "sha256": "a3cdc66f4155f9e10c929993d23c1c857e66bb7abf3d8c35537e4964b1fabce4"
+      },
+      {
+        "file": "jelgava-palace-private-transfer-1200.webp",
+        "bytes": 164642,
+        "sha256": "412a9cc52af6f37d7ffa68c654507b5448929d67fdf76808dc84cc6a6319ed92"
+      }
+    ]
+  },
+  {
+    "id": "jurmala",
+    "city": "Jūrmala",
+    "source": "https://commons.wikimedia.org/wiki/File:J%C5%ABrmala_-_Str%C5%ABklaka_pie_Dzintaru_koncertz%C4%81les.jpg",
+    "credit": "Olgerts V",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "jurmala-dzintari-concert-hall-fountain-private-transfer-640.webp",
+        "bytes": 55496,
+        "sha256": "bf882eb9f85080d61928563b4b494cb9fdac77f01d1c26fdc5c00358a0dbab3e"
+      },
+      {
+        "file": "jurmala-dzintari-concert-hall-fountain-private-transfer-1200.webp",
+        "bytes": 222776,
+        "sha256": "47904e74c4615f408a5230d4f542e29ae5ab336a3651160a1cb645eba354f69a"
+      }
+    ]
+  },
+  {
+    "id": "katowice",
+    "city": "Katowice",
+    "source": "https://commons.wikimedia.org/wiki/File:Katowice_Spodek_aerial_2026.jpg",
+    "credit": "Adrian Tync",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "katowice-spodek-arena-aerial-private-transfer-640.webp",
+        "bytes": 38714,
+        "sha256": "a71e0ebadeb57be68a5acd1c5c18b1f9842a83b0a2aa6b1326c549669625b28f"
+      },
+      {
+        "file": "katowice-spodek-arena-aerial-private-transfer-1200.webp",
+        "bytes": 150592,
+        "sha256": "b0c106b16a7a9e1e14e70f55500eb85a9093ca0a33b89ea313e8f3f93f444ed6"
+      }
+    ]
+  },
+  {
+    "id": "kaunas",
+    "city": "Kaunas",
+    "source": "https://commons.wikimedia.org/wiki/File:Kaunas_Castle_in_Kaunas%2C_Lithuania.jpg",
+    "credit": "Tim Adams",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "variants": [
+      {
+        "file": "kaunas-castle-private-transfer-640.webp",
+        "bytes": 39908,
+        "sha256": "87cf4869ed8d4a09c075a3b60ff5f6e0fa9b40caefd2e45557614c10b07abd59"
+      },
+      {
+        "file": "kaunas-castle-private-transfer-1200.webp",
+        "bytes": 178098,
+        "sha256": "4af1ecf34e52fbc89b618e66f1b40f74ec60e718dbf2f00ba5a0c791908b2699"
+      }
+    ]
+  },
+  {
+    "id": "klaipeda",
+    "city": "Klaipėda",
+    "source": "https://commons.wikimedia.org/wiki/File:Klaipeda_Meridianas_2.jpg",
+    "credit": "Andrzej Otrębski",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "klaipeda-meridianas-sailing-ship-private-transfer-640.webp",
+        "bytes": 23672,
+        "sha256": "37d08793ea851ab31e58d7048df97b5d86da855258fc293268bf4c3b7f17195b"
+      },
+      {
+        "file": "klaipeda-meridianas-sailing-ship-private-transfer-1200.webp",
+        "bytes": 64654,
+        "sha256": "13eb346962a987f24c7256c35d130cd41c2ec40f186463e39ef0c875450c8ef6"
+      }
+    ]
+  },
+  {
+    "id": "krakow",
+    "city": "Kraków",
+    "source": "https://commons.wikimedia.org/wiki/File:Wawel_Castle_Krakow.jpg",
+    "credit": "Lotse8",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "krakow-wawel-royal-castle-private-transfer-640.webp",
+        "bytes": 40868,
+        "sha256": "063ed7fbd45ab2215ec6f14d5985b2e618574e73b4732d34d1ad46bba40e7ccc"
+      },
+      {
+        "file": "krakow-wawel-royal-castle-private-transfer-1200.webp",
+        "bytes": 133614,
+        "sha256": "a222eb22b153e34142f53a43afc24badd248fdb4a6821d2b45cad2a689e820fa"
+      }
+    ]
+  },
+  {
+    "id": "lida",
+    "city": "Lida",
+    "source": "https://commons.wikimedia.org/wiki/File:Lida-Castle.JPG",
+    "credit": "Szeder László",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "variants": [
+      {
+        "file": "lida-medieval-castle-private-transfer-640.webp",
+        "bytes": 37044,
+        "sha256": "181516eeabd9651b44d9c98b7bf6e6d3c2eafce873778cbf992d9c946e378a48"
+      },
+      {
+        "file": "lida-medieval-castle-private-transfer-1200.webp",
+        "bytes": 123220,
+        "sha256": "e4e81fe2db30169b302b0ab3774031da6d603feeaa8377bec2b4131cc1a98340"
+      }
+    ]
+  },
+  {
+    "id": "liepaja",
+    "city": "Liepāja",
+    "source": "https://commons.wikimedia.org/wiki/File:Holy_Trinity_Cathedral_in_Liepaja_01.jpg",
+    "credit": "---=XEON=---",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "variants": [
+      {
+        "file": "liepaja-holy-trinity-cathedral-private-transfer-640.webp",
+        "bytes": 50848,
+        "sha256": "a8697eb62f82eb3d526df2aa81751241b7095b32964d83df94b9dd070ffb5abf"
+      },
+      {
+        "file": "liepaja-holy-trinity-cathedral-private-transfer-1200.webp",
+        "bytes": 224832,
+        "sha256": "69c6ea68a0859c07127e08f893c1daa55e56e6afcda6a918681969f7bfa67633"
+      }
+    ]
+  },
+  {
+    "id": "lodz",
+    "city": "Łódź",
+    "source": "https://commons.wikimedia.org/wiki/File:Manufaktura%2C_%C5%81%C3%B3d%C5%BA%2C_Poland.jpg",
+    "credit": "Michał Węzowski",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "lodz-manufaktura-market-square-private-transfer-640.webp",
+        "bytes": 45904,
+        "sha256": "439b47bb6830a4cbcac1407dcbf419345f6aaee439e79a88623c98a2dbe4a814"
+      },
+      {
+        "file": "lodz-manufaktura-market-square-private-transfer-1200.webp",
+        "bytes": 167752,
+        "sha256": "d5abe236bbfb2ac7315e4c99b7c441d337154bd0e9c29a3f9c955a07db5655e7"
+      }
+    ]
+  },
+  {
+    "id": "lublin",
+    "city": "Lublin",
+    "source": "https://commons.wikimedia.org/wiki/File:Lublin_castle.jpg",
+    "credit": "Red 81",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "lublin-medieval-castle-private-transfer-640.webp",
+        "bytes": 13574,
+        "sha256": "35d01a41630c8ec2fde1e68f46aa4ce52fa3117450465780c0bd59f412ab13f0"
+      },
+      {
+        "file": "lublin-medieval-castle-private-transfer-1200.webp",
+        "bytes": 39540,
+        "sha256": "8512b3e21c155517d373d22f255a337a6e13b9a8ec8ae576fd0135a0ef03e576"
+      }
+    ]
+  },
+  {
+    "id": "minsk",
+    "city": "Minsk",
+    "source": "https://commons.wikimedia.org/wiki/File:View_of_Minsk_from_the_National_Library_of_Belarus_01.JPG",
+    "credit": "Хомелка",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "variants": [
+      {
+        "file": "minsk-skyline-national-library-view-private-transfer-640.webp",
+        "bytes": 20688,
+        "sha256": "b95bd6d38f4253b49c56ab5d46b98c57c1395bcc01931d7faaa53a6cce353d33"
+      },
+      {
+        "file": "minsk-skyline-national-library-view-private-transfer-1200.webp",
+        "bytes": 67244,
+        "sha256": "eb389cfbbd295baec91d1e85895e5558820cf47840cc3aeb04bf1ad5ce0a3b4d"
+      }
+    ]
+  },
+  {
+    "id": "mogilev",
+    "city": "Mogilev",
+    "source": "https://commons.wikimedia.org/wiki/File:Town_hall%2C_Mogilev%2C_2025.jpg",
+    "credit": "Alena2026",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "mogilev-historic-town-hall-private-transfer-640.webp",
+        "bytes": 22204,
+        "sha256": "32f187dc1d6df94a31d5a429d01ca4616200ded8529f8d2f31d2d8a2ce819ed5"
+      },
+      {
+        "file": "mogilev-historic-town-hall-private-transfer-1200.webp",
+        "bytes": 66326,
+        "sha256": "4bddce8a01c5b03a954f4d626f6d088945d36cdff80ea590fc61ab4e106bc2ae"
+      }
+    ]
+  },
+  {
+    "id": "olsztyn",
+    "city": "Olsztyn",
+    "source": "https://commons.wikimedia.org/wiki/File:Zamek_Kapitu%C5%82y_Warmi%C5%84skiej_w_Olsztynie.jpg",
+    "credit": "ViktoriaLi",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "olsztyn-warmian-chapter-castle-private-transfer-640.webp",
+        "bytes": 60384,
+        "sha256": "c3e2dd1d52f3dbb17a2f117b8e06473121dea7e0eb160432415cbe2a88fd5280"
+      },
+      {
+        "file": "olsztyn-warmian-chapter-castle-private-transfer-1200.webp",
+        "bytes": 253384,
+        "sha256": "ab4e6d81945f014c303b1a785a4a6438fca48513a6fc699a5577f07352fdb22d"
+      }
+    ]
+  },
+  {
+    "id": "panevezys",
+    "city": "Panevėžys",
+    "source": "https://commons.wikimedia.org/wiki/File:Senvag%C4%97%2C_Panev%C4%97%C5%BEys%2C_2025.jpg",
+    "credit": "Obivan Kenobi",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "variants": [
+      {
+        "file": "panevezys-senvage-riverside-pond-private-transfer-640.webp",
+        "bytes": 35828,
+        "sha256": "ccb8fa55d9fc2dc2ed96b6cee18520a0c1e61436536e94d3fa55616ccdb6e7c0"
+      },
+      {
+        "file": "panevezys-senvage-riverside-pond-private-transfer-1200.webp",
+        "bytes": 165950,
+        "sha256": "e7435f2339e27808c5d833e603246d04fdfb35014110b0b09c198ce97dee948e"
+      }
+    ]
+  },
+  {
+    "id": "paris",
+    "city": "Paris",
+    "source": "https://commons.wikimedia.org/wiki/File:Eiffel_tower_from_trocadero.jpg",
+    "credit": "NonOmnisMoriar",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "variants": [
+      {
+        "file": "paris-eiffel-tower-trocadero-private-transfer-640.webp",
+        "bytes": 34836,
+        "sha256": "39221505e0c36780bc35de6703bac09c8cea1c989932e377573af989439ce909"
+      },
+      {
+        "file": "paris-eiffel-tower-trocadero-private-transfer-1200.webp",
+        "bytes": 121776,
+        "sha256": "441eb682f59894482ffd58ad4f077250864502eab7fb1726097c1ffd9f97b7fa"
+      }
+    ]
+  },
+  {
+    "id": "pinsk",
+    "city": "Pinsk",
+    "source": "https://commons.wikimedia.org/wiki/File:Pinsk_Jesuit_collegium.jpg",
+    "credit": "YYaroshko",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "variants": [
+      {
+        "file": "pinsk-jesuit-collegium-private-transfer-640.webp",
+        "bytes": 42910,
+        "sha256": "e94c902584127caec31bd95df3c8b6b68e80c6b9358ac0b87ea7c3a19674ea45"
+      },
+      {
+        "file": "pinsk-jesuit-collegium-private-transfer-1200.webp",
+        "bytes": 163616,
+        "sha256": "3277c28233abb4e8b3116c541707b745226bd0351f2d72cbd8ab4a413607aa0b"
+      }
+    ]
+  },
+  {
+    "id": "poznan",
+    "city": "Poznań",
+    "source": "https://commons.wikimedia.org/wiki/File:PL-Posen-Markt-Nordseite.jpg",
+    "credit": "SchiDD",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "poznan-old-market-square-town-hall-private-transfer-640.webp",
+        "bytes": 27172,
+        "sha256": "d28f8cf6bcc35de8cfd74b0e4f5a5fdf8e1e1ec322cd8a2b426baded083d333b"
+      },
+      {
+        "file": "poznan-old-market-square-town-hall-private-transfer-1200.webp",
+        "bytes": 98092,
+        "sha256": "219201e667d54acccbdb500992369b8bca616b696574058dd1d21096e628c97d"
+      }
+    ]
+  },
+  {
+    "id": "rezekne",
+    "city": "Rēzekne",
+    "source": "https://commons.wikimedia.org/wiki/File:Gors_Rezekne_2015.jpg",
+    "credit": "European1",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "variants": [
+      {
+        "file": "rezekne-gors-concert-hall-private-transfer-640.webp",
+        "bytes": 21110,
+        "sha256": "005b4c20d8913834a5f710d005400e861795835c0e8288273ba1ef2d113f34ce"
+      },
+      {
+        "file": "rezekne-gors-concert-hall-private-transfer-1200.webp",
+        "bytes": 77936,
+        "sha256": "a7bd08f1052091039539d7004568bc75566ffeb8246ce1130468bef73e4fae03"
+      }
+    ]
+  },
+  {
+    "id": "riga",
+    "city": "Riga",
+    "source": "https://commons.wikimedia.org/wiki/File:House_of_Blackheads_in_Riga%2C_Latvia.jpg",
+    "credit": "Raul Cortez999",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "riga-house-of-the-blackheads-old-town-private-transfer-640.webp",
+        "bytes": 52354,
+        "sha256": "18e52774696ef54b8ba21992d29d575e5b18c0e21f3e7668e6c6f909f535a86a"
+      },
+      {
+        "file": "riga-house-of-the-blackheads-old-town-private-transfer-1200.webp",
+        "bytes": 193998,
+        "sha256": "ce9047e2a6af61e31e9d4737f1615f990f4ca3dd00f8dc446193e845235fe602"
+      }
+    ]
+  },
+  {
+    "id": "rzeszow",
+    "city": "Rzeszów",
+    "source": "https://commons.wikimedia.org/wiki/File:PL_RZ_Rzeszow_city_hall.jpg",
+    "credit": "Andrei Stroe",
+    "license": "CC BY-SA 3.0 PL",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/pl/",
+    "variants": [
+      {
+        "file": "rzeszow-town-hall-old-market-private-transfer-640.webp",
+        "bytes": 37328,
+        "sha256": "e9169e726dfe91720416398e160f0ff4ff1ac2f755889dd58f12349ad48bf270"
+      },
+      {
+        "file": "rzeszow-town-hall-old-market-private-transfer-1200.webp",
+        "bytes": 119784,
+        "sha256": "06696237fb19ab0aea9fd8c00dab84c2556f954cd5ba7396b003c90f0873c713"
+      }
+    ]
+  }
+]
