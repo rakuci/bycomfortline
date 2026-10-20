@@ -301,7 +301,307 @@
         1200
       ],
       "updated": "2026-10-20"
+    },
+    {
+      "id": "jelgava",
+      "city": "Jelgava",
+      "landmark": "Jelgava Palace",
+      "file": "JelgavaPalace2024.jpg",
+      "credit": "Dejelnieks",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "slug": "jelgava-palace",
+      "labels": {
+        "en": "Jelgava Palace in Latvia",
+        "ru": "Елгавский дворец в Латвии",
+        "pl": "Pałac w Jełgawie",
+        "lt": "Jelgavos rūmai Latvijoje",
+        "lv": "Jelgavas pils Latvijā",
+        "de": "Schloss Jelgava in Lettland",
+        "fr": "Palais de Jelgava en Lettonie"
+      },
+      "center": [
+        0.48,
+        0.51
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:JelgavaPalace2024.jpg",
+      "base": "jelgava-palace-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "jurmala",
+      "city": "Jūrmala",
+      "landmark": "Dzintari Concert Hall fountain",
+      "file": "Jūrmala - Strūklaka pie Dzintaru koncertzāles.jpg",
+      "credit": "Olgerts V",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "jurmala-dzintari-concert-hall-fountain",
+      "labels": {
+        "en": "Fountain by Dzintari Concert Hall in Jūrmala",
+        "ru": "Фонтан у концертного зала Дзинтари в Юрмале",
+        "pl": "Fontanna przy sali koncertowej Dzintari w Jurmale",
+        "lt": "Fontanas prie Dzintarų koncertų salės Jūrmaloje",
+        "lv": "Strūklaka pie Dzintaru koncertzāles Jūrmalā",
+        "de": "Brunnen am Konzerthaus Dzintari in Jūrmala",
+        "fr": "Fontaine près de la salle de concerts Dzintari à Jūrmala"
+      },
+      "center": [
+        0.49,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:J%C5%ABrmala_-_Str%C5%ABklaka_pie_Dzintaru_koncertz%C4%81les.jpg",
+      "base": "jurmala-dzintari-concert-hall-fountain-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "katowice",
+      "city": "Katowice",
+      "landmark": "Spodek Arena aerial view",
+      "file": "Katowice Spodek aerial 2026.jpg",
+      "credit": "Adrian Tync",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "katowice-spodek-arena-aerial",
+      "labels": {
+        "en": "Spodek Arena and Katowice skyline from above",
+        "ru": "Арена Сподек и панорама Катовице с высоты",
+        "pl": "Spodek i panorama Katowic z lotu ptaka",
+        "lt": "Spodeko arena ir Katovicų panorama iš viršaus",
+        "lv": "Spodek arēna un Katovices panorāma no augšas",
+        "de": "Spodek-Arena und Stadtpanorama von Katowice",
+        "fr": "Salle Spodek et panorama de Katowice vus du ciel"
+      },
+      "center": [
+        0.51,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Katowice_Spodek_aerial_2026.jpg",
+      "base": "katowice-spodek-arena-aerial-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "kaunas",
+      "city": "Kaunas",
+      "landmark": "Kaunas Castle",
+      "file": "Kaunas Castle in Kaunas, Lithuania.jpg",
+      "credit": "Tim Adams",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "slug": "kaunas-castle",
+      "labels": {
+        "en": "Kaunas Castle in Lithuania",
+        "ru": "Каунасский замок в Литве",
+        "pl": "Zamek w Kownie na Litwie",
+        "lt": "Kauno pilis Lietuvoje",
+        "lv": "Kauņas pils Lietuvā",
+        "de": "Burg Kaunas in Litauen",
+        "fr": "Château de Kaunas en Lituanie"
+      },
+      "center": [
+        0.51,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Kaunas_Castle_in_Kaunas%2C_Lithuania.jpg",
+      "base": "kaunas-castle-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "klaipeda",
+      "city": "Klaipėda",
+      "landmark": "Meridianas sailing ship",
+      "file": "Klaipeda Meridianas 2.jpg",
+      "credit": "Andrzej Otrębski",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "klaipeda-meridianas-sailing-ship",
+      "labels": {
+        "en": "Meridianas historic ship in Klaipėda",
+        "ru": "Историческое судно Меридианас в Клайпеде",
+        "pl": "Żaglowiec Meridianas w Kłajpedzie",
+        "lt": "Istorinis burlaivis „Meridianas“ Klaipėdoje",
+        "lv": "Vēsturiskais burinieks Meridianas Klaipēdā",
+        "de": "Historisches Segelschiff Meridianas in Klaipėda",
+        "fr": "Voilier historique Meridianas à Klaipėda"
+      },
+      "center": [
+        0.5,
+        0.53
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Klaipeda_Meridianas_2.jpg",
+      "base": "klaipeda-meridianas-sailing-ship-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "krakow",
+      "city": "Kraków",
+      "landmark": "Wawel Royal Castle",
+      "file": "Wawel Castle Krakow.jpg",
+      "credit": "Lotse8",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "krakow-wawel-royal-castle",
+      "labels": {
+        "en": "Wawel Royal Castle in Kraków",
+        "ru": "Королевский замок Вавель в Кракове",
+        "pl": "Zamek Królewski na Wawelu w Krakowie",
+        "lt": "Vavelio karališkoji pilis Krokuvoje",
+        "lv": "Vāveles karaliskā pils Krakovā",
+        "de": "Königsschloss Wawel in Krakau",
+        "fr": "Château royal du Wawel à Cracovie"
+      },
+      "center": [
+        0.5,
+        0.52
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Wawel_Castle_Krakow.jpg",
+      "base": "krakow-wawel-royal-castle-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "lida",
+      "city": "Lida",
+      "landmark": "Lida Castle",
+      "file": "Lida-Castle.JPG",
+      "credit": "Szeder László",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "slug": "lida-medieval-castle",
+      "labels": {
+        "en": "Medieval Lida Castle in Belarus",
+        "ru": "Средневековый Лидский замок в Беларуси",
+        "pl": "Średniowieczny Zamek Lidzki na Białorusi",
+        "lt": "Viduramžių Lydos pilis Baltarusijoje",
+        "lv": "Viduslaiku Lidas pils Baltkrievijā",
+        "de": "Mittelalterliche Burg Lida in Belarus",
+        "fr": "Château médiéval de Lida en Biélorussie"
+      },
+      "center": [
+        0.52,
+        0.51
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lida-Castle.JPG",
+      "base": "lida-medieval-castle-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "liepaja",
+      "city": "Liepāja",
+      "landmark": "Holy Trinity Cathedral",
+      "file": "Holy Trinity Cathedral in Liepaja 01.jpg",
+      "credit": "---=XEON=---",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "slug": "liepaja-holy-trinity-cathedral",
+      "labels": {
+        "en": "Holy Trinity Cathedral in Liepāja",
+        "ru": "Собор Святой Троицы в Лиепае",
+        "pl": "Katedra Świętej Trójcy w Lipawie",
+        "lt": "Šventosios Trejybės katedra Liepojoje",
+        "lv": "Liepājas Svētās Trīsvienības katedrāle",
+        "de": "Dreifaltigkeitskathedrale in Liepāja",
+        "fr": "Cathédrale de la Sainte-Trinité à Liepāja"
+      },
+      "center": [
+        0.5,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Holy_Trinity_Cathedral_in_Liepaja_01.jpg",
+      "base": "liepaja-holy-trinity-cathedral-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "lodz",
+      "city": "Łódź",
+      "landmark": "Manufaktura Market Square",
+      "file": "Manufaktura, Łódź, Poland.jpg",
+      "credit": "Michał Węzowski",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "lodz-manufaktura-market-square",
+      "labels": {
+        "en": "Manufaktura Market Square in Łódź",
+        "ru": "Площадь Мануфактура в Лодзи",
+        "pl": "Rynek Manufaktury w Łodzi",
+        "lt": "Manufaktūros aikštė Lodzėje",
+        "lv": "Manufaktura laukums Lodzā",
+        "de": "Manufaktura-Marktplatz in Łódź",
+        "fr": "Place de la Manufaktura à Łódź"
+      },
+      "center": [
+        0.5,
+        0.53
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Manufaktura%2C_%C5%81%C3%B3d%C5%BA%2C_Poland.jpg",
+      "base": "lodz-manufaktura-market-square-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "lublin",
+      "city": "Lublin",
+      "landmark": "Lublin Castle",
+      "file": "Lublin castle.jpg",
+      "credit": "Red 81",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "lublin-medieval-castle",
+      "labels": {
+        "en": "Lublin Castle in Poland",
+        "ru": "Люблинский замок в Польше",
+        "pl": "Zamek Lubelski",
+        "lt": "Liublino pilis Lenkijoje",
+        "lv": "Ļubļinas pils Polijā",
+        "de": "Schloss Lublin in Polen",
+        "fr": "Château de Lublin en Pologne"
+      },
+      "center": [
+        0.48,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lublin_castle.jpg",
+      "base": "lublin-medieval-castle-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
     }
   ],
-  "workflowTrigger": "First alphabetic batch — 2026-10-20; generate and commit 640/1200 WebP pairs"
+  "workflowTrigger": "Two alphabetical batches curated — 2026-10-20"
 }
