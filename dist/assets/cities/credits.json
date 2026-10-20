@@ -149,13 +149,13 @@
     "variants": [
       {
         "file": "gdansk-neptune-fountain-old-town-private-transfer-640.webp",
-        "bytes": 6630,
-        "sha256": "9ea28246bde6697c62f0e288b0ba1f9b19fff70344143c2b91c782f075274002"
+        "bytes": 6612,
+        "sha256": "fcaa3112ca0e3a6323b3c283c8c0178dbffc5a3b4ef7ff34f8f0a239d385654a"
       },
       {
         "file": "gdansk-neptune-fountain-old-town-private-transfer-1200.webp",
-        "bytes": 17148,
-        "sha256": "b0b717c77c572fc25935effe74417eedf34a98176869665ee5bcc4ea9005530e"
+        "bytes": 17080,
+        "sha256": "77a0c93cc80c80b047f320651ff7715c2657766df5b1fd0601b85f4995cf8454"
       }
     ]
   },
