@@ -1,0 +1,306 @@
+{
+  "version": 1,
+  "notes": "Wikimedia Commons curated image references; photos must be verified and converted to WebP before use. All derivatives credited and licence linked.",
+  "images": [
+    {
+      "id": "baranovichi",
+      "city": "Baranovichi",
+      "landmark": "Baranovichi Central Railway Station",
+      "file": "The railway station Baranavichy - Central, Vilchousky str., Baramovichi city, Baranavichy Raion, Brest Region, Republic of Belarus 03.JPG",
+      "credit": "Horakvlado",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "baranovichi-central-railway-station",
+      "labels": {
+        "en": "Baranovichi Central railway station",
+        "ru": "Вокзал Барановичи-Центральные",
+        "pl": "Dworzec Baranowicze Centralne",
+        "lt": "Baranovičių centrinė stotis",
+        "lv": "Baranaviču Centrālā dzelzceļa stacija",
+        "de": "Bahnhof Baranowitschi-Zentralnyje",
+        "fr": "Gare centrale de Baranovitchi"
+      },
+      "center": [
+        0.5,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:The_railway_station_Baranavichy_-_Central%2C_Vilchousky_str.%2C_Baramovichi_city%2C_Baranavichy_Raion%2C_Brest_Region%2C_Republic_of_Belarus_03.JPG",
+      "base": "baranovichi-central-railway-station-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "berlin",
+      "city": "Berlin",
+      "landmark": "Brandenburg Gate",
+      "file": "Brandenburg gate at sunset.jpg",
+      "credit": "Danielgoes94",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "berlin-brandenburg-gate",
+      "labels": {
+        "en": "Brandenburg Gate in Berlin at sunset",
+        "ru": "Бранденбургские ворота в Берлине на закате",
+        "pl": "Brama Brandenburska w Berlinie o zachodzie słońca",
+        "lt": "Brandenburgo vartai Berlyne saulėlydžio metu",
+        "lv": "Brandenburgas vārti Berlīnē saulrietā",
+        "de": "Brandenburger Tor in Berlin bei Sonnenuntergang",
+        "fr": "Porte de Brandebourg à Berlin au coucher du soleil"
+      },
+      "center": [
+        0.5,
+        0.52
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Brandenburg_gate_at_sunset.jpg",
+      "base": "berlin-brandenburg-gate-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "bialystok",
+      "city": "Białystok",
+      "landmark": "Branicki Palace",
+      "file": "Panorama of the Branicki Palace Bialystok.jpg",
+      "credit": "Ymblanter",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "bialystok-branicki-palace",
+      "labels": {
+        "en": "Branicki Palace in Białystok",
+        "ru": "Дворец Браницких в Белостоке",
+        "pl": "Pałac Branickich w Białymstoku",
+        "lt": "Branickių rūmai Balstogėje",
+        "lv": "Braņicku pils Bjalistokā",
+        "de": "Branicki-Palast in Białystok",
+        "fr": "Palais Branicki à Białystok"
+      },
+      "center": [
+        0.5,
+        0.54
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Panorama_of_the_Branicki_Palace_Bialystok.jpg",
+      "base": "bialystok-branicki-palace-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "brest",
+      "city": "Brest, Belarus",
+      "landmark": "Brest Fortress Memorial",
+      "file": "Brest Fortress (250186225).jpeg",
+      "credit": "Alexxx Malev",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "slug": "brest-belarus-fortress-memorial",
+      "labels": {
+        "en": "Brest Fortress memorial in Brest, Belarus",
+        "ru": "Мемориал Брестская крепость в Бресте, Беларусь",
+        "pl": "Pomnik Twierdzy Brzeskiej w Brześciu na Białorusi",
+        "lt": "Bresto tvirtovės memorialas Baltarusijoje",
+        "lv": "Brestas cietokšņa memoriāls Baltkrievijā",
+        "de": "Gedenkstätte Brester Festung in Brest, Belarus",
+        "fr": "Mémorial de la forteresse de Brest en Biélorussie"
+      },
+      "center": [
+        0.5,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Brest_Fortress_(250186225).jpeg",
+      "base": "brest-belarus-fortress-memorial-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "bydgoszcz",
+      "city": "Bydgoszcz",
+      "landmark": "Granaries on the Brda River",
+      "file": "Bdg Spichrze 8 07-2013.jpg",
+      "credit": "Pit1233",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "slug": "bydgoszcz-brda-river-granaries",
+      "labels": {
+        "en": "Historic granaries reflected in the Brda River in Bydgoszcz",
+        "ru": "Исторические амбары на реке Брда в Быдгоще",
+        "pl": "Zabytkowe spichrze nad Brdą w Bydgoszczy",
+        "lt": "Istoriniai sandėliai prie Brdos upės Bydgoščiuje",
+        "lv": "Vēsturiskās noliktavas pie Brdas upes Bidgoščā",
+        "de": "Historische Speicher am Fluss Brda in Bydgoszcz",
+        "fr": "Greniers historiques le long de la Brda à Bydgoszcz"
+      },
+      "center": [
+        0.5,
+        0.43
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bdg_Spichrze_8_07-2013.jpg",
+      "base": "bydgoszcz-brda-river-granaries-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "daugavpils",
+      "city": "Daugavpils",
+      "landmark": "Nicholas Gate, Daugavpils Fortress",
+      "file": "Daugavpils fortress05.JPG",
+      "credit": "Alma Pater",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "slug": "daugavpils-fortress-nicholas-gate",
+      "labels": {
+        "en": "Nicholas Gate of Daugavpils Fortress",
+        "ru": "Николаевские ворота Даугавпилсской крепости",
+        "pl": "Brama Mikołajewska Twierdzy Dyneburskiej",
+        "lt": "Daugpilio tvirtovės Nikolajaus vartai",
+        "lv": "Daugavpils cietokšņa Nikolaja vārti",
+        "de": "Nikolaustor der Festung Daugavpils",
+        "fr": "Porte Nicolas de la forteresse de Daugavpils"
+      },
+      "center": [
+        0.5,
+        0.48
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Daugavpils_fortress05.JPG",
+      "base": "daugavpils-fortress-nicholas-gate-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "druskininkai",
+      "city": "Druskininkai",
+      "landmark": "Church of Our Lady of the Scapular",
+      "file": "Druskininkų Švč. Mergelės Marijos Škaplierinės bažnyčia.jpg",
+      "credit": "MHz`as",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "slug": "druskininkai-scapular-church",
+      "labels": {
+        "en": "Church of Our Lady of the Scapular in Druskininkai",
+        "ru": "Костёл Девы Марии Шкаплерной в Друскининкае",
+        "pl": "Kościół Matki Boskiej Szkaplerznej w Druskienikach",
+        "lt": "Švč. Mergelės Marijos Škaplierinės bažnyčia Druskininkuose",
+        "lv": "Škapulāra Dievmātes baznīca Druskininkos",
+        "de": "Skapulierkirche in Druskininkai",
+        "fr": "Église Notre-Dame du Scapulaire à Druskininkai"
+      },
+      "center": [
+        0.5,
+        0.37
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Druskinink%C5%B3_%C5%A0v%C4%8D._Mergel%C4%97s_Marijos_%C5%A0kaplierin%C4%97s_ba%C5%BEny%C4%8Dia.jpg",
+      "base": "druskininkai-scapular-church-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "gdansk",
+      "city": "Gdańsk",
+      "landmark": "Neptune Fountain",
+      "file": "Neptune fountain in Gdańsk during Wikimania 2010.jpg",
+      "credit": "Ragesoss (Sage Ross)",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "slug": "gdansk-neptune-fountain-old-town",
+      "labels": {
+        "en": "Neptune Fountain in Gdańsk Old Town",
+        "ru": "Фонтан Нептуна в Старом городе Гданьска",
+        "pl": "Fontanna Neptuna na Długim Targu w Gdańsku",
+        "lt": "Neptūno fontanas Gdansko senamiestyje",
+        "lv": "Neptūna strūklaka Gdaņskas vecpilsētā",
+        "de": "Neptunbrunnen in der Danziger Altstadt",
+        "fr": "Fontaine de Neptune dans la vieille ville de Gdańsk"
+      },
+      "center": [
+        0.5,
+        0.53
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Neptune_fountain_in_Gda%C5%84sk_during_Wikimania_2010.jpg",
+      "base": "gdansk-neptune-fountain-old-town-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "gomel",
+      "city": "Gomel",
+      "landmark": "Rumyantsev–Paskevich Palace",
+      "file": "Homiel. Гомель (19.10.2008).jpg",
+      "credit": "Andrei Suslov",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "slug": "gomel-rumyantsev-paskevich-palace",
+      "labels": {
+        "en": "Rumyantsev–Paskevich Palace in Gomel",
+        "ru": "Дворец Румянцевых — Паскевичей в Гомеле",
+        "pl": "Pałac Rumiancewów-Paskiewiczów w Homlu",
+        "lt": "Rumiancevų-Paskevičių rūmai Gomelyje",
+        "lv": "Rumjancevu–Paskeviču pils Gomeļā",
+        "de": "Rumjanzew-Paskewitsch-Palast in Gomel",
+        "fr": "Palais Roumiantsev-Paskevitch à Gomel"
+      },
+      "center": [
+        0.5,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Homiel._%D0%93%D0%BE%D0%BC%D0%B5%D0%BB%D1%8C_(19.10.2008).jpg",
+      "base": "gomel-rumyantsev-paskevich-palace-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "grodno",
+      "city": "Grodno",
+      "landmark": "Old Castle in Grodno",
+      "file": "Old Castle in Hrodna - Стары замак у Гродна - panoramio.jpg",
+      "credit": "Viktar Palstsiuk",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "slug": "grodno-old-castle",
+      "labels": {
+        "en": "Old Castle overlooking the Neman River in Grodno",
+        "ru": "Старый замок над Неманом в Гродно",
+        "pl": "Stary Zamek nad Niemnem w Grodnie",
+        "lt": "Gardino Senoji pilis prie Nemuno",
+        "lv": "Grodņas Vecā pils pie Nemunas",
+        "de": "Altes Schloss an der Memel in Grodno",
+        "fr": "Vieux château sur le Niémen à Grodno"
+      },
+      "center": [
+        0.5,
+        0.48
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Old_Castle_in_Hrodna_-_%D0%A1%D1%82%D0%B0%D1%80%D1%8B_%D0%B7%D0%B0%D0%BC%D0%B0%D0%BA_%D1%83_%D0%93%D1%80%D0%BE%D0%B4%D0%BD%D0%B0_-_panoramio.jpg",
+      "base": "grodno-old-castle-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    }
+  ]
+}
