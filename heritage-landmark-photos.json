@@ -1,0 +1,37 @@
+{
+  "purpose": "Actual destination-city heritage images matched to departure context for cross-border transfer pages. Original aspect ratios retained.",
+  "images": [
+    {
+      "id": "minsk-red-church",
+      "file": "Church of Saints Simon and Alena (Red Church).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Church_of_Saints_Simon_and_Alena_(Red_Church).jpg",
+      "credit": "Julia Boda",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+    },
+    {
+      "id": "minsk-holy-name-cathedral",
+      "file": "Belarus-Minsk-Archcathedral of Name of Virgin Mary-1.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Belarus-Minsk-Archcathedral_of_Name_of_Virgin_Mary-1.jpg",
+      "credit": "Hanna Zelenko",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    {
+      "id": "minsk-city-hall",
+      "file": "Belarus-Minsk-City Hall-1.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Belarus-Minsk-City_Hall-1.jpg",
+      "credit": "Hanna Zelenko",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+    },
+    {
+      "id": "grodno-francis-xavier",
+      "file": "Grodno Saint Francis Xavier Cathedral IMG 1355 2175.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Grodno_Saint_Francis_Xavier_Cathedral_IMG_1355_2175.jpg",
+      "credit": "Alexxx1979",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+  ]
+}
