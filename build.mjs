@@ -738,6 +738,7 @@ function hubPage(lang) {
   const body = `${header(lang)}<main>
     <section class="hero hero-home"><div class="hero-overlay"></div><div class="hero-content"><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(l.hubTitle)}</h1><p>${esc(l.hubDescription)}</p><div class="hero-actions"><a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang)}</div></section>
     ${trustStrip(l)}
+    <section class="section route-cultural-story" aria-label="${esc(destinationLabels[lang])}">${cityPhotoFigure(lang,"minsk")}</section>
     <section class="section routes-section" id="routes"><div class="section-head"><span class="eyebrow">Comfortline routes</span><h2>${esc(l.routesTitle)}</h2><p>${esc(l.routesLead)}</p></div><div class="route-grid three">${routeCards(lang)}</div></section>
     ${airportRouteLinks(lang)}
     ${geoHubDirectoryLinks(lang)}
@@ -747,7 +748,9 @@ function hubPage(lang) {
     <section class="section steps-section"><div class="section-head"><span class="eyebrow">3 steps</span><h2>${esc(l.stepsTitle)}</h2></div><div class="steps">${l.steps.map(([n, h, p]) => `<article><span>${n}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     ${homeBookingTransparency(lang)}
     ${faq(l)}</main>${footer(l)}`;
-  return layout({ lang, title, description: l.hubDescription, canonical, alternates: alternateLinks("home"), body, schema: businessSchema(lang, canonical) });
+  return layout({ lang, title, description: l.hubDescription, canonical, alternates: alternateLinks("home"), body,
+    schema: {"@context":"https://schema.org","@graph":[businessSchema(lang,canonical),cityPhotoObject(lang,"minsk")]},
+    ogImage:cityPhotoPreviewUrl("minsk") });
 }
 
 
@@ -984,6 +987,7 @@ function destinationIndexPage(lang){
     <h1>${esc(ui.section)}</h1><p>${esc(ui.hubLead)}</p>
     <a href="#dest-index-list" class="button primary">${esc(ui.browse)} ${icons.arrow}</a>
   </div></section>
+  <section class="section route-cultural-story" aria-label="Minsk, Belarus">${cityPhotoFigure(lang,"minsk")}</section>
   <section class="section dest-index-section" id="dest-index-list">
     <div class="dest-index-grid">${belarusDestinations.map(dest=>`
     <article class="dest-index-card">
@@ -1002,7 +1006,7 @@ function destinationIndexPage(lang){
   </main>${footer(l)}`;
  return layout({lang,title:ui.section+" | byComfortLine",description:ui.hubMeta.replace("{dest}",ui.section),
    canonical,alternates:destinationIndexAlternates(),body,schema:schemas,
-   originOverride:"",destinationOverride:""});
+   originOverride:"",destinationOverride:"",ogImage:cityPhotoPreviewUrl("minsk")});
 }
 
 function destinationPage(lang,dest){
@@ -1235,6 +1239,7 @@ function geoDirectoryPage(lang,type) {
         <a href="${geoIndexPath(lang,"city")}"${type==="city"?' aria-current="page"':""}>⌖ ${esc(t.browseCities)}</a>
       </div>
     </div></section>
+    <section class="section route-cultural-story" aria-label="${esc(t.arrival)}">${cityPhotoFigure(lang,"minsk")}</section>
     <div class="geo-directory-wrap section">${geoCountryGroups(lang,items)}
       <p class="geo-directory-note">${esc(t.directoryNote)}</p>
       <a class="button primary geo-list-cta" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a>
@@ -1244,7 +1249,7 @@ function geoDirectoryPage(lang,type) {
     ${faq(l)}
   </main>${footer(l)}`;
   return layout({lang,title:label+" | byComfortLine",description:label+". "+t.directoryLead,canonical,
-    alternates:geoIndexAlternates(type),body,schema});
+    alternates:geoIndexAlternates(type),body,schema,ogImage:cityPhotoPreviewUrl("minsk")});
 }
 
 // Distinctive city landmarks. Wikimedia Commons Special:FilePath resolves an image
@@ -1297,7 +1302,7 @@ function heritagePhotoFigure(lang,origin,destinationId="minsk"){
   const image=`<img src="${esc(local||photo.url)}" data-heritage-photo data-fallback-src="${esc(fallback)}"
       loading="lazy" decoding="async" width="${photo.imageWidth}" height="${photo.imageHeight}"
       alt="${esc(name)}" title="${esc(name)}" data-fallback-caption="${esc(fallbackName)}" referrerpolicy="no-referrer">`;
-  return `<figure class="geo-city-landmark has-photo geo-heritage-photo">
+  return `<figure class="geo-city-landmark has-photo geo-heritage-photo" data-destination-id="${esc(photo.destination)}">
     ${local?`<picture><source type="image/webp" srcset="${root}-640.webp 640w, ${root}-1200.webp 1200w"
       sizes="(max-width: 760px) calc(100vw - 48px), 660px">${image}</picture>`:image}
     <figcaption>
@@ -1334,7 +1339,7 @@ function cityPhotoFigure(lang,id) {
   const image=`<img src="${esc(local?path+"-1200.webp":cityPhotoRemote(id))}" width="1200" height="750"
     loading="eager" fetchpriority="high" decoding="async" alt="${esc(caption)}"
     title="${esc(photo.landmark+" · "+photo.city)}">`;
-  return `<figure class="geo-city-landmark has-photo">
+  return `<figure class="geo-city-landmark has-photo" data-destination-id="${esc(id)}">
     ${local?`<picture><source type="image/webp" media="(max-width: 760px)" srcset="${path}-640.webp">
     <source type="image/webp" srcset="${path}-640.webp 640w, ${path}-1200.webp 1200w" sizes="(max-width: 760px) calc(100vw - 48px), 660px">
     ${image}</picture>`:image}
@@ -1405,9 +1410,9 @@ function geoLocationPage(lang,place) {
   const l=locale[lang], t=geoLocale[lang];
   const name=place.names[lang], opts={place:name,code:place.code||""};
   const isAirport=place.type==="airport";
-  const landmark = !isAirport ? cityLandmarks[place.id] : null;
-  const landmarkCaption = landmark ? `${landmark.landmark} · ${landmark.city}` : "";
-  const landmarkImage = isAirport ? heritagePhotoFigure(lang,place,"minsk") : curatedCityPhotos[place.id] ? cityPhotoFigure(lang,place.id) : landmark ? `<figure class="geo-city-landmark"><div class="geo-city-landmark-placeholder" role="img" aria-label="${esc(landmarkCaption)}"><span>${esc(landmark.landmark)}</span><small>${esc(landmark.city)}</small></div><figcaption>${esc(landmarkCaption)}</figcaption></figure>` : "";
+  // These landing pages sell journeys TO Minsk: the photo must be Minsk,
+  // with the origin's country providing the verified heritage connection.
+  const landmarkImage = heritagePhotoFigure(lang,place,"minsk");
 
   const title=geoText(isAirport?t.airportTitle:t.cityTitle,opts)+" | byComfortLine";
   const description=geoText(isAirport?t.airportMeta:t.cityMeta,opts);
@@ -1440,10 +1445,8 @@ function geoLocationPage(lang,place) {
       {"@type":"ListItem","position":3,"name":name,"item":canonical}
     ]}
   ]};
-  if(isAirport) {
-    const photo=heritagePhotoObject(lang,place,"minsk");
-    if(photo)schema["@graph"].push(photo);
-  } else if(cityPhotoObject(lang,place.id)) schema["@graph"].push(cityPhotoObject(lang,place.id));
+  const destinationPhoto=heritagePhotoObject(lang,place,"minsk");
+  if(destinationPhoto)schema["@graph"].push(destinationPhoto);
   const body=`${header(lang,"geo",place)}<main>
     <section class="geo-location-hero">
       <div class="geo-location-hero-inner">
@@ -1453,7 +1456,6 @@ function geoLocationPage(lang,place) {
         </nav>
         <span class="eyebrow light">${esc(t.countryLabels[place.country])} · ${isAirport?esc(t.airport):esc(t.city)}${place.code?" · "+place.code:""}</span>
         <h1>${esc(h1)}</h1>
-        ${isAirport?"":landmarkImage}
         <p>${esc(geoText(isAirport?t.introAirport:t.introCity,opts))}</p>
         <div class="hero-actions">
           <a href="#booking-dialog" data-open-booking class="button primary" aria-haspopup="dialog" aria-controls="booking-dialog">${esc(t.quote)} ${icons.arrow}</a>
@@ -1462,7 +1464,7 @@ function geoLocationPage(lang,place) {
         ${quickBooking(lang,place.parent,name)}
       </div>
     </section>
-    ${isAirport?`<section class="section geo-airport-landmark-section">${landmarkImage}</section>`:""}
+    <section class="section geo-airport-landmark-section" aria-label="${esc(t.arrival)}">${landmarkImage}</section>
     <div class="geo-content-wrap section">
       <div class="geo-page-facts">
         <div><span>${esc(isAirport?t.airport:t.city)}</span><strong>${esc(name)}</strong></div>
@@ -1513,7 +1515,7 @@ function geoLocationPage(lang,place) {
   </main>${footer(l)}`;
   return layout({lang,title,description,canonical,alternates:geoAlternateLinks(place),
     body,schema,routeKey:place.parent,originOverride:name,
-    ogImage:isAirport?heritagePhotoPublicUrl(heritageForRoute(place,"minsk")):cityPhotoPreviewUrl(place.id)});
+    ogImage:heritagePhotoPublicUrl(heritageForRoute(place,"minsk"))});
 }
 
 function routePage(lang, key) {
@@ -1589,6 +1591,7 @@ function gateway() {
       <div class="gateway-links">${links}</div>
       <nav class="gateway-route-nav" aria-label="Popular private transfers">${popular}</nav>
       <small>Vilnius VNO · Warsaw WAW/WMI · Riga RIX · Minsk</small>
+      ${cityPhotoFigure("en","minsk")}
     </div></main>${floatingContact()}</body></html>`;
 }
 
