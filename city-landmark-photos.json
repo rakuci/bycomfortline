@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "notes": "Wikimedia Commons curated image references; photos must be verified and converted to WebP before use. All derivatives credited and licence linked.",
+  "notes": "Curated photographs of city landmarks and Minsk Airport with author/licence attribution; optimize each locally as 640 and 1200 px WebPs before using.",
   "images": [
     {
       "id": "baranovichi",
@@ -216,11 +216,11 @@
       "id": "gdansk",
       "city": "Gdańsk",
       "landmark": "Neptune Fountain",
-      "file": "Neptune fountain in Gdańsk during Wikimania 2010.jpg",
-      "credit": "Ragesoss (Sage Ross)",
-      "license": "CC BY 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-      "slug": "gdansk-neptune-fountain-old-town",
+      "file": "Neptune's fountain in Gdansk.jpg",
+      "credit": "Chichebombon",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "gdansk-neptune-fountain-artus-court",
       "labels": {
         "en": "Neptune Fountain in Gdańsk Old Town",
         "ru": "Фонтан Нептуна в Старом городе Гданьска",
@@ -232,10 +232,10 @@
       },
       "center": [
         0.5,
-        0.53
+        0.5
       ],
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Neptune_fountain_in_Gda%C5%84sk_during_Wikimania_2010.jpg",
-      "base": "gdansk-neptune-fountain-old-town-private-transfer",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Neptune%27s_fountain_in_Gdansk.jpg",
+      "base": "gdansk-neptune-fountain-artus-court-private-transfer",
       "variants": [
         640,
         1200
@@ -663,6 +663,36 @@
       "updated": "2026-10-20"
     },
     {
+      "id": "msq",
+      "city": "Minsk National Airport",
+      "landmark": "Minsk National Airport passenger terminal",
+      "file": "Аэропорт Минск.jpg",
+      "credit": "DCheretovich",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "minsk-national-airport-msq-terminal",
+      "labels": {
+        "en": "Minsk National Airport (MSQ) terminal, Belarus",
+        "ru": "Терминал Национального аэропорта Минск (MSQ)",
+        "pl": "Terminal Narodowego Portu Lotniczego Mińsk (MSQ)",
+        "lt": "Minsko nacionalinio oro uosto (MSQ) terminalas",
+        "lv": "Minskas Nacionālās lidostas (MSQ) terminālis",
+        "de": "Terminal des Nationalflughafens Minsk (MSQ)",
+        "fr": "Terminal de l'aéroport national de Minsk (MSQ)"
+      },
+      "center": [
+        0.5,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:%D0%90%D1%8D%D1%80%D0%BE%D0%BF%D0%BE%D1%80%D1%82_%D0%9C%D0%B8%D0%BD%D1%81%D0%BA.jpg",
+      "base": "minsk-national-airport-msq-terminal-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
       "id": "olsztyn",
       "city": "Olsztyn",
       "landmark": "Castle of the Warmian Cathedral Chapter",
@@ -901,7 +931,217 @@
         1200
       ],
       "updated": "2026-10-20"
+    },
+    {
+      "id": "siauliai",
+      "city": "Šiauliai",
+      "landmark": "Golden Boy (Šaulys) sculpture at Sundial Square",
+      "file": "Golden Boy Statue in Šiauliai, Lithuania in 2018 (2).jpg",
+      "credit": "Scotch Mist",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "siauliai-golden-boy-sundial-square",
+      "labels": {
+        "en": "Golden Boy (Šaulys) statue on Sundial Square, Šiauliai",
+        "ru": "Скульптура «Золотой мальчик» на площади Солнечных часов в Шяуляе",
+        "pl": "Złoty Chłopiec na placu Zegara Słonecznego w Szawlach",
+        "lt": "Auksinio berniuko (Šaulio) skulptūra Saulės laikrodžio aikštėje",
+        "lv": "Zelta zēna skulptūra Saules pulksteņa laukumā Šauļos",
+        "de": "Goldener Junge am Sonnenuhrplatz in Šiauliai",
+        "fr": "Statue du Garçon doré sur la place du Cadran solaire à Šiauliai"
+      },
+      "center": [
+        0.5,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Golden_Boy_Statue_in_%C5%A0iauliai%2C_Lithuania_in_2018_(2).jpg",
+      "base": "siauliai-golden-boy-sundial-square-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "suwalki",
+      "city": "Suwałki",
+      "landmark": "Maria Konopnicka Square",
+      "file": "Maria Konopnicka Square in Suwałki 02.jpg",
+      "credit": "Witia",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "suwalki-maria-konopnicka-square",
+      "labels": {
+        "en": "Maria Konopnicka Square in Suwałki",
+        "ru": "Площадь Марии Конопницкой в Сувалках",
+        "pl": "Plac Marii Konopnickiej w Suwałkach",
+        "lt": "Marijos Konopnickos aikštė Suvalkuose",
+        "lv": "Marijas Konopņickas laukums Suvalkos",
+        "de": "Maria-Konopnicka-Platz in Suwałki",
+        "fr": "Place Maria Konopnicka à Suwałki"
+      },
+      "center": [
+        0.5,
+        0.53
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Maria_Konopnicka_Square_in_Suwa%C5%82ki_02.jpg",
+      "base": "suwalki-maria-konopnicka-square-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "szczecin",
+      "city": "Szczecin",
+      "landmark": "Pomeranian Dukes' Castle",
+      "file": "Zamek Książąt Pomorskich, Staré Miasto, Szczecin, Západopomořanské vojvodství 03.jpg",
+      "credit": "Fry72",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "szczecin-pomeranian-dukes-castle",
+      "labels": {
+        "en": "Pomeranian Dukes' Castle in Szczecin Old Town",
+        "ru": "Замок померанских князей в Старом городе Щецина",
+        "pl": "Zamek Książąt Pomorskich na Starym Mieście w Szczecinie",
+        "lt": "Pamario kunigaikščių pilis Ščecine",
+        "lv": "Pomerānijas hercogu pils Ščecinā",
+        "de": "Schloss der Pommerschen Herzöge in Stettin",
+        "fr": "Château des ducs de Poméranie à Szczecin"
+      },
+      "center": [
+        0.5,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Zamek_Ksi%C4%85%C5%BC%C4%85t_Pomorskich%2C_Star%C3%A9_Miasto%2C_Szczecin%2C_Z%C3%A1padopomo%C5%99ansk%C3%A9_vojvodstv%C3%AD_03.jpg",
+      "base": "szczecin-pomeranian-dukes-castle-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "vilnius",
+      "city": "Vilnius",
+      "landmark": "Gediminas' Tower",
+      "file": "Gediminas Tower Vilnius.jpg",
+      "credit": "Sean Glossop",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "vilnius-gediminas-tower",
+      "labels": {
+        "en": "Gediminas' Tower and Grand Dukes' Palace in Vilnius",
+        "ru": "Башня Гедимина и Дворец великих князей в Вильнюсе",
+        "pl": "Wieża Giedymina i Pałac Wielkich Książąt w Wilnie",
+        "lt": "Gedimino pilies bokštas ir Valdovų rūmai Vilniuje",
+        "lv": "Ģedimina tornis un Lietuvas valdnieku pils Viļņā",
+        "de": "Gediminas-Turm und Großfürstenpalast in Vilnius",
+        "fr": "Tour de Gediminas et palais des Grands-Ducs à Vilnius"
+      },
+      "center": [
+        0.5,
+        0.52
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Gediminas_Tower_Vilnius.jpg",
+      "base": "vilnius-gediminas-tower-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "vitebsk",
+      "city": "Vitebsk",
+      "landmark": "Assumption Cathedral",
+      "file": "Church of the Assumption in Vitebsk - 003.jpg",
+      "credit": "Mikra72",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "slug": "vitebsk-assumption-cathedral",
+      "labels": {
+        "en": "Assumption Cathedral in Vitebsk, Belarus",
+        "ru": "Успенский собор в Витебске, Беларусь",
+        "pl": "Sobór Zaśnięcia Matki Bożej w Witebsku",
+        "lt": "Vitebsko Dievo Motinos Ėmimo į dangų soboras",
+        "lv": "Vitebskas Dievmātes Aizmigšanas katedrāle",
+        "de": "Mariä-Entschlafens-Kathedrale in Witebsk",
+        "fr": "Cathédrale de la Dormition à Vitebsk"
+      },
+      "center": [
+        0.5,
+        0.48
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Church_of_the_Assumption_in_Vitebsk_-_003.jpg",
+      "base": "vitebsk-assumption-cathedral-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "warsaw",
+      "city": "Warsaw",
+      "landmark": "Castle Square in Warsaw Old Town",
+      "file": "Castle Square, Warsaw, 2026.jpg",
+      "credit": "Wistula",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "warsaw-old-town-castle-square",
+      "labels": {
+        "en": "Castle Square in Warsaw Old Town",
+        "ru": "Замковая площадь в Старом городе Варшавы",
+        "pl": "Plac Zamkowy na Starym Mieście w Warszawie",
+        "lt": "Varšuvos senamiesčio Pilies aikštė",
+        "lv": "Varšavas vecpilsētas Pils laukums",
+        "de": "Schlossplatz in der Warschauer Altstadt",
+        "fr": "Place du Château dans la vieille ville de Varsovie"
+      },
+      "center": [
+        0.5,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Castle_Square%2C_Warsaw%2C_2026.jpg",
+      "base": "warsaw-old-town-castle-square-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "wroclaw",
+      "city": "Wrocław",
+      "landmark": "Historic Town Hall",
+      "file": "Wroclaw Ratusz.jpg",
+      "credit": "Merangs",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "slug": "wroclaw-historic-town-hall",
+      "labels": {
+        "en": "Historic Wrocław Town Hall on the Market Square",
+        "ru": "Историческая ратуша на Рыночной площади Вроцлава",
+        "pl": "Zabytkowy Ratusz na Rynku we Wrocławiu",
+        "lt": "Vroclavo rotušė Turgaus aikštėje",
+        "lv": "Vroclavas rātsnams Tirgus laukumā",
+        "de": "Historisches Rathaus am Marktplatz in Breslau",
+        "fr": "Hôtel de ville historique sur la place du Marché de Wrocław"
+      },
+      "center": [
+        0.5,
+        0.51
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Wroclaw_Ratusz.jpg",
+      "base": "wroclaw-historic-town-hall-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
     }
   ],
-  "workflowTrigger": "Three alphabetical batches of ten — 2026-10-20"
+  "workflowTrigger": "Incremental repairs of missing or changed city pictures"
 }
