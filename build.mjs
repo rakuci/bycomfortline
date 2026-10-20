@@ -986,7 +986,7 @@ function destinationIndexPage(lang){
   <section class="section dest-index-section" id="dest-index-list">
     <div class="dest-index-grid">${belarusDestinations.map(dest=>`
     <article class="dest-index-card">
-      ${resolvedCityPhoto(dest.id)?cityPhotoThumbnail(lang,dest.id):`<span class="dest-index-icon" aria-hidden="true">${dest.type==="airport"?"✈":"⌖"}</span>`}
+      ${curatedCityPhotos[dest.id]?cityPhotoThumbnail(lang,dest.id):`<span class="dest-index-icon" aria-hidden="true">${dest.type==="airport"?"✈":"⌖"}</span>`}
       <h2><a href="${destinationPath(lang,dest)}">${esc(dest.names[lang])} ↗</a></h2>
       <p>${esc(dest.specifics[lang])}</p>
       <a class="dest-index-read" href="${destinationPath(lang,dest)}">${esc(ui.keyOrigin.replace("{dest}",destSeoName(dest,lang)))} ↗</a>
@@ -1073,7 +1073,7 @@ function destinationPage(lang,dest){
   ${faq(l)}
   </main>${footer(l)}`;
  return layout({lang,title,description,canonical,alternates:destinationAlternates(dest),
-   body,schema,routeKey:"vilnius",originOverride:"",destinationOverride:to,ogImage:cityPhotoUrl(dest.id)});
+   body,schema,routeKey:"vilnius",originOverride:"",destinationOverride:to,ogImage:cityPhotoPreviewUrl(dest.id)});
 }
 
 function transferPairPage(lang,origin,dest){
@@ -1102,7 +1102,7 @@ function transferPairPage(lang,origin,dest){
     {"@type":"ListItem","position":4,"name":h1,"item":canonical}
    ]}
  ]};
- const relevantPhoto=resolvedCityPhoto(origin.id)?origin.id:resolvedCityPhoto(dest.id)?dest.id:null;
+ const relevantPhoto=curatedCityPhotos[origin.id]?origin.id:curatedCityPhotos[dest.id]?dest.id:null;
  if(relevantPhoto)schema["@graph"].push(cityPhotoObject(lang,relevantPhoto));
  const body=`${header(lang,"pair",{origin,dest})}<main>
   <section class="dest-pair-hero"><div class="dest-hero-inner">
@@ -1168,7 +1168,7 @@ function transferPairPage(lang,origin,dest){
   </section>
   </main>${footer(l)}`;
  return layout({lang,title,description,canonical,alternates:pairAlternates(origin,dest),
-  body,schema,routeKey:origin.parent,originOverride:from,destinationOverride:to,ogImage:relevantPhoto?cityPhotoUrl(relevantPhoto):null});
+  body,schema,routeKey:origin.parent,originOverride:from,destinationOverride:to,ogImage:relevantPhoto?cityPhotoPreviewUrl(relevantPhoto):null});
 }
 
 function geoText(template, variables) {
@@ -1186,7 +1186,7 @@ function geoCountryGroups(lang, items, compact = false) {
       <div class="geo-directory-grid${compact?" compact":""}">${subset.map(place=>{
         const name=place.names[lang];
         return `<a class="geo-directory-card" href="${geoPath(lang,place)}">
-          ${place.type==="city"&&resolvedCityPhoto(place.id)?cityPhotoThumbnail(lang,place.id):`<span class="geo-directory-card-mark" aria-hidden="true">${place.type==="airport"?"✈":"⌖"}</span>`}
+          ${place.type==="city"&&curatedCityPhotos[place.id]?cityPhotoThumbnail(lang,place.id):`<span class="geo-directory-card-mark" aria-hidden="true">${place.type==="airport"?"✈":"⌖"}</span>`}
           <span><strong>${esc(name)}</strong><small>${esc(place.type==="airport"?place.code:t.arrival)}</small></span>
           <span aria-hidden="true">↗</span>
         </a>`;
@@ -1256,33 +1256,46 @@ function resolvedCityPhoto(id) {
   const src="/assets/cities/"+photo.base+"-1200.webp";
   return existsSync(join(out,src.slice(1))) ? photo : null;
 }
+function cityPhotoRemote(id,width=1200) {
+  const photo=curatedCityPhotos[id];
+  return photo?"https://commons.wikimedia.org/wiki/Special:FilePath/"+encodeURIComponent(photo.file)+"?width="+width:null;
+}
+function cityPhotoPreviewUrl(id) {
+  return cityPhotoUrl(id)||cityPhotoRemote(id,1200);
+}
 function cityPhotoFigure(lang,id) {
-  const photo=resolvedCityPhoto(id);
+  const photo=curatedCityPhotos[id];
   if(!photo)return "";
+  const local=!!resolvedCityPhoto(id);
   const caption=photo.labels[lang]||photo.landmark;
   const path="/assets/cities/"+photo.base;
+  const image=`<img src="${esc(local?path+"-1200.webp":cityPhotoRemote(id))}" width="1200" height="750"
+    loading="eager" fetchpriority="high" decoding="async" alt="${esc(caption)}"
+    title="${esc(photo.landmark+" · "+photo.city)}">`;
   return `<figure class="geo-city-landmark has-photo">
-    <picture><source type="image/webp" media="(max-width: 760px)" srcset="${path}-640.webp">
+    ${local?`<picture><source type="image/webp" media="(max-width: 760px)" srcset="${path}-640.webp">
     <source type="image/webp" srcset="${path}-640.webp 640w, ${path}-1200.webp 1200w" sizes="(max-width: 760px) calc(100vw - 48px), 660px">
-    <img src="${path}-1200.webp" width="1200" height="750" loading="eager" fetchpriority="high" decoding="async"
-      alt="${esc(caption)}" title="${esc(photo.landmark+" · "+photo.city)}"></picture>
+    ${image}</picture>`:image}
     <figcaption><strong>${esc(caption)}</strong>
       <span class="geo-photo-credit">Photo: <a href="${esc(photo.sourcePage)}" target="_blank" rel="noopener noreferrer">${esc(photo.credit)}</a> ·
-        <a href="${esc(photo.licenseUrl)}" target="_blank" rel="license noopener noreferrer">${esc(photo.license)}</a> · resized/cropped to WebP</span>
+        <a href="${esc(photo.licenseUrl)}" target="_blank" rel="license noopener noreferrer">${esc(photo.license)}</a> ·
+        ${local?"resized/cropped to WebP":"Wikimedia Commons source photograph"}</span>
     </figcaption>
   </figure>`;
 }
 function cityPhotoThumbnail(lang,id) {
-  const photo=resolvedCityPhoto(id);
+  const photo=curatedCityPhotos[id];
   if(!photo)return "";
-  return `<img class="city-landmark-thumb" src="/assets/cities/${photo.base}-640.webp" width="140" height="88" loading="lazy" decoding="async"
+  const local=!!resolvedCityPhoto(id);
+  return `<img class="city-landmark-thumb" src="${esc(local?"/assets/cities/"+photo.base+"-640.webp":cityPhotoRemote(id,500))}" width="140" height="88" loading="lazy" decoding="async"
     alt="${esc(photo.labels[lang]||photo.landmark)}">`;
 }
 function cityPhotoObject(lang,id) {
-  const p=resolvedCityPhoto(id);
+  const p=curatedCityPhotos[id];
+  const local=!!resolvedCityPhoto(id);
   return p?{"@type":"ImageObject",
-    "contentUrl":base+"/assets/cities/"+p.base+"-1200.webp",
-    "thumbnailUrl":base+"/assets/cities/"+p.base+"-640.webp",
+    "contentUrl":cityPhotoPreviewUrl(id),
+    "thumbnailUrl":local?base+"/assets/cities/"+p.base+"-640.webp":cityPhotoRemote(id,500),
     "name":p.landmark+" — "+p.city,
     "caption":p.labels[lang]||p.landmark,
     "creator":{"@type":"Person","name":p.credit},
@@ -1332,7 +1345,7 @@ function geoLocationPage(lang,place) {
   const isAirport=place.type==="airport";
   const landmark = !isAirport ? cityLandmarks[place.id] : null;
   const landmarkCaption = landmark ? `${landmark.landmark} · ${landmark.city}` : "";
-  const landmarkImage = !isAirport && resolvedCityPhoto(place.id) ? cityPhotoFigure(lang,place.id) : landmark ? `<figure class="geo-city-landmark"><div class="geo-city-landmark-placeholder" role="img" aria-label="${esc(landmarkCaption)}"><span>${esc(landmark.landmark)}</span><small>${esc(landmark.city)}</small></div><figcaption>${esc(landmarkCaption)}</figcaption></figure>` : "";
+  const landmarkImage = !isAirport && curatedCityPhotos[place.id] ? cityPhotoFigure(lang,place.id) : landmark ? `<figure class="geo-city-landmark"><div class="geo-city-landmark-placeholder" role="img" aria-label="${esc(landmarkCaption)}"><span>${esc(landmark.landmark)}</span><small>${esc(landmark.city)}</small></div><figcaption>${esc(landmarkCaption)}</figcaption></figure>` : "";
 
   const title=geoText(isAirport?t.airportTitle:t.cityTitle,opts)+" | byComfortLine";
   const description=geoText(isAirport?t.airportMeta:t.cityMeta,opts);
@@ -1433,7 +1446,7 @@ function geoLocationPage(lang,place) {
     </div>
   </main>${footer(l)}`;
   return layout({lang,title,description,canonical,alternates:geoAlternateLinks(place),
-    body,schema,routeKey:place.parent,originOverride:name,ogImage:!isAirport?cityPhotoUrl(place.id):null});
+    body,schema,routeKey:place.parent,originOverride:name,ogImage:!isAirport?cityPhotoPreviewUrl(place.id):null});
 }
 
 function routePage(lang, key) {
