@@ -4189,3 +4189,16 @@ body { background:var(--cl-pearl); }
   .location-control > .location-clear,
   .quick-booking > .quick-submit { transition:none; }
 }
+
+/* City landmark editorial panel: ready for verified licensed photography. */
+.geo-city-landmark { width:min(100%,660px);margin:24px 0 25px; }
+.geo-city-landmark-placeholder {
+  min-height:150px;display:flex;flex-direction:column;justify-content:center;
+  gap:7px;padding:24px 30px;border:1px solid rgba(255,255,255,.23);
+  border-radius:17px;background:linear-gradient(120deg,rgba(190,164,124,.17),rgba(11,35,48,.54));
+  color:#fff;
+}
+.geo-city-landmark-placeholder span {font-size:clamp(1.15rem,2.5vw,1.7rem);font-weight:750;letter-spacing:-.025em;}
+.geo-city-landmark-placeholder small {font-size:13px;color:#e3d5b8;}
+.geo-city-landmark figcaption {margin-top:8px;color:#d6e3e3;font-size:12px;}
+@media(max-width:760px) {.geo-city-landmark{margin:18px 0 20px}.geo-city-landmark-placeholder{min-height:110px;padding:19px 20px;}}
