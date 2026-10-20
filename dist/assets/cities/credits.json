@@ -142,20 +142,20 @@
   {
     "id": "gdansk",
     "city": "Gdańsk",
-    "source": "https://commons.wikimedia.org/wiki/File:Neptune_fountain_in_Gda%C5%84sk_during_Wikimania_2010.jpg",
-    "credit": "Ragesoss (Sage Ross)",
-    "license": "CC BY 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Neptune%27s_fountain_in_Gdansk.jpg",
+    "credit": "Chichebombon",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
     "variants": [
       {
-        "file": "gdansk-neptune-fountain-old-town-private-transfer-640.webp",
-        "bytes": 6612,
-        "sha256": "fcaa3112ca0e3a6323b3c283c8c0178dbffc5a3b4ef7ff34f8f0a239d385654a"
+        "file": "gdansk-neptune-fountain-artus-court-private-transfer-640.webp",
+        "bytes": 58864,
+        "sha256": "2ce3a679744d7f000662317543a1f564ab890c695b721d4b2e4575fbeb7d2f2a"
       },
       {
-        "file": "gdansk-neptune-fountain-old-town-private-transfer-1200.webp",
-        "bytes": 17080,
-        "sha256": "77a0c93cc80c80b047f320651ff7715c2657766df5b1fd0601b85f4995cf8454"
+        "file": "gdansk-neptune-fountain-artus-court-private-transfer-1200.webp",
+        "bytes": 217986,
+        "sha256": "cb0ad73c1fb530ceee937bf1142ba0c2adeedacd123ca9da3bddd075cee65f26"
       }
     ]
   },
@@ -440,6 +440,26 @@
     ]
   },
   {
+    "id": "msq",
+    "city": "Minsk National Airport",
+    "source": "https://commons.wikimedia.org/wiki/File:%D0%90%D1%8D%D1%80%D0%BE%D0%BF%D0%BE%D1%80%D1%82_%D0%9C%D0%B8%D0%BD%D1%81%D0%BA.jpg",
+    "credit": "DCheretovich",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "minsk-national-airport-msq-terminal-private-transfer-640.webp",
+        "bytes": 42284,
+        "sha256": "f9d5f9699c94ea211a5f0a0ef08e22fae7621a3109fa0312d6bb479538b00194"
+      },
+      {
+        "file": "minsk-national-airport-msq-terminal-private-transfer-1200.webp",
+        "bytes": 132834,
+        "sha256": "dda4f0f7f14ce480b56305c740703f32f919e58dacfba6d2711773c18a52ede9"
+      }
+    ]
+  },
+  {
     "id": "olsztyn",
     "city": "Olsztyn",
     "source": "https://commons.wikimedia.org/wiki/File:Zamek_Kapitu%C5%82y_Warmi%C5%84skiej_w_Olsztynie.jpg",
@@ -596,6 +616,146 @@
         "file": "rzeszow-town-hall-old-market-private-transfer-1200.webp",
         "bytes": 119784,
         "sha256": "06696237fb19ab0aea9fd8c00dab84c2556f954cd5ba7396b003c90f0873c713"
+      }
+    ]
+  },
+  {
+    "id": "siauliai",
+    "city": "Šiauliai",
+    "source": "https://commons.wikimedia.org/wiki/File:Golden_Boy_Statue_in_%C5%A0iauliai%2C_Lithuania_in_2018_(2).jpg",
+    "credit": "Scotch Mist",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "siauliai-golden-boy-sundial-square-private-transfer-640.webp",
+        "bytes": 33384,
+        "sha256": "d9a04bcd5e8365349eba41af4b476fe0a3a3b1e247f09f53ddfdc78d04252e1b"
+      },
+      {
+        "file": "siauliai-golden-boy-sundial-square-private-transfer-1200.webp",
+        "bytes": 131380,
+        "sha256": "cac60c8da60de89ee9b38e41cd3910cd6505da98825ec519c3f7b088e36730da"
+      }
+    ]
+  },
+  {
+    "id": "suwalki",
+    "city": "Suwałki",
+    "source": "https://commons.wikimedia.org/wiki/File:Maria_Konopnicka_Square_in_Suwa%C5%82ki_02.jpg",
+    "credit": "Witia",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "suwalki-maria-konopnicka-square-private-transfer-640.webp",
+        "bytes": 48668,
+        "sha256": "66c2c80ae98077823d8ad2e8917ea8e40df5195741651c7c251ccffc7c1b3d96"
+      },
+      {
+        "file": "suwalki-maria-konopnicka-square-private-transfer-1200.webp",
+        "bytes": 178372,
+        "sha256": "bdbfcdd38347fd64037ad4a0742e1b493973595f7de952439acc8cb09b5cedb0"
+      }
+    ]
+  },
+  {
+    "id": "szczecin",
+    "city": "Szczecin",
+    "source": "https://commons.wikimedia.org/wiki/File:Zamek_Ksi%C4%85%C5%BC%C4%85t_Pomorskich%2C_Star%C3%A9_Miasto%2C_Szczecin%2C_Z%C3%A1padopomo%C5%99ansk%C3%A9_vojvodstv%C3%AD_03.jpg",
+    "credit": "Fry72",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "szczecin-pomeranian-dukes-castle-private-transfer-640.webp",
+        "bytes": 81682,
+        "sha256": "c7e4999365f6c24a9097e6c5661cf78ade52f54ccf9feb1e92e966930376ab3d"
+      },
+      {
+        "file": "szczecin-pomeranian-dukes-castle-private-transfer-1200.webp",
+        "bytes": 283106,
+        "sha256": "d5afb956f7ce8fdf0e4ea77093fa214771bf13d2a531447e926c874e8331bb2b"
+      }
+    ]
+  },
+  {
+    "id": "vilnius",
+    "city": "Vilnius",
+    "source": "https://commons.wikimedia.org/wiki/File:Gediminas_Tower_Vilnius.jpg",
+    "credit": "Sean Glossop",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "vilnius-gediminas-tower-private-transfer-640.webp",
+        "bytes": 39262,
+        "sha256": "d89aaef0d0aea9d01f6595a13120c3f1fde6a5543d8891ef833c77bc45f39bd1"
+      },
+      {
+        "file": "vilnius-gediminas-tower-private-transfer-1200.webp",
+        "bytes": 168808,
+        "sha256": "6d07fb871cd4c74a2d98d8987cdd301361bee3fda5fed6a1ade563026fa7edb9"
+      }
+    ]
+  },
+  {
+    "id": "vitebsk",
+    "city": "Vitebsk",
+    "source": "https://commons.wikimedia.org/wiki/File:Church_of_the_Assumption_in_Vitebsk_-_003.jpg",
+    "credit": "Mikra72",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "variants": [
+      {
+        "file": "vitebsk-assumption-cathedral-private-transfer-640.webp",
+        "bytes": 45344,
+        "sha256": "c884ffc384bcb23abfaba1d933c2f49791fcd6354e1204831555efe8ff90d899"
+      },
+      {
+        "file": "vitebsk-assumption-cathedral-private-transfer-1200.webp",
+        "bytes": 144538,
+        "sha256": "2b567ca6b7b98c4dad20ad42cd73ee3a9d643df645a8e8b29354b5f9133d4d81"
+      }
+    ]
+  },
+  {
+    "id": "warsaw",
+    "city": "Warsaw",
+    "source": "https://commons.wikimedia.org/wiki/File:Castle_Square%2C_Warsaw%2C_2026.jpg",
+    "credit": "Wistula",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "variants": [
+      {
+        "file": "warsaw-old-town-castle-square-private-transfer-640.webp",
+        "bytes": 41056,
+        "sha256": "c79df03edc273a8a49d02f4d11db5613f3baa8daec83c9693ae62aacf75a5437"
+      },
+      {
+        "file": "warsaw-old-town-castle-square-private-transfer-1200.webp",
+        "bytes": 165580,
+        "sha256": "1e16fc76fb4edd860ee9a0dce8532099a1434a62e3a840496497d2aaed6922d5"
+      }
+    ]
+  },
+  {
+    "id": "wroclaw",
+    "city": "Wrocław",
+    "source": "https://commons.wikimedia.org/wiki/File:Wroclaw_Ratusz.jpg",
+    "credit": "Merangs",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "variants": [
+      {
+        "file": "wroclaw-historic-town-hall-private-transfer-640.webp",
+        "bytes": 68444,
+        "sha256": "e4978f8288b3fa9e4cc1cd95bfeceb9fd731099efcca31645cc4f7c31a82fdc4"
+      },
+      {
+        "file": "wroclaw-historic-town-hall-private-transfer-1200.webp",
+        "bytes": 230390,
+        "sha256": "72d0a9faf5c0e3425d3bd7861ccfb81999efa11f1e054235ab536bb366bdf0cf"
       }
     ]
   }
