@@ -4349,3 +4349,37 @@ body { background:var(--cl-pearl); }
   .geo-heritage-photo figcaption { padding: 11px 13px 12px !important; }
   .geo-heritage-photo .heritage-note { font-size: 11px; line-height: 1.57; }
 }
+
+
+.geo-airport-landmark-section,
+.route-cultural-story {
+  padding-top: clamp(20px, 3vw, 36px);
+  padding-bottom: 10px;
+}
+.geo-airport-landmark-section .geo-heritage-photo,
+.route-cultural-story .geo-heritage-photo {
+  margin: 0 auto;
+  width: min(100%, 850px);
+  max-width: 850px;
+  border-color: #d4dfdc !important;
+  background: #132c37;
+  box-shadow: 0 12px 32px rgba(11,39,46,.09);
+}
+.geo-airport-landmark-section .geo-heritage-photo > img,
+.route-cultural-story .geo-heritage-photo > img {
+  max-height: 340px;
+}
+.route-cultural-story + .facts-section {
+  margin-top: 10px;
+}
+@media (max-width: 760px) {
+  .geo-airport-landmark-section,
+  .route-cultural-story {
+    padding-top: 18px;
+    padding-bottom: 5px;
+  }
+  .geo-airport-landmark-section .geo-heritage-photo > img,
+  .route-cultural-story .geo-heritage-photo > img {
+    max-height: 230px;
+  }
+}
