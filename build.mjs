@@ -18,7 +18,8 @@ import { dirname, join } from "node:path";
 
 const out = new URL("./dist/", import.meta.url).pathname;
 const base = "https://bycomfortline.com";
-const seoLastmod = "2026-10-20";
+const seoLastmod = "2026-10-19";
+const photoLastmod = "2026-10-20";
 const phoneDisplay = "+375 29 155 27 76";
 const phoneHref = "+375291552776";
 const email = "info@comfortline.by";
@@ -1564,15 +1565,41 @@ const sitemapEntries = [
     return `<url><loc>${url}</loc><lastmod>${seoLastmod}</lastmod>${localized}<xhtml:link rel="alternate" hreflang="x-default" href="${base}${routePath("en", key)}"/></url>`;
   }))
 ];
+
+const imageSitemapIndex = new Map();
+for (const lang of Object.keys(locale)) {
+  for (const place of geoCities) {
+    const image = cityPhotoUrl(place.id);
+    if(image)imageSitemapIndex.set(base+geoPath(lang,place),image);
+  }
+  for (const dest of belarusDestinations.filter(x=>x.type==="city")) {
+    const image=cityPhotoUrl(dest.id);
+    if(image)imageSitemapIndex.set(base+destinationPath(lang,dest),image);
+  }
+  for (const dest of belarusDestinations.filter(x=>x.id!=="minsk")) {
+    for (const origin of featuredOrigins) {
+      const photoId=resolvedCityPhoto(origin.id)?origin.id:resolvedCityPhoto(dest.id)?dest.id:null;
+      const image=photoId?cityPhotoUrl(photoId):null;
+      if(image)imageSitemapIndex.set(base+transferPairPath(lang,origin,dest),image);
+    }
+  }
+}
+const sitemapImageEntries=sitemapEntries.map(entry=>{
+  const url=entry.match(/<loc>([^<]+)<\\/loc>/)?.[1];
+  const image=imageSitemapIndex.get(url);
+  if(!image)return entry;
+  return entry.replace(`<lastmod>${seoLastmod}</lastmod>`,`<lastmod>${photoLastmod}</lastmod>`)
+    .replace("</url>", `<image:image><image:loc>${image}</image:loc></image:image></url>`);
+});
 await put("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${sitemapEntries.join("\n")}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${sitemapImageEntries.join("\n")}
 </urlset>`);
 // Yandex no longer uses hreflang attributes in sitemaps. Provide a simple
 // canonical-URL version for manual submission in Yandex Webmaster.
 await put("sitemap-yandex.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemapEntries.map(row=>{
+${sitemapImageEntries.map(row=>{
   const loc=row.match(/<loc>([^<]+)<\/loc>/)?.[1];
   const lastmod=row.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1];
   return `<url><loc>${loc}</loc><lastmod>${lastmod}</lastmod></url>`;
