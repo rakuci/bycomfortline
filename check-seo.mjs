@@ -19,6 +19,13 @@ async function filesUnder(dir) {
 const allFiles = await filesUnder(root);
 const known = new Set(allFiles.map(x => '/' + relative(root, x).replaceAll('\\','/')));
 const htmlFiles = allFiles.filter(x => x.endsWith('.html'));
+const cityPhotoManifest = JSON.parse(await readFile(join(process.cwd(),'city-landmark-photos.json'),'utf8')).images;
+const imageFiles = cityPhotoManifest.flatMap(photo=>
+  photo.variants.map(width=>'/assets/cities/'+photo.base+'-'+width+'.webp'));
+const imageFoundCount = imageFiles.filter(file=>known.has(file)).length;
+if(imageFoundCount!==0 && imageFoundCount!==imageFiles.length){
+  throw new Error('Partial landmark assets: found '+imageFoundCount+' of '+imageFiles.length+' expected responsive WebPs');
+}
 const indexable = [];
 const titles = new Map();
 const descriptions = new Map();
@@ -89,6 +96,19 @@ if (!known.has('/ru/aeroport-ber-minsk/index.html')) issues.push('Russian BER pa
 if (!known.has('/de/berlin-minsk-privattransfer/index.html')) issues.push('German Berlin page missing');
 if (!known.has('/fr/paris-minsk-transfert-prive/index.html')) issues.push('French Paris page missing');
 if (!known.has('/ru/transfery-iz-aeroportov/index.html')) issues.push('Airport index missing');
+
+if (imageFoundCount===imageFiles.length) {
+  for(const photo of cityPhotoManifest) {
+    const img='/assets/cities/'+photo.base+'-1200.webp';
+    const relevant=htmlFiles.filter(f=>f.includes('/'+photo.id+'-')||f.includes('/'+photo.id+'/')).slice(0,5);
+    const hasRenderedImage=await Promise.all(relevant.map(async file=>
+      (await readFile(file,'utf8')).includes(img)));
+    if(relevant.length && !hasRenderedImage.some(Boolean)) issues.push('WebP never used on route pages: '+photo.id);
+  }
+  const google=await readFile(join(root,'sitemap.xml'),'utf8');
+  if(!google.includes('xmlns:image='))issues.push('Image sitemap namespace missing');
+  if(!google.includes('<image:image>'))issues.push('Images missing from Google sitemap');
+}
 for (const key of ['grodno','brest','lida','vitebsk','gomel','mogilev','baranovichi','pinsk','msq','minsk']) {
   if (!known.has('/ru/goroda-belarusi/' + key + '/index.html')) issues.push('Russian destination missing: ' + key);
 }
