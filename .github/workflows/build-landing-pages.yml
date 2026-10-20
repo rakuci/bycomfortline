@@ -1,0 +1,71 @@
+name: Build and audit every landing page photograph
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - build.mjs
+      - check-seo.mjs
+      - city-landmark-photos.json
+      - heritage-landmark-photos.json
+      - heritage-route-photos.mjs
+      - belarus-destinations.mjs
+      - destination-locales.mjs
+      - geo-cities.mjs
+      - geo-airports.mjs
+      - geo-locales.mjs
+      - route-seo.mjs
+      - route-pair-context.mjs
+      - scripts/landing_image_report.mjs
+      - .github/workflows/build-landing-pages.yml
+      - dist/assets/cities/**
+      - dist/assets/heritage/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bycomfortline-build-landings
+  cancel-in-progress: false
+
+jobs:
+  build-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Render all seven language variants and run rigorous SEO/photo audit
+        run: node build.mjs
+      - name: Create a canonical-URL-to-image coverage and provenance report
+        run: node scripts/landing_image_report.mjs
+      - name: Check all 1,499 sitemap URLs and verified image coverage
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const info=JSON.parse(fs.readFileSync('dist/landing-image-coverage.json','utf8'));
+          if(info.summary.totalLandingUrls!==1499 ||
+             info.summary.coveredLandingUrls!==1499 ||
+             info.summary.missingDestinationPhotos!==0)
+            throw Error('Unpictured landing URLs found; refusing to publish');
+          if(info.pages.some(page=>!page.image.startsWith('/assets/')||!page.alt))
+            throw Error('Missing local image path or useful alt text');
+          console.log('Approved all 1,499 landing photographs.');
+          JS
+      - name: Commit generated pages and image coverage evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add dist/ LANDING_IMAGE_COVERAGE.md
+          if git diff --cached --quiet; then
+            echo 'Generated pages already current.'
+            exit 0
+          fi
+          git commit -m 'pages: publish destination photos and audited landing URLs'
+          git pull --rebase origin main
+          git push origin HEAD:main
