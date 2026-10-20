@@ -24,13 +24,13 @@ Ten genuine city photos were selected from Wikimedia Commons (rather than commer
 - **CC BY / CC BY-SA photos:** visibly credit the original creator, link the exact source and licence, and disclose that the original was **resized/cropped** and converted to WebP. The individual derivative photographs must remain available under the applicable licence, including ShareAlike for CC BY-SA source material. This licensing does **not** apply to original site code, logos, or independent website prose.
 - **CC0 image:** source and author links are still retained as provenance, though attribution is not legally required by CC0.
 - Preserve each photograph's context; never use a photo of an airport, monument or city as evidence that a specific service, vehicle or driver is guaranteed at that location.
-- **Do not hotlink or scrape** unrelated stock/paid photos; the conversion script uses only these curated Commons pages, checks licence metadata, validates source images, and refuses unrecognised licences or image formats.
+- Do not hotlink or scrape unrelated stock/paid photos. The temporary fallback links only to these individually selected and credited Commons photographs; after the GitHub optimization step, the site serves its own WebPs. The conversion script checks source licences, dimensions, image formats and source file names.
 
 ## SEO implementation
 
 - Individual city route pages show actual `<picture>` images with two width variants, intrinsic dimensions, relevant **localized alt text in seven languages**, `title`, photographer/licence caption links, and responsive styling.
 - Where a landmark image is relevant, the page also uses it for Open Graph/Twitter previews and JSON-LD `ImageObject` metadata. The Google XML sitemap includes `image:image` URLs **only after local image assets exist**. The Yandex XML sitemap stays clean and references the canonical pages.
-- A page references a locally stored image only when the matching `1200.webp` file is in `dist/assets/cities`; otherwise it renders the safe existing text placeholder. This avoids broken images if the GitHub Actions image-conversion workflow has not finished yet.
+- A page references a locally stored image only when the matching `1200.webp` file is in `dist/assets/cities`. Until the image automation finishes, the page temporarily uses the specifically credited Wikimedia Commons 1200-pixel photo via `Special:FilePath`. Once local WebPs exist, the next Cloudflare build switches automatically to the local 640/1200 WebP versions.
 
 ## Build and deployment
 
