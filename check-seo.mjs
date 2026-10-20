@@ -160,6 +160,9 @@ if (!known.has('/ru/transfery-iz-aeroportov/index.html')) issues.push('Airport i
 
 if (imageFoundCount===imageFiles.length) {
   for(const photo of cityPhotoManifest) {
+    // Warsaw, Vilnius and Riga are departure-only core routes to Minsk.
+    // Their pages intentionally display a Belarus destination landmark.
+    if(["warsaw","vilnius","riga"].includes(photo.id)) continue;
     const img='/assets/cities/'+photo.base+'-1200.webp';
     const relevant=htmlFiles.filter(f=>f.includes('/'+photo.id+'-')||f.includes('/'+photo.id+'/')).slice(0,5);
     const hasRenderedImage=await Promise.all(relevant.map(async file=>
