@@ -1,4 +1,5 @@
 import { mkdir, writeFile, copyFile } from "node:fs/promises";
+import { readFileSync, existsSync } from "node:fs";
 import { routeSeo } from "./route-seo.mjs";
 import { routeExtras } from "./route-extras.mjs";
 import { airportHubLinks } from "./airport-hub-links.mjs";
@@ -17,7 +18,7 @@ import { dirname, join } from "node:path";
 
 const out = new URL("./dist/", import.meta.url).pathname;
 const base = "https://bycomfortline.com";
-const seoLastmod = "2026-10-19";
+const seoLastmod = "2026-10-20";
 const phoneDisplay = "+375 29 155 27 76";
 const phoneHref = "+375291552776";
 const email = "info@comfortline.by";
@@ -694,9 +695,9 @@ function floatingContact() {
   return `<nav class="floating-social" aria-label="ComfortLine messaging and social profiles">${socialChannels.map(channel => socialLink(channel, "social-floating")).join("")}</nav>`;
 }
 
-function layout({ lang, title, description, canonical, alternates, body, schema, routeKey = "vilnius", originOverride = null, destinationOverride = null }) {
+function layout({ lang, title, description, canonical, alternates, body, schema, routeKey = "vilnius", originOverride = null, destinationOverride = null, ogImage = null }) {
   const l = locale[lang];
-  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="byComfortLine"><meta property="og:locale" content="${esc(l.locale)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${base}/assets/comfortline-transfer-van.webp"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preload" as="image" href="/assets/comfortline-transfer-van.webp" fetchpriority="high"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${bookingForm(lang, routeKey, originOverride, destinationOverride)}${destinationPopup(lang)}${floatingContact()}</body></html>`;
+  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="byComfortLine"><meta property="og:locale" content="${esc(l.locale)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${esc(ogImage||base+"/assets/comfortline-transfer-van.webp")}"><meta name="twitter:image" content="${esc(ogImage||base+"/assets/comfortline-transfer-van.webp")}"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="${canonical}">${alternates}<meta name="theme-color" content="#081a2d"><link rel="preload" as="image" href="/assets/comfortline-transfer-van.webp" fetchpriority="high"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/style.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script><script src="/assets/app.js" defer></script></head><body>${body}${bookingForm(lang, routeKey, originOverride, destinationOverride)}${destinationPopup(lang)}${floatingContact()}</body></html>`;
 }
 
 function businessSchema(lang, url) {
@@ -984,7 +985,7 @@ function destinationIndexPage(lang){
   <section class="section dest-index-section" id="dest-index-list">
     <div class="dest-index-grid">${belarusDestinations.map(dest=>`
     <article class="dest-index-card">
-      <span class="dest-index-icon" aria-hidden="true">${dest.type==="airport"?"✈":"⌖"}</span>
+      ${resolvedCityPhoto(dest.id)?cityPhotoThumbnail(lang,dest.id):`<span class="dest-index-icon" aria-hidden="true">${dest.type==="airport"?"✈":"⌖"}</span>`}
       <h2><a href="${destinationPath(lang,dest)}">${esc(dest.names[lang])} ↗</a></h2>
       <p>${esc(dest.specifics[lang])}</p>
       <a class="dest-index-read" href="${destinationPath(lang,dest)}">${esc(ui.keyOrigin.replace("{dest}",destSeoName(dest,lang)))} ↗</a>
@@ -1034,12 +1035,13 @@ function destinationPage(lang,dest){
  const siblingLinks=belarusDestinations.filter(x=>x.id!==dest.id).map(x=>`<a href="${destinationPath(lang,x)}">${esc(x.names[lang])} ↗</a>`).join("");
  const safetySources=[...new Map(Object.values(routeOfficialSources).flat().map(([label,url])=>[url,label])).entries()].slice(0,5)
    .map(([url,label])=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`).join("");
+ if(cityPhotoObject(lang,dest.id))schema["@graph"].push(cityPhotoObject(lang,dest.id));
  const body=`${header(lang,"destination",dest)}<main>
   <section class="dest-hero"><div class="dest-hero-inner">
     <nav class="breadcrumbs"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span>
       <a href="${destinationIndexPath(lang)}">${esc(ui.section)}</a><span>/</span><span>${esc(to)}</span></nav>
     <span class="eyebrow light">${esc(ui.section)}</span>
-    <h1>${esc(localeWords(ui.hubHeading,values))}</h1><p>${esc(intro)}</p>
+    <h1>${esc(localeWords(ui.hubHeading,values))}</h1>${cityPhotoFigure(lang,dest.id)}<p>${esc(intro)}</p>
     <div class="hero-actions"><a href="#booking-dialog" class="button primary"
       data-open-booking aria-controls="booking-dialog" aria-haspopup="dialog">${esc(ui.booking)} ${icons.arrow}</a>
       <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a></div>
@@ -1070,7 +1072,7 @@ function destinationPage(lang,dest){
   ${faq(l)}
   </main>${footer(l)}`;
  return layout({lang,title,description,canonical,alternates:destinationAlternates(dest),
-   body,schema,routeKey:"vilnius",originOverride:"",destinationOverride:to});
+   body,schema,routeKey:"vilnius",originOverride:"",destinationOverride:to,ogImage:cityPhotoUrl(dest.id)});
 }
 
 function transferPairPage(lang,origin,dest){
@@ -1099,13 +1101,15 @@ function transferPairPage(lang,origin,dest){
     {"@type":"ListItem","position":4,"name":h1,"item":canonical}
    ]}
  ]};
+ const relevantPhoto=resolvedCityPhoto(origin.id)?origin.id:resolvedCityPhoto(dest.id)?dest.id:null;
+ if(relevantPhoto)schema["@graph"].push(cityPhotoObject(lang,relevantPhoto));
  const body=`${header(lang,"pair",{origin,dest})}<main>
   <section class="dest-pair-hero"><div class="dest-hero-inner">
     <nav class="breadcrumbs"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span>
       <a href="${destinationIndexPath(lang)}">${esc(ui.section)}</a><span>/</span>
       <a href="${destinationPath(lang,dest)}">${esc(to)}</a><span>/</span><span>${esc(from)}</span></nav>
     <span class="eyebrow light">${esc(ui.service)} · ${esc(ui.price)}</span>
-    <h1>${esc(h1)}</h1><p>${esc(localeWords(ui.routeLead,values))}</p>
+    <h1>${esc(h1)}</h1>${relevantPhoto?cityPhotoFigure(lang,relevantPhoto):""}<p>${esc(localeWords(ui.routeLead,values))}</p>
     <div class="hero-actions">
       <a href="#booking-dialog" data-open-booking class="button primary" aria-controls="booking-dialog" aria-haspopup="dialog">${esc(ui.booking)} ${icons.arrow}</a>
       <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a>
@@ -1163,7 +1167,7 @@ function transferPairPage(lang,origin,dest){
   </section>
   </main>${footer(l)}`;
  return layout({lang,title,description,canonical,alternates:pairAlternates(origin,dest),
-  body,schema,routeKey:origin.parent,originOverride:from,destinationOverride:to});
+  body,schema,routeKey:origin.parent,originOverride:from,destinationOverride:to,ogImage:relevantPhoto?cityPhotoUrl(relevantPhoto):null});
 }
 
 function geoText(template, variables) {
@@ -1181,7 +1185,7 @@ function geoCountryGroups(lang, items, compact = false) {
       <div class="geo-directory-grid${compact?" compact":""}">${subset.map(place=>{
         const name=place.names[lang];
         return `<a class="geo-directory-card" href="${geoPath(lang,place)}">
-          <span class="geo-directory-card-mark" aria-hidden="true">${place.type==="airport"?"✈":"⌖"}</span>
+          ${place.type==="city"&&resolvedCityPhoto(place.id)?cityPhotoThumbnail(lang,place.id):`<span class="geo-directory-card-mark" aria-hidden="true">${place.type==="airport"?"✈":"⌖"}</span>`}
           <span><strong>${esc(name)}</strong><small>${esc(place.type==="airport"?place.code:t.arrival)}</small></span>
           <span aria-hidden="true">↗</span>
         </a>`;
@@ -1240,6 +1244,59 @@ function geoDirectoryPage(lang,type) {
 
 // Distinctive city landmarks. Wikimedia Commons Special:FilePath resolves an image
 // only when the filename is verified; never substitute a misleading stock image.
+
+const curatedCityPhotos = Object.fromEntries(
+  JSON.parse(readFileSync(new URL("./city-landmark-photos.json", import.meta.url), "utf-8"))
+    .images.map(entry=>[entry.id,entry])
+);
+function resolvedCityPhoto(id) {
+  const photo=curatedCityPhotos[id];
+  if(!photo)return null;
+  const src="/assets/cities/"+photo.base+"-1200.webp";
+  return existsSync(join(out,src.slice(1))) ? photo : null;
+}
+function cityPhotoFigure(lang,id) {
+  const photo=resolvedCityPhoto(id);
+  if(!photo)return "";
+  const caption=photo.labels[lang]||photo.landmark;
+  const path="/assets/cities/"+photo.base;
+  return `<figure class="geo-city-landmark has-photo">
+    <picture><source type="image/webp" media="(max-width: 760px)" srcset="${path}-640.webp">
+    <source type="image/webp" srcset="${path}-640.webp 640w, ${path}-1200.webp 1200w" sizes="(max-width: 760px) calc(100vw - 48px), 660px">
+    <img src="${path}-1200.webp" width="1200" height="750" loading="eager" fetchpriority="high" decoding="async"
+      alt="${esc(caption)}" title="${esc(photo.landmark+" · "+photo.city)}"></picture>
+    <figcaption><strong>${esc(caption)}</strong>
+      <span class="geo-photo-credit">Photo: <a href="${esc(photo.sourcePage)}" target="_blank" rel="noopener noreferrer">${esc(photo.credit)}</a> ·
+        <a href="${esc(photo.licenseUrl)}" target="_blank" rel="license noopener noreferrer">${esc(photo.license)}</a> · resized/cropped to WebP</span>
+    </figcaption>
+  </figure>`;
+}
+function cityPhotoThumbnail(lang,id) {
+  const photo=resolvedCityPhoto(id);
+  if(!photo)return "";
+  return `<img class="city-landmark-thumb" src="/assets/cities/${photo.base}-640.webp" width="140" height="88" loading="lazy" decoding="async"
+    alt="${esc(photo.labels[lang]||photo.landmark)}">`;
+}
+function cityPhotoObject(lang,id) {
+  const p=resolvedCityPhoto(id);
+  return p?{"@type":"ImageObject",
+    "contentUrl":base+"/assets/cities/"+p.base+"-1200.webp",
+    "thumbnailUrl":base+"/assets/cities/"+p.base+"-640.webp",
+    "name":p.landmark+" — "+p.city,
+    "caption":p.labels[lang]||p.landmark,
+    "creator":{"@type":"Person","name":p.credit},
+    "creditText":p.credit+" / Wikimedia Commons",
+    "license":p.licenseUrl,
+    "acquireLicensePage":p.sourcePage,
+    "copyrightNotice":p.license,
+    "width":1200,"height":750
+  }:null;
+}
+function cityPhotoUrl(id) {
+  const p=resolvedCityPhoto(id);
+  return p?base+"/assets/cities/"+p.base+"-1200.webp":null;
+}
+
 const cityLandmarks = {
   "bialystok": { landmark: "Branicki Palace", city: "Białystok" },
   "suwalki": { landmark: "Suwałki Town Hall", city: "Suwałki" },
@@ -1274,7 +1331,7 @@ function geoLocationPage(lang,place) {
   const isAirport=place.type==="airport";
   const landmark = !isAirport ? cityLandmarks[place.id] : null;
   const landmarkCaption = landmark ? `${landmark.landmark} · ${landmark.city}` : "";
-  const landmarkImage = landmark ? `<figure class="geo-city-landmark"><div class="geo-city-landmark-placeholder" role="img" aria-label="${esc(landmarkCaption)}"><span>${esc(landmark.landmark)}</span><small>${esc(landmark.city)}</small></div><figcaption>${esc(landmarkCaption)}</figcaption></figure>` : "";
+  const landmarkImage = !isAirport && resolvedCityPhoto(place.id) ? cityPhotoFigure(lang,place.id) : landmark ? `<figure class="geo-city-landmark"><div class="geo-city-landmark-placeholder" role="img" aria-label="${esc(landmarkCaption)}"><span>${esc(landmark.landmark)}</span><small>${esc(landmark.city)}</small></div><figcaption>${esc(landmarkCaption)}</figcaption></figure>` : "";
 
   const title=geoText(isAirport?t.airportTitle:t.cityTitle,opts)+" | byComfortLine";
   const description=geoText(isAirport?t.airportMeta:t.cityMeta,opts);
@@ -1307,6 +1364,7 @@ function geoLocationPage(lang,place) {
       {"@type":"ListItem","position":3,"name":name,"item":canonical}
     ]}
   ]};
+  if (!isAirport && cityPhotoObject(lang,place.id)) schema["@graph"].push(cityPhotoObject(lang,place.id));
   const body=`${header(lang,"geo",place)}<main>
     <section class="geo-location-hero">
       <div class="geo-location-hero-inner">
@@ -1374,7 +1432,7 @@ function geoLocationPage(lang,place) {
     </div>
   </main>${footer(l)}`;
   return layout({lang,title,description,canonical,alternates:geoAlternateLinks(place),
-    body,schema,routeKey:place.parent,originOverride:name});
+    body,schema,routeKey:place.parent,originOverride:name,ogImage:!isAirport?cityPhotoUrl(place.id):null});
 }
 
 function routePage(lang, key) {
