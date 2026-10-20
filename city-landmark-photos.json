@@ -601,7 +601,307 @@
         1200
       ],
       "updated": "2026-10-20"
+    },
+    {
+      "id": "minsk",
+      "city": "Minsk",
+      "landmark": "Minsk skyline from the National Library",
+      "file": "View of Minsk from the National Library of Belarus 01.JPG",
+      "credit": "Хомелка",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "slug": "minsk-skyline-national-library-view",
+      "labels": {
+        "en": "Minsk skyline seen from the National Library of Belarus",
+        "ru": "Панорама Минска с Национальной библиотеки Беларуси",
+        "pl": "Panorama Mińska widziana z Biblioteki Narodowej",
+        "lt": "Minsko panorama nuo Baltarusijos nacionalinės bibliotekos",
+        "lv": "Minskas panorāma no Baltkrievijas Nacionālās bibliotēkas",
+        "de": "Stadtpanorama von Minsk von der Nationalbibliothek aus",
+        "fr": "Panorama de Minsk depuis la Bibliothèque nationale"
+      },
+      "center": [
+        0.5,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:View_of_Minsk_from_the_National_Library_of_Belarus_01.JPG",
+      "base": "minsk-skyline-national-library-view-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "mogilev",
+      "city": "Mogilev",
+      "landmark": "Mogilev Town Hall",
+      "file": "Town hall, Mogilev, 2025.jpg",
+      "credit": "Alena2026",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "mogilev-historic-town-hall",
+      "labels": {
+        "en": "Historic town hall of Mogilev, Belarus",
+        "ru": "Историческая ратуша Могилёва",
+        "pl": "Historyczny ratusz Mohylewa na Białorusi",
+        "lt": "Istorinė Mogiliovo rotušė",
+        "lv": "Vēsturiskais Mogiļevas rātsnams",
+        "de": "Historisches Rathaus in Mogiljow, Belarus",
+        "fr": "Hôtel de ville historique de Moguilev"
+      },
+      "center": [
+        0.5,
+        0.51
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Town_hall%2C_Mogilev%2C_2025.jpg",
+      "base": "mogilev-historic-town-hall-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "olsztyn",
+      "city": "Olsztyn",
+      "landmark": "Castle of the Warmian Cathedral Chapter",
+      "file": "Zamek Kapituły Warmińskiej w Olsztynie.jpg",
+      "credit": "ViktoriaLi",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "olsztyn-warmian-chapter-castle",
+      "labels": {
+        "en": "Warmian Chapter Castle in Olsztyn, Poland",
+        "ru": "Замок Варминского капитула в Ольштыне",
+        "pl": "Zamek Kapituły Warmińskiej w Olsztynie",
+        "lt": "Varmijos kapitulos pilis Olštyne",
+        "lv": "Varmijas kapitula pils Olštinā",
+        "de": "Burg des Ermländischen Domkapitels in Allenstein",
+        "fr": "Château du chapitre de Warmie à Olsztyn"
+      },
+      "center": [
+        0.5,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Zamek_Kapitu%C5%82y_Warmi%C5%84skiej_w_Olsztynie.jpg",
+      "base": "olsztyn-warmian-chapter-castle-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "panevezys",
+      "city": "Panevėžys",
+      "landmark": "Senvagė riverside pond",
+      "file": "Senvagė, Panevėžys, 2025.jpg",
+      "credit": "Obivan Kenobi",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "slug": "panevezys-senvage-riverside-pond",
+      "labels": {
+        "en": "Senvagė riverfront park in Panevėžys, Lithuania",
+        "ru": "Парк Сенваге в Паневежисе, Литва",
+        "pl": "Park Senvagė w Poniewieżu na Litwie",
+        "lt": "Senvagė Panevėžyje, Lietuvoje",
+        "lv": "Senvagė parks Panevēžā, Lietuvā",
+        "de": "Senvagė-Park in Panevėžys, Litauen",
+        "fr": "Parc Senvagė à Panevėžys, Lituanie"
+      },
+      "center": [
+        0.51,
+        0.52
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Senvag%C4%97%2C_Panev%C4%97%C5%BEys%2C_2025.jpg",
+      "base": "panevezys-senvage-riverside-pond-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "paris",
+      "city": "Paris",
+      "landmark": "Eiffel Tower and Trocadéro Gardens",
+      "file": "Eiffel tower from trocadero.jpg",
+      "credit": "NonOmnisMoriar",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "slug": "paris-eiffel-tower-trocadero",
+      "labels": {
+        "en": "Eiffel Tower and Trocadéro Gardens in Paris",
+        "ru": "Эйфелева башня и сады Трокадеро в Париже",
+        "pl": "Wieża Eiffla i ogrody Trocadéro w Paryżu",
+        "lt": "Eifelio bokštas ir Trokadero sodai Paryžiuje",
+        "lv": "Eifeļa tornis un Trokadero dārzi Parīzē",
+        "de": "Eiffelturm und Trocadéro-Gärten in Paris",
+        "fr": "Tour Eiffel et jardins du Trocadéro à Paris"
+      },
+      "center": [
+        0.5,
+        0.51
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Eiffel_tower_from_trocadero.jpg",
+      "base": "paris-eiffel-tower-trocadero-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "pinsk",
+      "city": "Pinsk",
+      "landmark": "Pinsk Jesuit Collegium",
+      "file": "Pinsk Jesuit collegium.jpg",
+      "credit": "YYaroshko",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "slug": "pinsk-jesuit-collegium",
+      "labels": {
+        "en": "Historic Jesuit Collegium in Pinsk, Belarus",
+        "ru": "Исторический Иезуитский коллегиум в Пинске",
+        "pl": "Dawne kolegium jezuickie w Pińsku",
+        "lt": "Istorinė jėzuitų kolegija Pinske",
+        "lv": "Vēsturiskā jezuītu koledža Pinskā",
+        "de": "Historisches Jesuitenkolleg in Pinsk, Belarus",
+        "fr": "Collège jésuite historique de Pinsk"
+      },
+      "center": [
+        0.5,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Pinsk_Jesuit_collegium.jpg",
+      "base": "pinsk-jesuit-collegium-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "poznan",
+      "city": "Poznań",
+      "landmark": "Poznań Old Market Square and Town Hall",
+      "file": "PL-Posen-Markt-Nordseite.jpg",
+      "credit": "SchiDD",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "poznan-old-market-square-town-hall",
+      "labels": {
+        "en": "Old Market Square and Renaissance Town Hall in Poznań",
+        "ru": "Старая рыночная площадь и ратуша в Познани",
+        "pl": "Stary Rynek i renesansowy ratusz w Poznaniu",
+        "lt": "Poznanės senoji turgaus aikštė ir rotušė",
+        "lv": "Poznaņas Vecais tirgus laukums un rātsnams",
+        "de": "Alter Markt und Renaissance-Rathaus in Posen",
+        "fr": "Vieille place du Marché et hôtel de ville à Poznań"
+      },
+      "center": [
+        0.5,
+        0.51
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:PL-Posen-Markt-Nordseite.jpg",
+      "base": "poznan-old-market-square-town-hall-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "rezekne",
+      "city": "Rēzekne",
+      "landmark": "GORS concert hall",
+      "file": "Gors Rezekne 2015.jpg",
+      "credit": "European1",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "slug": "rezekne-gors-concert-hall",
+      "labels": {
+        "en": "Latgale GORS concert hall in Rēzekne, Latvia",
+        "ru": "Концертный зал GORS в Резекне, Латвия",
+        "pl": "Sala koncertowa GORS w Rzeżycy",
+        "lt": "GORS koncertų salė Rėzeknėje, Latvijoje",
+        "lv": "Latgales vēstniecība GORS Rēzeknē",
+        "de": "Konzerthaus GORS in Rēzekne, Lettland",
+        "fr": "Salle de concerts GORS à Rēzekne, Lettonie"
+      },
+      "center": [
+        0.5,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Gors_Rezekne_2015.jpg",
+      "base": "rezekne-gors-concert-hall-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "riga",
+      "city": "Riga",
+      "landmark": "House of the Blackheads",
+      "file": "House of Blackheads in Riga, Latvia.jpg",
+      "credit": "Raul Cortez999",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "slug": "riga-house-of-the-blackheads-old-town",
+      "labels": {
+        "en": "House of the Blackheads in Riga Old Town",
+        "ru": "Дом Черноголовых в Старой Риге",
+        "pl": "Dom Bractwa Czarnogłowych w Rydze",
+        "lt": "Juodagalvių namai Rygos senamiestyje",
+        "lv": "Melngalvju nams Vecrīgā",
+        "de": "Schwarzhäupterhaus in der Altstadt von Riga",
+        "fr": "Maison des Têtes noires dans la vieille ville de Riga"
+      },
+      "center": [
+        0.5,
+        0.51
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:House_of_Blackheads_in_Riga%2C_Latvia.jpg",
+      "base": "riga-house-of-the-blackheads-old-town-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
+    },
+    {
+      "id": "rzeszow",
+      "city": "Rzeszów",
+      "landmark": "Rzeszów Town Hall",
+      "file": "PL RZ Rzeszow city hall.jpg",
+      "credit": "Andrei Stroe",
+      "license": "CC BY-SA 3.0 PL",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/pl/",
+      "slug": "rzeszow-town-hall-old-market",
+      "labels": {
+        "en": "Rzeszów Town Hall on the Market Square",
+        "ru": "Ратуша Жешува на Рыночной площади",
+        "pl": "Ratusz w Rzeszowie na Rynku",
+        "lt": "Žešuvo rotušė turgaus aikštėje",
+        "lv": "Žešuvas rātsnams Tirgus laukumā",
+        "de": "Rathaus von Rzeszów am Marktplatz",
+        "fr": "Hôtel de ville de Rzeszów sur la place du Marché"
+      },
+      "center": [
+        0.5,
+        0.5
+      ],
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:PL_RZ_Rzeszow_city_hall.jpg",
+      "base": "rzeszow-town-hall-old-market-private-transfer",
+      "variants": [
+        640,
+        1200
+      ],
+      "updated": "2026-10-20"
     }
   ],
-  "workflowTrigger": "Two alphabetical batches curated — 2026-10-20"
+  "workflowTrigger": "Three alphabetical batches of ten — 2026-10-20"
 }
