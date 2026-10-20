@@ -19,6 +19,29 @@ async function filesUnder(dir) {
 const allFiles = await filesUnder(root);
 const known = new Set(allFiles.map(x => '/' + relative(root, x).replaceAll('\\','/')));
 const htmlFiles = allFiles.filter(x => x.endsWith('.html'));
+
+const cityPhotos = JSON.parse(await readFile(join(process.cwd(),'city-landmark-photos.json'),'utf8')).images;
+const imageIds=new Set(cityPhotos.map(photo=>photo.id));
+if(imageIds.size!==cityPhotos.length)throw new Error("Duplicate landmark image IDs");
+const necessaryPlaces=[
+  'baranovichi','berlin','bialystok','brest','bydgoszcz',
+  'daugavpils','druskininkai','gdansk','gomel','grodno',
+  'jelgava','jurmala','katowice','kaunas','klaipeda',
+  'krakow','lida','liepaja','lodz','lublin','minsk','mogilev',
+  'olsztyn','panevezys','paris','pinsk','poznan','rezekne',
+  'riga','rzeszow','suwalki','wroclaw','szczecin','siauliai',
+  'vitebsk','msq','warsaw','vilnius'
+];
+for(const id of necessaryPlaces){
+  if(!imageIds.has(id))throw new Error("Missing city landmark image catalogue record: "+id);
+}
+for(const photo of cityPhotos){
+  for(const l of ['en','ru','pl','lt','lv','de','fr']){
+    if(!photo.labels?.[l]||!photo.licenseUrl||!photo.sourcePage)
+      throw new Error("Missing translation/licence for city image: "+photo.id+"/"+l);
+  }
+}
+
 const cityPhotoManifest = JSON.parse(await readFile(join(process.cwd(),'city-landmark-photos.json'),'utf8')).images;
 const imageFiles = cityPhotoManifest.flatMap(photo=>
   photo.variants.map(width=>'/assets/cities/'+photo.base+'-'+width+'.webp'));
