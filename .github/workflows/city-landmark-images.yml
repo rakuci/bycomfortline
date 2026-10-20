@@ -19,7 +19,7 @@ concurrency:
 jobs:
   optimize-landmarks:
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 48
     steps:
       - name: Check out website
         uses: actions/checkout@v4
@@ -31,17 +31,42 @@ jobs:
           python-version: '3.12'
       - name: Install image encoder
         run: python -m pip install --disable-pip-version-check "Pillow>=10.4,<13"
-      - name: Validate Commons licence and render responsive WebP files
-        run: python scripts/prepare_city_landmark_images.py
-      - name: Save optimized assets and licences in the repository
+      - name: Batch 1 of 3 — Baranovichi to Grodno
+        run: python scripts/prepare_city_landmark_images.py --batch 1
+      - name: Batch 2 of 3 — Jelgava to Lublin
+        run: python scripts/prepare_city_landmark_images.py --batch 2
+      - name: Batch 3 of 3 — Minsk to Rzeszow
+        run: python scripts/prepare_city_landmark_images.py --batch 3
+      - name: Merge credits and validate all 60 responsive WebPs
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path("dist/assets/cities")
+          manifest=json.loads(Path("city-landmark-photos.json").read_text("utf-8"))["images"]
+          credits=[]
+          for batch in (1,2,3):
+              p=root/f"credits-batch-{batch}.json"
+              credits.extend(json.loads(p.read_text("utf-8")))
+              p.unlink()
+          assert len(manifest)==len(credits)==30
+          for entry in manifest:
+              for size in (640,1200):
+                  p=root/f"{entry['base']}-{size}.webp"
+                  assert p.is_file() and 1000<p.stat().st_size<=450000, p
+          assert len(list(root.glob("*.webp"))) >= 60
+          (root/"credits.json").write_text(json.dumps(credits,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print("Completed 30 landmarks / 60 WebP images; credits saved.")
+          PY
+      - name: Save optimized city photographs in GitHub
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dist/assets/cities/*.webp dist/assets/cities/credits.json
+          git add dist/assets/cities/
           if git diff --cached --quiet; then
-            echo "All 20 WebP variants already match the city manifest."
+            echo "All 60 WebPs already match the city manifest."
             exit 0
           fi
-          git commit -m "assets: publish 10 licensed city landmarks in responsive WebP"
+          git commit -m "assets: publish 30 credited city landmarks in 640/1200 WebP"
           git pull --rebase origin main
           git push origin HEAD:main
