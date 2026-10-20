@@ -4291,3 +4291,61 @@ body { background:var(--cl-pearl); }
 @media (prefers-reduced-motion: reduce) {
   .geo-city-landmark.has-photo { scroll-behavior: auto; }
 }
+
+
+/* Destination-first visual storytelling: authentic heritage of Minsk/Grodno. */
+.geo-heritage-photo {
+  max-width: 675px;
+  border-color: rgba(244,231,203,.33) !important;
+  box-shadow: 0 14px 46px rgba(5,17,25,.22);
+}
+.geo-heritage-photo > img {
+  object-fit: cover;
+  object-position: center 44%;
+  max-height: 355px;
+  background: #183a46;
+}
+.geo-heritage-photo figcaption {
+  display: block !important;
+  text-align: left;
+  padding: 14px 17px !important;
+}
+.geo-heritage-photo .heritage-caption-main,
+.geo-heritage-photo .heritage-caption-fallback {
+  display: grid;
+  gap: 5px;
+  max-width: 100%;
+}
+.geo-heritage-photo .heritage-caption-main[hidden],
+.geo-heritage-photo .heritage-caption-fallback[hidden] {
+  display: none !important;
+}
+.geo-heritage-photo .heritage-caption-main > strong,
+.geo-heritage-photo .heritage-caption-fallback > strong {
+  display: block;
+  color: #fff;
+  font-size: clamp(12px, 1.5vw, 14px);
+  font-weight: 850;
+  letter-spacing: -.012em;
+  line-height: 1.45;
+}
+.geo-heritage-photo .heritage-note {
+  display: block;
+  font-size: 12px;
+  line-height: 1.65;
+  font-weight: 470;
+  color: #dfebea;
+  max-width: 620px;
+}
+.geo-heritage-photo .geo-photo-credit {
+  display: block;
+  font-size: 10px;
+  line-height: 1.55;
+  margin-top: 3px;
+}
+@media (max-width:760px){
+  .geo-heritage-photo { width: 100%; max-width:100%; margin: 14px 0 20px; border-radius: 14px; }
+  .geo-heritage-photo > img { max-height: 260px; }
+  .geo-heritage-photo figcaption { padding: 11px 13px 12px !important; }
+  .geo-heritage-photo .heritage-note { font-size: 11px; line-height: 1.57; }
+}
