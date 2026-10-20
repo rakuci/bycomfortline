@@ -1,5 +1,26 @@
 (() => {
 
+  // Wikimedia can throttle external image requests. If that happens, display
+  // the already-hosted WebP of the actual Belarus destination, and update the
+  // visible credit/caption so it never mislabels a landmark or photographer.
+  document.addEventListener("error", (event) => {
+    const image = event.target;
+    if (!(image instanceof HTMLImageElement) || !image.matches("[data-heritage-photo]")) return;
+    if (image.dataset.heritageFallbackUsed === "true") return;
+    const fallback = image.getAttribute("data-fallback-src");
+    if (!fallback || !fallback.startsWith("/assets/cities/")) return;
+    image.dataset.heritageFallbackUsed = "true";
+    image.src = fallback;
+    image.alt = image.getAttribute("data-fallback-caption") || "Belarus destination landmark";
+    image.title = image.alt;
+    const figure = image.closest(".geo-heritage-photo");
+    const primary = figure?.querySelector(".heritage-caption-main");
+    const replacement = figure?.querySelector(".heritage-caption-fallback");
+    if (primary) primary.hidden = true;
+    if (replacement) replacement.hidden = false;
+  }, true);
+
+
   const subjects = {
     en: "ComfortLine private transfer enquiry",
     ru: "Запрос трансфера ComfortLine",
