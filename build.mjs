@@ -1171,7 +1171,8 @@ function transferPairPage(lang,origin,dest){
   </section>
   </main>${footer(l)}`;
  return layout({lang,title,description,canonical,alternates:pairAlternates(origin,dest),
-  body,schema,routeKey:origin.parent,originOverride:from,destinationOverride:to,ogImage:relevantPhoto?cityPhotoPreviewUrl(relevantPhoto):null});
+  body,schema,routeKey:origin.parent,originOverride:from,destinationOverride:to,
+  ogImage:heritagePhoto?heritagePhotoPublicUrl(heritagePhoto):relevantPhoto?cityPhotoPreviewUrl(relevantPhoto):null});
 }
 
 function geoText(template, variables) {
@@ -1272,6 +1273,16 @@ function heritageForRoute(origin,destinationId="minsk") {
   return heritageRoutePhotos.find(item=>item.id===id)||null;
 }
 
+// Prefer verified, locally encoded WebPs while preserving a fully credited Commons fallback.
+function heritagePhotoLocalUrl(photo) {
+  if(!photo)return null;
+  const path="/assets/heritage/"+photo.id+"-1200.webp";
+  return existsSync(join(out,path.slice(1))) ? path : null;
+}
+function heritagePhotoPublicUrl(photo) {
+  return heritagePhotoLocalUrl(photo) ? base+heritagePhotoLocalUrl(photo) : photo?.url||null;
+}
+
 function heritagePhotoFigure(lang,origin,destinationId="minsk"){
   const photo=heritageForRoute(origin,destinationId);
   if(!photo)return "";
@@ -1281,10 +1292,14 @@ function heritagePhotoFigure(lang,origin,destinationId="minsk"){
   const name=photo.names[lang]||photo.names.en;
   const caption=photo.context[lang]||photo.context.en;
   const fallbackName=fallbackPhoto?.labels[lang]||fallbackPhoto?.landmark||destination;
-  return `<figure class="geo-city-landmark has-photo geo-heritage-photo">
-    <img src="${esc(photo.url)}" data-heritage-photo data-fallback-src="${esc(fallback)}"
+  const local=heritagePhotoLocalUrl(photo);
+  const root="/assets/heritage/"+photo.id;
+  const image=`<img src="${esc(local||photo.url)}" data-heritage-photo data-fallback-src="${esc(fallback)}"
       loading="lazy" decoding="async" width="${photo.imageWidth}" height="${photo.imageHeight}"
-      alt="${esc(name)}" title="${esc(name)}" data-fallback-caption="${esc(fallbackName)}" referrerpolicy="no-referrer">
+      alt="${esc(name)}" title="${esc(name)}" data-fallback-caption="${esc(fallbackName)}" referrerpolicy="no-referrer">`;
+  return `<figure class="geo-city-landmark has-photo geo-heritage-photo">
+    ${local?`<picture><source type="image/webp" srcset="${root}-640.webp 640w, ${root}-1200.webp 1200w"
+      sizes="(max-width: 760px) calc(100vw - 48px), 660px">${image}</picture>`:image}
     <figcaption>
       <span class="heritage-caption-main"><strong>${esc(name)}</strong>
         <span class="heritage-note">${esc(caption)}</span>
@@ -1303,7 +1318,7 @@ function heritagePhotoFigure(lang,origin,destinationId="minsk"){
 function heritagePhotoObject(lang,origin,destinationId="minsk"){
   const photo=heritageForRoute(origin,destinationId);
   if(!photo)return null;
-  return {"@type":"ImageObject","contentUrl":photo.url,"name":photo.names[lang]||photo.names.en,
+  return {"@type":"ImageObject","contentUrl":heritagePhotoPublicUrl(photo),"name":photo.names[lang]||photo.names.en,
     "description":photo.context[lang]||photo.context.en,"creator":{"@type":"Person","name":photo.credit},
     "creditText":photo.credit+" / Wikimedia Commons","license":photo.licenseUrl,
     "acquireLicensePage":photo.sourcePage,"copyrightNotice":photo.license,
@@ -1497,7 +1512,8 @@ function geoLocationPage(lang,place) {
     </div>
   </main>${footer(l)}`;
   return layout({lang,title,description,canonical,alternates:geoAlternateLinks(place),
-    body,schema,routeKey:place.parent,originOverride:name,ogImage:isAirport?cityPhotoPreviewUrl("minsk"):cityPhotoPreviewUrl(place.id)});
+    body,schema,routeKey:place.parent,originOverride:name,
+    ogImage:isAirport?heritagePhotoPublicUrl(heritageForRoute(place,"minsk")):cityPhotoPreviewUrl(place.id)});
 }
 
 function routePage(lang, key) {
@@ -1528,7 +1544,8 @@ function routePage(lang, key) {
     ${faq(l)}
     <section class="section other-routes"><div class="section-head"><span class="eyebrow">Comfortline</span><h2>${esc(l.otherTitle)}</h2></div><div class="route-grid">${routeCards(lang, key)}</div></section>
     </main>${footer(l)}`;
-  return layout({ lang, title: seo.title, description, canonical, alternates: alternateLinks("route", key), body, schema, routeKey: key });
+  return layout({ lang, title: seo.title, description, canonical, alternates: alternateLinks("route", key),
+    body, schema, routeKey: key, ogImage:heritagePhotoPublicUrl(heritageForRoute(origin,"minsk")) });
 }
 
 function thankYouPage(lang) {
@@ -1648,10 +1665,19 @@ for (const lang of Object.keys(locale)) {
   }
   for (const dest of belarusDestinations.filter(x=>x.id!=="minsk")) {
     for (const origin of featuredOrigins) {
-      const photoId=resolvedCityPhoto(dest.id)?dest.id:null;
-      const image=photoId?cityPhotoUrl(photoId):null;
+      const linkedHeritage=heritageForRoute(origin,dest.id);
+      const localHeritage=heritagePhotoLocalUrl(linkedHeritage);
+      const image=localHeritage?base+localHeritage:cityPhotoUrl(dest.id);
       if(image)imageSitemapIndex.set(base+transferPairPath(lang,origin,dest),image);
     }
+  }
+  // Only include route-specific heritage images after the actual local WebPs exist.
+  for(const origin of [...geoAirports, ...coreOriginProfiles]) {
+    const photo=heritageForRoute(origin,"minsk");
+    const image=heritagePhotoLocalUrl(photo);
+    if(!image)continue;
+    const url=origin.type==="airport" ? geoPath(lang,origin) : routePath(lang,origin.id);
+    if(url)imageSitemapIndex.set(base+url,base+image);
   }
 }
 const sitemapImageEntries=sitemapEntries.map(entry=>{
