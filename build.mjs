@@ -1288,7 +1288,7 @@ function cityPhotoThumbnail(lang,id) {
   if(!photo)return "";
   const local=!!resolvedCityPhoto(id);
   return `<img class="city-landmark-thumb" src="${esc(local?"/assets/cities/"+photo.base+"-640.webp":cityPhotoRemote(id,500))}" width="140" height="88" loading="lazy" decoding="async"
-    alt="${esc(photo.labels[lang]||photo.landmark)}">`;
+    alt="${esc(photo.labels[lang]||photo.landmark)}" title="${esc(photo.landmark+" · "+photo.city)}">`;
 }
 function cityPhotoObject(lang,id) {
   const p=curatedCityPhotos[id];
@@ -1313,7 +1313,7 @@ function cityPhotoUrl(id) {
 
 const cityLandmarks = {
   "bialystok": { landmark: "Branicki Palace", city: "Białystok" },
-  "suwalki": { landmark: "Suwałki Town Hall", city: "Suwałki" },
+  "suwalki": { landmark: "Maria Konopnicka Square", city: "Suwałki" },
   "lublin": { landmark: "Lublin Castle", city: "Lublin" },
   "krakow": { landmark: "Wawel Castle", city: "Kraków" },
   "gdansk": { landmark: "Neptune Fountain", city: "Gdańsk" },
@@ -1327,7 +1327,7 @@ const cityLandmarks = {
   "olsztyn": { landmark: "Olsztyn Castle", city: "Olsztyn" },
   "kaunas": { landmark: "Kaunas Castle", city: "Kaunas" },
   "klaipeda": { landmark: "Meridianas", city: "Klaipėda" },
-  "siauliai": { landmark: "Hill of Crosses", city: "Šiauliai" },
+  "siauliai": { landmark: "Golden Boy (Šaulys) statue", city: "Šiauliai" },
   "panevezys": { landmark: "Senvagė", city: "Panevėžys" },
   "druskininkai": { landmark: "Druskininkai Church of Our Lady of the Scapular", city: "Druskininkai" },
   "daugavpils": { landmark: "Daugavpils Fortress", city: "Daugavpils" },
