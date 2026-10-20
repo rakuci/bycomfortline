@@ -1,0 +1,50 @@
+name: Diagnose public sitemap and crawler access
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/public-crawler-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-access:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Probe both ComfortLine hostnames without changing site settings
+        shell: bash
+        run: |
+          set -uo pipefail
+          echo "Public access diagnosis — $(date -u +%FT%TZ)"
+          echo "These requests come from a GitHub runner, NOT a Google-verified crawler."
+          for hostname in bycomfortline.com comfortline.by; do
+            for path in / /robots.txt /sitemap.xml /sitemap-yandex.xml; do
+              for agent in "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/125 Safari/537.36" "GitHub-Sitemap-Diagnostic/1.0"; do
+                if [[ "$agent" == GitHub* ]]; then label=diagnostic; else label=browser; fi
+                url="https://$hostname$path"
+                echo ""
+                echo "PROBE host=$hostname path=$path agent=$label"
+                curl --silent --show-error --location --max-time 22 \
+                  --user-agent "$agent" \
+                  --output /tmp/sitemap_probe_body \
+                  --dump-header /tmp/sitemap_probe_headers \
+                  --write-out 'RESULT status=%{http_code} final_url=%{url_effective} mime=%{content_type} remote_ip=%{remote_ip} response_bytes=%{size_download} redirect_count=%{num_redirects}\n' \
+                  "$url" || echo 'RESULT network_error=true'
+                grep -iE '^(server:|cf-ray:|content-type:|location:|content-length:|x-robots-tag:)' /tmp/sitemap_probe_headers 2>/dev/null | tail -n 8 || true
+                if [[ "$path" == /sitemap.xml ]]; then
+                  python3 - <<'PY'
+          from pathlib import Path
+          import re
+          b=Path('/tmp/sitemap_probe_body').read_bytes()
+          txt=b.decode('utf-8','replace')
+          print('SITEMAP_BODY looks_xml=',txt.lstrip().startswith('<?xml'), 'url_count=',len(re.findall(r'<loc>',txt)), 'possible_challenge=',any(token in txt.lower() for token in ('just a moment','challenge-platform','attention required','access denied')))
+          PY
+                fi
+              done
+            done
+          done
+          echo "Reminder: Googlebot User-Agent spoofing from a non-Google IP is not a valid Googlebot access check. Use Search Console live testing and Cloudflare Security Events."
