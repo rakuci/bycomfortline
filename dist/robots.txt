@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
 Sitemap: https://bycomfortline.com/sitemap.xml
+Sitemap: https://bycomfortline.com/sitemap-yandex.xml
