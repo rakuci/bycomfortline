@@ -1,10 +1,13 @@
-# Google Search Console — URL Inspection shortlist for bycomfortline.com
-# Verified against canonical sitemap on 2026-10-21
-# Inspect only page URLs here; submit https://bycomfortline.com/sitemap.xml in Sitemaps instead.
-# Use URL Inspection -> Test Live URL -> Request Indexing for selected high-value pages.
-# Google limits individual inspection/indexing requests. Don't repeatedly request the same URL.
+# Google Search Console — expanded prioritized manual URL Inspection list
+# Domain: https://bycomfortline.com
+# Source: dist/sitemap-yandex.xml (1,499 canonical URLs), verified on 2026-10-21.
+# Purpose: a review/inspection queue, NOT a recommendation to request indexing for every URL.
+# Check Search Console live test first, particularly after Cloudflare's Googlebot/BOBA-199 blocks.
+# Submit https://bycomfortline.com/sitemap.xml in Search Console > Sitemaps for bulk discovery.
+# Manual inspection/indexing is subject to Google limits. Prioritize first batch; avoid repeated requests.
+# Selections reflect geographic and service relevance, not measured traffic/search-volume rankings.
 
-# BATCH 1 — Core commercial routes; inspect first (12)
+# BATCH 1 — Critical commercial routes and home (12)
 https://bycomfortline.com/
 https://bycomfortline.com/en/
 https://bycomfortline.com/en/warsaw-minsk-transfer/
@@ -18,21 +21,80 @@ https://bycomfortline.com/lv/riga-minska-transfers/
 https://bycomfortline.com/de/berlin-minsk-privattransfer/
 https://bycomfortline.com/fr/paris-minsk-transfert-prive/
 
-# BATCH 2 — Airport and city transfer pages (12)
+# BATCH 2 — ALL 19 airports to Minsk, airport directories and selected local languages (37)
 https://bycomfortline.com/en/airport-transfers/
+https://bycomfortline.com/ru/transfery-iz-aeroportov/
+https://bycomfortline.com/pl/transfery-z-lotnisk/
+https://bycomfortline.com/lt/oro-uostu-pervezimai/
+https://bycomfortline.com/lv/lidostu-transferi/
+https://bycomfortline.com/de/flughafen-transfers/
+https://bycomfortline.com/fr/transferts-aeroports/
 https://bycomfortline.com/en/city-transfers/
 https://bycomfortline.com/en/airport-waw-minsk/
 https://bycomfortline.com/en/airport-wmi-minsk/
+https://bycomfortline.com/en/airport-krk-minsk/
+https://bycomfortline.com/en/airport-gdn-minsk/
+https://bycomfortline.com/en/airport-ktw-minsk/
+https://bycomfortline.com/en/airport-wro-minsk/
+https://bycomfortline.com/en/airport-poz-minsk/
+https://bycomfortline.com/en/airport-rze-minsk/
+https://bycomfortline.com/en/airport-luz-minsk/
+https://bycomfortline.com/en/airport-lcj-minsk/
+https://bycomfortline.com/en/airport-szz-minsk/
+https://bycomfortline.com/en/airport-bzg-minsk/
 https://bycomfortline.com/en/airport-vno-minsk/
-https://bycomfortline.com/en/airport-rix-minsk/
 https://bycomfortline.com/en/airport-kun-minsk/
+https://bycomfortline.com/en/airport-plq-minsk/
+https://bycomfortline.com/en/airport-rix-minsk/
 https://bycomfortline.com/en/airport-ber-minsk/
 https://bycomfortline.com/en/airport-cdg-minsk/
 https://bycomfortline.com/en/airport-ory-minsk/
-https://bycomfortline.com/en/airport-krk-minsk/
-https://bycomfortline.com/en/airport-gdn-minsk/
+https://bycomfortline.com/pl/lotnisko-waw-minsk/
+https://bycomfortline.com/pl/lotnisko-wmi-minsk/
+https://bycomfortline.com/pl/lotnisko-krk-minsk/
+https://bycomfortline.com/lt/oro-uostas-vno-minsk/
+https://bycomfortline.com/lt/oro-uostas-kun-minsk/
+https://bycomfortline.com/lt/oro-uostas-plq-minsk/
+https://bycomfortline.com/lv/lidosta-rix-minsk/
+https://bycomfortline.com/de/flughafen-ber-minsk/
+https://bycomfortline.com/fr/aeroport-cdg-minsk/
+https://bycomfortline.com/ru/aeroport-waw-minsk/
 
-# BATCH 3 — Belarus destination hubs (11)
+# BATCH 3 — ALL 25 major European city departure pages to Minsk (32)
+https://bycomfortline.com/en/bialystok-minsk-private-transfer/
+https://bycomfortline.com/en/suwalki-minsk-private-transfer/
+https://bycomfortline.com/en/lublin-minsk-private-transfer/
+https://bycomfortline.com/en/krakow-minsk-private-transfer/
+https://bycomfortline.com/en/gdansk-minsk-private-transfer/
+https://bycomfortline.com/en/katowice-minsk-private-transfer/
+https://bycomfortline.com/en/wroclaw-minsk-private-transfer/
+https://bycomfortline.com/en/poznan-minsk-private-transfer/
+https://bycomfortline.com/en/rzeszow-minsk-private-transfer/
+https://bycomfortline.com/en/lodz-minsk-private-transfer/
+https://bycomfortline.com/en/szczecin-minsk-private-transfer/
+https://bycomfortline.com/en/bydgoszcz-minsk-private-transfer/
+https://bycomfortline.com/en/olsztyn-minsk-private-transfer/
+https://bycomfortline.com/en/kaunas-minsk-private-transfer/
+https://bycomfortline.com/en/klaipeda-minsk-private-transfer/
+https://bycomfortline.com/en/siauliai-minsk-private-transfer/
+https://bycomfortline.com/en/panevezys-minsk-private-transfer/
+https://bycomfortline.com/en/druskininkai-minsk-private-transfer/
+https://bycomfortline.com/en/daugavpils-minsk-private-transfer/
+https://bycomfortline.com/en/jurmala-minsk-private-transfer/
+https://bycomfortline.com/en/liepaja-minsk-private-transfer/
+https://bycomfortline.com/en/jelgava-minsk-private-transfer/
+https://bycomfortline.com/en/rezekne-minsk-private-transfer/
+https://bycomfortline.com/en/berlin-minsk-private-transfer/
+https://bycomfortline.com/en/paris-minsk-private-transfer/
+https://bycomfortline.com/pl/bialystok-minsk-transfer/
+https://bycomfortline.com/pl/suwalki-minsk-transfer/
+https://bycomfortline.com/pl/lublin-minsk-transfer/
+https://bycomfortline.com/lt/kaunas-minsk-pervezimas/
+https://bycomfortline.com/lt/druskininkai-minsk-pervezimas/
+https://bycomfortline.com/lv/daugavpils-minsk-transfers/
+https://bycomfortline.com/lv/jurmala-minsk-transfers/
+
+# BATCH 4 — ALL Belarus destination hubs plus priority local-language pages (20)
 https://bycomfortline.com/en/belarus-destinations/
 https://bycomfortline.com/en/belarus-destinations/minsk/
 https://bycomfortline.com/en/belarus-destinations/grodno/
@@ -44,21 +106,99 @@ https://bycomfortline.com/en/belarus-destinations/mogilev/
 https://bycomfortline.com/en/belarus-destinations/baranovichi/
 https://bycomfortline.com/en/belarus-destinations/pinsk/
 https://bycomfortline.com/en/belarus-destinations/msq/
+https://bycomfortline.com/ru/goroda-belarusi/grodno/
+https://bycomfortline.com/ru/goroda-belarusi/brest/
+https://bycomfortline.com/ru/goroda-belarusi/pinsk/
+https://bycomfortline.com/pl/miasta-bialorusi/grodno/
+https://bycomfortline.com/pl/miasta-bialorusi/brest/
+https://bycomfortline.com/lt/baltarusijos-miestai/grodno/
+https://bycomfortline.com/lv/baltkrievijas-galamerki/vitebsk/
+https://bycomfortline.com/de/ziele-in-belarus/minsk/
+https://bycomfortline.com/fr/destinations-bielorussie/minsk/
 
-# BATCH 4 — Origin-to-destination route examples (16)
+# BATCH 5 — Cross-border routes from Warsaw, Vilnius, Riga and their major airports (54)
 https://bycomfortline.com/en/transfers/warsaw-grodno/
 https://bycomfortline.com/en/transfers/warsaw-brest/
 https://bycomfortline.com/en/transfers/warsaw-lida/
-https://bycomfortline.com/en/transfers/waw-msq/
+https://bycomfortline.com/en/transfers/warsaw-vitebsk/
+https://bycomfortline.com/en/transfers/warsaw-gomel/
+https://bycomfortline.com/en/transfers/warsaw-mogilev/
+https://bycomfortline.com/en/transfers/warsaw-baranovichi/
+https://bycomfortline.com/en/transfers/warsaw-pinsk/
+https://bycomfortline.com/en/transfers/warsaw-msq/
 https://bycomfortline.com/en/transfers/vilnius-grodno/
-https://bycomfortline.com/en/transfers/vno-lida/
-https://bycomfortline.com/en/transfers/kaunas-grodno/
+https://bycomfortline.com/en/transfers/vilnius-brest/
+https://bycomfortline.com/en/transfers/vilnius-lida/
+https://bycomfortline.com/en/transfers/vilnius-vitebsk/
+https://bycomfortline.com/en/transfers/vilnius-gomel/
+https://bycomfortline.com/en/transfers/vilnius-mogilev/
+https://bycomfortline.com/en/transfers/vilnius-baranovichi/
+https://bycomfortline.com/en/transfers/vilnius-pinsk/
+https://bycomfortline.com/en/transfers/vilnius-msq/
+https://bycomfortline.com/en/transfers/riga-grodno/
+https://bycomfortline.com/en/transfers/riga-brest/
+https://bycomfortline.com/en/transfers/riga-lida/
 https://bycomfortline.com/en/transfers/riga-vitebsk/
+https://bycomfortline.com/en/transfers/riga-gomel/
+https://bycomfortline.com/en/transfers/riga-mogilev/
+https://bycomfortline.com/en/transfers/riga-baranovichi/
+https://bycomfortline.com/en/transfers/riga-pinsk/
+https://bycomfortline.com/en/transfers/riga-msq/
+https://bycomfortline.com/en/transfers/waw-grodno/
+https://bycomfortline.com/en/transfers/waw-brest/
+https://bycomfortline.com/en/transfers/waw-lida/
+https://bycomfortline.com/en/transfers/waw-vitebsk/
+https://bycomfortline.com/en/transfers/waw-gomel/
+https://bycomfortline.com/en/transfers/waw-mogilev/
+https://bycomfortline.com/en/transfers/waw-baranovichi/
+https://bycomfortline.com/en/transfers/waw-pinsk/
+https://bycomfortline.com/en/transfers/waw-msq/
+https://bycomfortline.com/en/transfers/vno-grodno/
+https://bycomfortline.com/en/transfers/vno-brest/
+https://bycomfortline.com/en/transfers/vno-lida/
+https://bycomfortline.com/en/transfers/vno-vitebsk/
+https://bycomfortline.com/en/transfers/vno-gomel/
+https://bycomfortline.com/en/transfers/vno-mogilev/
+https://bycomfortline.com/en/transfers/vno-baranovichi/
+https://bycomfortline.com/en/transfers/vno-pinsk/
+https://bycomfortline.com/en/transfers/vno-msq/
 https://bycomfortline.com/en/transfers/rix-grodno/
+https://bycomfortline.com/en/transfers/rix-brest/
+https://bycomfortline.com/en/transfers/rix-lida/
+https://bycomfortline.com/en/transfers/rix-vitebsk/
+https://bycomfortline.com/en/transfers/rix-gomel/
+https://bycomfortline.com/en/transfers/rix-mogilev/
+https://bycomfortline.com/en/transfers/rix-baranovichi/
+https://bycomfortline.com/en/transfers/rix-pinsk/
+https://bycomfortline.com/en/transfers/rix-msq/
+
+# BATCH 6 — Regional border cities, additional airports and multilingual destination routes (28)
 https://bycomfortline.com/en/transfers/bialystok-grodno/
+https://bycomfortline.com/en/transfers/bialystok-brest/
+https://bycomfortline.com/en/transfers/bialystok-lida/
 https://bycomfortline.com/en/transfers/suwalki-grodno/
+https://bycomfortline.com/en/transfers/suwalki-brest/
+https://bycomfortline.com/en/transfers/suwalki-lida/
+https://bycomfortline.com/en/transfers/kaunas-grodno/
+https://bycomfortline.com/en/transfers/kaunas-brest/
+https://bycomfortline.com/en/transfers/kaunas-lida/
+https://bycomfortline.com/en/transfers/wmi-grodno/
+https://bycomfortline.com/en/transfers/wmi-brest/
+https://bycomfortline.com/en/transfers/berlin-grodno/
 https://bycomfortline.com/en/transfers/berlin-brest/
+https://bycomfortline.com/en/transfers/berlin-gomel/
+https://bycomfortline.com/en/transfers/ber-grodno/
+https://bycomfortline.com/en/transfers/ber-msq/
+https://bycomfortline.com/en/transfers/paris-grodno/
 https://bycomfortline.com/en/transfers/paris-msq/
+https://bycomfortline.com/en/transfers/cdg-brest/
+https://bycomfortline.com/en/transfers/ory-msq/
 https://bycomfortline.com/pl/transfery/waw-grodno/
+https://bycomfortline.com/pl/transfery/warsaw-brest/
+https://bycomfortline.com/lt/pervezimai/vno-lida/
+https://bycomfortline.com/lt/pervezimai/vilnius-grodno/
+https://bycomfortline.com/lv/transferi/rix-vitebsk/
+https://bycomfortline.com/ru/transfery/warsaw-grodno/
 https://bycomfortline.com/de/privattransfers/berlin-gomel/
 https://bycomfortline.com/fr/transferts/paris-msq/
+
