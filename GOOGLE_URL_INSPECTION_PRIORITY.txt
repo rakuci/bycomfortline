@@ -1,0 +1,64 @@
+# Google Search Console — URL Inspection shortlist for bycomfortline.com
+# Verified against canonical sitemap on 2026-10-21
+# Inspect only page URLs here; submit https://bycomfortline.com/sitemap.xml in Sitemaps instead.
+# Use URL Inspection -> Test Live URL -> Request Indexing for selected high-value pages.
+# Google limits individual inspection/indexing requests. Don't repeatedly request the same URL.
+
+# BATCH 1 — Core commercial routes; inspect first (12)
+https://bycomfortline.com/
+https://bycomfortline.com/en/
+https://bycomfortline.com/en/warsaw-minsk-transfer/
+https://bycomfortline.com/pl/warszawa-minsk-transfer/
+https://bycomfortline.com/ru/warsaw-minsk-transfer/
+https://bycomfortline.com/en/vilnius-minsk-transfer/
+https://bycomfortline.com/lt/vilnius-minskas-pervezimas/
+https://bycomfortline.com/ru/vilnius-minsk-transfer/
+https://bycomfortline.com/en/riga-minsk-transfer/
+https://bycomfortline.com/lv/riga-minska-transfers/
+https://bycomfortline.com/de/berlin-minsk-privattransfer/
+https://bycomfortline.com/fr/paris-minsk-transfert-prive/
+
+# BATCH 2 — Airport and city transfer pages (12)
+https://bycomfortline.com/en/airport-transfers/
+https://bycomfortline.com/en/city-transfers/
+https://bycomfortline.com/en/airport-waw-minsk/
+https://bycomfortline.com/en/airport-wmi-minsk/
+https://bycomfortline.com/en/airport-vno-minsk/
+https://bycomfortline.com/en/airport-rix-minsk/
+https://bycomfortline.com/en/airport-kun-minsk/
+https://bycomfortline.com/en/airport-ber-minsk/
+https://bycomfortline.com/en/airport-cdg-minsk/
+https://bycomfortline.com/en/airport-ory-minsk/
+https://bycomfortline.com/en/airport-krk-minsk/
+https://bycomfortline.com/en/airport-gdn-minsk/
+
+# BATCH 3 — Belarus destination hubs (11)
+https://bycomfortline.com/en/belarus-destinations/
+https://bycomfortline.com/en/belarus-destinations/minsk/
+https://bycomfortline.com/en/belarus-destinations/grodno/
+https://bycomfortline.com/en/belarus-destinations/brest/
+https://bycomfortline.com/en/belarus-destinations/lida/
+https://bycomfortline.com/en/belarus-destinations/vitebsk/
+https://bycomfortline.com/en/belarus-destinations/gomel/
+https://bycomfortline.com/en/belarus-destinations/mogilev/
+https://bycomfortline.com/en/belarus-destinations/baranovichi/
+https://bycomfortline.com/en/belarus-destinations/pinsk/
+https://bycomfortline.com/en/belarus-destinations/msq/
+
+# BATCH 4 — Origin-to-destination route examples (16)
+https://bycomfortline.com/en/transfers/warsaw-grodno/
+https://bycomfortline.com/en/transfers/warsaw-brest/
+https://bycomfortline.com/en/transfers/warsaw-lida/
+https://bycomfortline.com/en/transfers/waw-msq/
+https://bycomfortline.com/en/transfers/vilnius-grodno/
+https://bycomfortline.com/en/transfers/vno-lida/
+https://bycomfortline.com/en/transfers/kaunas-grodno/
+https://bycomfortline.com/en/transfers/riga-vitebsk/
+https://bycomfortline.com/en/transfers/rix-grodno/
+https://bycomfortline.com/en/transfers/bialystok-grodno/
+https://bycomfortline.com/en/transfers/suwalki-grodno/
+https://bycomfortline.com/en/transfers/berlin-brest/
+https://bycomfortline.com/en/transfers/paris-msq/
+https://bycomfortline.com/pl/transfery/waw-grodno/
+https://bycomfortline.com/de/privattransfers/berlin-gomel/
+https://bycomfortline.com/fr/transferts/paris-msq/
