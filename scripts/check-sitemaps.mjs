@@ -27,7 +27,7 @@ const rows=[...google.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(m=>m[1]);
 const loc=row=>row.match(/<loc>([^<]+)<\/loc>/)?.[1];
 const canonicals=rows.map(loc);
 const byUrl=new Map(rows.map(row=>[loc(row),row]));
-assert.equal(rows.length,1499+5*langs.length,"Unexpected number of canonical URLs");
+assert.equal(rows.length,1499+6*langs.length,"Unexpected number of canonical URLs");
 assert.equal(byUrl.size,rows.length,"Duplicate canonical URL");
 assert(!canonicals.some(u=>u.includes("/thank-you/")),"Non-indexable thank-you URLs in sitemap");
 const yandexLocs=[...yandex.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
