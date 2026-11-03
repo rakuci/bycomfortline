@@ -360,5 +360,133 @@ export const carSanctionsArticle = {
       "Apstipriniet robežpunkta atvērtību jūsu transportam.",
       "Atkārtoti pārbaudiet oficiālo informāciju īsi pirms izbraukšanas."
     ]
+  },
+  "de": {
+    "title": "165 Millimeter, die eine Reise stoppen: Warum ein EU-Kennzeichen an Litauens Grenze nicht genügt",
+    "shortTitle": "165 mm: Wenn das Auto nicht über die Grenze darf",
+    "description": "ComfortLine-Fahrergeschichte und EU-Sanktionsrecht: Litauen–Belarus, Fahrzeuge mit mehr als 1900 cm³, Bodenfreiheit, Hybridautos, Elektrofahrzeuge und Nachweise.",
+    "tag": "Fahrergeschichten · Zoll und Sanktionen",
+    "read": "Geschichte und Rechtsanalyse lesen",
+    "back": "Zurück zum Reiseratgeber",
+    "reviewed": "Geprüft am 3. November 2026",
+    "sources": "Amtliche Quellen für die Prüfung vor Reiseantritt",
+    "checklist": "Sechs Kontrollen vor der Abfahrt",
+    "disclaimerTitle": "Wichtig: Persönliche Information, keine amtliche Rechtsquelle",
+    "disclaimer": "Dieser Beitrag dient ausschließlich der persönlichen Information und Reisevorbereitung. ComfortLine ist keine Zoll- oder Grenzbehörde. Der Text ist weder eine amtliche Rechtsauskunft noch individuelle Rechtsberatung oder eine Garantie für die Ausreise. Rechtslage, Ausnahmen, Zolltarifzuordnung und Grenzöffnungen können sich ändern. Prüfen Sie unmittelbar vor jeder Reise die geltenden EU-Vorschriften und die Mitteilungen des litauischen Zolls; bitten Sie im Zweifelsfall um eine Auskunft für Ihr konkretes Fahrzeug. Die Entscheidung trifft die zuständige Behörde.",
+    "illustrationCaption": "Satirische Illustration: Auto und Personen sind fiktiv. Die Grenze von 165 mm ist real; eine Zeichnung ist keine zollrechtliche Einstufung eines Fahrzeugs.",
+    "sections": [
+      [
+        "Der Bericht des Fahrers: Reisepapiere geprüft, Bodenfreiheit vergessen",
+        "Ein ComfortLine-Fahrer berichtet, dass Reisende im Herbst 2026 häufiger über Autos mit EU-Kennzeichen sprachen, deren Ausreise von Litauen nach Belarus vom Zoll abgelehnt wurde. Besonders diskutiert wurden SUVs, Crossover, manche Kleinbusse und Fahrzeuge mit Luftfederung. Alles wirkt bestens organisiert – Pass, Versicherung, Koffer, Route –, bis der Zoll nicht nach dem Reiseziel fragt, sondern nach den Millimetern zwischen Fahrgestell und Asphalt.",
+        "Der Bericht ist eine anonymisierte, zusammengefasste Beobachtung und keine amtliche Statistik. Einen behördlich belegten Anstieg der Zurückweisungen speziell ab Oktober 2026 konnten wir nicht nachweisen. Die zugrunde liegenden Sanktionen bestehen seit 2024; Litauen erläuterte sie im August und September 2026 ausführlicher. [1] [2] [3]"
+      ],
+      [
+        "Ein Privatbesuch ist zollrechtlich trotzdem eine Ausfuhr",
+        "Artikel 1bb und Anhang XVIII der Verordnung (EG) 765/2006 mit Änderungen unter anderem durch die Verordnungen 2024/1865 und 2025/1472 untersagen die Lieferung, Übertragung oder Ausfuhr bestimmter Waren nach Belarus bzw. zur dortigen Verwendung. Ob jemand sein Auto verkaufen will, ist daher nicht das alleinige Kriterium. Entscheidend ist, ob das Fahrzeug unter die jeweilige Warenbeschreibung fällt. [4] [5] [6]",
+        "Nach Artikeln 137, 140 und 141 der Delegierten Verordnung 2015/2446 kann bereits das Verlassen des EU-Zollgebiets mit einem dort zugelassenen und zur Wiedereinfuhr bestimmten Auto als Ausfuhranmeldung gelten. Eine elektronische Standarderklärung ist vielfach nicht nötig, die Sanktionen greifen dennoch. EU-Kennzeichen, Wochenendbesuch und Rückkehrabsicht bilden keine allgemeine Ausnahme. [1] [7]"
+      ],
+      [
+        "Benzin und Diesel: zwei Voraussetzungen müssen zusammenkommen",
+        "Bei den einschlägigen Benzinfahrzeugen ex 8703 23/24 und Dieselfahrzeugen ex 8703 32/33 verbindet die Warenbeschreibung **Hubraum über 1.900 cm³** UND **Bodenfreiheit mindestens 165 mm**. Beispiel: Ein Benzin-SUV mit 1.998 cm³ und 175 mm erfüllt beide technischen Merkmale. Exakt 1.900 cm³ ist nicht 'mehr als' 1.900; exakt 165 mm erreicht bereits die Bodenfreiheitsgrenze. [1] [5]",
+        "Zusätzlich muss der zutreffende Code der Kombinierten Nomenklatur (KN) geprüft werden. 'Geländewagen' ist ein Werbebegriff, keine automatische Zollklassifikation. Ein Fahrzeug unter einer der beiden Grenzen kann anderen Beschränkungen unterliegen. Die genannten Positionen für reine Verbrennungsmotoren nehmen bestimmte Krankenwagen ausdrücklich aus. [1]"
+      ],
+      [
+        "Hybrid- und Elektrofahrzeuge: Der Hubraum hilft hier nicht",
+        "Für die gelisteten gewöhnlichen Hybride (ex 8703 40/50), Plug-in-Hybride (ex 8703 60/70) und reinen Elektroautos (ex 8703 80) ist die Bodenfreiheit von **mindestens 165 mm** ausschlaggebend. Der zusätzliche Mindesthubraum von über 1.900 cm³ ist in diesen Positionen keine Voraussetzung. Auch ein Hybrid mit kleinem Benzinmotor oder ein vollelektrischer Crossover kann betroffen sein. [1] [5]",
+        "Nicht alle Einträge folgen diesem Muster: 8703 10 erfasst bestimmte Schnee- und Golf-Fahrzeuge ohne solche Bodenfreiheitsangabe; 8703 90 betrifft andere Antriebsarten. Das Präfix 'ex' bedeutet, dass lediglich die ausdrücklich beschriebene Teilmenge einer KN-Position erfasst wird. [1]"
+      ],
+      [
+        "Fünf Beispiele für den Grenzfall",
+        "Benzin 1.998 cm³ und 175 mm: beide technischen Merkmale der entsprechenden Kategorie erfüllt. Diesel 2.200 cm³ und 160 mm: Bodenfreiheitsmerkmal jener Position nicht erfüllt, aber kein pauschaler Freibrief. Benzin genau 1.900 cm³ und 180 mm: das Merkmal 'über 1.900' fehlt. Hybrid 1.500 cm³ und 170 mm: der geringe Hubraum beseitigt das mögliche Verbot nicht. Elektroauto genau 165 mm: die inklusive Grenze ist erreicht. [1] [5]",
+        "Es handelt sich um Beispiele, nicht um verbindliche Entscheidungen. Konkrete Ausstattung, FIN (VIN), KN-Code, mögliche Ausnahmen und aktuelle Vorschriften können das Ergebnis ändern."
+      ],
+      [
+        "Luftfederung, Zollstock und Händlerbestätigung",
+        "Der EU-Text versteht unter Bodenfreiheit den senkrechten Abstand zwischen der Unterseite des Fahrgestells und der Fahrbahn. Prospekte können andere Messpunkte verwenden. Luftfederung, Fahrprogramme, Zuladung, Räder und Modellvarianten können die Angaben verändern. Die spontane Zollstockmessung am Schlagbaum ersetzt keine belastbare technische Zuordnung. [1] [5]",
+        "Bei Unsicherheit ist eine VIN-bezogene Bescheinigung des Herstellers, offiziellen Importeurs oder Vertragshändlers sinnvoll, mit Variante, Baujahr, Antrieb, Bodenfreiheit und Messbedingungen. **Eine amtliche Vorschrift, wonach ausschließlich ein Händlerbrief anerkannt würde oder die Durchfahrt garantiert, konnten wir nicht finden.** Der litauische Zoll würdigt die Nachweise und Rechtslage; eine schriftliche Vorabauskunft ist ratsam. [1] [3]"
+      ],
+      [
+        "'Letztes Jahr ging es doch auch' schafft kein Recht",
+        "Der litauische Zoll stellt ausdrücklich klar: Frühere Fahrten nach Belarus, die Zahl der Grenzübertritte und der Zweck des aktuellen Besuchs heben ein einschlägiges Ausfuhrverbot nicht auf. Jeder Vorgang wird nach den zum Zeitpunkt der Ausreise geltenden Regeln beurteilt. [3]",
+        "Eine Ablehnung kann Unterkunft, Terminplanung und Rückreise durcheinanderbringen. Die absichtliche Manipulation der Fahrzeughöhe oder das Suchen einer anderen Grenze zur Umgehung von Sanktionen ist keine rechtmäßige Lösung. Prüfen Sie vorab legale Alternativen; selbst ein gebuchter Transfer garantiert keine Einreise."
+      ],
+      [
+        "Sechs Prüfungen sparen eine lange Diskussion am Schlagbaum",
+        "Klären Sie KN-Code, Antrieb, exakten Hubraum und die technische Bodenfreiheit der konkreten Variante. Gleichen Sie alles mit Anhang XVIII und Artikel 1bb ab, überprüfen Sie den Grenzübergang und holen Sie bei Unklarheiten vorab schriftliche Auskunft des litauischen Zolls ein. Aktualisieren Sie die Informationen unmittelbar vor dem Start. [1] [4] [9]",
+        "Die Pointe ist beinahe kafkaesk: Vier Koffer, zwei Pässe und das Ladegerät finden Platz im Auto. Aber die entscheidende Reiseinformation passt auf einen Zettel: 165 Millimeter. Besser in der Garage nachlesen als am geschlossenen Schlagbaum."
+      ]
+    ],
+    "checks": [
+      "Fahrgestellnummer (VIN) und zutreffenden KN-Code ermitteln, nicht nur die Bezeichnung SUV.",
+      "Antriebsart und gegebenenfalls exakten Hubraum prüfen.",
+      "Verlässliche werkseitige Bodenfreiheitsdaten Ihrer Ausstattungsvariante bereithalten.",
+      "Aktuellen Artikel 1bb und Anhang XVIII prüfen; Zweifelsfälle vorab schriftlich klären.",
+      "Öffnung und zugelassene Fahrzeugtypen am geplanten Grenzübergang prüfen.",
+      "Amtliche Mitteilungen unmittelbar vor der Abfahrt nochmals lesen."
+    ]
+  },
+  "fr": {
+    "title": "165 millimètres qui changent tout : pourquoi une voiture immatriculée dans l'UE peut être refoulée en Lituanie",
+    "shortTitle": "165 mm : quand la voiture n'atteint pas le Bélarus",
+    "description": "Récit d'un chauffeur ComfortLine et analyse des sanctions européennes : export de voitures de Lituanie vers le Bélarus, cylindrée, garde au sol, hybrides et justificatifs officiels.",
+    "tag": "Histoires de chauffeurs · Douane et sanctions",
+    "read": "Lire le récit et l'analyse juridique",
+    "back": "Retour au Guide de voyage",
+    "reviewed": "Vérifié le 3 novembre 2026",
+    "sources": "Sources officielles à consulter avant le départ",
+    "checklist": "Six vérifications avant de partir",
+    "disclaimerTitle": "Important : information personnelle, non source de droit officielle",
+    "disclaimer": "Cette publication est destinée uniquement à l'information personnelle et à la préparation du voyage. ComfortLine n'est ni un service des douanes ni une autorité frontalière. Ce texte ne constitue pas une source juridique officielle, un avis personnalisé ou une garantie de passage. Les règles, dérogations, classifications douanières et horaires des postes peuvent évoluer. Avant chaque trajet, consultez les textes de l'UE et les avis de la douane lituanienne à jour; sollicitez une réponse de l'autorité compétente pour votre véhicule en cas de doute. Elle seule prend la décision finale.",
+    "illustrationCaption": "Illustration satirique : personnages et véhicule fictifs. Le seuil de 165 mm est réel, mais ce dessin ne permet pas de classifier juridiquement une voiture.",
+    "sections": [
+      [
+        "L'histoire du chauffeur : tout est prêt, sauf la garde au sol",
+        "Selon les observations d'un chauffeur ComfortLine, les discussions sur des voitures immatriculées dans l'UE refoulées par la douane lituanienne avant de sortir vers le Bélarus se sont multipliées à l'automne 2026. Il est souvent question de SUV, de crossovers, de certains minibus et de véhicules à suspension pneumatique. Passeport, assurance, bagages et itinéraire sont prêts. Pourtant, devant la barrière, l'information décisive devient soudain la distance entre le châssis et la chaussée.",
+        "Il s'agit d'un témoignage anonymisé et généralisé, pas de statistiques officielles. Aucune série de données vérifiée ne permet d'affirmer une hausse des refus spécifiquement depuis octobre 2026. En revanche, le fondement des sanctions remonte à 2024 et la douane lituanienne a publié des explications détaillées en août et septembre 2026. [1] [2] [3]"
+      ],
+      [
+        "Partir quelques jours peut constituer une exportation",
+        "L'article 1bb et l'annexe XVIII du règlement (CE) no 765/2006, modifié notamment par les règlements 2024/1865 et 2025/1472, interdisent la vente, la fourniture, le transfert ou l'exportation de certains biens vers le Bélarus ou pour utilisation dans ce pays. La classification technique du véhicule importe indépendamment de l'intention de le vendre. [4] [5] [6]",
+        "En vertu des articles 137, 140 et 141 du règlement délégué 2015/2446, le simple franchissement de la frontière douanière de l'UE par un véhicule immatriculé dans l'Union et destiné à revenir peut valoir déclaration d'exportation. La déclaration électronique habituelle n'est généralement pas nécessaire, mais les sanctions restent applicables. Ni les plaques européennes ni la promesse d'un retour trois jours plus tard ne créent une exemption. [1] [7]"
+      ],
+      [
+        "Essence et diesel : deux seuils cumulatifs",
+        "Pour les voitures à essence des rubriques ex 8703 23/24 et diesel ex 8703 32/33, la description associe **une cylindrée strictement supérieure à 1 900 cm³** ET **une garde au sol au moins égale à 165 mm**. Un SUV essence de 1 998 cm³ et 175 mm présente ces deux caractéristiques. Exactement 1 900 cm³ ne signifie pas 'plus de 1 900', tandis que 165 mm tout juste atteint le seuil de garde au sol. [1] [5]",
+        "Le code de nomenclature combinée (NC) approprié et la configuration exacte doivent également correspondre. L'étiquette commerciale SUV n'est pas une classification juridique. Être sous l'un des seuils ne garantit pas l'absence d'autres restrictions. Les rubriques concernées de moteurs thermiques excluent expressément les ambulances, mais cette exception n'est pas générale. [1]"
+      ],
+      [
+        "Hybrides et voitures électriques : une autre logique",
+        "Pour les hybrides classiques (ex 8703 40/50), hybrides rechargeables (ex 8703 60/70) et voitures électriques (ex 8703 80) visés par l'annexe, le critère indiqué est **une garde au sol de 165 mm ou davantage**. Le seuil de 1 900 cm³ n'est pas une condition supplémentaire pour ces catégories. Un hybride de 1 500 cm³ ou un crossover électrique peut donc être concerné. [1] [5]",
+        "D'autres rubriques sont particulières : 8703 10 vise certains véhicules conçus pour la neige et les voiturettes de golf sans le même critère, et 8703 90 couvre certains autres modes de propulsion. La mention 'ex' signifie que seule la partie répondant à la description précise du code est concernée. [1]"
+      ],
+      [
+        "Cinq exemples qui valent mieux qu'une rumeur",
+        "Essence 1 998 cm³ et 175 mm : les deux critères techniques de la catégorie concernée sont réunis. Diesel 2 200 cm³ et 160 mm : le seuil de garde au sol de cette rubrique n'est pas atteint, sans garantir pour autant un passage légal. Essence exactement 1 900 cm³ et 180 mm : le critère 'supérieur à 1 900' manque. Hybride 1 500 cm³ et 170 mm : sa faible cylindrée n'écarte pas le risque. Électrique exactement 165 mm : le seuil inclusif est atteint. [1] [5]",
+        "Ce sont des illustrations, non des autorisations. Le VIN, la finition, le code NC, les éventuelles dérogations et le droit applicable au jour du trajet demeurent déterminants."
+      ],
+      [
+        "Suspension pneumatique et attestation du concessionnaire",
+        "Le texte réglementaire définit la garde au sol comme la distance verticale entre le dessous du châssis et la chaussée. Les brochures peuvent employer d'autres points de mesure. Suspension pneumatique, modes de conduite, charge, roues et variantes peuvent modifier la hauteur. Une mesure improvisée au poste-frontière ne suffit pas forcément à établir la caractéristique réglementaire. [1] [5]",
+        "En cas de doute, il est prudent de demander au constructeur, à l'importateur officiel ou au concessionnaire agréé un document associé au VIN, précisant finition, année, motorisation, garde au sol et conditions de mesure. **Nous n'avons trouvé aucune règle officielle établissant que seule une attestation du concessionnaire serait recevable ou garantirait l'autorisation.** La douane apprécie les éléments et le droit applicable; sollicitez son avis écrit avant le départ. [1] [3]"
+      ],
+      [
+        "'Je suis déjà passé' n'est pas une dérogation",
+        "La douane lituanienne précise qu'un passage antérieur réussi, le nombre de voyages et le but du déplacement n'annulent pas une interdiction lorsque les critères sont réunis. Chaque départ est examiné selon les faits et le droit en vigueur à ce moment. [3]",
+        "Un refus peut bouleverser réservations et programme. Modifier artificiellement la hauteur ou chercher un autre poste pour contourner les sanctions n'est pas une solution légale. Étudiez les alternatives autorisées en amont; même un transfert réservé ne garantit pas le passage."
+      ],
+      [
+        "La meilleure préparation commence avant la frontière",
+        "Déterminez le code NC, le type de propulsion, la cylindrée lorsqu'elle compte et la garde au sol de la version exacte. Comparez ces données avec l'article 1bb et l'annexe XVIII à jour, vérifiez le poste-frontière, puis demandez à la douane lituanienne une réponse écrite en cas d'incertitude. Contrôlez à nouveau les avis officiels juste avant de partir. [1] [4] [9]",
+        "La morale souriante de cette histoire : on pense aux passeports, aux valises et au café pour la route; on oublie parfois le nombre qui décide du trajet, caché à quelques millimètres près sous la voiture. Mieux vaut le vérifier au garage qu'au pied d'une barrière fermée."
+      ]
+    ],
+    "checks": [
+      "Identifier le VIN et le code NC exact; ne pas se fier seulement à la catégorie commerciale.",
+      "Vérifier la motorisation et, si nécessaire, la cylindrée précise.",
+      "Préparer des spécifications constructeur fiables pour la garde au sol de la finition concernée.",
+      "Consulter l'article 1bb et l'annexe XVIII à jour; interroger la douane par écrit en cas de doute.",
+      "Confirmer l'ouverture du poste et les catégories de véhicules admises.",
+      "Relire les communications officielles juste avant le départ."
+    ]
   }
 };
