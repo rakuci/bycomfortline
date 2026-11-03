@@ -6,6 +6,8 @@ on:
       - build.mjs
       - car-sanctions-article.mjs
       - ikea-kids-customs-article.mjs
+      - cash-eur60-border-article.mjs
+      - dist/assets/stories/euro-60-cash-border-exchange-cartoon.svg
       - dist/assets/stories/**
       - check-seo.mjs
       - border-passports-article.mjs
