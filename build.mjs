@@ -1038,6 +1038,91 @@ function travelGuidePage(lang) {
   return layout({lang,title,description:c.metaDescription,canonical,alternates:guideAlternates(),body,schema});
 }
 
+
+function longDistanceTeaser(lang,{from="",to="",isAirport=false}={}){
+  const c=longDistanceSeo[lang];
+  const title=from?c.customHeading.replace("{place}",from):c.routeCrossHeading;
+  const description=from
+    ?(to?c.customPairText.replace("{from}",from).replace("{to}",to)
+       :(isAirport?c.customAirport:c.customCity).replace("{place}",from))
+    :c.routeCrossText;
+  return `<aside class="long-distance-teaser" aria-label="${esc(c.nav)}">
+    <div><span class="eyebrow">ComfortLine · 300+ km</span><h2>${esc(title)}</h2><p>${esc(description)}</p></div>
+    <a class="button primary" href="${longDistancePath(lang)}">${esc(c.customLink)} ${icons.arrow}</a>
+  </aside>`;
+}
+function longDistanceCountryDirectory(lang){
+  const c=longDistanceSeo[lang];
+  return longDistanceRegionOriginIds.map(region=>{
+    const name=geoLocale[lang].countryLabels[region.id];
+    const context=sourceCountryContext[region.id][lang];
+    const links=region.originIds.map(id=>{
+      const place=coreOriginProfiles.find(item=>item.id===id)||geoIds.get(id);
+      if(!place || place.country!==region.id)throw Error("Invalid long-distance hub origin "+id);
+      const href=coreOriginProfiles.some(item=>item.id===id)?routePath(lang,id):geoPath(lang,place);
+      const display=place.names[lang]+(place.code?" ("+place.code+")":"");
+      return `<a class="long-distance-origin-link" href="${href}">${esc(display)} <span aria-hidden="true">↗</span></a>`;
+    }).join("");
+    return `<section class="long-distance-country" id="departure-${region.id.toLowerCase()}">
+      <h3>${esc(name)}</h3><p>${esc(context)}</p><div class="long-distance-origin-links">${links}</div>
+    </section>`;
+  }).join("");
+}
+function longDistancePage(lang){
+  const l=locale[lang],c=longDistanceSeo[lang],canonical=base+longDistancePath(lang);
+  const serviceType=lang==="ru"?"Междугородний трансфер по индивидуальному запросу":"Private intercity and cross-border transfer enquiry";
+  const destinations=belarusDestinations.map(dest=>
+    `<a href="${destinationPath(lang,dest)}">${esc(dest.names[lang])} <span aria-hidden="true">↗</span></a>`).join("");
+  const benefits=c.benefits.map(([h,p])=>`<article class="long-distance-benefit"><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("");
+  const steps=c.steps.map(([h,p],i)=>`<li><span>${String(i+1).padStart(2,"0")}</span><div><h3>${esc(h)}</h3><p>${esc(p)}</p></div></li>`).join("");
+  const faq=c.faq.map(([q,a])=>`<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("");
+  const schema={"@context":"https://schema.org","@graph":[businessSchema(lang,canonical),
+    {"@type":"Service","@id":canonical+"#service","name":c.h1,"serviceType":serviceType,
+     "description":c.meta,"url":canonical,"provider":{"@id":base+"/#business"},
+     "areaServed":["Belarus","Lithuania","Latvia","Poland","Germany","France"],
+     "availableChannel":{"@type":"ServiceChannel","serviceUrl":canonical}},
+    {"@type":"BreadcrumbList","itemListElement":[
+     {"@type":"ListItem","position":1,"name":l.nav.routes,"item":base+l.home},
+     {"@type":"ListItem","position":2,"name":c.nav,"item":canonical}
+    ]}
+  ]};
+  const body=`${header(lang,"long-distance")}<main>
+    <section class="long-distance-hero"><div class="long-distance-hero-inner">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(c.nav)}</span></nav>
+      <span class="eyebrow light">${esc(c.kicker)}</span>
+      <h1>${esc(c.h1)}</h1>
+      <p>${esc(c.lead)}</p>
+      <div class="hero-actions"><a href="#booking-dialog" class="button primary" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(c.quote)} ${icons.arrow}</a>
+        <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a></div>
+      ${quickBooking(lang,"vilnius","","")}
+    </div></section>
+    <section class="section long-distance-landmark" aria-label="${esc(destinationLabels[lang])}">${cityPhotoFigure(lang,"minsk")}</section>
+    <section class="section long-distance-overview" id="long-distance-service">
+      <div class="section-head"><span class="eyebrow">ComfortLine · 300+ km</span><h2>${esc(c.whoHeading)}</h2><p>${esc(c.whoIntro)}</p></div>
+      <div class="long-distance-benefits">${benefits}</div>
+    </section>
+    <section class="section long-distance-costs"><h2>${esc(c.conditionsHeading)}</h2><p>${esc(c.conditionsText)}</p></section>
+    <section class="section long-distance-departures" id="departures">
+      <div class="section-head"><span class="eyebrow">${esc(c.countryHeading)}</span>
+        <h2>${esc(c.coverageHeading)}</h2><p>${esc(c.coverageIntro)}</p></div>
+      <div class="long-distance-country-grid">${longDistanceCountryDirectory(lang)}</div>
+      <h2 class="long-distance-destinations-title">${esc(destinationLocale[lang].section)}</h2>
+      <div class="long-distance-destination-links">${destinations}</div>
+    </section>
+    <section class="section long-distance-steps" id="request-a-quote">
+      <div class="section-head"><span class="eyebrow">${esc(c.kicker)}</span><h2>${esc(c.stepsHeading)}</h2></div>
+      <ol>${steps}</ol><a href="#booking-dialog" class="button primary" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(c.quote)} ${icons.arrow}</a>
+    </section>
+    <section class="section long-distance-faq" id="faq"><h2>${esc(c.faqHeading)}</h2><div class="long-distance-faq-list">${faq}</div>
+      <p class="long-distance-disclaimer">${esc(c.evidence)}</p>
+      <a href="${guidePath(lang)}">${esc(l.nav.guide)} ↗</a>
+    </section>
+    ${homeBookingTransparency(lang)}
+   </main>${footer(l)}`;
+  return layout({lang,title:c.title,description:c.meta,canonical,alternates:longDistanceAlternates(),
+    body,schema,routeKey:"vilnius",originOverride:"",destinationOverride:"",ogImage:cityPhotoPreviewUrl("minsk")});
+}
+
 function hubPage(lang) {
   const l = locale[lang];
   const canonical = `${base}/${lang}/`;
@@ -1049,6 +1134,7 @@ function hubPage(lang) {
     <section class="section routes-section" id="routes"><div class="section-head"><span class="eyebrow">Comfortline routes</span><h2>${esc(l.routesTitle)}</h2><p>${esc(l.routesLead)}</p></div><div class="route-grid three">${routeCards(lang)}</div></section>
     ${airportRouteLinks(lang)}
     ${geoHubDirectoryLinks(lang)}
+    ${longDistanceTeaser(lang)}
     ${destinationCardList(lang)}
     ${fleetShowcase(lang)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">Door to door</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
@@ -1914,6 +2000,7 @@ await put("index.html", gateway());
 for (const lang of Object.keys(locale)) {
   await put(`${lang}/index.html`, hubPage(lang));
   await put(guidePath(lang).slice(1)+"index.html", travelGuidePage(lang));
+  await put(longDistancePath(lang).slice(1)+"index.html", longDistancePage(lang));
   await put(borderStoryPath(lang).slice(1)+"index.html", borderStoryPage(lang));
   await put(carStoryPath(lang).slice(1)+"index.html", carStoryPage(lang));
   await put(ikeaStoryPath(lang).slice(1)+"index.html", ikeaStoryPage(lang));
@@ -1932,6 +2019,11 @@ for (const lang of Object.keys(locale)) {
 }
 
 const sitemapEntries = [
+  ...Object.keys(locale).map(lang=>{
+    const url=base+longDistancePath(lang);
+    const alt=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+longDistancePath(code)}"/>`).join("");
+    return `<url><loc>${url}</loc><lastmod>2026-11-03</lastmod>${alt}<xhtml:link rel="alternate" hreflang="x-default" href="${base+longDistancePath("en")}"/></url>`;
+  }),
   ...Object.keys(locale).map(lang=>{
     const url=base+cashStoryPath(lang);
     const alts=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+cashStoryPath(code)}"/>`).join("");
