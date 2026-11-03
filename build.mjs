@@ -4,6 +4,7 @@ import { routeSeo } from "./route-seo.mjs";
 import { travelGuideContent } from "./travel-guide-content.mjs";
 import { borderPassportArticle, borderPassportSources } from "./border-passports-article.mjs";
 import { carSanctionsArticle, carSanctionsSources } from "./car-sanctions-article.mjs";
+import { ikeaKidsArticle, ikeaKidsProducts, ikeaKidsSources } from "./ikea-kids-customs-article.mjs";
 import { routeExtras } from "./route-extras.mjs";
 import { airportHubLinks } from "./airport-hub-links.mjs";
 import { bookingTrustContent, routeOfficialSources, reverseRoutePages } from "./booking-trust-content.mjs";
@@ -390,6 +391,9 @@ const borderStorySlug = "dual-passports-belarus-poland-border";
 function borderStoryPath(lang) { return guidePath(lang)+borderStorySlug+"/"; }
 const carStorySlug = "lithuania-belarus-car-export-sanctions-165mm";
 function carStoryPath(lang) { return guidePath(lang)+carStorySlug+"/"; }
+const ikeaStorySlug="ikea-shopping-belarus-customs-limits-frequency";
+function ikeaStoryPath(lang){return guidePath(lang)+ikeaStorySlug+"/";}
+function ikeaStoryAlternates(){return [...Object.keys(locale).map(code=>`<link rel="alternate" hreflang="${code}" href="${base}${ikeaStoryPath(code)}">`),`<link rel="alternate" hreflang="x-default" href="${base}${ikeaStoryPath("en")}">`].join("\n");}
 function carStoryAlternates() { return [...Object.keys(locale).map(code=>`<link rel="alternate" hreflang="${code}" href="${base}${carStoryPath(code)}">`), `<link rel="alternate" hreflang="x-default" href="${base}${carStoryPath("en")}">`].join("\n"); }
 function borderStoryAlternates() { return [...Object.keys(locale).map(code=>`<link rel="alternate" hreflang="${code}" href="${base}${borderStoryPath(code)}">`), `<link rel="alternate" hreflang="x-default" href="${base}${borderStoryPath("en")}">`].join("\n"); }
 function guideAlternates() { return [...Object.keys(locale).map(lang=>`<link rel="alternate" hreflang="${lang}" href="${base}${guidePath(lang)}">`), `<link rel="alternate" hreflang="x-default" href="${base}${guidePath("en")}">`].join("\n"); }
@@ -409,6 +413,7 @@ function languageMenu(lang, type, routeKey) {
       : type === "guide" ? guidePath(code)
       : type === "guide-story" ? borderStoryPath(code)
       : type === "car-story" ? carStoryPath(code)
+      : type === "ikea-story" ? ikeaStoryPath(code)
       : type === "geo" ? geoPath(code,routeKey)
       : type === "geo-index" ? geoIndexPath(code,routeKey)
       : type === "destination-index" ? destinationIndexPath(code)
@@ -427,9 +432,9 @@ function header(lang, type = "home", routeKey) {
       <img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56">
     </a>
     <nav class="main-nav" aria-label="${esc(l.nav.routes)}">
-      <a href="${l.home}#routes">${l.nav.routes}</a><a href="${l.home}#service">${l.nav.service}</a><a href="${l.home}#faq">${l.nav.faq}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${l.nav.contact}</a>
+      <a href="${l.home}#routes">${l.nav.routes}</a><a href="${l.home}#service">${l.nav.service}</a><a href="${l.home}#faq">${l.nav.faq}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${l.nav.contact}</a>
     </nav>
-    <details class="mobile-nav"><summary aria-label="${esc(menuLabel)}"><span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span>${esc(menuLabel)}</span></summary><nav class="mobile-nav-links" aria-label="${esc(menuLabel)}"><a href="${l.home}#routes">${esc(l.nav.routes)}</a><a href="${l.home}#service">${esc(l.nav.service)}</a><a href="${l.home}#faq">${esc(l.nav.faq)}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.nav.contact)}</a></nav></details>
+    <details class="mobile-nav"><summary aria-label="${esc(menuLabel)}"><span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span>${esc(menuLabel)}</span></summary><nav class="mobile-nav-links" aria-label="${esc(menuLabel)}"><a href="${l.home}#routes">${esc(l.nav.routes)}</a><a href="${l.home}#service">${esc(l.nav.service)}</a><a href="${l.home}#faq">${esc(l.nav.faq)}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.nav.contact)}</a></nav></details>
     <details class="language-menu"><summary aria-label="${esc(l.label)}"><svg class="language-globe" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4.5 6 4.5 9s-1.5 6-4.5 9c-3-3-4.5-6-4.5-9S9 6 12 3Z"/></svg><span class="language-current">${l.code.toUpperCase()}</span></summary><div class="language-options">${languageMenu(lang, type, routeKey)}</div></details>
   </header>`;
 }
@@ -835,6 +840,36 @@ function carStoryPage(lang){
   return layout({lang,title:c.title+" | ComfortLine",description:c.description,canonical,alternates:carStoryAlternates(),body,schema,ogImage:base+carStoryIllustration});
 }
 
+
+const ikeaStoryKinds = {"ru":["столешница стульчика","сиденье стульчика","ножки стульчика","горшок","деревянная железная дорога","детские приборы","детская ступенька","мягкая игрушка","счёты","игрушечная касса","игрушка","корзина с игрушечными продуктами","детское сиденье на унитаз","цветные карандаши","мелки","фломастеры"],"en":["high-chair tray","high-chair seat","high-chair legs","children's potty","wooden railway","children's cutlery","children's step stool","green soft toy","abacus","toy cash register","toy","play shopping basket","children's toilet seat","coloured pencils","chalk","felt-tip pens"],"pl":["blat krzesełka","siedzisko krzesełka","nogi krzesełka","nocnik","drewniana kolejka","sztućce dziecięce","podnóżek dla dzieci","zielona przytulanka","liczydło","kasa do zabawy","zabawka","koszyk do zabawy w sklep","nakładka na sedes","kredki ołówkowe","kreda","flamastry"],"lt":["kėdutės padėklas","kėdutės sėdynė","kėdutės kojos","puodukas","medinis traukinukas","vaikiški stalo įrankiai","laiptelis","žalias minkštas žaislas","skaitytuvai","žaislinė kasa","žaislas","žaislinis pirkinių krepšelis","tualeto dangčio sėdynė","spalvoti pieštukai","kreidelės","flomasteriai"],"lv":["krēsliņa paplāte","krēsliņa sēdeklis","krēsliņa kājas","bērnu podiņš","koka dzelzceļš","bērnu galda piederumi","bērnu pakāpiens","zaļa mīkstā rotaļlieta","skaitīkļi","rotaļu kase","rotaļlieta","rotaļu iepirkumu grozs","tualetes sēdekļa uzlika","krāsainie zīmuļi","krītiņi","flomāsteri"],"de":["Hochstuhl-Tablett","Hochstuhl-Sitz","Hochstuhl-Beine","Kindertöpfchen","Holzeisenbahn","Kinderbesteck","Kindertritt","grünes Stofftier","Abakus","Spielkasse","Spielzeug","Spiel-Einkaufskorb","Toilettensitz für Kinder","Buntstifte","Kreide","Filzstifte"],"fr":["plateau de chaise haute","siège de chaise haute","pieds de chaise haute","pot pour enfant","train en bois","couverts pour enfant","marchepied","peluche verte","boulier","caisse jouet","jouet","panier d'aliments jouets","réducteur de toilettes","crayons de couleur","craies","feutres"]};
+const ikeaStoryFactsLabels = {"en":["Personal-use value ceiling","Personal-use weight ceiling","Products on the shopping list"],"ru":["Лимит стоимости для личных товаров","Лимит веса для личных товаров","Артикулов в списке покупок"],"pl":["Limit wartości zakupów osobistych","Limit masy zakupów osobistych","Artykułów na liście"],"lt":["Asmeninių prekių vertės riba","Asmeninių prekių svorio riba","Prekių sąraše"],"lv":["Personīgo preču vērtības robeža","Personīgo preču svara robeža","Preces sarakstā"],"de":["Wertgrenze für persönlichen Bedarf","Gewichtsgrenze für persönlichen Bedarf","Artikel auf der Einkaufsliste"],"fr":["Plafond de valeur pour usage personnel","Plafond de poids pour usage personnel","Références sur la liste"]};
+function ikeaStoryPage(lang){
+ const l=locale[lang],c=ikeaKidsArticle[lang],canonical=base+ikeaStoryPath(lang);
+ const kinds=ikeaStoryKinds[lang];
+ const list=ikeaKidsProducts.map(([sku,name],i)=>`<li class="guide-ikea-product"><span class="guide-ikea-sku">${esc(sku)}</span><span class="guide-ikea-item"><strong>${esc(name)}</strong><small>${esc(kinds[i])}</small></span></li>`).join("");
+ const inventory=`<section class="guide-ikea-inventory" id="ikea-shopping-list"><h2>${esc(c.productsTitle)}</h2><p>${esc(c.productsIntro)}</p><ol>${list}</ol></section>`;
+ const sections=c.sections.map(([heading,...paragraphs],i)=>`<section class="guide-article-section" id="section-${i+1}"><h2>${esc(heading)}</h2>${paragraphs.map(text=>`<p>${renderCarStoryText(text)}</p>`).join("")}</section>`+(i===0?inventory:"")).join("");
+ const checklist=c.checklist.map(item=>`<li>${esc(item)}</li>`).join("");
+ const sources=ikeaKidsSources.map((source,i)=>`<li id="guide-source-${i+1}"><span class="guide-article-source-number">[${i+1}]</span><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.title)} <span aria-hidden="true">↗</span></a></li>`).join("");
+ const body=`${header(lang,"ikea-story",ikeaStorySlug)}<main class="guide-article-root" id="main-content"><article class="guide-article" itemscope itemtype="https://schema.org/BlogPosting">
+ <div class="guide-article-header"><nav class="guide-article-breadcrumb" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span aria-hidden="true">/</span><a href="${guidePath(lang)}">${esc(l.nav.guide)}</a></nav>
+ <span class="guide-article-kicker">${esc(c.tag)}</span><h1 itemprop="headline">${esc(c.title)}</h1><p class="guide-article-lead" itemprop="description">${esc(c.description)}</p>
+ <div class="guide-article-meta"><span>ComfortLine</span><span aria-hidden="true">·</span><time datetime="2026-11-03" itemprop="datePublished">${esc(c.reviewed)}</time></div></div>
+ <div class="guide-article-body">
+ <aside class="guide-article-warning" aria-label="${esc(c.disclaimerTitle)}"><strong>${esc(c.disclaimerTitle)}</strong><p>${esc(c.disclaimer)}</p></aside>
+ <div class="guide-ikea-facts"><div><strong>500 €</strong><span>${esc(ikeaStoryFactsLabels[lang][0])}</span></div><div><strong>25 kg</strong><span>${esc(ikeaStoryFactsLabels[lang][1])}</span></div><div><strong>16 IKEA</strong><span>${esc(ikeaStoryFactsLabels[lang][2])}</span></div></div>
+ ${sections}
+ <section class="guide-article-checklist" aria-label="${esc(c.checklistTitle)}"><h2>${esc(c.checklistTitle)}</h2><ul>${checklist}</ul></section>
+ <section class="guide-article-sources" id="official-sources" aria-label="${esc(c.sources)}"><h2>${esc(c.sources)}</h2><ol>${sources}</ol></section>
+ <div class="guide-article-back"><a href="${guidePath(lang)}">← ${esc(c.back)}</a></div>
+ </div></article></main>${footer(l)}`;
+ const schema={"@context":"https://schema.org","@graph":[businessSchema(lang,canonical),
+ {"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":canonical},"headline":c.title,"description":c.description,
+ "datePublished":"2026-11-03","dateModified":"2026-11-03","inLanguage":lang,"author":{"@type":"Organization","name":"ComfortLine"},"publisher":{"@type":"Organization","name":"ComfortLine","url":base+"/"},"citation":ikeaKidsSources.map(item=>item.url)},
+ {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":l.nav.routes,"item":base+l.home},{"@type":"ListItem","position":2,"name":l.nav.guide,"item":base+guidePath(lang)},{"@type":"ListItem","position":3,"name":c.shortTitle,"item":canonical}]}]};
+ return layout({lang,title:c.title+" | ComfortLine",description:c.description,canonical,alternates:ikeaStoryAlternates(),body,schema});
+}
+
 function travelGuidePage(lang) {
   const l=locale[lang], c=travelGuideContent[lang];
   const canonical=base+guidePath(lang);
@@ -862,6 +897,12 @@ function travelGuidePage(lang) {
       <h2><a href="${carStoryPath(lang)}">${esc(carSanctionsArticle[lang].shortTitle)}</a></h2><p>${esc(carSanctionsArticle[lang].description)}</p>
       <a class="travel-guide-featured-link" href="${carStoryPath(lang)}">${esc(carSanctionsArticle[lang].read)} ${icons.arrow}</a></div>
       <a class="travel-guide-featured-thumbnail" href="${carStoryPath(lang)}" aria-label="${esc(carSanctionsArticle[lang].read)}"><img src="${carStoryIllustration}" width="1440" height="810" loading="lazy" decoding="async" alt=""></a>
+    </section>
+    <section class="travel-guide-featured travel-guide-featured-ikea" aria-label="${esc(ikeaKidsArticle[lang].tag)}">
+      <div class="travel-guide-featured-copy"><span class="travel-guide-featured-label">${esc(ikeaKidsArticle[lang].tag)} · <time datetime="2026-11-03">03.11.2026</time></span>
+      <h2><a href="${ikeaStoryPath(lang)}">${esc(ikeaKidsArticle[lang].shortTitle)}</a></h2><p>${esc(ikeaKidsArticle[lang].description)}</p>
+      <a class="travel-guide-featured-link" href="${ikeaStoryPath(lang)}">${esc(ikeaKidsArticle[lang].read)} ${icons.arrow}</a></div>
+      <a class="guide-ikea-feature-symbol" href="${ikeaStoryPath(lang)}" aria-label="${esc(ikeaKidsArticle[lang].read)}"><span aria-hidden="true">IKEA</span><span aria-hidden="true">16</span></a>
     </section>
     <section class="travel-guide-section">
       <div class="travel-guide-heading"><h2>${esc(c.topicsHeading)}</h2><p>${esc(c.topicsIntro)}</p></div>
@@ -1769,6 +1810,7 @@ for (const lang of Object.keys(locale)) {
   await put(guidePath(lang).slice(1)+"index.html", travelGuidePage(lang));
   await put(borderStoryPath(lang).slice(1)+"index.html", borderStoryPage(lang));
   await put(carStoryPath(lang).slice(1)+"index.html", carStoryPage(lang));
+  await put(ikeaStoryPath(lang).slice(1)+"index.html", ikeaStoryPage(lang));
   await put(`${lang}/thank-you/index.html`, thankYouPage(lang));
   for (const key of Object.keys(routes)) await put(`${lang}/${locale[lang].slugs[key]}/index.html`, routePage(lang, key));
   for (const type of ["airport","city"]) await put(geoIndexPath(lang,type).slice(1)+"index.html", geoDirectoryPage(lang,type));
@@ -1783,6 +1825,11 @@ for (const lang of Object.keys(locale)) {
 }
 
 const sitemapEntries = [
+  ...Object.keys(locale).map(lang=>{
+    const url=base+ikeaStoryPath(lang);
+    const alts=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+ikeaStoryPath(code)}"/>`).join("");
+    return `<url><loc>${url}</loc><lastmod>2026-11-03</lastmod>${alts}<xhtml:link rel="alternate" hreflang="x-default" href="${base+ikeaStoryPath("en")}"/></url>`;
+  }),
   ...Object.keys(locale).map(lang=>{
     const url=base+carStoryPath(lang);
     const alts=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+carStoryPath(code)}"/>`).join("");

@@ -6,6 +6,7 @@ on:
     paths:
       - build.mjs
       - car-sanctions-article.mjs
+      - ikea-kids-customs-article.mjs
       - dist/assets/stories/**
       - border-passports-article.mjs
       - travel-guide-content.mjs
