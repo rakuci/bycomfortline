@@ -4436,3 +4436,48 @@ body { background:var(--cl-pearl); }
  .travel-guide-actions {width:100%;}
  .travel-guide-actions .button {width:100%;text-align:center;justify-content:center;white-space:normal;}
 }
+
+/* Editorial article and featured-story components | ComfortLine Travel Guide */
+.travel-guide-featured{width:min(1160px,calc(100% - 40px));margin:clamp(40px,6vw,80px) auto 0;border-radius:24px;padding:clamp(28px,4vw,55px);display:flex;align-items:center;justify-content:space-between;gap:36px;overflow:hidden;background:linear-gradient(117deg,#123746,#173f48);color:#fff;box-shadow:0 24px 48px rgba(10,40,50,.10)}
+.travel-guide-featured-copy{max-width:760px}
+.travel-guide-featured-label{display:block;color:#d6bb8e;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;margin-bottom:18px}
+.travel-guide-featured h2{font-size:clamp(1.65rem,3.2vw,2.8rem);line-height:1.18;letter-spacing:-.03em;margin:0 0 17px;color:#fff}
+.travel-guide-featured h2 a{color:inherit;text-decoration:none}
+.travel-guide-featured h2 a:hover,.travel-guide-featured h2 a:focus-visible{text-decoration:underline;text-underline-offset:5px}
+.travel-guide-featured p{max-width:650px;font-size:15px;line-height:1.8;color:#dfebeb;margin:0 0 25px}
+.travel-guide-featured-link{color:#fff;display:inline-flex;align-items:center;gap:9px;font-weight:800;text-underline-offset:5px}
+.travel-guide-featured-link svg{width:19px;height:19px}
+.travel-guide-featured-icon{min-width:140px;display:grid;place-items:center;position:relative;color:#c3d9d3;opacity:.8}
+.travel-guide-featured-icon>span{position:absolute;top:-25px;right:0;color:#d5b78b;font-weight:800;font-size:12px}
+.guide-article-root{background:#f8fbfb;color:#102f37;min-height:65vh}
+.guide-article-header{background:linear-gradient(115deg,#0c2935,#19434b);color:#fff;padding:clamp(48px,7vw,100px) max(22px,calc((100vw - 920px)/2)) clamp(45px,6vw,75px)}
+.guide-article-breadcrumb{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:#c6dbdb;margin-bottom:30px;font-size:13px}
+.guide-article-breadcrumb a{color:inherit;text-decoration:none}
+.guide-article-breadcrumb a:hover{text-decoration:underline}
+.guide-article-kicker{display:block;color:#d4b78b;letter-spacing:.13em;text-transform:uppercase;font-weight:800;font-size:12px;margin:0 0 20px}
+.guide-article-header h1{max-width:1000px;color:#fff;font-size:clamp(2rem,4.5vw,3.9rem);letter-spacing:-.038em;line-height:1.18;margin:0 0 25px}
+.guide-article-lead{color:#e4f0ed;font-size:clamp(16px,1.7vw,19px);line-height:1.75;max-width:850px;margin:0 0 24px}
+.guide-article-meta{display:flex;align-items:center;gap:11px;color:#bdd3d4;font-size:13px}
+.guide-article-body{width:min(850px,calc(100% - 38px));margin:0 auto;padding:46px 0 90px}
+.guide-article-warning{border:1px solid #c9d9dd;border-left:5px solid #b18b4f;background:#f0f5f4;border-radius:12px;padding:22px 25px;margin-bottom:50px}
+.guide-article-warning strong{font-size:17px;line-height:1.45;display:block;margin-bottom:12px}
+.guide-article-warning p{color:#3e5b64;line-height:1.8;margin:0}
+.guide-article-section{margin-bottom:48px;scroll-margin-top:110px}
+.guide-article-section h2{font-size:clamp(1.45rem,2.7vw,2.1rem);letter-spacing:-.025em;line-height:1.3;margin:0 0 17px;color:#0d303a}
+.guide-article-section p{font-size:16px;line-height:1.9;color:#3c565e;margin:0 0 17px}
+.guide-article-ref{font-size:12px;vertical-align:super;text-underline-offset:2px;color:#205875;font-weight:800;text-decoration:underline}
+.guide-article-checklist{padding:31px;background:#e9f1ee;border-radius:20px;margin:47px 0 55px}
+.guide-article-checklist h2,.guide-article-sources h2{font-size:clamp(1.35rem,2.5vw,1.95rem);letter-spacing:-.02em;margin:0 0 21px}
+.guide-article-checklist ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.guide-article-checklist li{display:flex;align-items:flex-start;gap:12px;line-height:1.65;color:#345259}
+.guide-article-checklist li:before{content:"✓";color:#266e5e;font-weight:900;font-size:17px;flex-shrink:0}
+.guide-article-sources{border-top:1px solid #d5e2e2;padding-top:33px;scroll-margin-top:110px}
+.guide-article-sources ol{list-style:none;margin:0;padding:0;display:grid;gap:15px}
+.guide-article-sources li{display:flex;align-items:baseline;gap:11px;scroll-margin-top:120px}
+.guide-article-source-number{font-size:12px;color:#64828a;font-weight:800;white-space:nowrap}
+.guide-article-sources a{color:#18526b;line-height:1.65;text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
+.guide-article-sources a:hover{color:#0a3548}
+.guide-article-back{margin-top:45px;padding-top:24px;border-top:1px solid #d7e4e4}
+.guide-article-back a{color:#204a58;font-weight:800;text-decoration:none}
+.guide-article-back a:hover{text-decoration:underline}
+@media(max-width:730px){.travel-guide-featured{width:calc(100% - 34px);padding:28px;margin-top:25px}.travel-guide-featured-icon{display:none}.travel-guide-featured p{font-size:14px}.guide-article-header{padding:40px 20px 48px}.guide-article-body{padding:27px 0 65px}.guide-article-warning{padding:19px;margin-bottom:35px}.guide-article-section{margin-bottom:35px}.guide-article-section p{font-size:15px;line-height:1.85}.guide-article-checklist{padding:24px 19px}.guide-article-sources ol{gap:16px}}
