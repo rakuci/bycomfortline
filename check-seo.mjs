@@ -107,6 +107,18 @@ assert.equal(new Set(googleLocs).size, googleLocs.length, 'Duplicate URL in Goog
 assert.deepEqual(yandexLocs, googleLocs, 'Yandex sitemap should include same canonical URLs');
 assert(!yandex.includes('xhtml:link'), 'Yandex sitemap must be simple');
 const setOfCanonicalSitemap = new Set(googleLocs);
+
+for(const lang of langs) {
+  const guideFile='/'+lang+'/travel-guide/index.html';
+  assert(known.has(guideFile), 'Missing localized Travel Guide: '+lang);
+  assert(setOfCanonicalSitemap.has(site+'/'+lang+'/travel-guide/'), 'Travel Guide missing from sitemap: '+lang);
+  const guide=await readFile(join(root, guideFile.slice(1)),'utf8');
+  assert(guide.includes('class="travel-guide-root"'), 'Travel Guide layout missing: '+lang);
+  assert(guide.includes('data-destination-id="minsk"'), 'Travel Guide missing authentic destination photo: '+lang);
+  assert(guide.includes('href="/'+lang+'/travel-guide/"'), 'Travel Guide missing header navigation: '+lang);
+  assert(guide.includes('hreflang="x-default"'), 'Travel Guide missing language alternatives: '+lang);
+}
+
 for (const path of htmlFiles) {
   const html = await readFile(path,'utf8');
   const local = '/' + relative(root,path).replaceAll('\\','/');
