@@ -33,6 +33,10 @@ jobs:
           node-version: '22'
       - name: Rebuild pages, SEO, citations and photo audit
         run: |
+          # Recheck site content and the booking API before production deployment.
+          test -f src/worker.mjs
+          grep -q '/api/booking' src/worker.mjs
+          grep -q 'RESEND_API_KEY' src/worker.mjs
           node build.mjs
           node scripts/check-travel-guide.mjs
           node scripts/landing_image_report.mjs
