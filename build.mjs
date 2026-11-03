@@ -2,10 +2,12 @@ import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import { readFileSync, existsSync } from "node:fs";
 import { routeSeo } from "./route-seo.mjs";
 import { travelGuideContent } from "./travel-guide-content.mjs";
+import { editorialContributionLocale } from "./travel-guide-contribution-locales.mjs";
 import { borderPassportArticle, borderPassportSources } from "./border-passports-article.mjs";
 import { carSanctionsArticle, carSanctionsSources } from "./car-sanctions-article.mjs";
 import { ikeaKidsArticle, ikeaKidsProducts, ikeaKidsSources } from "./ikea-kids-customs-article.mjs";
 import { cashSixtyArticle, cashSixtySources } from "./cash-eur60-border-article.mjs";
+import { cashStoryImageLabels } from "./travel-guide-cash-image-labels.mjs";
 import { routeExtras } from "./route-extras.mjs";
 import { airportHubLinks } from "./airport-hub-links.mjs";
 import { bookingTrustContent, routeOfficialSources, reverseRoutePages } from "./booking-trust-content.mjs";
@@ -395,7 +397,8 @@ function carStoryPath(lang) { return guidePath(lang)+carStorySlug+"/"; }
 const ikeaStorySlug="ikea-shopping-belarus-customs-limits-frequency";
 function ikeaStoryPath(lang){return guidePath(lang)+ikeaStorySlug+"/";}
 const cashStorySlug="60-euro-cash-eur-pln-belarus-border-lithuania-latvia";
-const cashStoryArt="/assets/stories/euro-60-cash-border-exchange-cartoon.svg";
+const cashStoryArt="/assets/stories/euro-60-border-exchange-office-driver.webp";
+const cashStoryInfographic="/assets/stories/euro-60-border-cash-rules-infographic.webp";
 function cashStoryPath(lang){return guidePath(lang)+cashStorySlug+"/";}
 function cashStoryAlternates(){return [...Object.keys(locale).map(code=>`<link rel="alternate" hreflang="${code}" href="${base}${cashStoryPath(code)}">`),`<link rel="alternate" hreflang="x-default" href="${base}${cashStoryPath("en")}">`].join("\n");}
 function ikeaStoryAlternates(){return [...Object.keys(locale).map(code=>`<link rel="alternate" hreflang="${code}" href="${base}${ikeaStoryPath(code)}">`),`<link rel="alternate" hreflang="x-default" href="${base}${ikeaStoryPath("en")}">`].join("\n");}
@@ -878,8 +881,13 @@ function ikeaStoryPage(lang){
 
 
 function cashStoryPage(lang){
-  const l=locale[lang],c=cashSixtyArticle[lang],canonical=base+cashStoryPath(lang);
-  const sections=c.sections.map(([heading,...paragraphs],i)=>`<section class="guide-article-section" id="section-${i+1}"><h2>${esc(heading)}</h2>${paragraphs.map(text=>`<p>${renderCarStoryText(text)}</p>`).join("")}</section>`).join("");
+  const l=locale[lang],c=cashSixtyArticle[lang],canonical=base+cashStoryPath(lang),media=cashStoryImageLabels[lang];
+  const sections=c.sections.map(([heading,...paragraphs],i)=>`<section class="guide-article-section" id="section-${i+1}"><h2>${esc(heading)}</h2>${paragraphs.map(text=>`<p>${renderCarStoryText(text)}</p>`).join("")}</section>`+(i===6?`<figure class="guide-article-cartoon guide-article-cartoon--cash-guide">
+      <a class="guide-image-enlarge" href="${cashStoryInfographic}" target="_blank" rel="noopener noreferrer" aria-label="${esc(media.view)}">
+        <img src="${cashStoryInfographic}" width="1672" height="941" loading="lazy" decoding="async" alt="${esc(media.caption)}">
+      </a>
+      <figcaption>${esc(media.caption)}</figcaption>
+    </figure>`:"")).join("");
   const checklist=c.checklist.map(item=>`<li>${esc(item)}</li>`).join("");
   const sources=cashSixtySources.map((source,i)=>`<li id="guide-source-${i+1}"><span class="guide-article-source-number">[${i+1}]</span><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.title)} <span aria-hidden="true">↗</span></a></li>`).join("");
   const factValues=["€60?","€10,000","$10,000"];
@@ -893,7 +901,7 @@ function cashStoryPage(lang){
     <div class="guide-article-body">
       <aside class="guide-article-warning" aria-label="${esc(c.disclaimerTitle)}"><strong>${esc(c.disclaimerTitle)}</strong><p>${esc(c.disclaimer)}</p></aside>
       <figure class="guide-article-cartoon guide-article-cartoon--cash">
-        <img src="${cashStoryArt}" width="1400" height="788" loading="eager" decoding="async" fetchpriority="high" alt="${esc(c.figureCaption)}">
+        <a class="guide-image-enlarge" href="${cashStoryArt}" target="_blank" rel="noopener noreferrer" aria-label="${esc(media.view)}"><img src="${cashStoryArt}" width="1672" height="941" loading="eager" decoding="async" fetchpriority="high" alt="${esc(c.figureCaption)}"></a>
         <figcaption>${esc(c.figureCaption)}</figcaption>
       </figure>
       <div class="guide-cash-facts">${facts}</div>
@@ -915,14 +923,55 @@ function cashStoryPage(lang){
 const cashSourcesHeading={ru:"Официальные источники и первоисточники",en:"Official sources and original legal texts",pl:"Dokumenty urzędowe i źródła",lt:"Oficialūs teisės aktai ir šaltiniai",lv:"Oficiālie avoti un tiesību akti",de:"Amtliche Quellen und Gesetzestexte",fr:"Sources officielles et textes de loi"};
 const cashChecklistHeading={ru:"Перед поездкой: проверочный список",en:"Pre-departure cash checklist",pl:"Lista kontrolna przed wyjazdem",lt:"Patikrinimai prieš kelionę",lv:"Pirms izbraukšanas pārbaudiet",de:"Checkliste vor der Abreise",fr:"À vérifier avant le départ"};
 
+function travelGuideContributionForm(lang) {
+  const c=editorialContributionLocale[lang];
+  return `<section class="travel-guide-contribute" id="share-your-story" aria-labelledby="travel-guide-contribute-title">
+    <div class="travel-guide-contribute-heading">
+      <span class="travel-guide-eyebrow">COMFORTLINE · ${esc(travelGuideContent[lang].nav)}</span>
+      <h2 id="travel-guide-contribute-title">${esc(c.heading)}</h2>
+      <p>${esc(c.intro)}</p>
+    </div>
+    <form class="travel-guide-story-form" data-travel-guide-submission data-lang="${lang}" data-sending="${esc(c.sending)}" data-success="${esc(c.success)}" data-error="${esc(c.error)}" data-validation="${esc(c.validation)}" data-rate-limited="${esc(c.tooMany)}" method="post" action="/api/travel-guide-submission">
+      <div class="guide-story-form-grid">
+        <label class="guide-story-form-field guide-story-type">
+          <span>${esc(c.type)}</span>
+          <select name="type" required>
+            <option value="idea">${esc(c.idea)}</option>
+            <option value="story">${esc(c.story)}</option>
+          </select>
+        </label>
+        <label class="guide-story-form-field guide-story-title">
+          <span>${esc(c.title)}</span>
+          <input type="text" name="title" minlength="6" maxlength="140" placeholder="${esc(c.titlePlaceholder)}" autocomplete="off" required>
+        </label>
+        <label class="guide-story-form-field guide-story-message">
+          <span>${esc(c.message)}</span>
+          <textarea name="message" minlength="25" maxlength="4000" rows="7" placeholder="${esc(c.messagePlaceholder)}" required></textarea>
+        </label>
+        <label class="guide-story-form-field">
+          <span>${esc(c.name)}</span>
+          <input type="text" name="name" maxlength="100" placeholder="${esc(c.namePlaceholder)}" autocomplete="name">
+        </label>
+        <label class="guide-story-form-field">
+          <span>${esc(c.email)}</span>
+          <input type="email" name="email" maxlength="190" placeholder="${esc(c.emailPlaceholder)}" autocomplete="email">
+        </label>
+        <div class="guide-story-honeypot" aria-hidden="true"><label>Website <input name="website" autocomplete="off" tabindex="-1"></label></div>
+        <label class="guide-story-consent"><input type="checkbox" name="consent" value="yes" required><span>${esc(c.consent)}</span></label>
+      </div>
+      <p class="guide-story-privacy">${esc(c.privacy)}</p>
+      <div class="guide-story-submit-row">
+        <button class="button primary guide-story-submit" type="submit">${esc(c.send)}</button>
+        <p class="guide-story-form-status" role="status" aria-live="polite" hidden></p>
+      </div>
+    </form>
+  </section>`;
+}
+
 function travelGuidePage(lang) {
   const l=locale[lang], c=travelGuideContent[lang];
   const canonical=base+guidePath(lang);
   const title=c.metaTitle+" | ComfortLine";
-  const cards=c.topics.map(([heading,description],i)=>`<article class="travel-guide-card">
-      <span class="travel-guide-card-count">0${i+1}</span>
-      <div><span class="travel-guide-card-status">${esc(c.planned)}</span><h2>${esc(heading)}</h2><p>${esc(description)}</p></div>
-    </article>`).join("");
   const body=`${header(lang,"guide")}<main class="travel-guide-root" id="main-content">
     <section class="travel-guide-hero">
       <div class="travel-guide-hero-inner">
@@ -937,7 +986,7 @@ function travelGuidePage(lang) {
         <h2><a href="${cashStoryPath(lang)}">${esc(cashSixtyArticle[lang].shortTitle)}</a></h2><p>${esc(cashSixtyArticle[lang].description)}</p>
         <a class="travel-guide-featured-link" href="${cashStoryPath(lang)}">${esc(cashSixtyArticle[lang].read)} ${icons.arrow}</a>
       </div>
-      <a class="travel-guide-featured-thumbnail travel-guide-featured-thumbnail--cash" href="${cashStoryPath(lang)}" aria-label="${esc(cashSixtyArticle[lang].read)}"><img src="${cashStoryArt}" width="1400" height="788" loading="lazy" decoding="async" alt=""></a>
+      <a class="travel-guide-featured-thumbnail travel-guide-featured-thumbnail--cash" href="${cashStoryPath(lang)}" aria-label="${esc(cashSixtyArticle[lang].read)}"><img src="${cashStoryArt}" width="1672" height="941" loading="lazy" decoding="async" alt=""></a>
     </section>
     <section class="travel-guide-featured" aria-label="${esc(borderPassportArticle[lang].tag)}">
       <div class="travel-guide-featured-copy"><span class="travel-guide-featured-label">${esc(borderPassportArticle[lang].tag)} · <time datetime="2026-11-03">03.11.2026</time></span>
@@ -957,10 +1006,7 @@ function travelGuidePage(lang) {
       <a class="travel-guide-featured-link" href="${ikeaStoryPath(lang)}">${esc(ikeaKidsArticle[lang].read)} ${icons.arrow}</a></div>
       <a class="guide-ikea-feature-symbol" href="${ikeaStoryPath(lang)}" aria-label="${esc(ikeaKidsArticle[lang].read)}"><span aria-hidden="true">IKEA</span><span aria-hidden="true">16</span></a>
     </section>
-    <section class="travel-guide-section">
-      <div class="travel-guide-heading"><h2>${esc(c.topicsHeading)}</h2><p>${esc(c.topicsIntro)}</p></div>
-      <div class="travel-guide-grid">${cards}</div>
-    </section>
+    ${travelGuideContributionForm(lang)}
     <section class="travel-guide-disclaimer" aria-label="${esc(c.disclaimerHeading)}">
       <span class="travel-guide-note-icon" aria-hidden="true">i</span>
       <div><h2>${esc(c.disclaimerHeading)}</h2><p>${esc(c.disclaimer)}</p></div>

@@ -4,6 +4,12 @@ on:
   pull_request:
     paths:
       - build.mjs
+      - src/worker.mjs
+      - travel-guide-contribution-locales.mjs
+      - travel-guide-cash-image-labels.mjs
+      - dist/assets/app.js
+      - dist/assets/style.css
+      - scripts/check-travel-guide-submission.mjs
       - car-sanctions-article.mjs
       - ikea-kids-customs-article.mjs
       - cash-eur60-border-article.mjs
@@ -32,5 +38,7 @@ jobs:
         run: node build.mjs
       - name: Verify legal article, citations and all language alternates
         run: node scripts/check-travel-guide.mjs
+      - name: Verify seven-language reader submissions without sending email
+        run: node scripts/check-travel-guide-submission.mjs
       - name: Confirm transfer photo audit excludes editorial content
         run: node scripts/landing_image_report.mjs

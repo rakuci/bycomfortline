@@ -4530,12 +4530,50 @@ body { background:var(--cl-pearl); }
 /* ComfortLine cash at the Belarus border editorial article */
 .travel-guide-featured-cash{background:linear-gradient(115deg,#14384c 0%,#1c5365 80%);margin-top:28px}
 .travel-guide-featured-thumbnail--cash{width:clamp(190px,29vw,368px);transform:rotate(1deg)}
-.travel-guide-featured-thumbnail--cash img{width:100%;height:auto;aspect-ratio:1400/788;object-fit:contain;background:#b3dce0}
+.travel-guide-featured-thumbnail--cash img{width:100%;height:auto;aspect-ratio:1672/941;object-fit:contain;background:#b3dce0}
 .guide-article-cartoon--cash{border-radius:20px}
-.guide-article-cartoon--cash img{width:100%;height:auto;aspect-ratio:1400/788;object-fit:contain}
+.guide-article-cartoon--cash img{width:100%;height:auto;aspect-ratio:1672/941;object-fit:contain}
 .guide-cash-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:21px;margin:0 0 48px;border-radius:17px;background:#edf4f3;border:1px solid #d6e4e2}
 .guide-cash-facts>div{padding:8px 11px;display:flex;flex-direction:column;gap:9px}
 .guide-cash-facts strong{font-size:clamp(1.5rem,3.2vw,2.3rem);line-height:1.1;letter-spacing:-.04em;color:#153b4b}
 .guide-cash-facts span{color:#486973;font-size:13px;line-height:1.55}
 @media(max-width:750px){.travel-guide-featured-cash{flex-direction:column;align-items:stretch;gap:22px}.travel-guide-featured-thumbnail--cash{width:100%;transform:none}.guide-cash-facts{padding:14px;gap:6px}.guide-cash-facts>div{padding:8px 5px}.guide-cash-facts strong{font-size:23px}}
 @media(max-width:550px){.guide-cash-facts{grid-template-columns:1fr}.guide-cash-facts>div{flex-direction:row;align-items:center;gap:14px;border-bottom:1px solid #d1dfde}.guide-cash-facts>div:last-child{border-bottom:0}.guide-cash-facts strong{min-width:109px}}
+
+/* Travel Guide: invite genuine reader stories and topic ideas instead of 'coming soon' cards */
+.travel-guide-contribute{width:min(1160px,calc(100% - 40px));margin:clamp(45px,7vw,95px) auto clamp(54px,8vw,110px);padding:clamp(28px,5vw,58px);background:#f6f9f8;border:1px solid #dce7e5;border-radius:25px;display:grid;grid-template-columns:minmax(250px,.85fr) minmax(0,1.45fr);gap:clamp(28px,4vw,65px);align-items:start}
+.travel-guide-contribute-heading{padding-top:12px}
+.travel-guide-contribute-heading .travel-guide-eyebrow{color:#9b7a49;font-weight:800;font-size:11px;letter-spacing:.12em}
+.travel-guide-contribute-heading h2{color:#112f38;letter-spacing:-.038em;font-size:clamp(2rem,3.15vw,3rem);line-height:1.15;margin:16px 0}
+.travel-guide-contribute-heading>p{color:#577079;font-size:15px;line-height:1.8;margin:0;max-width:400px}
+.travel-guide-story-form{background:#fff;border:1px solid #e0e8e7;border-radius:18px;padding:clamp(20px,3vw,35px);box-shadow:0 13px 45px rgba(13,55,63,.055)}
+.guide-story-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.guide-story-form-field{display:flex;flex-direction:column;gap:9px;min-width:0}
+.guide-story-form-field>span{color:#244550;font-size:13px;font-weight:700;line-height:1.45}
+.guide-story-form-field input,.guide-story-form-field textarea,.guide-story-form-field select{display:block;min-width:0;width:100%;min-height:49px;padding:13px 14px;border:1px solid #ccd9d9;background:#fff;color:#153640;border-radius:10px;font:inherit;font-size:14px;line-height:1.5;outline:none;box-shadow:none;transition:border-color .15s,box-shadow .15s}
+.guide-story-form-field select{appearance:auto}
+.guide-story-form-field input::placeholder,.guide-story-form-field textarea::placeholder{color:#829499;opacity:1}
+.guide-story-form-field textarea{resize:vertical;min-height:156px}
+.guide-story-form-field input:focus-visible,.guide-story-form-field textarea:focus-visible,.guide-story-form-field select:focus-visible{border-color:#367683;box-shadow:0 0 0 3px rgba(49,112,126,.14)}
+.guide-story-form-field input:invalid:not(:placeholder-shown),.guide-story-form-field textarea:invalid:not(:placeholder-shown){border-color:#ad625c}
+.guide-story-type,.guide-story-title,.guide-story-message{grid-column:1/-1}
+.guide-story-consent{grid-column:1/-1;display:flex;align-items:flex-start;gap:11px;color:#435e65;font-size:12px;line-height:1.7;cursor:pointer}
+.guide-story-consent input{width:17px;height:17px;margin:2px 0 0;flex-shrink:0;accent-color:#1f6878}
+.guide-story-privacy{font-size:12px;line-height:1.7;color:#6c8185;margin:14px 0 25px}
+.guide-story-submit-row{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.guide-story-submit{min-height:46px;cursor:pointer}
+.guide-story-submit:disabled{opacity:.6;cursor:progress}
+.guide-story-form-status{font-size:13px;font-weight:700;line-height:1.55;color:#246052;margin:0;flex:1 1 190px;overflow-wrap:anywhere}
+.guide-story-form-status.guide-story-form-error{color:#a54442}
+.guide-story-honeypot{position:absolute!important;left:-9999px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important}
+@media(max-width:900px){.travel-guide-contribute{grid-template-columns:1fr}.travel-guide-contribute-heading>p{max-width:740px}}
+@media(max-width:620px){.travel-guide-contribute{width:calc(100% - 32px);border-radius:17px;padding:22px 16px;margin:35px auto 60px}.travel-guide-story-form{padding:21px 16px}.guide-story-form-grid{grid-template-columns:1fr;gap:18px}.guide-story-submit{width:100%;justify-content:center}.guide-story-form-status{flex-basis:100%}}
+@media(prefers-reduced-motion:reduce){.guide-story-form-field input,.guide-story-form-field textarea,.guide-story-form-field select{transition:none}}
+
+/* Responsive €60 feature and declaration illustrations: full text remains visible */
+.guide-image-enlarge{display:block;overflow:hidden;line-height:0;cursor:zoom-in}
+.guide-image-enlarge:focus-visible{outline:3px solid #397a89;outline-offset:-3px}
+.guide-image-enlarge img{display:block;width:100%;height:auto;aspect-ratio:1672/941;object-fit:contain}
+.guide-article-cartoon--cash-guide{margin:20px 0 48px;border-radius:18px}
+.guide-article-cartoon--cash-guide figcaption{font-size:12px;line-height:1.7}
+@media(max-width:700px){.guide-article-cartoon--cash-guide{margin:18px 0 34px}.guide-image-enlarge img{height:auto}}

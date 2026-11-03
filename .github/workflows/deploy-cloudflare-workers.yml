@@ -39,6 +39,7 @@ jobs:
           grep -q 'RESEND_API_KEY' src/worker.mjs
           node build.mjs
           node scripts/check-travel-guide.mjs
+          node scripts/check-travel-guide-submission.mjs
           node scripts/landing_image_report.mjs
       - name: Check Cloudflare credentials without exposing secret values
         id: credentials

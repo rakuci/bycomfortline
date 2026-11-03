@@ -315,9 +315,130 @@ async function submitBooking(request, env) {
   }
 }
 
+
+/**
+ * Editorial submissions are handled separately from booking requests.
+ * Messages go to the existing internal mailbox via the existing Resend secret.
+ * Do not add submissions to the public site or log their contents.
+ */
+function validateEditorialSubmission(data) {
+  if (!data || typeof data !== "object" || Array.isArray(data)) return null;
+  const {lang, type, title, message, name = "", email = "", website = "", consent} = data;
+  if (!ALLOWED_LANGUAGES.has(lang) ||
+      !["idea","story"].includes(type) ||
+      typeof title !== "string" || typeof message !== "string" ||
+      typeof name !== "string" || typeof email !== "string" ||
+      typeof website !== "string" || consent !== true) return null;
+  if (website) return {bot:true}; // Hidden honeypot.
+  const trimmed = {
+    title: title.trim(), message: message.trim(),
+    name: name.trim(), email: email.trim()
+  };
+  if (trimmed.title.length < 6 || trimmed.title.length > 140 ||
+      trimmed.message.length < 25 || trimmed.message.length > 4000 ||
+      trimmed.name.length > 100 || trimmed.email.length > 190 ||
+      /[\r\n]/.test(trimmed.title) ||
+      /[\r\n]/.test(trimmed.name) ||
+      /[\r\n]/.test(trimmed.email)) return null;
+  if (trimmed.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed.email)) return null;
+  return {lang, type, ...trimmed};
+}
+async function submitEditorialContribution(request, env) {
+  const url=new URL(request.url);
+  const origin=request.headers.get("Origin");
+  if (!origin || origin !== url.origin || request.headers.get("Sec-Fetch-Site")==="cross-site") {
+    return json({success:false,code:"forbidden"},403);
+  }
+  if (!request.headers.get("Content-Type")?.toLowerCase().startsWith("application/json")) {
+    return json({success:false,code:"invalid_content_type"},415);
+  }
+  if (Number(request.headers.get("Content-Length")||0)>7000) {
+    return json({success:false,code:"too_large"},413);
+  }
+  let data;
+  try {
+    const raw=await request.text();
+    if(raw.length>7000)return json({success:false,code:"too_large"},413);
+    data=JSON.parse(raw);
+  } catch (_) { return json({success:false,code:"invalid_payload"},400); }
+  const submission=validateEditorialSubmission(data);
+  if (!submission || submission.bot) return json({success:false,code:"invalid_payload"},400);
+  if (!env.RESEND_API_KEY || typeof env.RESEND_API_KEY!=="string") {
+    console.error("Missing RESEND_API_KEY Worker secret for editorial submissions.");
+    return json({success:false,code:"email_unavailable"},503);
+  }
+  const reference="TG-"+new Date().toISOString().slice(0,10).replace(/-/g,"")+
+    "-"+crypto.randomUUID().replace(/-/g,"").slice(0,10).toUpperCase();
+  const h=escapeHtml;
+  const labels={idea:"Предложение темы статьи",story:"История путешественника"};
+  const description=labels[submission.type];
+  const lines=[
+    "ComfortLine — материал от читателя",
+    "Тип: "+description, "Номер: "+reference,
+    "Язык: "+submission.lang.toUpperCase(),
+    "Получено (UTC): "+new Date().toISOString(),
+    "Имя: "+(submission.name||"Не указано"),
+    "Контакт для ответа: "+(submission.email||"Не указан"),
+    "Тема: "+submission.title,
+    "",
+    submission.message,
+    "",
+    "Согласие на обработку для рассмотрения и ответа: да.",
+    "История не предназначена для автоматической публикации."
+  ];
+  const html='<!doctype html><html><head><meta charset="utf-8"></head>'+
+    '<body style="background:#f3f7f7;padding:24px;font-family:Arial,Helvetica,sans-serif;color:#173140;">'+
+    '<div style="max-width:680px;margin:auto;background:#fff;border-radius:14px;padding:28px;">'+
+    '<h1 style="font-size:22px">ComfortLine — материал от читателя</h1>'+
+    '<p><strong>'+h(description)+'</strong> · '+h(reference)+'</p>'+
+    '<p><strong>Язык:</strong> '+h(submission.lang.toUpperCase())+'</p>'+
+    '<p><strong>Имя:</strong> '+h(submission.name||"—")+'</p>'+
+    '<p><strong>Email:</strong> '+h(submission.email||"—")+'</p>'+
+    '<h2 style="font-size:18px">'+h(submission.title)+'</h2>'+
+    '<p style="white-space:pre-wrap;line-height:1.7;overflow-wrap:anywhere">'+h(submission.message)+'</p>'+
+    '<p style="color:#60727c;font-size:12px">Получено для рассмотрения, не для автоматической публикации.</p>'+
+    '</div></body></html>';
+  const payload={
+    from:SENDER,to:[RECIPIENT],
+    subject:"ComfortLine — "+description+" № "+reference,
+    text:lines.join("\n"),html,
+    ...(submission.email?{reply_to:submission.email}:{})
+  };
+  try {
+    const response=await fetch(RESEND_SEND_URL,{
+      method:"POST",
+      headers:{
+        "Authorization":"Bearer "+env.RESEND_API_KEY,
+        "Content-Type":"application/json",
+        "Idempotency-Key":reference
+      },
+      body:JSON.stringify(payload)
+    });
+    if (!response.ok) {
+      console.error("Resend rejected editorial message:",response.status);
+      return json({success:false,code:response.status===429?"rate_limited":"email_unavailable"},response.status===429?429:503);
+    }
+    const result=await response.json().catch(()=>null);
+    if (!result || typeof result.id!=="string" || !result.id.trim()) {
+      return json({success:false,code:"email_unavailable"},503);
+    }
+    console.log("Editorial message accepted",reference,result.id);
+    return json({success:true,reference},200);
+  } catch (error) {
+    console.error("Editorial email request failed:",error?.name||"unknown");
+    return json({success:false,code:"email_unavailable"},503);
+  }
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname === "/api/travel-guide-submission") {
+      if (request.method !== "POST") {
+        return new Response(null,{status:405,headers:{"Allow":"POST","Cache-Control":"no-store"}});
+      }
+      return submitEditorialContribution(request,env);
+    }
     if (url.pathname === "/api/booking") {
       if (request.method !== "POST") {
         return new Response(null, { status: 405, headers: { "Allow": "POST", "Cache-Control": "no-store" } });
