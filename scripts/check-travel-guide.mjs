@@ -5,6 +5,18 @@ import {borderPassportArticle,borderPassportSources} from "../border-passports-a
 const langs=["en","ru","pl","lt","lv","de","fr"];
 const base="https://bycomfortline.com";
 const slug="dual-passports-belarus-poland-border";
+const passportArt="/assets/stories/dual-passport-no-departure.webp";
+async function requireOptimizedWebp(path,expectedWidth,expectedHeight){
+  const buf=await readFile("dist"+path);
+  assert(buf.length>10000 && buf.length<300000,path+": unexpected asset size");
+  assert.equal(buf.toString("ascii",0,4),"RIFF",path+": missing RIFF header");
+  assert.equal(buf.toString("ascii",8,12),"WEBP",path+": missing WEBP header");
+  assert.equal(buf.toString("ascii",12,16),"VP8 ",path+": unexpected image encoding");
+  const w=buf.readUInt16LE(26)&0x3fff, h=buf.readUInt16LE(28)&0x3fff;
+  assert.equal(w,expectedWidth,path+": width mismatch");
+  assert.equal(h,expectedHeight,path+": height mismatch");
+}
+await requireOptimizedWebp(passportArt,1280,960);
 const sitemap=await readFile("dist/sitemap.xml","utf8");
 const yandex=await readFile("dist/sitemap-yandex.xml","utf8");
 const css=await readFile("dist/assets/style.css","utf8");
@@ -21,6 +33,10 @@ for(const lang of langs){
   assert(html.includes(`<link rel="canonical" href="${url}"`),lang+": missing canonical");
   assert(html.includes(`<html lang="${lang}"`),lang+": incorrect document language");
   assert(html.includes(c.disclaimerTitle),lang+": missing up-front disclaimer");
+  assert(html.includes(`src="${passportArt}" width="1280" height="960"`),lang+": missing passport art in article");
+  assert(guide.includes(`src="${passportArt}" width="1280" height="960"`),lang+": missing passport art on guide card");
+  assert(html.includes(`property="og:image" content="${base}${passportArt}"`),lang+": missing passport social preview");
+  assert(html.indexOf("guide-article-warning")<html.indexOf("guide-article-cartoon--passport"),lang+": legal disclaimer must precede art");
   assert(html.indexOf("guide-article-warning")<html.indexOf("guide-article-section"),lang+": legal disclaimer is not first");
   assert(html.includes("https://schema.org/BlogPosting") && html.includes('"@type":"BlogPosting"'),lang+": missing article schema");
   assert(html.includes(`<h1 itemprop="headline">`),lang+": missing article heading");
@@ -38,12 +54,11 @@ console.log("Verified 7 localized border articles, source attribution, canonical
 
 import {carSanctionsArticle,carSanctionsSources} from "../car-sanctions-article.mjs";
 const carSlug="lithuania-belarus-car-export-sanctions-165mm";
-const carArt="/assets/stories/lithuania-belarus-165mm-satire.svg";
+const carArt="/assets/stories/lithuania-belarus-165mm-border.webp";
 assert.equal(Object.keys(carSanctionsArticle).length,7,"Vehicle sanctions story must be available in every locale");
 assert(carSanctionsSources.length>=8,"Vehicle sanctions story needs official sources");
 assert(css.includes(".guide-article-cartoon")&&css.includes(".travel-guide-featured-car"),"Missing satirical story layout styles");
-const art=await readFile("dist"+carArt,"utf8");
-assert(art.includes("<svg")&&art.includes("</svg>")&&art.includes("165"),"Missing border-clearance illustration");
+await requireOptimizedWebp(carArt,1440,810);
 for(const lang of langs){
   const c=carSanctionsArticle[lang],slug=carSlug;
   assert(c&&c.sections.length>=8&&c.checks.length===6,lang+": car sanctions article incomplete");
@@ -59,7 +74,9 @@ for(const lang of langs){
   assert(html.includes(c.disclaimerTitle),lang+": missing information-only warning");
   assert(html.indexOf("guide-article-warning")<html.indexOf("guide-article-cartoon"),lang+": disclaimer must precede image");
   assert(html.indexOf("guide-article-warning")<html.indexOf("guide-article-section"),lang+": disclaimer must precede claims");
-  assert(html.includes(`src="${carArt}"`),lang+": missing actual cartoon asset");
+  assert(html.includes(`src="${carArt}" width="1440" height="810"`),lang+": missing current car illustration");
+  assert(guide.includes(`src="${carArt}" width="1440" height="810"`),lang+": missing current car card");
+  assert(html.includes(`property="og:image" content="${base}${carArt}"`),lang+": missing car social preview");
   assert(html.includes('"@type":"BlogPosting"'),lang+": BlogPosting JSON-LD missing");
   assert(html.includes('id="guide-source-10"')&&html.includes('href="#guide-source-1"'),lang+": citation anchors missing");
   assert(html.includes('class="guide-article-section"'),lang+": article content missing");
@@ -69,4 +86,4 @@ for(const lang of langs){
   assert(html.includes(`hreflang="x-default" href="${base}/en/travel-guide/${slug}/"`),lang+": missing x-default alternate");
   assert.equal((html.match(/class="guide-article-section"/g)||[]).length,c.sections.length,lang+": missing sections");
 }
-console.log("Verified seven detailed localized car-sanctions articles, disclaimers, satirical SVG, official sources and SEO.");
+console.log("Verified both optimized story WebPs and their seven localized article/card placements, disclaimers, official sources and SEO.");
