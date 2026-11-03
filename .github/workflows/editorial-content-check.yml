@@ -4,6 +4,12 @@ on:
   pull_request:
     paths:
       - build.mjs
+      - long-distance-seo.mjs
+      - geo-locales.mjs
+      - destination-locales.mjs
+      - route-pair-context.mjs
+      - scripts/check-long-distance-seo.mjs
+      - scripts/check-sitemaps.mjs
       - src/worker.mjs
       - travel-guide-contribution-locales.mjs
       - travel-guide-cash-image-labels.mjs
@@ -38,6 +44,10 @@ jobs:
         run: node build.mjs
       - name: Verify legal article, citations and all language alternates
         run: node scripts/check-travel-guide.mjs
+      - name: Audit 300+ km route content, internal links and domain redirects
+        run: |
+          node scripts/check-long-distance-seo.mjs
+          node scripts/check-sitemaps.mjs
       - name: Verify seven-language reader submissions without sending email
         run: node scripts/check-travel-guide-submission.mjs
       - name: Confirm transfer photo audit excludes editorial content
