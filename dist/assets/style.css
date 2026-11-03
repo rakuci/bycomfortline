@@ -4481,3 +4481,16 @@ body { background:var(--cl-pearl); }
 .guide-article-back a{color:#204a58;font-weight:800;text-decoration:none}
 .guide-article-back a:hover{text-decoration:underline}
 @media(max-width:730px){.travel-guide-featured{width:calc(100% - 34px);padding:28px;margin-top:25px}.travel-guide-featured-icon{display:none}.travel-guide-featured p{font-size:14px}.guide-article-header{padding:40px 20px 48px}.guide-article-body{padding:27px 0 65px}.guide-article-warning{padding:19px;margin-bottom:35px}.guide-article-section{margin-bottom:35px}.guide-article-section p{font-size:15px;line-height:1.85}.guide-article-checklist{padding:24px 19px}.guide-article-sources ol{gap:16px}}
+
+/* ComfortLine Travel Guide: illustrated sanctions-driver story */
+.guide-article-cartoon{margin:0 0 48px;border:1px solid #d5e2e4;border-radius:21px;overflow:hidden;background:#d7e5e5;box-shadow:0 14px 45px rgba(8,42,56,.10)}
+.guide-article-cartoon img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.guide-article-cartoon figcaption{background:#f1f6f5;color:#526b72;font-size:12px;line-height:1.65;padding:14px 19px;border-top:1px solid #d8e5e4}
+.travel-guide-featured-car{background:linear-gradient(115deg,#2d5961 0%,#123f47 75%);margin-top:28px}
+.travel-guide-featured-thumbnail{display:block;width:clamp(190px,28vw,365px);flex:0 0 auto;min-width:0;border-radius:17px;overflow:hidden;border:2px solid rgba(255,255,255,.25);box-shadow:0 10px 25px rgba(1,16,22,.27);transform:rotate(2deg);transition:transform .2s ease}
+.travel-guide-featured-thumbnail:hover,.travel-guide-featured-thumbnail:focus-visible{transform:rotate(0)}
+.travel-guide-featured-thumbnail img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.guide-article-section strong{color:#123c46;font-weight:800}
+@media(max-width:860px){.travel-guide-featured-car{align-items:flex-start}.travel-guide-featured-thumbnail{width:220px}}
+@media(max-width:730px){.travel-guide-featured-car{flex-direction:column;gap:22px}.travel-guide-featured-thumbnail{width:100%;transform:none}.guide-article-cartoon{border-radius:14px;margin-bottom:34px}.guide-article-cartoon figcaption{padding:12px 14px}}
+@media(prefers-reduced-motion:reduce){.travel-guide-featured-thumbnail{transition:none}}
