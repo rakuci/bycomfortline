@@ -40,6 +40,7 @@ jobs:
           node build.mjs
           node scripts/check-travel-guide.mjs
           node scripts/check-sitemaps.mjs
+          node scripts/check-long-distance-seo.mjs
           node scripts/check-travel-guide-submission.mjs
           node scripts/landing_image_report.mjs
       - name: Check Cloudflare credentials without exposing secret values
