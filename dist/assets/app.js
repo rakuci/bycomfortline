@@ -731,4 +731,62 @@
       }
     });
   });
+}
+  // Reader suggestions and anonymised travel stories (Travel Guide only).
+  document.querySelectorAll("[data-travel-guide-submission]").forEach((form) => {
+    const status=form.querySelector(".guide-story-form-status");
+    const sendButton=form.querySelector(".guide-story-submit");
+    let sending=false;
+    form.addEventListener("submit",async(event)=>{
+      event.preventDefault();
+      if(sending||!form.reportValidity())return;
+      const data=Object.fromEntries(new FormData(form).entries());
+      const payload={
+        lang:form.dataset.lang||"en",
+        type:data.type||"idea",
+        title:data.title||"",
+        message:data.message||"",
+        name:data.name||"",
+        email:data.email||"",
+        website:data.website||"",
+        consent:data.consent==="yes"
+      };
+      const original=sendButton.textContent;
+      sending=true;
+      sendButton.disabled=true;
+      sendButton.textContent=form.dataset.sending||"Sending…";
+      if(status){status.hidden=false;status.classList.remove("guide-story-form-error");status.textContent=form.dataset.sending||"Sending…";}
+      try{
+        const response=await fetch("/api/travel-guide-submission",{
+          method:"POST",
+          credentials:"same-origin",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify(payload)
+        });
+        const result=await response.json();
+        if(!response.ok||result.success!==true||!/^TG-[0-9]{8}-[A-F0-9]{10}$/.test(result.reference||"")){
+          throw new Error(result?.code||"email_unavailable");
+        }
+        form.reset();
+        if(status){
+          status.hidden=false;
+          status.textContent=(form.dataset.success||"Thank you! Reference:")+" "+result.reference;
+        }
+      }catch(error){
+        if(status){
+          const code=error?.message;
+          status.hidden=false;
+          status.classList.add("guide-story-form-error");
+          status.textContent=code==="rate_limited"?(form.dataset.rateLimited||"Please try again later.")
+            :code==="invalid_payload"?(form.dataset.validation||"Please check your fields.")
+            :(form.dataset.error||"Could not send. Please try again.");
+        }
+      }finally{
+        sending=false;
+        sendButton.disabled=false;
+        sendButton.textContent=original;
+      }
+    });
+  });
+
 })();
