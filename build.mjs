@@ -5,6 +5,7 @@ import { travelGuideContent } from "./travel-guide-content.mjs";
 import { borderPassportArticle, borderPassportSources } from "./border-passports-article.mjs";
 import { carSanctionsArticle, carSanctionsSources } from "./car-sanctions-article.mjs";
 import { ikeaKidsArticle, ikeaKidsProducts, ikeaKidsSources } from "./ikea-kids-customs-article.mjs";
+import { cashSixtyArticle, cashSixtySources } from "./cash-eur60-border-article.mjs";
 import { routeExtras } from "./route-extras.mjs";
 import { airportHubLinks } from "./airport-hub-links.mjs";
 import { bookingTrustContent, routeOfficialSources, reverseRoutePages } from "./booking-trust-content.mjs";
@@ -393,6 +394,10 @@ const carStorySlug = "lithuania-belarus-car-export-sanctions-165mm";
 function carStoryPath(lang) { return guidePath(lang)+carStorySlug+"/"; }
 const ikeaStorySlug="ikea-shopping-belarus-customs-limits-frequency";
 function ikeaStoryPath(lang){return guidePath(lang)+ikeaStorySlug+"/";}
+const cashStorySlug="60-euro-cash-eur-pln-belarus-border-lithuania-latvia";
+const cashStoryArt="/assets/stories/euro-60-cash-border-exchange-cartoon.svg";
+function cashStoryPath(lang){return guidePath(lang)+cashStorySlug+"/";}
+function cashStoryAlternates(){return [...Object.keys(locale).map(code=>`<link rel="alternate" hreflang="${code}" href="${base}${cashStoryPath(code)}">`),`<link rel="alternate" hreflang="x-default" href="${base}${cashStoryPath("en")}">`].join("\n");}
 function ikeaStoryAlternates(){return [...Object.keys(locale).map(code=>`<link rel="alternate" hreflang="${code}" href="${base}${ikeaStoryPath(code)}">`),`<link rel="alternate" hreflang="x-default" href="${base}${ikeaStoryPath("en")}">`].join("\n");}
 function carStoryAlternates() { return [...Object.keys(locale).map(code=>`<link rel="alternate" hreflang="${code}" href="${base}${carStoryPath(code)}">`), `<link rel="alternate" hreflang="x-default" href="${base}${carStoryPath("en")}">`].join("\n"); }
 function borderStoryAlternates() { return [...Object.keys(locale).map(code=>`<link rel="alternate" hreflang="${code}" href="${base}${borderStoryPath(code)}">`), `<link rel="alternate" hreflang="x-default" href="${base}${borderStoryPath("en")}">`].join("\n"); }
@@ -414,6 +419,7 @@ function languageMenu(lang, type, routeKey) {
       : type === "guide-story" ? borderStoryPath(code)
       : type === "car-story" ? carStoryPath(code)
       : type === "ikea-story" ? ikeaStoryPath(code)
+      : type === "cash-story" ? cashStoryPath(code)
       : type === "geo" ? geoPath(code,routeKey)
       : type === "geo-index" ? geoIndexPath(code,routeKey)
       : type === "destination-index" ? destinationIndexPath(code)
@@ -432,9 +438,9 @@ function header(lang, type = "home", routeKey) {
       <img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56">
     </a>
     <nav class="main-nav" aria-label="${esc(l.nav.routes)}">
-      <a href="${l.home}#routes">${l.nav.routes}</a><a href="${l.home}#service">${l.nav.service}</a><a href="${l.home}#faq">${l.nav.faq}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${l.nav.contact}</a>
+      <a href="${l.home}#routes">${l.nav.routes}</a><a href="${l.home}#service">${l.nav.service}</a><a href="${l.home}#faq">${l.nav.faq}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story" || type==="cash-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${l.nav.contact}</a>
     </nav>
-    <details class="mobile-nav"><summary aria-label="${esc(menuLabel)}"><span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span>${esc(menuLabel)}</span></summary><nav class="mobile-nav-links" aria-label="${esc(menuLabel)}"><a href="${l.home}#routes">${esc(l.nav.routes)}</a><a href="${l.home}#service">${esc(l.nav.service)}</a><a href="${l.home}#faq">${esc(l.nav.faq)}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.nav.contact)}</a></nav></details>
+    <details class="mobile-nav"><summary aria-label="${esc(menuLabel)}"><span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span>${esc(menuLabel)}</span></summary><nav class="mobile-nav-links" aria-label="${esc(menuLabel)}"><a href="${l.home}#routes">${esc(l.nav.routes)}</a><a href="${l.home}#service">${esc(l.nav.service)}</a><a href="${l.home}#faq">${esc(l.nav.faq)}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story" || type==="cash-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.nav.contact)}</a></nav></details>
     <details class="language-menu"><summary aria-label="${esc(l.label)}"><svg class="language-globe" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4.5 6 4.5 9s-1.5 6-4.5 9c-3-3-4.5-6-4.5-9S9 6 12 3Z"/></svg><span class="language-current">${l.code.toUpperCase()}</span></summary><div class="language-options">${languageMenu(lang, type, routeKey)}</div></details>
   </header>`;
 }
@@ -870,6 +876,45 @@ function ikeaStoryPage(lang){
  return layout({lang,title:c.title+" | ComfortLine",description:c.description,canonical,alternates:ikeaStoryAlternates(),body,schema});
 }
 
+
+function cashStoryPage(lang){
+  const l=locale[lang],c=cashSixtyArticle[lang],canonical=base+cashStoryPath(lang);
+  const sections=c.sections.map(([heading,...paragraphs],i)=>`<section class="guide-article-section" id="section-${i+1}"><h2>${esc(heading)}</h2>${paragraphs.map(text=>`<p>${renderCarStoryText(text)}</p>`).join("")}</section>`).join("");
+  const checklist=c.checklist.map(item=>`<li>${esc(item)}</li>`).join("");
+  const sources=cashSixtySources.map((source,i)=>`<li id="guide-source-${i+1}"><span class="guide-article-source-number">[${i+1}]</span><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.title)} <span aria-hidden="true">↗</span></a></li>`).join("");
+  const factValues=["€60?","€10,000","$10,000"];
+  const facts=c.facts.map((label,i)=>`<div><strong>${factValues[i]}</strong><span>${esc(label)}</span></div>`).join("");
+  const body=`${header(lang,"cash-story",cashStorySlug)}<main class="guide-article-root" id="main-content"><article class="guide-article" itemscope itemtype="https://schema.org/BlogPosting">
+    <div class="guide-article-header">
+      <nav class="guide-article-breadcrumb" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span aria-hidden="true">/</span><a href="${guidePath(lang)}">${esc(l.nav.guide)}</a></nav>
+      <span class="guide-article-kicker">${esc(c.tag)}</span><h1 itemprop="headline">${esc(c.title)}</h1><p class="guide-article-lead" itemprop="description">${esc(c.description)}</p>
+      <div class="guide-article-meta"><span>ComfortLine</span><span aria-hidden="true">·</span><time datetime="2026-11-03" itemprop="datePublished">${esc(c.reviewed)}</time></div>
+    </div>
+    <div class="guide-article-body">
+      <aside class="guide-article-warning" aria-label="${esc(c.disclaimerTitle)}"><strong>${esc(c.disclaimerTitle)}</strong><p>${esc(c.disclaimer)}</p></aside>
+      <figure class="guide-article-cartoon guide-article-cartoon--cash">
+        <img src="${cashStoryArt}" width="1400" height="788" loading="eager" decoding="async" fetchpriority="high" alt="${esc(c.figureCaption)}">
+        <figcaption>${esc(c.figureCaption)}</figcaption>
+      </figure>
+      <div class="guide-cash-facts">${facts}</div>
+      ${sections}
+      <section class="guide-article-checklist" aria-label="${esc(cashChecklistHeading[lang])}"><h2>${esc(cashChecklistHeading[lang])}</h2><ul>${checklist}</ul></section>
+      <section class="guide-article-sources" id="official-sources" aria-label="${esc(c.sources||cashSourcesHeading[lang])}"><h2>${esc(c.sources||cashSourcesHeading[lang])}</h2><ol>${sources}</ol></section>
+      <div class="guide-article-back"><a href="${guidePath(lang)}">← ${esc(c.back)}</a></div>
+    </div></article></main>${footer(l)}`;
+  const schema={"@context":"https://schema.org","@graph":[businessSchema(lang,canonical),
+    {"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":canonical},"headline":c.title,"description":c.description,
+    "datePublished":"2026-11-03","dateModified":"2026-11-03","inLanguage":lang,"image":base+cashStoryArt,
+    "author":{"@type":"Organization","name":"ComfortLine"},"publisher":{"@type":"Organization","name":"ComfortLine","url":base+"/"},
+    "citation":cashSixtySources.map(item=>item.url)},
+    {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":l.nav.routes,"item":base+l.home},
+     {"@type":"ListItem","position":2,"name":l.nav.guide,"item":base+guidePath(lang)},
+     {"@type":"ListItem","position":3,"name":c.shortTitle,"item":canonical}]}]};
+  return layout({lang,title:c.title+" | ComfortLine",description:c.description,canonical,alternates:cashStoryAlternates(),body,schema,ogImage:base+cashStoryArt});
+}
+const cashSourcesHeading={ru:"Официальные источники и первоисточники",en:"Official sources and original legal texts",pl:"Dokumenty urzędowe i źródła",lt:"Oficialūs teisės aktai ir šaltiniai",lv:"Oficiālie avoti un tiesību akti",de:"Amtliche Quellen und Gesetzestexte",fr:"Sources officielles et textes de loi"};
+const cashChecklistHeading={ru:"Перед поездкой: проверочный список",en:"Pre-departure cash checklist",pl:"Lista kontrolna przed wyjazdem",lt:"Patikrinimai prieš kelionę",lv:"Pirms izbraukšanas pārbaudiet",de:"Checkliste vor der Abreise",fr:"À vérifier avant le départ"};
+
 function travelGuidePage(lang) {
   const l=locale[lang], c=travelGuideContent[lang];
   const canonical=base+guidePath(lang);
@@ -885,6 +930,14 @@ function travelGuidePage(lang) {
         <span class="travel-guide-eyebrow">${esc(c.eyebrow)}</span>
         <h1>${esc(c.title)}</h1><p>${esc(c.intro)}</p>
       </div>
+    </section>
+    <section class="travel-guide-featured travel-guide-featured-cash" aria-label="${esc(cashSixtyArticle[lang].tag)}">
+      <div class="travel-guide-featured-copy">
+        <span class="travel-guide-featured-label">${esc(cashSixtyArticle[lang].tag)} · <time datetime="2026-11-03">03.11.2026</time></span>
+        <h2><a href="${cashStoryPath(lang)}">${esc(cashSixtyArticle[lang].shortTitle)}</a></h2><p>${esc(cashSixtyArticle[lang].description)}</p>
+        <a class="travel-guide-featured-link" href="${cashStoryPath(lang)}">${esc(cashSixtyArticle[lang].read)} ${icons.arrow}</a>
+      </div>
+      <a class="travel-guide-featured-thumbnail travel-guide-featured-thumbnail--cash" href="${cashStoryPath(lang)}" aria-label="${esc(cashSixtyArticle[lang].read)}"><img src="${cashStoryArt}" width="1400" height="788" loading="lazy" decoding="async" alt=""></a>
     </section>
     <section class="travel-guide-featured" aria-label="${esc(borderPassportArticle[lang].tag)}">
       <div class="travel-guide-featured-copy"><span class="travel-guide-featured-label">${esc(borderPassportArticle[lang].tag)} · <time datetime="2026-11-03">03.11.2026</time></span>
@@ -1811,6 +1864,7 @@ for (const lang of Object.keys(locale)) {
   await put(borderStoryPath(lang).slice(1)+"index.html", borderStoryPage(lang));
   await put(carStoryPath(lang).slice(1)+"index.html", carStoryPage(lang));
   await put(ikeaStoryPath(lang).slice(1)+"index.html", ikeaStoryPage(lang));
+  await put(cashStoryPath(lang).slice(1)+"index.html", cashStoryPage(lang));
   await put(`${lang}/thank-you/index.html`, thankYouPage(lang));
   for (const key of Object.keys(routes)) await put(`${lang}/${locale[lang].slugs[key]}/index.html`, routePage(lang, key));
   for (const type of ["airport","city"]) await put(geoIndexPath(lang,type).slice(1)+"index.html", geoDirectoryPage(lang,type));
@@ -1825,6 +1879,11 @@ for (const lang of Object.keys(locale)) {
 }
 
 const sitemapEntries = [
+  ...Object.keys(locale).map(lang=>{
+    const url=base+cashStoryPath(lang);
+    const alts=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+cashStoryPath(code)}"/>`).join("");
+    return `<url><loc>${url}</loc><lastmod>2026-11-03</lastmod>${alts}<xhtml:link rel="alternate" hreflang="x-default" href="${base+cashStoryPath("en")}"/></url>`;
+  }),
   ...Object.keys(locale).map(lang=>{
     const url=base+ikeaStoryPath(lang);
     const alts=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+ikeaStoryPath(code)}"/>`).join("");
