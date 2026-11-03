@@ -789,8 +789,8 @@ function borderStoryPage(lang) {
 
 const carStoryIllustration="/assets/stories/lithuania-belarus-165mm-satire.svg";
 function renderCarStoryText(text){
-  return esc(text).replace(/\\*\\*([^*]+)\\*\\*/g,"<strong>$1</strong>")
-    .replace(/\\[(\\d{1,2})\\]/g,(_,num)=>`<a class="guide-article-ref" href="#guide-source-${num}" aria-label="Source ${num}">[${num}]</a>`);
+  return esc(text).replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>")
+    .replace(/\[(\d{1,2})\]/g,(_,num)=>`<a class="guide-article-ref" href="#guide-source-${num}" aria-label="Source ${num}">[${num}]</a>`);
 }
 function carStoryPage(lang){
   const l=locale[lang],c=carSanctionsArticle[lang],canonical=base+carStoryPath(lang);
