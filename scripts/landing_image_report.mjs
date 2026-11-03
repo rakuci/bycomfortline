@@ -16,8 +16,12 @@ const origins=[
   ...heritage.map(p=>({kind:"heritage",id:p.id,src:p.sourcePage,photographer:p.credit,license:p.license}))
 ];
 const lookup=new Map(origins.map(p=>[p.id,p]));
-const urls=[...sitemap.matchAll(/<loc>(https:\/\/bycomfortline\.com\/[^<]*)<\/loc>/g)].map(m=>m[1]);
-assert.equal(urls.length,1499,"Expected 1,499 canonical indexable URLs");
+const canonicalUrls=[...sitemap.matchAll(/<loc>(https:\/\/bycomfortline\.com\/[^<]*)<\/loc>/g)].map(m=>m[1]);
+// Editorial Travel Guide pages contain information rather than destination photographs.
+// They remain indexable in both sitemaps, but belong in the article/SEO audit below.
+const editorialPath=/^\/(?:en|ru|pl|lt|lv|de|fr)\/travel-guide\//;
+const urls=canonicalUrls.filter(url=>!editorialPath.test(new URL(url).pathname));
+assert.equal(urls.length,1499,"Expected 1,499 transfer/destination landing URLs (excluding editorial pages)");
 const entries=[];
 for(const url of urls){
   const pathname=new URL(url).pathname;
@@ -61,6 +65,7 @@ for(const e of entries){
 const summary={
   generatedAt:new Date().toISOString(),
   totalLandingUrls:entries.length,
+  editorialUrls:canonicalUrls.length-urls.length,
   coveredLandingUrls:entries.length,
   missingDestinationPhotos:0,
   distinctPhotographs:Object.keys(photos).length,
@@ -77,7 +82,8 @@ await writeFile("LANDING_IMAGE_COVERAGE.md",[
   "",
   "| Measure | Count |",
   "|---|---:|",
-  `| Canonical URLs checked | ${summary.totalLandingUrls} |`,
+  `| Canonical transfer/destination URLs checked | ${summary.totalLandingUrls} |`,
+  `| Editorial pages excluded from destination-photo audit | ${summary.editorialUrls} |`,
   `| With real self-hosted destination image | ${summary.coveredLandingUrls} |`,
   `| Missing matching destination photo | ${summary.missingDestinationPhotos} |`,
   `| Distinct photographed landmarks used | ${summary.distinctPhotographs} |`,
