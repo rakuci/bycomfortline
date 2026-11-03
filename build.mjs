@@ -767,6 +767,10 @@ function borderStoryPage(lang) {
     </div>
     <div class="guide-article-body">
       <aside class="guide-article-warning" aria-label="${esc(c.disclaimerTitle)}"><strong>${esc(c.disclaimerTitle)}</strong><p>${esc(c.disclaimer)}</p></aside>
+      <figure class="guide-article-cartoon guide-article-cartoon--passport">
+        <img src="${passportStoryIllustration}" width="1280" height="960" loading="eager" decoding="async" fetchpriority="high" alt="${esc(passportStoryCaptions[lang])}">
+        <figcaption>${esc(passportStoryCaptions[lang])}</figcaption>
+      </figure>
       ${sections}
       <section class="guide-article-checklist" aria-label="${esc(c.checklist)}"><h2>${esc(c.checklist)}</h2><ul>${checklist}</ul></section>
       <section class="guide-article-sources" id="official-sources" aria-label="${esc(c.sources)}"><h2>${esc(c.sources)}</h2><ol>${sources}</ol></section>
@@ -775,7 +779,7 @@ function borderStoryPage(lang) {
   const schema={"@context":"https://schema.org","@graph":[
     businessSchema(lang,canonical),
     {"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":canonical},"headline":c.title,"description":c.description,
-     "datePublished":"2026-11-03","dateModified":"2026-11-03","inLanguage":lang,"author":{"@type":"Organization","name":"ComfortLine"},"publisher":{"@type":"Organization","name":"ComfortLine","url":base+"/"},
+     "datePublished":"2026-11-03","dateModified":"2026-11-03","inLanguage":lang,"image":base+passportStoryIllustration,"author":{"@type":"Organization","name":"ComfortLine"},"publisher":{"@type":"Organization","name":"ComfortLine","url":base+"/"},
      "citation":borderPassportSources.map(source=>source.url)},
     {"@type":"BreadcrumbList","itemListElement":[
       {"@type":"ListItem","position":1,"name":l.nav.routes,"item":base+l.home},
@@ -783,11 +787,13 @@ function borderStoryPage(lang) {
       {"@type":"ListItem","position":3,"name":c.shortTitle,"item":canonical}
     ]}
   ]};
-  return layout({lang,title,description:c.description,canonical,alternates:borderStoryAlternates(),body,schema});
+  return layout({lang,title,description:c.description,canonical,alternates:borderStoryAlternates(),body,schema,ogImage:base+passportStoryIllustration});
 }
 
 
-const carStoryIllustration="/assets/stories/lithuania-belarus-165mm-satire.svg";
+const carStoryIllustration="/assets/stories/lithuania-belarus-165mm-border.webp";
+const passportStoryIllustration="/assets/stories/dual-passport-no-departure.webp";
+const passportStoryCaptions={"en":"Satirical illustration: a dual citizen discovers that leaving a second passport at home may disrupt a border crossing. Document requirements depend on the person and the country.","ru":"Сатирическая иллюстрация: путешественник с двойным гражданством забыл второй паспорт дома и столкнулся с проблемой на границе. Требования зависят от гражданства и страны.","pl":"Ilustracja satyryczna: podróżny z podwójnym obywatelstwem zapomniał drugiego paszportu i napotkał problem na granicy. Wymagania zależą od państwa i sytuacji.","lt":"Satyrinė iliustracija: dvigubą pilietybę turintis keliautojas pamiršo antrąjį pasą ir susidūrė su problema pasienyje. Reikalavimai priklauso nuo valstybės ir aplinkybių.","lv":"Satīriska ilustrācija: ceļotājs ar dubultpilsonību mājās aizmirsa otru pasi un saskārās ar robežas problēmu. Prasības atkarīgas no valsts un situācijas.","de":"Satirische Illustration: Ein Reisender mit doppelter Staatsangehörigkeit hat den zweiten Pass zu Hause vergessen und erlebt Probleme an der Grenze. Die Anforderungen sind länder- und fallabhängig.","fr":"Illustration satirique : un voyageur ayant une double nationalité a oublié son deuxième passeport et rencontre une difficulté à la frontière. Les règles varient selon les pays et les situations."};
 function renderCarStoryText(text){
   return esc(text).replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>")
     .replace(/\[(\d{1,2})\]/g,(_,num)=>`<a class="guide-article-ref" href="#guide-source-${num}" aria-label="Source ${num}">[${num}]</a>`);
@@ -807,7 +813,7 @@ function carStoryPage(lang){
   <div class="guide-article-body">
     <aside class="guide-article-warning" aria-label="${esc(c.disclaimerTitle)}"><strong>${esc(c.disclaimerTitle)}</strong><p>${esc(c.disclaimer)}</p></aside>
     <figure class="guide-article-cartoon">
-      <img src="${carStoryIllustration}" width="1200" height="675" loading="eager" decoding="async" fetchpriority="high" alt="${esc(c.illustrationCaption)}">
+      <img src="${carStoryIllustration}" width="1440" height="810" loading="eager" decoding="async" fetchpriority="high" alt="${esc(c.illustrationCaption)}">
       <figcaption>${esc(c.illustrationCaption)}</figcaption>
     </figure>
     ${sections}
@@ -826,7 +832,7 @@ function carStoryPage(lang){
       {"@type":"ListItem","position":2,"name":l.nav.guide,"item":base+guidePath(lang)},
       {"@type":"ListItem","position":3,"name":c.shortTitle,"item":canonical}
     ]}]};
-  return layout({lang,title:c.title+" | ComfortLine",description:c.description,canonical,alternates:carStoryAlternates(),body,schema});
+  return layout({lang,title:c.title+" | ComfortLine",description:c.description,canonical,alternates:carStoryAlternates(),body,schema,ogImage:base+carStoryIllustration});
 }
 
 function travelGuidePage(lang) {
@@ -849,13 +855,13 @@ function travelGuidePage(lang) {
       <div class="travel-guide-featured-copy"><span class="travel-guide-featured-label">${esc(borderPassportArticle[lang].tag)} · <time datetime="2026-11-03">03.11.2026</time></span>
       <h2><a href="${borderStoryPath(lang)}">${esc(borderPassportArticle[lang].shortTitle)}</a></h2><p>${esc(borderPassportArticle[lang].description)}</p>
       <a class="travel-guide-featured-link" href="${borderStoryPath(lang)}">${esc(borderPassportArticle[lang].read)} ${icons.arrow}</a></div>
-      <div class="travel-guide-featured-icon" aria-hidden="true"><span>01</span><svg width="115" height="115" viewBox="0 0 115 115" fill="none"><rect x="24" y="10" width="58" height="88" rx="7" stroke="currentColor" stroke-width="2.5"/><rect x="36" y="22" width="35" height="25" rx="3" stroke="currentColor" stroke-width="2"/><path d="M36 61h33M36 72h33M36 83h22" stroke="currentColor" stroke-width="2"/><path d="M75 45l20 20-20 20" stroke="currentColor" stroke-width="2.5"/></svg></div>
+      <a class="travel-guide-featured-thumbnail travel-guide-featured-thumbnail--passport" href="${borderStoryPath(lang)}" aria-label="${esc(borderPassportArticle[lang].read)}"><img src="${passportStoryIllustration}" width="1280" height="960" loading="lazy" decoding="async" alt=""></a>
     </section>
     <section class="travel-guide-featured travel-guide-featured-car" aria-label="${esc(carSanctionsArticle[lang].tag)}">
       <div class="travel-guide-featured-copy"><span class="travel-guide-featured-label">${esc(carSanctionsArticle[lang].tag)} · <time datetime="2026-11-03">03.11.2026</time></span>
       <h2><a href="${carStoryPath(lang)}">${esc(carSanctionsArticle[lang].shortTitle)}</a></h2><p>${esc(carSanctionsArticle[lang].description)}</p>
       <a class="travel-guide-featured-link" href="${carStoryPath(lang)}">${esc(carSanctionsArticle[lang].read)} ${icons.arrow}</a></div>
-      <a class="travel-guide-featured-thumbnail" href="${carStoryPath(lang)}" aria-label="${esc(carSanctionsArticle[lang].read)}"><img src="${carStoryIllustration}" width="1200" height="675" loading="lazy" decoding="async" alt=""></a>
+      <a class="travel-guide-featured-thumbnail" href="${carStoryPath(lang)}" aria-label="${esc(carSanctionsArticle[lang].read)}"><img src="${carStoryIllustration}" width="1440" height="810" loading="lazy" decoding="async" alt=""></a>
     </section>
     <section class="travel-guide-section">
       <div class="travel-guide-heading"><h2>${esc(c.topicsHeading)}</h2><p>${esc(c.topicsIntro)}</p></div>
