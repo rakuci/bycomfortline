@@ -684,6 +684,7 @@ function quickBooking(lang, routeKey = "vilnius", originOverride = null, destina
   </form>`;
 }
 
+const bespokeDestinationFieldLabels={"en":["Exact drop-off address (any destination)","Street, city and country"],"ru":["Точный адрес прибытия (любой город)","Улица, дом, город и страна"],"pl":["Dokładny adres docelowy (dowolne miasto)","Ulica, miasto i kraj"],"lt":["Tikslus atvykimo adresas (bet kuris miestas)","Gatvė, miestas ir šalis"],"lv":["Precīza galamērķa adrese (jebkura pilsēta)","Iela, pilsēta un valsts"],"de":["Genaue Zieladresse (beliebige Stadt)","Straße, Stadt und Land"],"fr":["Adresse d'arrivée exacte (toute ville)","Rue, ville et pays"]};
 function bookingForm(lang, routeKey = "vilnius", originOverride = null, destinationOverride = null) {
   const l = locale[lang], ui = bookingLabels[lang], popup = bookingPopupUi[lang];
   return `<dialog class="booking-dialog" id="booking-dialog" aria-labelledby="booking-dialog-title">
@@ -696,7 +697,7 @@ function bookingForm(lang, routeKey = "vilnius", originOverride = null, destinat
         ${locationFormField(lang, "fromPreset", "details", originOverride !== null ? originOverride : l.fromNames[routeKey])}
         ${locationFormField(lang, "to", "details", destinationOverride !== null ? destinationOverride : l.fieldValues.to)}
         <label><span>${esc(ui.pickupAddress)}</span><input name="pickupAddress" placeholder="${esc(l.fieldValues.fromPlaceholder)}"></label>
-        <label><span>${esc(ui.dropAddress)}</span><input name="dropAddress" placeholder="${esc(l.fieldValues.to)}"></label>
+        <label><span>${esc(destinationOverride===""?bespokeDestinationFieldLabels[lang][0]:ui.dropAddress)}</span><input name="dropAddress" placeholder="${esc(destinationOverride===""?bespokeDestinationFieldLabels[lang][1]:l.fieldValues.to)}"></label>
         <label><span>${esc(ui.date)}</span><input type="datetime-local" name="date" required></label>
         ${passengerPicker(lang, "details")}
         <label class="vehicle-model-field full"><span>${esc(fleetCopy[lang].choiceLabel)}</span>
