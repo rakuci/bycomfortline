@@ -5,6 +5,11 @@ on:
     branches: [main]
     paths:
       - build.mjs
+      - src/worker.mjs
+      - travel-guide-contribution-locales.mjs
+      - dist/assets/app.js
+      - dist/assets/style.css
+      - scripts/check-travel-guide-submission.mjs
       - car-sanctions-article.mjs
       - ikea-kids-customs-article.mjs
       - cash-eur60-border-article.mjs
@@ -52,6 +57,8 @@ jobs:
         run: node build.mjs
       - name: Verify published Travel Guide articles, sources and SEO
         run: node scripts/check-travel-guide.mjs
+      - name: Verify seven-language reader submissions without sending email
+        run: node scripts/check-travel-guide-submission.mjs
       - name: Create a canonical-URL-to-image coverage and provenance report
         run: node scripts/landing_image_report.mjs
       - name: Check all 1,499 transfer landing URLs and verified image coverage
