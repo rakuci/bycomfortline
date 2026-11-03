@@ -4615,6 +4615,7 @@ body { background:var(--cl-pearl); }
     flex:0 0 auto;
     transform:none;
     margin:0;
+    order:-1; /* thumbnail before long text on mobile */
   }
   .travel-guide-featured-thumbnail img,
   .travel-guide-featured-thumbnail--passport img,
