@@ -4526,3 +4526,16 @@ body { background:var(--cl-pearl); }
 @media(max-width:740px){.guide-ikea-feature-symbol{display:none}.guide-ikea-facts{gap:5px;padding:15px}.guide-ikea-facts>div{padding:5px}.guide-ikea-facts strong{font-size:23px}}
 @media(max-width:620px){.guide-ikea-inventory{padding:19px 14px}.guide-ikea-inventory ol{grid-template-columns:1fr}.guide-ikea-facts{grid-template-columns:1fr;gap:8px}.guide-ikea-facts>div{border-bottom:1px solid #cbdad7;flex-direction:row;align-items:center;gap:14px}.guide-ikea-facts>div:last-child{border:0}.guide-ikea-facts strong{min-width:100px}.guide-ikea-product{gap:14px}}
 @media(prefers-reduced-motion:reduce){.guide-ikea-feature-symbol{transition:none}}
+
+/* ComfortLine cash at the Belarus border editorial article */
+.travel-guide-featured-cash{background:linear-gradient(115deg,#14384c 0%,#1c5365 80%);margin-top:28px}
+.travel-guide-featured-thumbnail--cash{width:clamp(190px,29vw,368px);transform:rotate(1deg)}
+.travel-guide-featured-thumbnail--cash img{width:100%;height:auto;aspect-ratio:1400/788;object-fit:contain;background:#b3dce0}
+.guide-article-cartoon--cash{border-radius:20px}
+.guide-article-cartoon--cash img{width:100%;height:auto;aspect-ratio:1400/788;object-fit:contain}
+.guide-cash-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:21px;margin:0 0 48px;border-radius:17px;background:#edf4f3;border:1px solid #d6e4e2}
+.guide-cash-facts>div{padding:8px 11px;display:flex;flex-direction:column;gap:9px}
+.guide-cash-facts strong{font-size:clamp(1.5rem,3.2vw,2.3rem);line-height:1.1;letter-spacing:-.04em;color:#153b4b}
+.guide-cash-facts span{color:#486973;font-size:13px;line-height:1.55}
+@media(max-width:750px){.travel-guide-featured-cash{flex-direction:column;align-items:stretch;gap:22px}.travel-guide-featured-thumbnail--cash{width:100%;transform:none}.guide-cash-facts{padding:14px;gap:6px}.guide-cash-facts>div{padding:8px 5px}.guide-cash-facts strong{font-size:23px}}
+@media(max-width:550px){.guide-cash-facts{grid-template-columns:1fr}.guide-cash-facts>div{flex-direction:row;align-items:center;gap:14px;border-bottom:1px solid #d1dfde}.guide-cash-facts>div:last-child{border-bottom:0}.guide-cash-facts strong{min-width:109px}}
