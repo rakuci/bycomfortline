@@ -264,5 +264,200 @@ export const ikeaKidsArticle = {
       "Prepare declarations and contact customs if thresholds or circumstances are unclear.",
       "Check current checkpoints and both countries' requirements immediately before travel."
     ]
+  },
+  "pl": {
+    "title": "16 produktów IKEA dla dziecka: co może wwieźć kierowca na Białoruś, gdy często przekracza granicę?",
+    "shortTitle": "IKEA dla dziecka: ile można przewieźć przez granicę?",
+    "description": "Fikcyjny kierowca kupuje ANTILOP, LILLABO, DUKTIG i MÅLA. Przepisy EUG dotyczące 500 € i 25 kg, częstych podróży, dokumentów, opłat i sankcji UE.",
+    "tag": "Historie kierowców · Zakupy i cło",
+    "read": "Przeczytaj poradnik o zakupach IKEA",
+    "back": "Powrót do poradnika",
+    "reviewed": "Sprawdzono 3 listopada 2026",
+    "disclaimerTitle": "Ważne: wyłącznie do osobistej informacji, nie oficjalna wykładnia prawa",
+    "disclaimer": "Artykuł służy wyłącznie do osobistego zapoznania się z tematem i przygotowania podróży. ComfortLine nie jest organem celnym ani państwowym. Tekst nie stanowi oficjalnego źródła prawa, porady prawnej ani gwarancji odprawy. Przed wyjazdem sprawdź aktualne przepisy EUG, Białorusi, sankcje UE i wymagania służb kraju wyjazdu. W razie wątpliwości zwróć się o oficjalne wyjaśnienie dotyczące konkretnych towarów.",
+    "productsTitle": "Lista IKEA: 16 produktów dla dziecka",
+    "productsIntro": "To lista planowanych zakupów, a nie potwierdzenie aktualnej dostępności. Zachowujemy podane numery artykułów; ceny, wagi opakowań i klasyfikację należy sprawdzić w sklepie. Trzy części ANTILOP tworzą funkcjonalnie jedno krzesełko.",
+    "sources": "Dokumenty urzędowe i właściwe organy",
+    "checklistTitle": "Sześć kontroli przed wyjazdem",
+    "sections": [
+      [
+        "Kierowca, którego najważniejszy klient czeka w domu",
+        "Wyobraźmy sobie kierowcę ComfortLine, Marka. Regularnie jeździ między Białorusią a Unią Europejską, a w domu czeka małe dziecko. Marek chce przywieźć krzesełko ANTILOP, nocnik LOCKIG, drewnianą kolejkę LILLABO, kasę DUKTIG, liczydło UNDERHÅLLA i artykuły plastyczne MÅLA.",
+        "Koszyk wygląda niewinnie, lecz na granicy liczą się: wartość, masa, ilość, przeznaczenie rodzinne i częstotliwość poprzednich wjazdów. Trzeba również sprawdzić ewentualne unijne ograniczenia wywozowe. Historia jest fikcyjna, przepisy — rzeczywiste."
+      ],
+      [
+        "Ogólny limit: 500 € oraz 25 kg",
+        "Towary uznane za przeznaczone do użytku osobistego, przewożone drogą lądową na Białoruś przez granicę celną EUG, podlegają ogólnemu zwolnieniu w granicach **500 € łącznej wartości ORAZ 25 kg łącznej masy na osobę**. Warunki są łączne: zakupy za 480 € ważące 26 kg przekraczają limit masy; za 540 € i 20 kg przekraczają limit wartości. Nie jest to uprawnienie do przewożenia odpłatnych zamówień klientów jako bagażu osobistego. [1] [6]",
+        "Należy zachować paragony, faktury, zamówienia i dane o masie paczek. Gdy dokumentów brak, urząd może ustalić wartość na podstawie posiadanych informacji. [7]"
+      ],
+      [
+        "Co pół roku, co tydzień, co trzy dni",
+        "**Co pół roku:** jeden rzeczywiście rodzinny zestaw łatwiej uzasadnić; obowiązują ogólne progi. **Co tydzień:** limit pieniężny automatycznie nie spada, ale urząd ocenia częstotliwość i liczbę rzeczy. Wskazówki białoruskiej służby celnej podają dla wjazdów co siedem dni lub rzadziej orientacyjnie do dziesięciu sztuk danego rodzaju, z uwzględnieniem zwykłych potrzeb domowych. Nie jest to zezwolenie na dziesięć identycznych krzesełek. [1] [5]",
+        "**Częściej niż raz na siedem dni:** wskazówki mówią o jednej sztuce każdego rodzaju; **częściej niż raz na trzy dni:** o jednej sztuce jednego rodzaju. **Kilka razy dziennie:** o używanych rzeczach potrzebnych podczas podróży lub na miejscu. Nowy komplet 16 artykułów w takich okolicznościach może zostać uznany za nietypowy. To wskaźniki oceny celu przywozu, a nie osobne kwoty wolne od cła. [5]"
+      ],
+      [
+        "Dlaczego stare 300 € i 20 kg wprowadza w błąd",
+        "Starsze poradniki wskazują 300 € i 20 kg przy wjazdach częstszych niż raz na trzy miesiące. Opisują jednak dawne wersje białoruskiego dekretu nr 360. Dekret nr 146 z 2020 r. usunął szczególny próg, a nr 73 z 2022 r. zmienił dawny przepis o kwalifikowaniu towarów. Nie należy powielać historycznych informacji jako aktualnych. [3] [4]",
+        "Obecnie zasadniczy limit EUG dla bagażu osobistego to 500 €/25 kg. Częste przewożenie zakupów dla klientów nadal może jednak świadczyć o charakterze handlowym. [1] [5]"
+      ],
+      [
+        "Przekroczenie progu i należności",
+        "Jeżeli towary pozostają towarami do użytku osobistego, zastosowanie może mieć stawka **30% wartości powyżej 500 €, lecz nie mniej niż 4 € za kilogram ponad 25 kg**. Przykładowo: 540 € i 24 kg — 12 € za przekroczenie wartości; 400 € i 28 kg — 12 € za nadwyżkę masy; 600 € i 28 kg — 30 € jako wyższa z obliczonych kwot. To przykłady, bez innych możliwych opłat. [2]",
+        "Towary wymagające zapłaty należy zgłosić w czerwonym korytarzu. Jeżeli partia ma charakter handlowy, uproszczone stawki dla bagażu osobistego mogą nie mieć zastosowania. [2] [7]"
+      ],
+      [
+        "Prezent dla dziecka czy biznes kurierski?",
+        "Jedno krzesełko, nocnik, zabawki i kredki dla własnego dziecka mogą odpowiadać potrzebom rodziny. Gdy kierowca regularnie zbiera płatne zamówienia innych osób, przewozi kolejne identyczne kartony lub pobiera opłatę za ich dostawę, urząd może zakwalifikować towar jako handlowy. Sam napis 'dla dzieci' tego nie rozstrzyga. [5] [12]",
+        "Numery ANTILOP obejmują blat, siedzisko i nogi jednego zestawu. Wartość i masę należy ustalić dla wszystkich przewożonych części. Sztuczne dzielenie paragonów między pasażerów nie zmienia rzeczywistego charakteru przywozu."
+      ],
+      [
+        "Druga granica: unijne sankcje na wywóz",
+        "**500 € według przepisów EUG nie oznacza zgody UE na wywóz wszystkich produktów IKEA.** Przy wyjeździe z Litwy, Łotwy lub Polski należy sprawdzić rozporządzenie 765/2006 i odpowiednie załączniki pod kątem rzeczywistych kodów CN, opisu towaru, wartości oraz wyjątków. Nie można z góry zagwarantować legalności wszystkich 16 SKU. [8] [9] [11]",
+        "Często wspominane **60 € dotyczy problematyki banknotów euro**, a nie ogólnego limitu wartości zakupów IKEA. Również litewskie **300 € przy wjeździe z Białorusi na Litwę** dotyczy przeciwnego kierunku podróży. [8] [10]"
+      ],
+      [
+        "Zakończenie z kolejką LILLABO",
+        "Marek sprawdza każdy numer produktu, zachowuje paragony i rzeczywiste wagi, rozróżnia swoje zakupy od zleceń klientów i pyta odpowiedni urząd o niejasne pozycje. Dopiero po kontroli obu stron granicy może planować przewóz.",
+        "Dla dziecka najważniejsze są tory LILLABO. Dla ojca — to, by kolejka dotarła do domu bez dodatkowej wycieczki do urzędu celnego."
+      ]
+    ],
+    "checklist": [
+      "Sprawdź 16 kodów i zachowaj prawdziwe paragony IKEA.",
+      "Zsumuj wartość i masę zakupów wraz z opakowaniem.",
+      "Uwzględnij częstotliwość wjazdów i rzeczywisty cel rodzinny.",
+      "Sprawdź kody CN i sankcje wywozowe UE.",
+      "W razie przekroczenia progu lub wątpliwości zwróć się do urzędu i zadeklaruj towary.",
+      "Przed podróżą sprawdź informacje obu służb granicznych."
+    ]
+  },
+  "lt": {
+    "title": "16 IKEA pirkinių vaikui: ką gali įsivežti dažnai sieną kertantis vairuotojas?",
+    "shortTitle": "IKEA vaikui: kiek galima vežtis per sieną?",
+    "description": "Išgalvotas vairuotojas perka ANTILOP, LILLABO, DUKTIG ir MÅLA vaikui. Baltarusijos ir EAEU 500 € / 25 kg ribos, dažni kirtimai, dokumentai ir ES sankcijos.",
+    "tag": "Vairuotojų istorijos · Pirkiniai ir muitinė",
+    "read": "Skaityti IKEA muitinės gidą",
+    "back": "Grįžti į kelionių gidą",
+    "reviewed": "Patikrinta 2026 m. lapkričio 3 d.",
+    "disclaimerTitle": "Svarbu: tik asmeninei informacijai, ne oficialus teisės šaltinis",
+    "disclaimer": "Ši publikacija skirta tik asmeniniam susipažinimui ir pasiruošimui kelionei. ComfortLine nėra muitinės ar valstybinė institucija. Tai nėra oficialus teisės aiškinimas, teisinė konsultacija ar leidimo kirsti sieną garantija. Prieš kelionę patikrinkite dabartines EAEU, Baltarusijos ir ES sankcijų taisykles bei Lietuvos muitinės nurodymus. Neaiškiais atvejais kreipkitės dėl oficialaus konkrečių prekių įvertinimo.",
+    "productsTitle": "IKEA krepšelis: 16 prekių vaikui",
+    "productsIntro": "Tai norimų pirkinių sąrašas, ne patvirtinimas, kad visi SKU parduodami. Kodai pateikti pagal istorijos sąrašą. Tikrinkite kainas, pakuočių svorį, kilmę ir apribojimus. ANTILOP dalys kartu sudaro vieną maitinimo kėdutę.",
+    "sources": "Oficialūs teisės aktai ir institucijos",
+    "checklistTitle": "Šeši žingsniai prieš kelionę",
+    "sections": [
+      [
+        "Vairuotojas, kurio svarbiausias keleivis laukia namuose",
+        "Įsivaizduokime ComfortLine vairuotoją Maksimą, kuris dažnai važiuoja tarp ES ir Baltarusijos. Jo mažam vaikui reikia ANTILOP kėdutės, LOCKIG puoduko, LILLABO medinio traukinuko, DUKTIG žaislinės kasos, UNDERHÅLLA skaitliukų ir MÅLA piešimo priemonių.",
+        "Sąraše yra 16 IKEA kodų, bet pasienyje svarbu ne vien mieli pavadinimai: muitinė vertina tikrą prekių kainą, masę, skaičių, paskirtį ir ankstesnius sienos kirtimus. ES išvykimo pusėje aktualios ir sankcijos. Istorija išgalvota; teisinės taisyklės tikros."
+      ],
+      [
+        "Pagrindinė Baltarusijos riba: 500 € IR 25 kg",
+        "Automobiliu į Baltarusiją per EAEU muitų sieną vežamoms asmeninio naudojimo prekėms taikomos bendros neapmokestinamos ribos: **bendra vertė iki 500 € IR bendras svoris iki 25 kg vienam asmeniui**. Abu reikalavimai privalomi. 480 € krepšelis, sveriantis 26 kg, viršija svorį; 540 € ir 20 kg viršija vertę. Ši taisyklė automatiškai netaikoma komerciniams klientų užsakymams. [1] [6]",
+        "Turėkite čekius, sąskaitas, užsakymų dokumentus ir pakuočių svorio duomenis. Be įrodymų muitinė gali nustatyti vertę remdamasi savo turima informacija. [7]"
+      ],
+      [
+        "Kas pusmetį, kas savaitę ar kelis kartus per dieną",
+        "**Kartą per pusmetį:** po vieną šeimai reikalingą daiktą lengviau pagrįsti kaip asmeninį pirkinį. **Kas savaitę:** 500 €/25 kg riba savaime nesumažėja, tačiau pasienio kontrolė vertina dažnumą. Oficialiose Baltarusijos muitinės rekomendacijose, kai važiuojama kas septynias dienas ar rečiau, minimas orientyras iki dešimties to paties tipo vienetų, atsižvelgiant į įprastas šeimos reikmes; tai nėra leidimas dešimčiai vienodų kėdučių. [1] [5]",
+        "**Dažniau nei kas septynias dienas:** orientyras — po vieną kiekvienos rūšies daiktą; **dažniau nei kas tris dienas:** vienas vienos rūšies daiktas. **Kelis kartus tą pačią dieną:** tik naudoti daiktai, būtini kelionėje arba paskirties vietoje. Tai asmeninės paskirties vertinimo kriterijai, o ne nauji muitų tarifai ar garantuotas leidimas. [5]"
+      ],
+      [
+        "Kodėl internete klaidingai kartojami 300 € / 20 kg",
+        "Anksčiau Baltarusijoje dažnoms kelionėms galiojo atskiri 300 € ir 20 kg reikalavimai. 2020 m. dekretas Nr. 146 pašalino atskirą nuostatą, o 2022 m. dekretas Nr. 73 pakeitė seną prekių klasifikavimo kriterijų. Senos interneto lentelės gali būti klaidinančios. [3] [4]",
+        "Šiandien galioja bendra EAEU 500 €/25 kg asmeninių prekių riba. Vis dėlto reguliariai mokamai vežamos svetimų žmonių prekės gali būti laikomos komercinėmis. [1] [5]"
+      ],
+      [
+        "Kai pirkiniai viršija ribą",
+        "Jei daiktai pripažįstami asmeniniais, paprastai skaičiuojama **30% vertės virš 500 €, bet ne mažiau kaip 4 € už kiekvieną kilogramą virš 25 kg**. Pavyzdžiai: 540 € ir 24 kg — 12 € dėl vertės; 400 € ir 28 kg — 12 € dėl svorio; 600 € ir 28 kg — 30 €, kaip didesnė iš dviejų sumų. Kiti mokesčiai ar apribojimai gali būti taikomi papildomai. [2]",
+        "Prekes, už kurias reikia mokėti, deklaruokite raudonajame koridoriuje. Komercinėms siuntoms asmeninio bagažo tarifas gali netikti. [2] [7]"
+      ],
+      [
+        "Dovana vaikui ar užsakymų vežimo verslas?",
+        "Vienas ANTILOP komplektas, puodukas ir skirtingi žaislai savo vaikui atitinka šeimos poreikius labiau nei dešimtys vienodų dėžių, kurias vairuotojas reguliariai veža apmokamiems klientams. Prekės ženklinimas 'vaikams' savaime neįrodo asmeninės paskirties. [5] [12]",
+        "ANTILOP padėklas, sėdynė ir kojos — atskiri kodai, tačiau funkciškai viena kėdutė. Vertinkite visų dalių kainą ir svorį; dirbtinis pirkinių paskirstymas tarp keleivių nėra teisėtas būdas apeiti reikalavimus."
+      ],
+      [
+        "Lietuvos išvykimo muitinė: atskiras ES sankcijų klausimas",
+        "**500 € Baltarusijos importo riba nesuteikia ES leidimo išvežti visas IKEA prekes.** Prieš išvykdami iš Lietuvos, Latvijos ar Lenkijos patikrinkite Reglamento 765/2006 draudimus, atitinkamus KN kodus ir išimtis. Negalima iš anksto patvirtinti visų 16 prekių teisėtumo vien iš IKEA pavadinimo. [8] [9] [11]",
+        "Dažnai minimi **60 € susiję su grynųjų eurų banknotų klausimu**, o ne bendru IKEA pirkinių vertės limitu. Lietuvos **300 € įvežimo iš Baltarusijos riba** yra priešingos krypties taisyklė. [8] [10]"
+      ],
+      [
+        "Sėkminga pabaiga prasideda nuo čekio",
+        "Maksimas išsaugo visų 16 gaminių kodus, faktines kainas ir pakuočių svorius, patikrina, ar tai tikrai jo šeimos daiktai, ir dėl neaiškios sankcijų klasifikacijos pasiteirauja muitinės prieš važiuodamas.",
+        "Vaikui svarbu, kad namuose atsirastų LILLABO traukinukas. Tėčiui svarbu, kad tas traukinukas neliktų muitinės ginčo priežastimi."
+      ]
+    ],
+    "checklist": [
+      "Patikrinkite 16 IKEA kodų ir tikrus pirkimo čekius.",
+      "Suskaičiuokite bendrą kainą ir faktinį svorį.",
+      "Atsižvelkite į sienos kirtimo dažnumą ir šeimos poreikius.",
+      "Patikrinkite ES eksporto sankcijas pagal KN kodus.",
+      "Esant ribų viršijimui ar abejonėms kreipkitės į muitinę ir deklaruokite prekes.",
+      "Prieš išvykimą patikrinkite abiejų pusių naujausius pranešimus."
+    ]
+  },
+  "lv": {
+    "title": "16 IKEA pirkumi bērnam: cik daudz uz Baltkrieviju drīkst vest šoferis, kurš bieži šķērso robežu?",
+    "shortTitle": "IKEA bērnam: ko drīkst vest pāri robežai?",
+    "description": "Izdomāts šoferis pērk ANTILOP, LILLABO, DUKTIG un MÅLA. EAEU 500 € un 25 kg robeža, regulāri braucieni, čeki, maksājumi un ES sankcijas.",
+    "tag": "Vadītāju stāsti · Iepirkšanās un muita",
+    "read": "Lasīt IKEA muitas ceļvedi",
+    "back": "Atpakaļ uz ceļvedi",
+    "reviewed": "Pārbaudīts 2026. gada 3. novembrī",
+    "disclaimerTitle": "Svarīgi: tikai personiskai informācijai, nevis oficiāls tiesību avots",
+    "disclaimer": "Raksts paredzēts vienīgi personiskai iepazīšanai un ceļojuma sagatavošanai. ComfortLine nav muitas vai valsts iestāde. Šis nav oficiāls tiesību avots, individuāla juridiska konsultācija vai garantija robežas šķērsošanai. Pirms brauciena pārbaudiet aktuālās EAEU, Baltkrievijas un ES sankciju prasības, kā arī izbraukšanas valsts muitas skaidrojumus. Neskaidros gadījumos lūdziet kompetentajai iestādei rakstisku atbildi.",
+    "productsTitle": "IKEA iepirkumu saraksts: 16 preces bērnam",
+    "productsIntro": "Šis ir vēlmju saraksts, nevis apstiprinājums par katra artikula pieejamību. Kodi saglabāti no sākotnējā saraksta. Cenas, iepakojuma svaru, izcelsmi un ierobežojumus pārbaudiet veikalā. Trīs ANTILOP detaļas kopā veido vienu bērnu barošanas krēslu.",
+    "sources": "Oficiālie tiesību akti un iestādes",
+    "checklistTitle": "Seši jautājumi pirms izbraukšanas",
+    "sections": [
+      [
+        "Šoferis ar mazu, bet prasīgu klientu",
+        "Iztēlosimies ComfortLine šoferi Maksimu. Viņš regulāri brauc starp Baltkrieviju un ES, bet mājās gaida mazs bērns. Maksims plāno atvest ANTILOP krēsliņu, LOCKIG podiņu, LILLABO dzelzceļu, DUKTIG rotaļu kasi, UNDERHÅLLA skaitīkļus un MÅLA zīmēšanas piederumus.",
+        "Sarakstā ir 16 IKEA preču kodi, tomēr robežpunktā muitai svarīga arī cena, svars, daudzums, ģimenes vajadzības un braucienu biežums. Izbraucot no ES, jāņem vērā sankcijas. Stāsts ir izdomāts, bet juridiskie jautājumi — īsti."
+      ],
+      [
+        "Pamatnorma: 500 € UN 25 kg",
+        "Pa sauszemi Baltkrievijā ievestām personiskās lietošanas precēm EAEU muitas noteikumi paredz beznodokļu robežu **līdz 500 € kopvērtībā UN līdz 25 kg kopējā svarā vienai personai**. Abi nosacījumi jāizpilda reizē: 480 € un 26 kg pārsniedz svaru; 540 € un 20 kg — vērtību. Šo normu nevar automātiski izmantot, lai pārvadātu klientu pasūtījumus par atlīdzību. [1] [6]",
+        "Saglabājiet čekus, rēķinus, pasūtījumu dokumentus un iepakojumu masas datus. Bez dokumentiem muitas iestāde vērtību var noteikt pēc tai pieejamās informācijas. [7]"
+      ],
+      [
+        "Reizi pusgadā, ik nedēļu vai vairākas reizes dienā",
+        "**Reizi pusgadā:** vienu bērnam paredzētu preču komplektu ir vieglāk pamatot kā ģimenes vajadzību. **Reizi nedēļā:** 500 €/25 kg nodokļu robeža pati par sevi nesamazinās, taču muitnieki izvērtē biežumu. Baltkrievijas muitas ieteikumos pie braucieniem reizi septiņās dienās vai retāk minēts orientieris līdz desmit viena nosaukuma vienībām, ņemot vērā parasto mājsaimniecības patēriņu. Tas nav atļauja desmit vienādiem bērnu krēsliņiem. [1] [5]",
+        "**Biežāk nekā reizi septiņās dienās:** orientieris — viena katra nosaukuma prece. **Biežāk nekā reizi trijās dienās:** viena viena nosaukuma prece. **Vairākkārt vienā dienā:** agrāk lietoti priekšmeti, kas nepieciešami ceļā vai galamērķī. Šie ir personiskā lietojuma novērtēšanas orientieri, nevis automātiska muitošanas atļauja. [5]"
+      ],
+      [
+        "Kāpēc vecais 300 € / 20 kg skaitlis maldina",
+        "Novecojušās lapās var redzēt 300 € un 20 kg robežu braucieniem biežāk nekā reizi trīs mēnešos. Tā radās no vecām Baltkrievijas dekrēta Nr. 360 redakcijām. Ar 2020. gada dekrētu Nr. 146 īpašā norma tika svītrota, savukārt 2022. gada dekrēts Nr. 73 pārveidoja agrāko klasifikācijas noteikumu. [3] [4]",
+        "Šobrīd personiskajām mantām piemēro EAEU pamatnormu 500 €/25 kg; regulāri apmaksāti citu cilvēku iepirkumu pārvadājumi tomēr var tikt uzskatīti par komercdarbību. [1] [5]"
+      ],
+      [
+        "Ja pirkumu vērtība vai svars ir pārāk liels",
+        "Ja preces joprojām tiek atzītas par personiskām, piemērojamā likme ir **30% no vērtības virs 500 €, bet ne mazāk kā 4 € par kilogramu virs 25 kg**. Piemēri: 540 € un 24 kg — 12 €; 400 € un 28 kg — 12 €; 600 € un 28 kg — 30 €, jo tā ir lielākā no aprēķinātajām summām. Iespējami citi maksājumi. [2]",
+        "Ar maksājamiem nodokļiem apliekamās preces jādeklarē sarkanajā koridorā. Ja pārvadājums ir komerciāls, personisko mantu aprēķins var nebūt piemērojams. [2] [7]"
+      ],
+      [
+        "Dāvana bērnam vai klientu piegādes?",
+        "Viens ANTILOP komplekts, podiņš un dažādas rotaļlietas savam bērnam atbilst personiskām vajadzībām vairāk nekā iknedēļas apmaksāti klientu pasūtījumi un vairāki vienādi komplekti. Uzraksts 'bērniem' pats par sevi nenosaka preču tiesisko statusu. [5] [12]",
+        "ANTILOP paplāte, sēdeklis un kājas veido vienu krēsliņu, lai gan tie iegādājami ar atsevišķiem kodiem. Jāuzskaita visi pirkumi, nevis mākslīgi jāsadala tos starp pasažieriem."
+      ],
+      [
+        "ES izvešanas ierobežojumi ir atsevišķs pārbaudījums",
+        "**500 € Baltkrievijas ievesto preču slieksnis nav ES atļauja izvest visas IKEA preces.** Izbraucot no Latvijas, Lietuvas vai Polijas, pārbaudiet Regulu 765/2006, konkrētus KN kodus, preču aprakstus un izņēmumus. No nosaukuma vien nevar apstiprināt visus 16 artikulus. [8] [9] [11]",
+        "Bieži dzirdētie **60 € attiecas uz ES valūtas banknotēm**, nevis universālu bērnu preču vērtības ierobežojumu. Savukārt **300 € atļautais ievešanas apjoms Lietuvā no Baltkrievijas** ir noteikums pretējam virzienam. [8] [10]"
+      ],
+      [
+        "Labāk pārbaudīt tagad nekā skaidrot muitā",
+        "Maksims saglabā visus pirkumu čekus un svarus, pārliecinās par personisko vajadzību, pārbauda eksporta sankcijas un neskaidrību gadījumā iepriekš raksta muitas iestādei.",
+        "Mazajam pasažierim svarīgs būs LILLABO vilcieniņš, bet tētim — lai tas mājās nonāktu likumīgi un bez liekiem pārsteigumiem."
+      ]
+    ],
+    "checklist": [
+      "Pārbaudiet 16 IKEA artikulus un saglabājiet čekus.",
+      "Saskaitiet kopējo vērtību un iepakojuma svaru.",
+      "Novērtējiet braucienu biežumu un personisko lietojumu.",
+      "Pārbaudiet KN kodus un ES eksporta sankcijas.",
+      "Ja pārsniegtas normas vai rodas neskaidrības, sazinieties ar muitu un deklarējiet preces.",
+      "Pirms brauciena vēlreiz pārbaudiet abu valstu jaunākos noteikumus."
+    ]
   }
 };
