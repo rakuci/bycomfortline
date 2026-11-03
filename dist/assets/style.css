@@ -4494,3 +4494,12 @@ body { background:var(--cl-pearl); }
 @media(max-width:860px){.travel-guide-featured-car{align-items:flex-start}.travel-guide-featured-thumbnail{width:220px}}
 @media(max-width:730px){.travel-guide-featured-car{flex-direction:column;gap:22px}.travel-guide-featured-thumbnail{width:100%;transform:none}.guide-article-cartoon{border-radius:14px;margin-bottom:34px}.guide-article-cartoon figcaption{padding:12px 14px}}
 @media(prefers-reduced-motion:reduce){.travel-guide-featured-thumbnail{transition:none}}
+
+/* Story-specific artwork: keep every caption and speech balloon visible. */
+.guide-article-cartoon--passport img{aspect-ratio:4/3;object-fit:contain}
+.travel-guide-featured-thumbnail--passport{width:clamp(190px,24vw,300px)}
+.travel-guide-featured-thumbnail--passport img{aspect-ratio:4/3;object-fit:contain;background:#d7e5ea}
+@media(max-width:730px){
+  .travel-guide-featured-thumbnail--passport{width:100%;transform:none}
+  .guide-article-cartoon--passport img{aspect-ratio:4/3}
+}
