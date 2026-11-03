@@ -6,6 +6,7 @@ on:
       - build.mjs
       - src/worker.mjs
       - travel-guide-contribution-locales.mjs
+      - travel-guide-cash-image-labels.mjs
       - dist/assets/app.js
       - dist/assets/style.css
       - scripts/check-travel-guide-submission.mjs
