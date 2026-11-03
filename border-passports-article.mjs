@@ -330,5 +330,121 @@ export const borderPassportArticle = {
       "Pārliecinieties, ka robežpunkts ir atvērts attiecīgajam transportam.",
       "Pirms brauciena atkārtoti pārbaudiet oficiālos paziņojumus."
     ]
+  },
+  "de": {
+    "title": "Zwei Pässe, aber kein sicherer Rückweg: eine Geschichte von der Grenze Belarus–Polen",
+    "shortTitle": "Zwei Pässe und die Rückreise-Falle",
+    "description": "Eine Fahrerbeobachtung zu US- und russischen Pässen, belarussischen Visa, polnischen Einreisebeschränkungen und biometrischen Dokumenten — mit amtlichen Quellen.",
+    "tag": "Grenzgeschichten",
+    "read": "Rechtliche Einordnung lesen",
+    "back": "Alle Ratgeberartikel",
+    "reviewed": "Amtliche Quellen geprüft",
+    "sources": "Amtliche Quellen für die Prüfung vor der Reise",
+    "checklist": "Checkliste vor der Abreise",
+    "disclaimerTitle": "Wichtig: Nur zur persönlichen Information, keine amtliche Rechtsquelle",
+    "disclaimer": "Dieser Beitrag dient ausschließlich der persönlichen Information und Reisevorbereitung. ComfortLine ist keine staatliche Behörde. Der Text ist weder eine amtliche Rechtsquelle noch eine individuelle Rechtsberatung oder Einreisegarantie. Vorschriften, Ausnahmen und Grenzübergänge können sich kurzfristig ändern. Prüfen Sie vor jeder Abreise die verlinkten amtlichen Originalquellen sowie die Auskünfte der zuständigen Grenz-, Visa- und Konsularbehörden. Über die Einreise entscheiden die zuständigen Behörden.",
+    "sections": [
+      [
+        "Die Geschichte des Fahrers: russische Pässe zu Hause vergessen",
+        "Ein ComfortLine-Fahrer berichtete von Reisenden, die mit US-Pässen von Polen nach Belarus fuhren. Bei der belarussischen Passkontrolle fragten Beamte nach ihren russischen Pässen. Diese hatten die Reisenden nicht dabei, wohl aber belarussische Visa. Der Fahrer befürchtete Schwierigkeiten sowohl bei der Einreise als auch auf dem Rückweg nach Polen.",
+        "Es handelt sich um einen anonymisierten Augenzeugenbericht, nicht um eine bestätigte Behördenentscheidung. Uns liegen weder die vollständigen Unterlagen noch ein amtlicher Bescheid vor. Wir wissen daher nicht, auf welcher Grundlage die russischen Pässe verlangt wurden, welche Bedeutung die Visa hatten oder ob eine polnische Ausnahme anwendbar war."
+      ],
+      [
+        "Warum ein US-Pass die Einreise aus Belarus nach Polen nicht garantiert",
+        "US-Staatsangehörige können den Schengen-Raum normalerweise für Kurzaufenthalte visumfrei besuchen. Für die Einreise aus Belarus nach Polen gelten jedoch zusätzliche polnische Beschränkungen. Ausländer müssen zu einer zugelassenen Kategorie nach § 3 Absatz 2 der polnischen Verordnung über den Grenzverkehr gehören. Das US-Außenministerium warnt ausdrücklich, dass US-Bürger hierfür eine Ausnahme erfüllen müssen. [1] [2]",
+        "Ausnahmen hängen vom persönlichen Status und entsprechenden Nachweisen ab, etwa bestimmten Aufenthalts- oder Familienrechten. Es gibt kein generelles polnisches Einreiseverbot für alle Inhaber US-amerikanischer, israelischer oder grenadischer Pässe. Ausschlaggebend sind vielmehr der konkrete Einreiseweg und der Rechtsgrund; die übliche Schengen-Visumbefreiung genügt hier nicht allein. [1]"
+      ],
+      [
+        "Doppelte Staatsangehörigkeit und belarussische Visa",
+        "Wer die amerikanische und russische Staatsangehörigkeit besitzt, muss klären, welche Pässe Belarus bei Ein- und Ausreise verlangt und welche Dokumente das nächste Zielland anerkennt. Ein belarussisches Visum im US-Pass ersetzt keine andere rechtlich verlangte Reiseurkunde und begründet kein Recht auf Einreise nach Polen.",
+        "Warum die belarussischen Beamten in diesem Fall nach den russischen Pässen fragten, ist nicht belegt. Für Einzelfälle sollten die zuständigen Konsular- und Grenzbehörden kontaktiert werden. Das US-Außenministerium warnt weiterhin mit Stufe 4 vor Reisen nach Belarus und verweist auf stark eingeschränkte konsularische Hilfe. [8] [10]"
+      ],
+      [
+        "Russische nichtbiometrische Reisepässe: zwei Zeitpläne",
+        "Polen erkennt russische nichtbiometrische Diplomaten- und Dienstpässe seit dem 1. Januar 2026 nicht mehr an; für gewöhnliche Reisepässe gilt dies seit dem 1. April 2026. Litauen führte eine entsprechende Maßnahme am 1. Juni 2025 ein, mit gesonderter Übergangsregelung für bestimmte Inhaber von Aufenthaltstiteln und einer Ausnahme für bestimmten Eisenbahntransit. [3] [4]",
+        "Artikel 6 des Schengener Grenzkodex verlangt für gewöhnliche Kurzaufenthalte grundsätzlich einen Pass, der innerhalb der vorangegangenen zehn Jahre ausgestellt wurde. Das heißt nicht, dass jeder Pass eine Gültigkeitsdauer von exakt zehn Jahren haben muss. Die Anerkennung als biometrischer Pass ist eine weitere, eigenständige Frage. [5]"
+      ],
+      [
+        "Ukrainische Reisepässe und Ausnahmen",
+        "Für einen gewöhnlichen visumfreien Kurzaufenthalt benötigen ukrainische Staatsangehörige einen geeigneten biometrischen Pass. Daraus folgt jedoch kein ausnahmsloses Erfordernis für jede denkbare Einreisesituation. Ein Visum, ein Aufenthaltstitel oder ein einschlägiger humanitärer Schutzmechanismus kann die rechtliche Beurteilung verändern. [6] [7]",
+        "Die EU-Hinweise für Menschen auf der Flucht vor dem Krieg in der Ukraine beziehen sich auf bestimmte Situationen. Sie gelten nicht automatisch für jede Reise aus Belarus in einen EU-Staat. [7]"
+      ],
+      [
+        "Litauische und polnische Grenzregeln unterscheiden sich",
+        "Die polnische Regelung nach § 3 Absatz 2 kann nicht ohne Weiteres auf Litauen übertragen werden. Litauen wendet eigene Regeln zur Anerkennung von Dokumenten, zur nationalen Sicherheit und zu Grenzübergängen an. Ein US- oder israelischer Pass ist weder eine automatische Einreiseberechtigung noch ein pauschaler Ausschluss. [4] [9]",
+        "Prüfen Sie den jeweiligen Grenzübergang, die Reiserichtung, zugelassene Fahrzeugarten und die nötigen Dokumente. Die Grenzentscheidung erfolgt individuell nach den einschlägigen Vorschriften. [5]"
+      ],
+      [
+        "Erst den Rückweg prüfen, dann losfahren",
+        "Erfassen Sie alle Staatsangehörigkeiten und nehmen Sie die erforderlichen gültigen Reisepässe mit. Prüfen Sie Passanerkennung und -gültigkeit, Visa, Aufenthaltstitel und die Rechtsgrundlage für die Rückkehr nach Polen beziehungsweise die Einreise nach Litauen. Achten Sie auch auf Fahrzeugbeschränkungen und die aktuellen Öffnungszeiten der Übergänge.",
+        "Wer Polen verlassen und Belarus betreten kann, darf nicht automatisch auf demselben Weg zurück. Planen Sie die gesamte Route mithilfe aktueller amtlicher Informationen und klären Sie unklare Fälle direkt mit den zuständigen Stellen. [1] [2] [8]"
+      ]
+    ],
+    "checks": [
+      "Alle Staatsangehörigkeiten berücksichtigen und gültige Pässe mitnehmen.",
+      "Belarussische Ein- und Ausreisevoraussetzungen abklären.",
+      "Rechtsgrundlage für die Rückkehr nach Polen oder die Einreise nach Litauen bestätigen.",
+      "Biometrie, Gültigkeit, Visa und Aufenthaltstitel kontrollieren.",
+      "Öffnung und Verkehrsarten des Grenzübergangs überprüfen.",
+      "Amtliche Hinweise unmittelbar vor der Abreise erneut prüfen."
+    ]
+  },
+  "fr": {
+    "title": "Deux passeports, mais un retour incertain : récit à la frontière entre le Bélarus et la Pologne",
+    "shortTitle": "Deux passeports et le risque d'un retour impossible",
+    "description": "Récit d'un chauffeur sur des passeports américains et russes, les visas bélarusses et les règles d'entrée en Pologne et en Lituanie, avec sources officielles.",
+    "tag": "Récits de frontière",
+    "read": "Lire l'analyse juridique",
+    "back": "Tous les guides",
+    "reviewed": "Sources vérifiées",
+    "sources": "Sources officielles à consulter avant le départ",
+    "checklist": "Points à vérifier avant de partir",
+    "disclaimerTitle": "Important : information personnelle, non source juridique officielle",
+    "disclaimer": "Cet article est destiné uniquement à l'information personnelle et à la préparation d'un voyage. ComfortLine n'est pas une autorité publique. Cette publication ne constitue ni une source officielle de droit, ni un conseil juridique personnalisé, ni une garantie d'admission. Les règles, exceptions et points de passage peuvent changer sans préavis. Avant tout déplacement, consultez les textes et communications officiels ci-dessous ainsi que les autorités frontalières, consulaires et migratoires compétentes. La décision d'admission relève de ces autorités.",
+    "sections": [
+      [
+        "Le récit du chauffeur : les passeports russes restés à la maison",
+        "Un chauffeur ComfortLine a raconté le voyage de passagers allant de Pologne au Bélarus avec des passeports américains. Au contrôle bélarusse, des agents leur ont demandé leurs passeports russes, qu'ils n'avaient pas emportés. Ils disposaient néanmoins de visas bélarusses. Le chauffeur s'est interrogé sur les difficultés possibles à l'entrée et, surtout, au retour vers la Pologne.",
+        "Ce témoignage anonymisé n'est pas une décision officielle. Nous n'avons pas examiné les documents des voyageurs ni les conclusions des gardes-frontières. Nous ne pouvons donc confirmer la raison de la demande des passeports russes, l'effet éventuel des visas ou l'applicabilité d'une exception polonaise."
+      ],
+      [
+        "Un passeport américain ne garantit pas l'entrée en Pologne depuis le Bélarus",
+        "Les ressortissants américains peuvent normalement effectuer de courts séjours sans visa dans l'espace Schengen. Cependant, l'entrée en Pologne depuis le Bélarus est soumise à des restrictions nationales particulières. Les étrangers doivent relever d'une catégorie autorisée par le § 3, paragraphe 2, du règlement polonais relatif au trafic frontalier. Le département d'État américain rappelle expressément l'obligation de bénéficier d'une exception. [1] [2]",
+        "Certaines exceptions sont liées au droit au séjour, à la situation familiale ou à d'autres motifs expressément prévus. Il ne s'agit pas d'une interdiction générale d'entrer en Pologne frappant les détenteurs de passeports des États-Unis, d'Israël ou de Grenade. Le sens du passage et le fondement juridique sont décisifs, indépendamment de la dispense habituelle de visa Schengen. [1]"
+      ],
+      [
+        "Double nationalité et visas bélarusses",
+        "Une personne ayant les nationalités américaine et russe doit déterminer quels documents le Bélarus exige à l'entrée et à la sortie et lesquels seront reconnus par le prochain pays. Un visa bélarusse dans un passeport américain ne remplace pas automatiquement un autre passeport légalement requis et ne donne aucun droit d'entrer en Pologne.",
+        "La base juridique de la demande des agents bélarusses n'a pas été établie. Une clarification individuelle auprès des autorités consulaires ou frontalières est nécessaire. Le département d'État américain déconseille tout voyage au Bélarus (niveau 4) et alerte sur les limites de l'assistance consulaire. [8] [10]"
+      ],
+      [
+        "Passeports russes non biométriques : dates distinctes en Pologne et en Lituanie",
+        "La Pologne ne reconnaît plus les passeports russes diplomatiques et de service non biométriques depuis le 1er janvier 2026, ni les passeports ordinaires non biométriques depuis le 1er avril 2026. La Lituanie a appliqué sa mesure le 1er juin 2025, avec des dispositions transitoires pour certains titulaires de titres de séjour et une exception relative à certains transits ferroviaires. [3] [4]",
+        "L'article 6 du code frontières Schengen exige en principe, pour les courts séjours, un document délivré dans les dix années précédentes. Cela ne signifie pas qu'il doit avoir été émis pour une durée de validité de dix ans. La reconnaissance biométrique du document est une question distincte. [5]"
+      ],
+      [
+        "Documents ukrainiens : séjour sans visa et autres situations",
+        "Pour un court séjour ordinaire sans visa, les ressortissants ukrainiens doivent disposer d'un passeport biométrique éligible. Ce principe n'exclut pas toutes les autres voies légales : un visa, un titre de séjour ou un dispositif humanitaire applicable peuvent modifier l'analyse. [6] [7]",
+        "Les directives européennes relatives aux personnes fuyant la guerre en Ukraine portent sur des situations précises ; elles ne s'appliquent pas automatiquement à toute arrivée depuis le Bélarus. [7]"
+      ],
+      [
+        "La Lituanie applique ses propres règles",
+        "La restriction polonaise du § 3, paragraphe 2, ne s'étend pas automatiquement à la frontière lituanienne. La Lituanie applique ses propres mesures concernant les documents, la sécurité et les passages frontaliers. Un passeport américain ou israélien ne garantit pas l'admission, mais ne prouve pas non plus une interdiction générale. [4] [9]",
+        "Vérifiez le point de passage précis, le sens de circulation, les catégories de véhicules admises et les justificatifs nécessaires. Chaque dossier reste soumis au contrôle individuel. [5]"
+      ],
+      [
+        "Vérifier le retour avant de partir",
+        "Recensez toutes les nationalités, emportez les passeports nécessaires et contrôlez leur reconnaissance, leur validité, les visas et les titres de séjour. Vérifiez la base juridique permettant le retour en Pologne ou l'entrée en Lituanie. Informez-vous aussi sur les restrictions visant les véhicules et sur l'ouverture des postes-frontières.",
+        "Le fait d'avoir quitté la Pologne et d'être entré au Bélarus ne signifie pas que l'on pourra revenir par la même route. Vérifiez l'ensemble de l'itinéraire dans les sources officielles et demandez confirmation aux administrations compétentes en cas de doute. [1] [2] [8]"
+      ]
+    ],
+    "checks": [
+      "Recenser toutes les nationalités et emporter les passeports requis.",
+      "Vérifier les conditions d'entrée et de sortie du Bélarus.",
+      "Confirmer le fondement du retour en Pologne ou de l'entrée en Lituanie.",
+      "Contrôler la biométrie, la validité, les visas et les titres de séjour.",
+      "Vérifier l'ouverture du poste-frontière pour le véhicule prévu.",
+      "Consulter à nouveau les avis officiels juste avant le départ."
+    ]
   }
 };
