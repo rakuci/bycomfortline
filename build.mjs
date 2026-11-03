@@ -1,6 +1,7 @@
 import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import { readFileSync, existsSync } from "node:fs";
 import { routeSeo } from "./route-seo.mjs";
+import { longDistanceSeo, longDistanceRegionOriginIds } from "./long-distance-seo.mjs";
 import { travelGuideContent } from "./travel-guide-content.mjs";
 import { editorialContributionLocale } from "./travel-guide-contribution-locales.mjs";
 import { borderPassportArticle, borderPassportSources } from "./border-passports-article.mjs";
@@ -390,6 +391,8 @@ function geoMenu(lang, type, place) {
 
 function routePath(lang, key) { return `/${lang}/${locale[lang].slugs[key]}/`; }
 function guidePath(lang) { return `/${lang}/travel-guide/`; }
+function longDistancePath(lang){return `/${lang}/${longDistanceSeo[lang].slug}/`;}
+function longDistanceAlternates(){return [...Object.keys(locale).map(code=>`<link rel="alternate" hreflang="${code}" href="${base}${longDistancePath(code)}">`),`<link rel="alternate" hreflang="x-default" href="${base}${longDistancePath("en")}">`].join("\n");}
 const borderStorySlug = "dual-passports-belarus-poland-border";
 function borderStoryPath(lang) { return guidePath(lang)+borderStorySlug+"/"; }
 const carStorySlug = "lithuania-belarus-car-export-sanctions-165mm";
@@ -418,6 +421,7 @@ function alternateLinks(pathType, routeKey) {
 function languageMenu(lang, type, routeKey) {
   return Object.entries(locale).map(([code, l]) => {
     const href = type === "home" ? l.home
+      : type === "long-distance" ? longDistancePath(code)
       : type === "guide" ? guidePath(code)
       : type === "guide-story" ? borderStoryPath(code)
       : type === "car-story" ? carStoryPath(code)
@@ -441,9 +445,9 @@ function header(lang, type = "home", routeKey) {
       <img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56">
     </a>
     <nav class="main-nav" aria-label="${esc(l.nav.routes)}">
-      <a href="${l.home}#routes">${l.nav.routes}</a><a href="${l.home}#service">${l.nav.service}</a><a href="${l.home}#faq">${l.nav.faq}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story" || type==="cash-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${l.nav.contact}</a>
+      <a href="${l.home}#routes">${l.nav.routes}</a><a href="${l.home}#service">${l.nav.service}</a><a href="${l.home}#faq">${l.nav.faq}</a><a href="${longDistancePath(lang)}"${type==="long-distance"?' aria-current="page"':""}>${esc(l.nav.longDistance)}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story" || type==="cash-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${l.nav.contact}</a>
     </nav>
-    <details class="mobile-nav"><summary aria-label="${esc(menuLabel)}"><span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span>${esc(menuLabel)}</span></summary><nav class="mobile-nav-links" aria-label="${esc(menuLabel)}"><a href="${l.home}#routes">${esc(l.nav.routes)}</a><a href="${l.home}#service">${esc(l.nav.service)}</a><a href="${l.home}#faq">${esc(l.nav.faq)}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story" || type==="cash-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.nav.contact)}</a></nav></details>
+    <details class="mobile-nav"><summary aria-label="${esc(menuLabel)}"><span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span>${esc(menuLabel)}</span></summary><nav class="mobile-nav-links" aria-label="${esc(menuLabel)}"><a href="${l.home}#routes">${esc(l.nav.routes)}</a><a href="${l.home}#service">${esc(l.nav.service)}</a><a href="${l.home}#faq">${esc(l.nav.faq)}</a><a href="${longDistancePath(lang)}"${type==="long-distance"?' aria-current="page"':""}>${esc(l.nav.longDistance)}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story" || type==="cash-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.nav.contact)}</a></nav></details>
     <details class="language-menu"><summary aria-label="${esc(l.label)}"><svg class="language-globe" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4.5 6 4.5 9s-1.5 6-4.5 9c-3-3-4.5-6-4.5-9S9 6 12 3Z"/></svg><span class="language-current">${l.code.toUpperCase()}</span></summary><div class="language-options">${languageMenu(lang, type, routeKey)}</div></details>
   </header>`;
 }
@@ -552,7 +556,10 @@ for (const lang of ["de", "fr"]) {
   fleetCopy[lang] = translations.fleet;
   reverseJourneyCopy[lang] = translations.reverse;
 }
-for(const lang of Object.keys(locale)) locale[lang].nav.guide = travelGuideContent[lang].nav;
+for(const lang of Object.keys(locale)) {
+  locale[lang].nav.guide = travelGuideContent[lang].nav;
+  locale[lang].nav.longDistance = longDistanceSeo[lang].nav;
+}
 // City and airport names remain searchable in their original spelling as well.
 for (const place of locationCatalog) {
   place.names.de ??= place.names.en;
@@ -719,7 +726,7 @@ function faq(l) {
 }
 
 function footer(l) {
-  return `<footer id="operator-info"><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}<a href="${geoIndexPath(l.code,"airport")}">${esc(geoLocale[l.code].browseAirports)}</a><a href="${geoIndexPath(l.code,"city")}">${esc(geoLocale[l.code].browseCities)}</a><a href="${destinationIndexPath(l.code)}">${esc(destinationLocale[l.code].browse)}</a><a href="${guidePath(l.code)}">${esc(l.nav.guide)}</a></div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
+  return `<footer id="operator-info"><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}<a href="${geoIndexPath(l.code,"airport")}">${esc(geoLocale[l.code].browseAirports)}</a><a href="${geoIndexPath(l.code,"city")}">${esc(geoLocale[l.code].browseCities)}</a><a href="${destinationIndexPath(l.code)}">${esc(destinationLocale[l.code].browse)}</a><a href="${longDistancePath(l.code)}">${esc(l.nav.longDistance)}</a><a href="${guidePath(l.code)}">${esc(l.nav.guide)}</a></div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
 }
 
 function floatingContact() {
