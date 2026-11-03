@@ -1,6 +1,7 @@
 // Run after node build.mjs: validates Google/Yandex sitemaps, localized editorial
 // pages, live image references and canonical URLs without relying on third-party APIs.
 import assert from "node:assert/strict";
+import {longDistanceSeo} from "../long-distance-seo.mjs";
 import {readFile,stat} from "node:fs/promises";
 import {join} from "node:path";
 const base="https://bycomfortline.com";
@@ -53,6 +54,18 @@ for(const lang of langs){
     assert(html.includes(`<link rel="canonical" href="${url}"`),lang+": article HTML canonical mismatch");
     articleImages+=rowImages.length;
   }
+  const serviceUrl=`${base}/${lang}/${longDistanceSeo[lang].slug}/`;
+  const serviceRow=byUrl.get(serviceUrl);
+  assert(serviceRow,lang+": long-distance service URL missing from sitemap");
+  const altLinks=[...serviceRow.matchAll(/<xhtml:link rel="alternate" hreflang="([^"]+)" href="([^"]+)"\s*\/>/g)];
+  assert.equal(altLinks.length,8,lang+": long-distance hreflang reciprocity missing");
+  for(const other of langs)assert(altLinks.some(a=>a[1]===other&&a[2]===`${base}/${other}/${longDistanceSeo[other].slug}/`),
+    lang+": wrong long-distance alternate "+other);
+  const heroImages=[...serviceRow.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map(m=>m[1]);
+  assert.equal(heroImages.length,1,lang+": long-distance service photo missing from image sitemap");
+  assert(heroImages[0].includes("/assets/cities/")&&heroImages[0].endsWith(".webp"),lang+": long-distance image must be a local WebP");
+  const serviceHtml=await readFile(join("dist",lang,longDistanceSeo[lang].slug,"index.html"),"utf8");
+  assert(serviceHtml.includes(`<link rel="canonical" href="${serviceUrl}"`),lang+": long-distance HTML canonical mismatch");
   const guide=`${base}/${lang}/travel-guide/`;
   assert(byUrl.has(guide),lang+": Travel Guide index missing");
 }
