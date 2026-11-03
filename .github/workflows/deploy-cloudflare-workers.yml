@@ -39,6 +39,7 @@ jobs:
           grep -q 'RESEND_API_KEY' src/worker.mjs
           node build.mjs
           node scripts/check-travel-guide.mjs
+          node scripts/check-sitemaps.mjs
           node scripts/check-travel-guide-submission.mjs
           node scripts/landing_image_report.mjs
       - name: Check Cloudflare credentials without exposing secret values
@@ -81,3 +82,30 @@ jobs:
             exit 1
           fi
           echo "Success: latest ComfortLine car-sanctions article and illustration markup are live."
+          echo "Checking live XML sitemap parity and all five editorial routes per language..."
+          curl -L --retry 3 --retry-delay 2 -fSs --max-time 30 https://bycomfortline.com/sitemap.xml -o /tmp/comfortline-live-sitemap.xml
+          curl -L --retry 3 --retry-delay 2 -fSs --max-time 30 https://bycomfortline.com/sitemap-yandex.xml -o /tmp/comfortline-live-yandex.xml
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          root=ET.parse('/tmp/comfortline-live-sitemap.xml').getroot()
+          yandex=ET.parse('/tmp/comfortline-live-yandex.xml').getroot()
+          ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9','image':'http://www.google.com/schemas/sitemap-image/1.1'}
+          g=[row.findtext('s:loc',namespaces=ns) for row in root.findall('s:url',ns)]
+          y=[row.findtext('s:loc',namespaces=ns) for row in yandex.findall('s:url',ns)]
+          assert len(g)==1534, f'Live canonical sitemap has {len(g)} URLs, expected 1534'
+          assert g==y, 'Live Google and Yandex sitemap URLs differ'
+          for lang in ('en','ru','pl','lt','lv','de','fr'):
+              paths=[
+                  f'/{lang}/travel-guide/',
+                  f'/{lang}/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/',
+                  f'/{lang}/travel-guide/dual-passports-belarus-poland-border/',
+                  f'/{lang}/travel-guide/lithuania-belarus-car-export-sanctions-165mm/',
+                  f'/{lang}/travel-guide/ikea-shopping-belarus-customs-limits-frequency/']
+              for path in paths:
+                  assert 'https://bycomfortline.com'+path in g, f'Missing live page {path}'
+          images=[img.text for row in root.findall('s:url',ns) for img in row.findall('image:image/image:loc',ns)]
+          assert any('euro-60-border-exchange-office-driver.webp' in url for url in images), 'New article images not in live sitemap'
+          assert any('euro-60-border-cash-rules-infographic.webp' in url for url in images), 'Infographic missing from live sitemap'
+          print(f'LIVE SITEMAP VERIFIED: {len(g)} canonical URLs and {len(images)} image refs.')
+          PY

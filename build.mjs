@@ -2013,12 +2013,31 @@ for (const lang of Object.keys(locale)) {
     if(url)imageSitemapIndex.set(base+url,base+image);
   }
 }
+// Include article illustrations in Google's image sitemap, not just route photographs.
+// Preserve each article's own lastmod date: adding metadata isn't a content revision.
+const editorialSitemapImages=new Map();
+for(const lang of Object.keys(locale)){
+  editorialSitemapImages.set(base+cashStoryPath(lang),[base+cashStoryArt,base+cashStoryInfographic]);
+  editorialSitemapImages.set(base+carStoryPath(lang),[base+carStoryIllustration]);
+  editorialSitemapImages.set(base+borderStoryPath(lang),[base+passportStoryIllustration]);
+}
+for(const images of editorialSitemapImages.values()){
+  for(const image of images){
+    if(!image.startsWith(base+"/assets/") || !existsSync(join(out,image.slice(base.length+1)))){
+      throw Error("Article image missing from site build: "+image);
+    }
+  }
+}
 const sitemapImageEntries=sitemapEntries.map(entry=>{
   const url=entry.match(/<loc>([^<]+)<\/loc>/)?.[1];
-  const image=imageSitemapIndex.get(url);
-  if(!image)return entry;
-  return entry.replace(`<lastmod>${seoLastmod}</lastmod>`,`<lastmod>${photoLastmod}</lastmod>`)
-    .replace("</url>", `<image:image><image:loc>${image}</image:loc></image:image></url>`);
+  const destinationImage=imageSitemapIndex.get(url);
+  const images=[...(destinationImage?[destinationImage]:[]),
+    ...(editorialSitemapImages.get(url)||[])];
+  if(!images.length)return entry;
+  const dated=destinationImage
+    ?entry.replace(`<lastmod>${seoLastmod}</lastmod>`,`<lastmod>${photoLastmod}</lastmod>`)
+    :entry;
+  return dated.replace("</url>",images.map(image=>`<image:image><image:loc>${image}</image:loc></image:image>`).join("")+"</url>");
 });
 await put("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
