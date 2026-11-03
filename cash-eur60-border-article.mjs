@@ -188,5 +188,139 @@ export const cashSixtyArticle = {
       "Use the red corridor if a declaration is needed and ask before selecting a lane when uncertain.",
       "Carry supporting documentation where needed; do not rely on a border-side exchange kiosk."
     ]
+  },
+  "pl": {
+    "title": "60 € na granicy z Białorusią: dlaczego euro i złotówki mogą zatrzymać podróż przez Litwę lub Łotwę?",
+    "shortTitle": "60 € na granicy: kantor daleko od szlabanu",
+    "description": "60 euro przy wyjeździe z Litwy i Łotwy na Białoruś? Sankcje dotyczące banknotów EUR i PLN, wyjątki, USD, deklaracje 10 000 € / 10 000 $ i czerwony korytarz.",
+    "tag": "Historie z granicy · Gotówka i sankcje",
+    "read": "Przeczytaj o 60 € na granicy",
+    "back": "Wróć do poradnika",
+    "reviewed": "Sprawdzono 3 listopada 2026",
+    "disclaimerTitle": "Ważne: informacja osobista, nie oficjalna wykładnia prawa",
+    "disclaimer": "Tekst jest przeznaczony wyłącznie do osobistej informacji. ComfortLine nie jest organem celnym. Nie stanowi oficjalnego źródła prawa ani gwarancji przekroczenia granicy. Nie istnieje ogólnounijny ustawowy limit 60 €. W 2022 r. litewskie służby celne były cytowane z interpretacją dotyczącą maksymalnie 60 € w banknotach na potrzeby osobiste. Łotwa wskazuje na rozsądną kwotę niezbędną do podróży. Przed wyjazdem sprawdź bieżące komunikaty odpowiednich władz i art. 1za rozporządzenia 765/2006.",
+    "figureCaption": "Satyryczna ilustracja fikcyjnego pasażera skierowanego do kantoru w odległym mieście; odległość i postacie nie przedstawiają rzeczywistego przejścia.",
+    "facts": [
+      "Historyczne litewskie podejście do banknotów euro, nie próg prawny całej UE",
+      "Deklaracja gotówki przy przekraczaniu zewnętrznej granicy UE od tej wartości",
+      "Deklaracja na granicy Białorusi/EUG powyżej tej wartości"
+    ],
+    "sections": [
+      [
+        "Kawa, paszport, walizka i… wyprawa do kantoru",
+        "Fikcyjny pasażer ComfortLine Tomasz jedzie z Litwy na Białoruś. Przygotował dokumenty, ale w portfelu ma euro i polskie złote. Funkcjonariusz pyta, po co wiezie banknoty walut Unii Europejskiej. Na miejscu trudno wymienić gotówkę; najbliższy czynny kantor może być dopiero w mieście. Tomasz myślał, że skoro nie ma 10 000 €, niczego nie musi sprawdzać.",
+        "To pomylenie **progu zgłaszania gotówki** z **sankcyjnym zakazem wywozu banknotów walut UE na Białoruś**. Opisana podróż jest fikcyjna; oba porządki prawne istnieją naprawdę. [1] [2]"
+      ],
+      [
+        "Skąd wzięło się 60 €?",
+        "W marcu 2022 r. litewskie media informowały na podstawie wypowiedzi litewskiej administracji celnej, że podróżny mógł zabrać na osobisty użytek maksymalnie 60 € w banknotach euro. Jest to udokumentowane stanowisko administracyjne z tamtego okresu, a nie liczba wpisana do art. 1za jako obowiązujący w całej UE limit. Aktualną praktykę należy potwierdzić przed przejazdem. [5]",
+        "Łotewska administracja skarbowa stosuje w komunikacie zasadę **rozsądnej kwoty na rzeczywiste potrzeby podróży**, bez wskazania stałych 60 €. Nie można zakładać ani że kwota 60 € daje gwarancję przejazdu, ani że 61 € jest automatycznie zakazane na każdym przejściu. [4]"
+      ],
+      [
+        "Dlaczego złotówki są objęte przepisem, a dolary nie",
+        "Art. **1za rozporządzenia 765/2006** dotyczy banknotów denominowanych w **oficjalnej walucie dowolnego państwa członkowskiego UE**. Euro i polski złoty należą do tego zakresu. Istnieje wyjątek, gdy banknoty są konieczne na osobiste potrzeby podróżnego lub jego najbliższej rodziny, która podróżuje z nim. [1]",
+        "Dolar amerykański nie jest walutą żadnego państwa członkowskiego UE, więc ten konkretny zakaz dotyczący nominału go nie obejmuje. Mimo to USD liczą się do limitów zgłaszania gotówki, mogą wymagać udokumentowania pochodzenia i podlegać innym kontrolom. [1] [2]"
+      ],
+      [
+        "Unia: 10 000 € oznacza zgłoszenie, nie zgodę na eksport EUR",
+        "Przy wjeździe lub wyjeździe z UE należy zgłosić **10 000 € lub więcej** w gotówce i instrumentach objętych przepisami, także równowartość w innych walutach. Sumuje się wszystkie waluty. Organy mogą podjąć czynności także poniżej progu w razie przesłanek nielegalnych działań. [2] [3] [8]",
+        "Deklaracja nie uchyla sankcji. Banknoty euro o wartości niższej od 10 000 € mogą wymagać odrębnej oceny w świetle art. 1za. Z kolei USD o równowartości co najmniej 10 000 € trzeba zgłosić mimo braku zastosowania tego konkretnego zakazu banknotowego. [1] [2]"
+      ],
+      [
+        "Białoruś: ponad 10 000 dolarów w obie strony",
+        "Przy przekroczeniu granicy celnej EUG gotówkę i czeki podróżne należy zadeklarować, jeżeli łącznie wynoszą **więcej niż równowartość 10 000 USD**. Zgłasza się całą sumę i korzysta z czerwonego korytarza. Powyżej 100 000 USD potrzebne są również dokumenty potwierdzające pochodzenie pieniędzy. Dotyczy wjazdu i wyjazdu. [6] [7]",
+        "To próg obowiązku deklaracji, nie ogólny bezwzględny zakaz przewozu ponad 10 000 USD. Na granicy liczą się oba systemy: UE (co najmniej 10 000 EUR) i EUG (ponad 10 000 USD). [2] [6]"
+      ],
+      [
+        "Tam i z powrotem: nie te same reguły",
+        "**Litwa lub Łotwa → Białoruś:** najpierw art. 1za i unijny obowiązek deklarowania, następnie białoruski próg. **Białoruś → Litwa lub Łotwa:** najpierw próg EUG dla wywozu, potem unijna deklaracja na przywóz. Unijnego zakazu eksportu banknotów **do** Białorusi nie należy automatycznie traktować jak identycznego zakazu w drodze powrotnej. [1] [2] [6]",
+        "Kwot 10 000 € i 10 000 $ nie można zamieniać miejscami: waluty i sposób sformułowania progu różnią się, a przeliczenia dokonuje się po właściwym kursie na dzień przekraczania granicy."
+      ],
+      [
+        "Zielony i czerwony korytarz",
+        "**Zielony:** deklarujesz brak rzeczy lub gotówki wymagających zgłoszenia; nadal możliwa jest kontrola. **Czerwony:** składasz wymagane deklaracje. Łotwa i Białoruś wskazują czerwony korytarz dla osób podlegających obowiązkowi zgłoszenia gotówki, jeśli taki system działa na przejściu. [4] [6]",
+        "Nie wolno uważać, że zgłoszenie na czerwonym korytarzu automatycznie legalizuje wywóz banknotów zabroniony sankcjami. Gdy istnieje wątpliwość, zapytaj funkcjonariusza przed wyborem korytarza. [1]"
+      ],
+      [
+        "Dlaczego kantor w najbliższym mieście to kiepski plan B",
+        "W naszym humorystycznym obrazie Tomasz musi cofnąć się do kantoru w odległym mieście. Nie podajemy prawdziwej odległości: zależy ona od przejścia i godzin otwarcia. Kantor może też nie mieć potrzebnej waluty. Przygotuj legalny sposób finansowania podróży w mieście wyjazdu i zasięgnij wyjaśnienia właściwej administracji celnej.",
+        "Wymiana banknotów nie usuwa obowiązku deklaracji i nie może służyć obchodzeniu sankcji. Najtańszą walutą na granicy okazuje się dobrze sprawdzona informacja. [1] [3]"
+      ]
+    ],
+    "checklist": [
+      "Sprawdź aktualną praktykę służb na Litwie lub Łotwie dotyczącą EUR i PLN.",
+      "Nie traktuj 60 € jako gwarancji lub ogólnounijnej normy ustawowej.",
+      "Zsumuj wszystkie waluty dla zgłoszenia UE od 10 000 €.",
+      "Policz niezależnie próg EUG przekraczający 10 000 USD.",
+      "Gdy deklaracja jest obowiązkowa, wybierz czerwony korytarz.",
+      "Nie zakładaj dostępności kantoru przy granicy; wątpliwości wyjaśnij przed wyjazdem."
+    ]
+  },
+  "lt": {
+    "title": "60 € prie Lietuvos ir Baltarusijos sienos: kodėl eurai ir zlotai gali sutrukdyti kelionei?",
+    "shortTitle": "60 € pasienyje: iki valiutos keityklos dar toli",
+    "description": "Kodėl prieš kelionę į Baltarusiją svarbūs 60 € ir EUR/PLN banknotų ribojimai, kuo skiriasi USD, 10 000 € ir 10 000 USD deklaravimo taisyklės, raudonasis ir žaliasis kanalai.",
+    "tag": "Vairuotojų istorijos · Pinigai ir sankcijos",
+    "read": "Skaityti apie 60 € pasienyje",
+    "back": "Grįžti į gidą",
+    "reviewed": "Patikrinta 2026 m. lapkričio 3 d.",
+    "disclaimerTitle": "Svarbu: informacinė publikacija, ne oficialus teisės aiškinimas",
+    "disclaimer": "Straipsnis skirtas tik asmeniniam susipažinimui ir kelionės planavimui. ComfortLine nėra muitinės ar pasienio institucija. 60 € nėra visai ES teisės aktu nustatyta grynųjų pinigų riba. 2022 m. viešai skelbta apie Lietuvos muitinės 60 € banknotų asmeninio naudojimo praktinę ribą, o Latvijos oficialiuose paaiškinimuose nurodomas pagrįstas kiekis asmeninėms kelionės reikmėms. Prieš išvykdami patikrinkite naujausią Reglamento 765/2006 1za straipsnį ir kompetentingų tarnybų informaciją.",
+    "figureCaption": "Satyrinė iliustracija: išgalvotas keliautojas nukreipiamas į tolimame mieste esančią valiutos keityklą; pavaizduotas atstumas nėra realios kelionės nurodymas.",
+    "facts": [
+      "2022 m. Lietuvos muitinės skelbta EUR banknotų praktika, ne ES masto riba",
+      "Privaloma deklaruoti kertant ES išorinę sieną nuo šios sumos",
+      "Baltarusijos / EAEU deklaravimo riba — griežtai daugiau"
+    ],
+    "sections": [
+      [
+        "Kai kelionės planas baigiasi ieškant keityklos",
+        "Įsivaizduokite vairuotoją Andrių, kuris važiuoja į Baltarusiją. Dokumentai parengti, o kišenėje — eurų ir lenkiškų zlotų banknotai. Pasienyje kyla klausimas, ar šie pinigai iš tiesų skirti asmeninėms kelionės reikmėms. Vietoje artimiausios valiutos keityklos ne visada būna; mūsų pasakojime ji laukia tik kitame mieste.",
+        "Tai išgalvota istorija, padedanti suprasti du skirtingus teisinius klausimus: ES banknotų eksporto sankcijas ir grynųjų pinigų deklaravimo ribas. [1] [2]"
+      ],
+      [
+        "Kodėl kalbama apie 60 eurų?",
+        "2022 m. Lietuvos žiniasklaida citavo muitinės pranešimą, kad keliaujant į Baltarusiją asmeninėms reikmėms leidžiama išsivežti iki **60 € eurų banknotais vienam asmeniui**. Tai užfiksuota tuometė Lietuvos muitinės pozicija, bet ne vienoda ES teisėje įrašyta visų valstybių riba. Dabartinį taikymą reikia patikrinti prieš išvykstant. [5]",
+        "Latvijos Valstybinė pajamų tarnyba kalba apie **pagrįstą sumą asmeninėms kelionės reikmėms**, nenurodydama tokios pačios fiksuotos 60 € ribos. 60 € automatiškai negarantuoja leidimo, o 61 € savaime nereiškia universalaus ES draudimo. [4]"
+      ],
+      [
+        "Eurai ir zlotai: kodėl USD vertinami kitaip?",
+        "Reglamento 765/2006 **1za straipsnis** apima **visų ES valstybių narių oficialių valiutų banknotus**, įskaitant EUR ir Lenkijos PLN. Eksportas į Baltarusiją paprastai ribojamas, tačiau numatyta išimtis keliautojo arba su juo keliaujančių artimiausių šeimos narių būtinoms asmeninėms reikmėms. [1]",
+        "JAV doleris nėra ES valstybės narės oficiali valiuta, todėl konkreti valiutos nominalo sankcija USD banknotams netaikoma. Tačiau doleriai vis tiek skaičiuojami deklaravimo sumai ir nėra atleidžiami nuo kitų kontrolės priemonių. [1] [2]"
+      ],
+      [
+        "10 000 € ES pusėje: deklaruoti, o ne automatiškai išvežti",
+        "Keliaujant į ES arba iš jos **10 000 € ar daugiau** grynųjų pinigų arba jų ekvivalentą kitomis valiutomis privaloma deklaruoti. Skaičiuojama bendra suma, o ne kiekviena valiuta atskirai. Kilus įtarimų institucijos gali pareikalauti papildomos informacijos ir dėl mažesnės sumos. [2] [3] [8]",
+        "Deklaravimas nepanaikina 1za straipsnio eksporto ribojimų. EUR banknotų sankcijų klausimas gali kilti ir turint mažiau nei 10 000 €, o USD suma, viršijanti ES deklaravimo ribą, turi būti deklaruojama. [1]"
+      ],
+      [
+        "Baltarusijos pusėje: daugiau kaip 10 000 USD",
+        "Prie Baltarusijos / EAEU muitų sienos reikia deklaruoti grynuosius ir kelionės čekius, jei bendra suma **viršija 10 000 USD ekvivalentą**. Virš **100 000 USD** taip pat privaloma pateikti lėšų kilmę pagrindžiančius dokumentus. Taisyklė taikoma į abi puses. [6] [7]",
+        "Tai deklaravimo pareiga, ne bendras absoliutus leidžiamos sumos maksimumas. ES taiko ribą **nuo 10 000 €**, o EAEU — **daugiau kaip 10 000 USD**."
+      ],
+      [
+        "Vykstant pirmyn ir atgal",
+        "**Lietuva / Latvija → Baltarusija:** ES tikrinamos sankcijos EUR/PLN ir €10 000 deklaravimas; Baltarusijos pusėje — daugiau kaip $10 000. **Baltarusija → ES:** pirmiausia EAEU išvežimo deklaravimas, vėliau ES įvežimo deklaravimas. Draudimo eksportuoti ES banknotus **į Baltarusiją** negalima automatiškai taikyti grįžimui atgal. [1] [2] [6]",
+        "Valiutų keitimo kursą nustato atitinkamos institucijos pagal kelionės dieną, todėl EUR ir USD ribų nereikia painioti."
+      ],
+      [
+        "Žaliasis ir raudonasis kanalai",
+        "**Žaliasis kanalas:** pareiškiama, kad nėra deklaruotinų prekių ar grynųjų. **Raudonasis:** kai privalu pateikti deklaraciją. Latvijos ir Baltarusijos muitinės nurodo rinktis raudonąjį kanalą, jei taikoma grynųjų deklaravimo pareiga. [4] [6]",
+        "Deklaracija negali padaryti teisėtu sankcijomis draudžiamo banknotų eksporto. Kilus abejonių kreipkitės į pareigūnus prieš pasirinkdami kanalą."
+      ],
+      [
+        "Keitykla kitame mieste nėra patikimas planas",
+        "Mūsų paveikslėlyje keitykla yra toli, tačiau tikras atstumas priklauso nuo konkretaus punkto. Vietinė keitykla gali nedirbti ar neturėti reikiamų banknotų. Išsiaiškinkite klausimus ir pasirūpinkite teisėtomis lėšomis dar prieš kelionę.",
+        "Pinigų iškeitimas negali būti naudojamas sankcijų apėjimui ir nepanaikina prievolės deklaruoti. Geriausia pasiruošti iki atvykstant prie užtvaro. [1]"
+      ]
+    ],
+    "checklist": [
+      "Patikrinkite naujausius Lietuvos arba Latvijos muitinės nurodymus dėl EUR ir PLN.",
+      "Nelaikykite 60 € visoje ES galiojančiu teisiniu limitu.",
+      "ES deklaravimui suskaičiuokite visas valiutas nuo 10 000 €.",
+      "Atskirai tikrinkite EAEU ribą, viršijančią 10 000 USD.",
+      "Kai privaloma deklaruoti, pasirinkite raudonąjį kanalą.",
+      "Neplanuokite skubiai keisti pinigų ties pasienio užtvaru."
+    ]
   }
 };
