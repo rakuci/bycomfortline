@@ -22,6 +22,16 @@ const sitemap=await readFile("dist/sitemap.xml","utf8");
 const yandex=await readFile("dist/sitemap-yandex.xml","utf8");
 const css=await readFile("dist/assets/style.css","utf8");
 assert(css.includes(".guide-article-root")&&css.includes(".travel-guide-featured"),"Missing responsive article CSS");
+const mobileCardCss=css.slice(css.indexOf("/* All Travel Guide feature cards must stack"));
+assert(mobileCardCss.includes("@media (max-width:850px)") &&
+       mobileCardCss.includes(".travel-guide-featured{") &&
+       mobileCardCss.includes("flex-direction:column;") &&
+       mobileCardCss.includes(".travel-guide-featured-copy{") &&
+       mobileCardCss.includes("width:100%;") &&
+       mobileCardCss.includes(".travel-guide-featured-thumbnail--passport") &&
+       mobileCardCss.includes("order:-1;"),
+       "All Travel Guide cards must stack text and full illustrations on mobile");
+
 assert.equal(Object.keys(borderPassportArticle).length,7,"Article needs all seven languages");
 assert.equal(borderPassportSources.length,10,"Original legal sources must be retained");
 for(const lang of langs){
