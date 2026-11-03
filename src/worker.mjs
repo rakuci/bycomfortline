@@ -337,10 +337,10 @@ function validateEditorialSubmission(data) {
   if (trimmed.title.length < 6 || trimmed.title.length > 140 ||
       trimmed.message.length < 25 || trimmed.message.length > 4000 ||
       trimmed.name.length > 100 || trimmed.email.length > 190 ||
-      /[\\r\\n]/.test(trimmed.title) ||
-      /[\\r\\n]/.test(trimmed.name) ||
-      /[\\r\\n]/.test(trimmed.email)) return null;
-  if (trimmed.email && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(trimmed.email)) return null;
+      /[\r\n]/.test(trimmed.title) ||
+      /[\r\n]/.test(trimmed.name) ||
+      /[\r\n]/.test(trimmed.email)) return null;
+  if (trimmed.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed.email)) return null;
   return {lang, type, ...trimmed};
 }
 async function submitEditorialContribution(request, env) {
@@ -401,7 +401,7 @@ async function submitEditorialContribution(request, env) {
   const payload={
     from:SENDER,to:[RECIPIENT],
     subject:"ComfortLine — "+description+" № "+reference,
-    text:lines.join("\\n"),html,
+    text:lines.join("\n"),html,
     ...(submission.email?{reply_to:submission.email}:{})
   };
   try {
