@@ -97,7 +97,8 @@ export const borderPassportArticle = {
       "Verify biometric recognition, passport validity, visas and residence documents.",
       "Confirm checkpoint opening and permitted transport types for both directions.",
       "Review official notices again immediately before departure."
-    ]
+    ],
+    "illustrationCaption": "Satirical editorial illustration: a dual citizen discovers at departure that their second passport was left at home. Actual passport and exit requirements depend on the countries involved."
   },
   "ru": {
     "title": "Два паспорта и риск остаться без обратного маршрута: история с границы Беларуси и Польши",
@@ -155,7 +156,8 @@ export const borderPassportArticle = {
       "Проверить биометрию, сроки паспортов, визы и ВНЖ.",
       "Убедиться, что выбранный переход открыт для нужного вида транспорта.",
       "Повторно проверить официальные уведомления непосредственно перед поездкой."
-    ]
+    ],
+    "illustrationCaption": "Сатирическая иллюстрация: путешественник с двумя гражданствами обнаружил на выезде, что второй паспорт остался дома. Реальные требования к документам зависят от гражданств и страны пересечения границы."
   },
   "pl": {
     "title": "Dwa paszporty, niepewny powrót: historia z granicy Białorusi i Polski",
@@ -213,7 +215,8 @@ export const borderPassportArticle = {
       "Sprawdź dokument biometryczny, ważność, wizę i pozwolenie na pobyt.",
       "Sprawdź otwarcie przejścia i dopuszczony rodzaj pojazdu.",
       "Ponownie przeczytaj komunikaty urzędowe bezpośrednio przed wyjazdem."
-    ]
+    ],
+    "illustrationCaption": "Ilustracja satyryczna: podróżny z podwójnym obywatelstwem odkrywa na granicy, że drugi paszport został w domu. Rzeczywiste wymagania zależą od obywatelstwa i państwa."
   },
   "lt": {
     "title": "Du pasai, bet neaiškus kelias atgal: istorija prie Baltarusijos ir Lenkijos sienos",
@@ -271,7 +274,8 @@ export const borderPassportArticle = {
       "Patikrinkite biometrinius duomenis, galiojimą, vizas ir leidimus.",
       "Įsitikinkite, kad sienos punktas atidarytas jūsų transporto rūšiai.",
       "Dar kartą perskaitykite oficialius pranešimus prieš pat išvykimą."
-    ]
+    ],
+    "illustrationCaption": "Satyrinė iliustracija: dvigubą pilietybę turintis keliautojas prie sienos supranta, kad antrasis pasas liko namuose. Tikrieji reikalavimai priklauso nuo pilietybių ir šalies."
   },
   "lv": {
     "title": "Divas pases, bet neskaidrs atpakaļceļš: stāsts no Baltkrievijas un Polijas robežas",
@@ -329,7 +333,8 @@ export const borderPassportArticle = {
       "Pārbaudiet biometriju, derīgumu, vīzas un uzturēšanās atļaujas.",
       "Pārliecinieties, ka robežpunkts ir atvērts attiecīgajam transportam.",
       "Pirms brauciena atkārtoti pārbaudiet oficiālos paziņojumus."
-    ]
+    ],
+    "illustrationCaption": "Satīriska ilustrācija: ceļotājs ar dubultpilsonību pie robežas atklāj, ka otra pase palikusi mājās. Faktiskās prasības ir atkarīgas no pilsonības un attiecīgās valsts."
   },
   "de": {
     "title": "Zwei Pässe, aber kein sicherer Rückweg: eine Geschichte von der Grenze Belarus–Polen",
@@ -387,7 +392,8 @@ export const borderPassportArticle = {
       "Biometrie, Gültigkeit, Visa und Aufenthaltstitel kontrollieren.",
       "Öffnung und Verkehrsarten des Grenzübergangs überprüfen.",
       "Amtliche Hinweise unmittelbar vor der Abreise erneut prüfen."
-    ]
+    ],
+    "illustrationCaption": "Satirische Illustration: Ein Reisender mit doppelter Staatsangehörigkeit bemerkt an der Grenze, dass der zweite Reisepass zu Hause liegt. Die tatsächlichen Pflichten hängen von den Staaten und Staatsangehörigkeiten ab."
   },
   "fr": {
     "title": "Deux passeports, mais un retour incertain : récit à la frontière entre le Bélarus et la Pologne",
@@ -445,6 +451,7 @@ export const borderPassportArticle = {
       "Contrôler la biométrie, la validité, les visas et les titres de séjour.",
       "Vérifier l'ouverture du poste-frontière pour le véhicule prévu.",
       "Consulter à nouveau les avis officiels juste avant le départ."
-    ]
+    ],
+    "illustrationCaption": "Illustration satirique : un voyageur binational réalise à la frontière qu'il a oublié son deuxième passeport. Les obligations réelles dépendent des nationalités et des pays concernés."
   }
 };
