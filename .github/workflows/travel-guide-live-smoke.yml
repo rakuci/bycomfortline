@@ -1,0 +1,72 @@
+name: Verify live Travel Guide images and story form
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/travel-guide-live-smoke.yml
+  workflow_run:
+    workflows:
+      - Deploy built ComfortLine website to Cloudflare Workers
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Inspect both localized guides, article pictures, and Worker endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://bycomfortline.com"
+          get() { curl -fsSL --retry 3 --retry-delay 2 --max-time 40 --user-agent "ComfortLineSiteSmoke/1.0" "$1" -o "$2"; }
+          get "$base/ru/travel-guide/" /tmp/ru-guide.html
+          get "$base/en/travel-guide/" /tmp/en-guide.html
+          get "$base/ru/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/" /tmp/cash-article.html
+          get "$base/assets/stories/euro-60-border-exchange-office-driver.webp" /tmp/cash-driver.webp
+          get "$base/assets/stories/euro-60-border-cash-rules-infographic.webp" /tmp/cash-rules.webp
+          python3 - <<'PY'
+          from pathlib import Path
+          import struct
+          for locale in ("ru","en"):
+              html=Path(f"/tmp/{locale}-guide.html").read_text(encoding="utf-8")
+              assert 'id="share-your-story"' in html, f"{locale}: story form not deployed"
+              assert 'action="/api/travel-guide-submission"' in html, f"{locale}: submission endpoint missing"
+              assert 'name="consent"' in html, f"{locale}: consent missing"
+              assert 'travel-guide-card-status' not in html, f"{locale}: old coming-soon cards still visible"
+              assert 'travel-guide-featured-cash' in html, f"{locale}: published story card missing"
+          article=Path("/tmp/cash-article.html").read_text(encoding="utf-8")
+          for name in ("euro-60-border-exchange-office-driver.webp","euro-60-border-cash-rules-infographic.webp"):
+              assert name in article, f"cash article missing image {name}"
+          assert article.find("guide-article-warning") < article.find("guide-article-cartoon--cash"), "disclaimer must precede imagery"
+          for name in ("driver","rules"):
+              data=Path(f"/tmp/cash-{name}.webp").read_bytes()
+              assert len(data)>100_000, f"{name}: image missing or truncated"
+              assert data[:4]==b"RIFF" and data[8:12]==b"WEBP", f"{name}: not a real WebP"
+              assert data[12:16]==b"VP8 ", f"{name}: unexpected WebP format"
+              width=struct.unpack_from("<H",data,26)[0]&0x3fff
+              height=struct.unpack_from("<H",data,28)[0]&0x3fff
+              assert (width,height)==(1672,941), f"{name}: wrong image resolution"
+              print(f"Live image {name}: {width}x{height}, {len(data)} bytes")
+          print("Live guide pages, privacy form and two cash illustrations verified.")
+          PY
+          get_status=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 20 "$base/api/travel-guide-submission")
+          if [[ "$get_status" != "405" ]]; then
+            echo "::error::Expected API GET to return 405, found $get_status"
+            exit 1
+          fi
+          invalid_status=$(curl -sS --max-time 20 -o /tmp/story-form-response -w "%{http_code}" -X POST "$base/api/travel-guide-submission" \
+            -H "Origin: $base" -H "Content-Type: application/json" \
+            --data '{"lang":"ru","type":"story"}')
+          if [[ "$invalid_status" != "400" ]]; then
+            echo "::error::Expected incomplete form POST to return 400, found $invalid_status"
+            exit 1
+          fi
+          echo "Live editorial API responds correctly to non-POST and incomplete submissions (no email sent)."
