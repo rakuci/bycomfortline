@@ -2,13 +2,14 @@
 import {readFile} from "node:fs/promises";
 import assert from "node:assert/strict";
 import {borderPassportArticle,borderPassportSources} from "../border-passports-article.mjs";
+import {cashStoryImageLabels} from "../travel-guide-cash-image-labels.mjs";
 const langs=["en","ru","pl","lt","lv","de","fr"];
 const base="https://bycomfortline.com";
 const slug="dual-passports-belarus-poland-border";
 const passportArt="/assets/stories/dual-passport-no-departure.webp";
-async function requireOptimizedWebp(path,expectedWidth,expectedHeight){
+async function requireOptimizedWebp(path,expectedWidth,expectedHeight,maxBytes=300000){
   const buf=await readFile("dist"+path);
-  assert(buf.length>10000 && buf.length<300000,path+": unexpected asset size");
+  assert(buf.length>10000 && buf.length<maxBytes,path+": unexpected asset size");
   assert.equal(buf.toString("ascii",0,4),"RIFF",path+": missing RIFF header");
   assert.equal(buf.toString("ascii",8,12),"WEBP",path+": missing WEBP header");
   assert.equal(buf.toString("ascii",12,16),"VP8 ",path+": unexpected image encoding");
@@ -123,12 +124,14 @@ console.log("Verified seven localised IKEA customs articles: 16 SKUs, source lin
 
 import {cashSixtyArticle,cashSixtySources} from "../cash-eur60-border-article.mjs";
 const cashSlug="60-euro-cash-eur-pln-belarus-border-lithuania-latvia";
-const cashArt="/assets/stories/euro-60-cash-border-exchange-cartoon.svg";
+const cashArt="/assets/stories/euro-60-border-exchange-office-driver.webp";
+const cashInfographic="/assets/stories/euro-60-border-cash-rules-infographic.webp";
 assert.equal(Object.keys(cashSixtyArticle).length,7,"Cash-border story requires seven languages");
 assert(cashSixtySources.length>=10,"Cash-border story requires official law and customs sources");
 assert(css.includes(".guide-cash-facts")&&css.includes(".travel-guide-featured-cash"),"Cash-story responsive styling missing");
-const cashSVG=await readFile("dist"+cashArt,"utf8");
-assert(cashSVG.includes("<svg")&&cashSVG.includes("</svg>")&&cashSVG.includes("€60")&&cashSVG.includes("EXCHANGE OFFICE"),"Cash-border illustration missing or incomplete");
+await requireOptimizedWebp(cashArt,1672,941,380000);
+await requireOptimizedWebp(cashInfographic,1672,941,450000);
+assert.equal(Object.keys(cashStoryImageLabels).length,7,"Cash captions require all languages");
 for(const lang of langs){
  const c=cashSixtyArticle[lang],url=`${base}/${lang}/travel-guide/${cashSlug}/`;
  assert(c&&c.sections.length>=8&&c.checklist.length>=5&&c.facts.length===3,lang+": Cash story is incomplete");
@@ -140,8 +143,12 @@ for(const lang of langs){
  assert(html.includes(c.disclaimerTitle),lang+": missing disclaimer");
  assert(html.indexOf("guide-article-warning")<html.indexOf("guide-article-cartoon--cash"),lang+": disclaimer must precede illustration");
  assert(html.indexOf("guide-article-warning")<html.indexOf('class="guide-article-section"'),lang+": disclaimer must precede legal claims");
- assert(html.includes(`src="${cashArt}" width="1400" height="788"`),lang+": missing illustration");
- assert(guide.includes(`src="${cashArt}" width="1400" height="788"`),lang+": missing story thumbnail");
+ assert(html.includes(`src="${cashArt}" width="1672" height="941"`),lang+": missing driver illustration");
+ assert(html.includes(`src="${cashInfographic}" width="1672" height="941"`),lang+": missing cash-rules infographic");
+ assert(html.includes(`href="${cashInfographic}" target="_blank"`),lang+": infographic should open full size");
+ assert(html.includes('guide-article-cartoon--cash-guide'),lang+": missing secondary image container");
+ assert(html.includes(cashStoryImageLabels[lang].caption),lang+": missing localized infographic caption");
+ assert(guide.includes(`src="${cashArt}" width="1672" height="941"`),lang+": missing new story thumbnail");
  assert(html.includes('"@type":"BlogPosting"'),lang+": missing BlogPosting structured data");
  assert(html.includes(`property="og:image" content="${base}${cashArt}"`),lang+": missing social share image");
  assert(sitemap.includes(`<loc>${url}</loc>`)&&yandex.includes(`<loc>${url}</loc>`),lang+": missing sitemap URL");
@@ -151,4 +158,4 @@ for(const lang of langs){
  assert(html.includes(`hreflang="x-default" href="${base}/en/travel-guide/${cashSlug}/"`),lang+": x-default missing");
  assert.equal((html.match(/class="guide-article-section"/g)||[]).length,c.sections.length,lang+": missing article sections");
 }
-console.log("Verified seven €60 cash border stories, source citations, disclaimers, illustrations and hreflang SEO.");
+console.log("Verified seven €60 cash stories, two optimized infographics, translated captions, citations and hreflang SEO.");
