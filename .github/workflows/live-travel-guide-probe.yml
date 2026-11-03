@@ -1,0 +1,52 @@
+name: Probe live Travel Guide publication
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/live-travel-guide-probe.yml
+      - dist/ru/travel-guide/**
+      - dist/en/travel-guide/**
+
+permissions:
+  contents: read
+
+jobs:
+  check-publication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Test public URLs from an independent network
+        shell: bash
+        run: |
+          set -u
+          for host in bycomfortline.com bycomfortline.by; do
+            for path in /ru/ /ru/travel-guide/ /ru/travel-guide/lithuania-belarus-car-export-sanctions-165mm/ /en/travel-guide/ /assets/stories/lithuania-belarus-165mm-satire.svg /sitemap.xml; do
+              url="https://${host}${path}"
+              echo "::group::PROBE ${url}"
+              status=$(curl --location --max-time 17 --silent --show-error \
+                -A "Mozilla/5.0 (compatible; ComfortlinePublicationAudit/1.0)" \
+                --output /tmp/public_body \
+                --dump-header /tmp/public_headers \
+                --write-out "%{http_code}" "${url}") || status="NETWORK_ERROR"
+              echo "HTTP status: ${status}"
+              grep -iE '^(content-type:|server:|location:|cf-ray:|cache-control:)' /tmp/public_headers 2>/dev/null | head -n 7 || true
+              python3 - "${path}" <<'PY'
+          import sys, pathlib, re
+          path=sys.argv[1]
+          body=pathlib.Path('/tmp/public_body').read_text('utf-8','replace')
+          indicators={
+            'guide_nav': ('Путеводитель' in body or 'Travel Guide' in body),
+            'new_car_article': ('165 миллиметров' in body or '165 millimetres' in body or '165 mm:' in body),
+            'article_slug_in_page': ('lithuania-belarus-car-export-sanctions-165mm' in body),
+            'fictional_illustration': ('guide-article-cartoon' in body),
+            'html_document': ('<!doctype html>' in body.lower()),
+            'edge_challenge': ('challenge-platform' in body.lower() or 'just a moment' in body.lower()),
+            'sitemap_url_count': len(re.findall(r'<loc>',body)) if path.endswith('sitemap.xml') else None
+          }
+          print('BYTES',len(body),'INDICATORS',indicators)
+          PY
+              echo "::endgroup::"
+            done
+          done
