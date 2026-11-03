@@ -745,7 +745,7 @@ function travelGuidePage(lang) {
       <span class="travel-guide-card-count">0${i+1}</span>
       <div><span class="travel-guide-card-status">${esc(c.planned)}</span><h2>${esc(heading)}</h2><p>${esc(description)}</p></div>
     </article>`).join("");
-  const body=`${header(lang,"guide")}<main class="travel-guide-root" id="main-content">
+  const body=`${header(lang,"guide")}<main><div class="travel-guide-root" id="main-content">
     <section class="travel-guide-hero">
       <div class="travel-guide-hero-inner">
         <nav class="travel-guide-breadcrumb" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span aria-hidden="true">/</span><span>${esc(c.nav)}</span></nav>
@@ -757,6 +757,7 @@ function travelGuidePage(lang) {
       <div class="travel-guide-heading"><h2>${esc(c.topicsHeading)}</h2><p>${esc(c.topicsIntro)}</p></div>
       <div class="travel-guide-grid">${cards}</div>
     </section>
+    <section class="travel-guide-cultural-story" aria-label="${esc(c.routesHeading)}">${cityPhotoFigure(lang,"minsk")}</section>
     <section class="travel-guide-disclaimer" aria-label="${esc(c.disclaimerHeading)}">
       <span class="travel-guide-note-icon" aria-hidden="true">i</span>
       <div><h2>${esc(c.disclaimerHeading)}</h2><p>${esc(c.disclaimer)}</p></div>
@@ -768,17 +769,18 @@ function travelGuidePage(lang) {
         <a class="button ghost" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(c.contact)}</a>
       </div>
     </section>
-    </main>${footer(l)}`;
+    </div></main>${footer(l)}`;
   const schema={"@context":"https://schema.org","@graph":[
     businessSchema(lang,canonical),
     {"@type":"CollectionPage","name":c.title,"description":c.metaDescription,"url":canonical,"inLanguage":lang,
-      "isPartOf":{"@id":base+"/#business"}},
+      "about":{"@id":base+"/#business"}},
     {"@type":"BreadcrumbList","itemListElement":[
       {"@type":"ListItem","position":1,"name":l.nav.routes,"item":base+l.home},
       {"@type":"ListItem","position":2,"name":c.nav,"item":canonical}
-    ]}
+    ]},
+    cityPhotoObject(lang,"minsk")
   ]};
-  return layout({lang,title,description:c.metaDescription,canonical,alternates:guideAlternates(),body,schema});
+  return layout({lang,title,description:c.metaDescription,canonical,alternates:guideAlternates(),body,schema,ogImage:cityPhotoPreviewUrl("minsk")});
 }
 
 function hubPage(lang) {
@@ -1714,6 +1716,8 @@ const sitemapEntries = [
 
 const imageSitemapIndex = new Map();
 for (const lang of Object.keys(locale)) {
+  const guideImage=cityPhotoUrl("minsk");
+  if(guideImage)imageSitemapIndex.set(base+guidePath(lang),guideImage);
   for (const place of geoCities) {
     const image = cityPhotoUrl(place.id);
     if(image)imageSitemapIndex.set(base+geoPath(lang,place),image);
