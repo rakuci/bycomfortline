@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="art-title art-desc">
+<title id="art-title">165 millimetres: a satirical Lithuanian–Belarusian border illustration</title>
+<desc id="art-desc">A puzzled driver stands beside a packed SUV at the Lithuania-to-Belarus checkpoint while a friendly customs officer consults a vehicle-clearance diagram. The border barrier stays closed; a small tape measure shows 165 mm. Fictional editorial cartoon.</desc>
+<defs>
+<linearGradient id="sky" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#d2e8ea"/><stop offset="1" stop-color="#fff3d9"/></linearGradient>
+<linearGradient id="road" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#d6d8d1"/><stop offset="1" stop-color="#b9bbb1"/></linearGradient>
+<linearGradient id="car" x1="0" x2="1"><stop stop-color="#2b6773"/><stop offset=".65" stop-color="#123745"/><stop offset="1" stop-color="#264a55"/></linearGradient>
+<linearGradient id="window" x1="0" x2="1"><stop stop-color="#e8f1e9"/><stop offset="1" stop-color="#a2c6ca"/></linearGradient>
+<filter id="sh"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#203c48" flood-opacity=".16"/></filter>
+<pattern id="cross" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><path d="M0 0V12" stroke="#c59f64" stroke-width="5"/></pattern>
+</defs>
+<rect width="1200" height="675" fill="url(#sky)"/>
+<path d="M0 386Q180 365 350 394T700 387T1200 375V500H0" fill="#b6d4c1" opacity=".66"/>
+<path d="M0 451H1200V675H0Z" fill="url(#road)"/>
+<path d="M0 472H1200" stroke="#fff" stroke-opacity=".7" stroke-width="6"/>
+<path d="M0 622H1200" stroke="#fbf8ed" stroke-width="7" stroke-dasharray="70 54" opacity=".85"/>
+<!-- checkpoint -->
+<g filter="url(#sh)">
+<rect x="785" y="179" width="321" height="276" rx="11" fill="#e2ebe8" stroke="#7f9fa1" stroke-width="3"/>
+<rect x="764" y="155" width="364" height="31" rx="8" fill="#355a68"/>
+<rect x="829" y="235" width="238" height="116" rx="11" fill="#84adbc" stroke="#496e7a" stroke-width="6"/>
+<path d="M831 294H1067M950 236V350" stroke="#d9edee" stroke-width="7" opacity=".8"/>
+<rect x="831" y="364" width="239" height="18" rx="4" fill="#8eacac"/>
+<rect x="819" y="400" width="275" height="55" rx="10" fill="#264450"/>
+</g>
+<!-- LT border route sign -->
+<g filter="url(#sh)">
+<rect x="845" y="46" width="262" height="94" rx="12" fill="#143750" stroke="#f7edd9" stroke-width="5"/>
+<rect x="862" y="62" width="47" height="15" fill="#fcd348"/><rect x="862" y="77" width="47" height="15" fill="#2b916d"/><rect x="862" y="92" width="47" height="15" fill="#d44b4b"/>
+<text x="930" y="106" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="35" font-weight="800">LT → BY</text>
+</g>
+<!-- barrier -->
+<rect x="750" y="400" width="34" height="167" rx="7" fill="#334d56"/>
+<rect x="742" y="383" width="51" height="35" rx="8" fill="#f2c566" stroke="#273f49" stroke-width="4"/>
+<rect x="234" y="408" width="515" height="24" rx="8" fill="#fff" stroke="#bd5050" stroke-width="3"/>
+<path d="M256 409l26 23h53l-26-23zm100 0l26 23h53l-26-23zm100 0l26 23h53l-26-23zm100 0l26 23h53l-26-23zm100 0l26 23h53l-26-23z" fill="#d74c4a"/>
+<!-- luggage roof -->
+<rect x="105" y="301" width="355" height="31" rx="14" fill="#162f3b"/>
+<rect x="183" y="225" width="174" height="79" rx="19" fill="#536c73" stroke="#1c3541" stroke-width="6"/>
+<rect x="207" y="235" width="127" height="8" rx="4" fill="#758f92"/>
+<!-- SUV -->
+<g filter="url(#sh)">
+<path d="M61 437l45-72q13-22 45-26h299q24 0 44 26l53 63 29 13q20 9 20 31v63H42v-60q0-23 19-38" fill="url(#car)" stroke="#18323d" stroke-width="6"/>
+<path d="M149 355h290q12 1 23 16l44 50H87l31-48q13-18 31-18" fill="url(#window)" stroke="#18313c" stroke-width="6"/>
+<path d="M287 355v65M86 422h420" stroke="#284652" stroke-width="8"/>
+<path d="M60 462h60M515 462h64" stroke="#f3dec0" stroke-width="17" stroke-linecap="round"/>
+<rect x="42" y="495" width="554" height="41" rx="17" fill="#21404a"/>
+<rect x="56" y="503" width="73" height="23" rx="6" fill="#cfddda"/><rect x="516" y="503" width="66" height="23" rx="6" fill="#cfddda"/>
+<circle cx="166" cy="530" r="66" fill="#1c2b32"/><circle cx="166" cy="530" r="43" fill="#b9cbcb"/><circle cx="166" cy="530" r="23" fill="#738d90"/><circle cx="166" cy="530" r="6" fill="#dfe7df"/>
+<circle cx="473" cy="530" r="66" fill="#1c2b32"/><circle cx="473" cy="530" r="43" fill="#b9cbcb"/><circle cx="473" cy="530" r="23" fill="#738d90"/><circle cx="473" cy="530" r="6" fill="#dfe7df"/>
+<rect x="300" y="474" width="101" height="33" rx="6" fill="#f9fbf4" stroke="#9faead" stroke-width="3"/>
+<rect x="306" y="478" width="19" height="8" fill="#275ac1"/><rect x="306" y="486" width="19" height="8" fill="#ebd73a"/>
+<text x="348" y="495" fill="#425c65" font-family="Arial,sans-serif" font-size="17" font-weight="800">EU</text>
+</g>
+<!-- anxious driver upper torso leaning -->
+<g>
+<path d="M388 430q-4-82 49-101q56-16 75 52l-12 51z" fill="#ae7657" stroke="#573b35" stroke-width="5"/>
+<path d="M425 357q-20-37-2-61q19-26 51-19q33 8 26 50l-18 41z" fill="#dca986" stroke="#573b35" stroke-width="4"/>
+<path d="M420 319q-13-39 23-50q17-27 47-8q26 7 16 37q-29-12-46-5q-26 16-40 26" fill="#553c2f"/>
+<circle cx="448" cy="320" r="5" fill="#342c2c"/><circle cx="480" cy="318" r="5" fill="#342c2c"/>
+<path d="M450 306l-8-6M476 303l11-3M452 345q14-13 30-4" stroke="#65433a" stroke-width="4" fill="none" stroke-linecap="round"/>
+<path d="M414 381q-37-6-34-28l16-22 27 17-7 24" fill="#dca986" stroke="#573b35" stroke-width="4"/>
+</g>
+<!-- driver's speech bubble -->
+<path d="M342 78h270q27 0 27 25v101q0 24-26 24H460l-37 42 7-42h-88q-25 0-25-24V103q0-25 25-25" fill="#fffdf6" stroke="#425a5a" stroke-width="5" filter="url(#sh)"/>
+<text x="477" y="133" font-family="Arial,sans-serif" text-anchor="middle" font-size="29" font-weight="800" fill="#344b53">165 mm?!</text>
+<text x="477" y="173" font-family="Arial,sans-serif" text-anchor="middle" font-size="22" fill="#53656c">1900 cm³?</text>
+<path d="M487 190q28 23 52 0" fill="none" stroke="#c39c6b" stroke-width="4" stroke-linecap="round"/>
+<!-- official customs cartoon woman, no real agency insignia -->
+<g filter="url(#sh)">
+<path d="M910 586v-124q4-51 60-51t61 51v124" fill="#38626a" stroke="#27424b" stroke-width="5"/>
+<path d="M937 451l34 42 30-42" fill="#e0f0dc" stroke="#24444b" stroke-width="3"/>
+<path d="M953 493l18-21 18 21-18 77z" fill="#d9b16a"/>
+<rect x="922" y="456" width="15" height="122" fill="#d3b76e"/><rect x="1005" y="456" width="15" height="122" fill="#d3b76e"/>
+<rect x="942" y="315" width="57" height="85" rx="22" fill="#e5b38e" stroke="#594739" stroke-width="4"/>
+<path d="M941 349q-11-42 26-47q32-5 37 26l-5 17q-24-15-58 4" fill="#51453f"/>
+<path d="M920 302l32-27h45l32 27-17 15h-76z" fill="#314b5a" stroke="#1d3945" stroke-width="4"/>
+<rect x="917" y="303" width="113" height="16" rx="7" fill="#1e3642"/>
+<circle cx="958" cy="356" r="4" fill="#253238"/><circle cx="987" cy="356" r="4" fill="#253238"/>
+<path d="M961 378q14 12 26 0" fill="none" stroke="#9b6353" stroke-width="4" stroke-linecap="round"/>
+<path d="M924 462q-38-12-63-39l-39 42q25 56 99 66" fill="#e5b38e" stroke="#594739" stroke-width="5"/>
+</g>
+<!-- officer clipboard note -->
+<g transform="rotate(-7 784 438)" filter="url(#sh)">
+<rect x="689" y="293" width="177" height="183" rx="14" fill="#fff9e7" stroke="#4d6164" stroke-width="6"/>
+<rect x="749" y="282" width="57" height="20" rx="7" fill="#657f7a"/>
+<text x="777" y="345" text-anchor="middle" fill="#224752" font-family="Arial,sans-serif" font-weight="900" font-size="34">165</text>
+<text x="777" y="378" text-anchor="middle" fill="#224752" font-family="Arial,sans-serif" font-weight="800" font-size="25">mm</text>
+<path d="M723 412h107M723 437h107" stroke="#b6c0b5" stroke-width="7" stroke-linecap="round"/>
+</g>
+<!-- ruler & measurement foreground -->
+<g>
+<rect x="364" y="609" width="279" height="36" rx="8" fill="#f3c556" stroke="#3f5360" stroke-width="4"/>
+<path d="M377 612v21m12-21v10m12-10v16m12-16v10m12-10v21m12-21v10m12-10v16m12-16v10m12-10v21m12-21v10m12-10v16m12-16v10m12-10v21m12-21v10m12-10v16m12-16v10m12-10v21m12-21v10m12-10v16" stroke="#926e26" stroke-width="2"/>
+<text x="498" y="637" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" font-weight="900" fill="#2b4850">165 mm</text>
+</g>
+<!-- subtle byline without logo -->
+<rect x="32" y="32" width="226" height="48" rx="24" fill="#153b48"/>
+<text x="145" y="62" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="2">COMFORTLINE</text>
+<text x="1120" y="652" text-anchor="end" fill="#3d5960" font-family="Arial,sans-serif" font-size="13">Editorial illustration · fictional scene</text>
+</svg>
