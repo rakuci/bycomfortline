@@ -93,10 +93,15 @@ jobs:
           ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9','image':'http://www.google.com/schemas/sitemap-image/1.1'}
           g=[row.findtext('s:loc',namespaces=ns) for row in root.findall('s:url',ns)]
           y=[row.findtext('s:loc',namespaces=ns) for row in yandex.findall('s:url',ns)]
-          assert len(g)==1534, f'Live canonical sitemap has {len(g)} URLs, expected 1534'
+          assert len(g)==1541, f'Live canonical sitemap has {len(g)} URLs, expected 1541'
           assert g==y, 'Live Google and Yandex sitemap URLs differ'
+          service_slugs={
+              'en':'long-distance-private-transfers','ru':'dalnie-transfery-ot-300-km',
+              'pl':'transfery-dlugodystansowe-300-km','lt':'ilgu-atstumu-pervezimai-300-km',
+              'lv':'talie-privatie-transferi-300-km','de':'langstrecken-privattransfer-ab-300-km',
+              'fr':'transferts-prives-longue-distance-300-km'}
           for lang in ('en','ru','pl','lt','lv','de','fr'):
-              paths=[
+              paths=[f'/{lang}/{service_slugs[lang]}/',
                   f'/{lang}/travel-guide/',
                   f'/{lang}/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/',
                   f'/{lang}/travel-guide/dual-passports-belarus-poland-border/',
