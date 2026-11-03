@@ -22,7 +22,7 @@ for(const lang of langs){
   assert(html.includes(`<html lang="${lang}"`),lang+": incorrect document language");
   assert(html.includes(c.disclaimerTitle),lang+": missing up-front disclaimer");
   assert(html.indexOf("guide-article-warning")<html.indexOf("guide-article-section"),lang+": legal disclaimer is not first");
-  assert(html.includes("https://schema.org/BlogPosting")&&html.includes('"\"@type\":\"BlogPosting\""'),lang+": missing article schema");
+  assert(html.includes("https://schema.org/BlogPosting") && html.includes('"@type":"BlogPosting"'),lang+": missing article schema");
   assert(html.includes(`<h1 itemprop="headline">`),lang+": missing article heading");
   assert(html.includes('href="#guide-source-1"')&&html.includes('id="guide-source-10"'),lang+": sources not cross-linked");
   assert(sitemap.includes(`<loc>${url}</loc>`),lang+": not in Google sitemap");
