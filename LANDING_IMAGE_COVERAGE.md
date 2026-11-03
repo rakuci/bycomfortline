@@ -5,7 +5,8 @@ Do not interpret this source-level audit as verification of live Cloudflare resp
 
 | Measure | Count |
 |---|---:|
-| Canonical URLs checked | 1499 |
+| Canonical transfer/destination URLs checked | 1499 |
+| Editorial pages excluded from destination-photo audit | 14 |
 | With real self-hosted destination image | 1499 |
 | Missing matching destination photo | 0 |
 | Distinct photographed landmarks used | 14 |
