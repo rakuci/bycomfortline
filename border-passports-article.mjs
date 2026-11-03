@@ -156,5 +156,179 @@ export const borderPassportArticle = {
       "Убедиться, что выбранный переход открыт для нужного вида транспорта.",
       "Повторно проверить официальные уведомления непосредственно перед поездкой."
     ]
+  },
+  "pl": {
+    "title": "Dwa paszporty, niepewny powrót: historia z granicy Białorusi i Polski",
+    "shortTitle": "Dwa paszporty i ryzyko braku powrotu",
+    "description": "Historia kierowcy o paszportach USA i Rosji, białoruskich wizach oraz ograniczeniach wjazdu do Polski i na Litwę — analiza oficjalnych źródeł.",
+    "tag": "Historie z granicy",
+    "read": "Przeczytaj analizę przepisów",
+    "back": "Wróć do poradnika",
+    "reviewed": "Źródła prawne sprawdzone",
+    "sources": "Źródła urzędowe do sprawdzenia przed wyjazdem",
+    "checklist": "Lista kontrolna przed podróżą",
+    "disclaimerTitle": "Ważne: materiał informacyjny, nie źródło urzędowe",
+    "disclaimer": "Tekst służy wyłącznie do osobistego zapoznania się z tematem i planowania podróży. ComfortLine nie jest organem państwowym. Artykuł nie stanowi oficjalnego źródła prawa, porady prawnej ani gwarancji przekroczenia granicy. Przepisy, wyjątki i dostępność przejść mogą się zmienić. Bezpośrednio przed wyjazdem sprawdź wskazane akty i komunikaty urzędowe oraz informacje właściwych służb granicznych i konsularnych. Decyzję o wpuszczeniu podejmują odpowiednie organy.",
+    "sections": [
+      [
+        "Historia kierowcy: rosyjskie paszporty zostały w domu",
+        "Kierowca ComfortLine opisał podróż z Polski na Białoruś pasażerów posługujących się paszportami amerykańskimi. Podczas białoruskiej kontroli paszportowej funkcjonariusze zapytali o paszporty rosyjskie. Podróżni nie zabrali ich z domu, ale mieli białoruskie wizy. Kierowca obawiał się problemów zarówno przy wjeździe, jak i późniejszym powrocie do Polski.",
+        "Jest to anonimowa relacja, nie prawomocne rozstrzygnięcie. Nie widzieliśmy dokumentów ani decyzji służb. Nie możemy potwierdzić podstawy żądania rosyjskich paszportów, znaczenia wiz ani tego, czy pasażerów obejmował wyjątek od polskich ograniczeń."
+      ],
+      [
+        "Paszport USA a wjazd do Polski z Białorusi",
+        "Obywatele USA zwykle mogą krótkotrwale wjeżdżać do strefy Schengen bez wizy. Inne, szczególne przepisy obejmują jednak przekraczanie granicy białorusko-polskiej w kierunku Polski. Straż Graniczna odsyła do kategorii uprawnionych cudzoziemców z § 3 ust. 2 rozporządzenia o ograniczeniu ruchu granicznego. Departament Stanu USA ostrzega, że obywatel USA musi spełnić jeden z wyjątków. [1] [2]",
+        "Podstawą wyjątku mogą być odpowiednio udokumentowane uprawnienia pobytowe, sytuacja rodzinna lub inna przewidziana prawem kategoria. To nie jest ogólny zakaz wjazdu do Polski dla obywateli USA, Izraela czy Grenady. Liczą się kierunek wjazdu i konkretna podstawa prawna, a sam ruch bezwizowy nie rozwiązuje problemu. [1]"
+      ],
+      [
+        "Dwa obywatelstwa i białoruska wiza",
+        "Osoba posiadająca obywatelstwa USA i Rosji powinna ustalić, jakie dokumenty są wymagane przy wjeździe na Białoruś oraz wyjeździe z niej, a także przy wjeździe do następnego państwa. Wiza białoruska w paszporcie USA nie zastępuje rosyjskiego dokumentu, jeżeli właściwe władze zasadnie go wymagają; nie zapewnia też prawa wjazdu do Polski.",
+        "Nie ustalono, na jakiej podstawie białoruscy funkcjonariusze pytali o rosyjskie paszporty. Sprawę należy wyjaśnić z kompetentnym konsulatem lub służbami granicznymi. USA utrzymują wobec Białorusi ostrzeżenie poziomu 4 — nie podróżować — m.in. ze względu na ograniczoną pomoc konsularną i możliwe zamknięcia granic. [8] [10]"
+      ],
+      [
+        "Rosyjskie paszporty niebiometryczne: różne daty",
+        "Polska nie uznaje rosyjskich paszportów dyplomatycznych i służbowych bez danych biometrycznych od 1 stycznia 2026 r., a zwykłych paszportów tego typu od 1 kwietnia 2026 r. Litwa wprowadziła analogiczne ograniczenie 1 czerwca 2025 r., przewidując określone rozwiązania przejściowe dla posiadaczy zezwoleń pobytowych oraz wyjątek dotyczący tranzytu kolejowego. [3] [4]",
+        "Należy odróżnić wymóg dokumentu wydanego w ciągu ostatnich dziesięciu lat (art. 6 kodeksu granicznego Schengen) od rodzaju dokumentu. Przepis nie wymaga, aby każdy paszport był wydany na okres dokładnie dziesięciu lat. [5]"
+      ],
+      [
+        "Obywatele Ukrainy: bezwizowy wjazd a inne podstawy",
+        "Ukraiński paszport biometryczny jest warunkiem zwykłego, krótkoterminowego ruchu bezwizowego. Nie oznacza to, że ukraiński paszport niebiometryczny jest bezwzględnie wykluczony w każdej sytuacji. Znaczenie mogą mieć wiza, prawo pobytu lub odpowiednie mechanizmy humanitarne. [6] [7]",
+        "Unijne wytyczne dotyczące osób uciekających przed wojną obejmują określone okoliczności. Nie należy automatycznie stosować ich do każdej podróży z Białorusi przez polską lub litewską granicę. [7]"
+      ],
+      [
+        "Litwa stosuje własne zasady",
+        "Polskiego § 3 ust. 2 nie wolno przenosić na litewską granicę. Litwa stosuje własne regulacje dotyczące obywatelstwa, dokumentów i bezpieczeństwa; działanie przejść może się zmieniać. Sam paszport USA lub Izraela nie daje gwarancji wjazdu z Białorusi, ale nie oznacza też automatycznego całkowitego zakazu. [4] [9]",
+        "Trzeba osobno sprawdzić konkretny punkt graniczny, kierunek oraz możliwość przejazdu samochodem osobowym. Ocena na granicy pozostaje indywidualna. [5]"
+      ],
+      [
+        "Najpierw sprawdź drogę powrotną",
+        "Przed wyjazdem ustal wszystkie obywatelstwa, zabierz odpowiednie paszporty, sprawdź ich uznawanie, ważność, wizy i zezwolenia na pobyt. Upewnij się, że istnieje prawna podstawa powrotu do Polski przez wybrane przejście lub wjazdu na Litwę. Sprawdź również pojazd i aktualne godziny pracy przejść.",
+        "Wyjazd z Polski i wjazd na Białoruś nie oznaczają, że powrót tą samą drogą będzie dozwolony. Weryfikuj cały plan podróży w źródłach państwowych, a w niejasnych przypadkach poproś służby o oficjalne wyjaśnienie. [1] [2] [8]"
+      ]
+    ],
+    "checks": [
+      "Uwzględnij wszystkie obywatelstwa i zabierz właściwe ważne paszporty.",
+      "Sprawdź warunki wjazdu i wyjazdu z Białorusi.",
+      "Potwierdź podstawę ponownego wjazdu do Polski albo wymagania Litwy.",
+      "Sprawdź dokument biometryczny, ważność, wizę i pozwolenie na pobyt.",
+      "Sprawdź otwarcie przejścia i dopuszczony rodzaj pojazdu.",
+      "Ponownie przeczytaj komunikaty urzędowe bezpośrednio przed wyjazdem."
+    ]
+  },
+  "lt": {
+    "title": "Du pasai, bet neaiškus kelias atgal: istorija prie Baltarusijos ir Lenkijos sienos",
+    "shortTitle": "Du pasai ir grįžimo per sieną rizika",
+    "description": "Vairuotojo pasakojimas apie JAV ir Rusijos pasus, Baltarusijos vizas bei grįžimo į Lenkiją taisykles. Remiamasi oficialiais šaltiniais.",
+    "tag": "Pasakojimai iš pasienio",
+    "read": "Skaityti teisinę apžvalgą",
+    "back": "Visas kelionių gidas",
+    "reviewed": "Šaltiniai patikrinti",
+    "sources": "Oficialūs šaltiniai, kuriuos būtina patikrinti",
+    "checklist": "Prieš kelionę pasitikrinkite",
+    "disclaimerTitle": "Svarbu: tik informacinė medžiaga, ne oficialus šaltinis",
+    "disclaimer": "Ši publikacija skirta tik asmeniniam susipažinimui ir kelionės planavimui. ComfortLine nėra valstybės institucija; tekstas nėra oficialus teisės šaltinis, individuali teisinė konsultacija ar įleidimo garantija. Reikalavimai, išimtys ir pasienio punktų veikla gali keistis. Prieš vykdami iš naujo patikrinkite pateiktus oficialius teisės aktus ir kompetentingų pasienio bei konsulinių institucijų informaciją. Sprendimą dėl įleidimo priima valdžios institucijos.",
+    "sections": [
+      [
+        "Vairuotojo istorija: Rusijos pasai liko namuose",
+        "ComfortLine vairuotojas papasakojo apie keleivius, vykusius iš Lenkijos į Baltarusiją su JAV pasais. Baltarusijos pasienio kontrolėje pareigūnai paklausė apie jų Rusijos pasus, tačiau keleiviai jų nebuvo pasiėmę. Jie turėjo Baltarusijos vizas. Vairuotojui kilo klausimas, ar keliautojai be papildomų dokumentų galėtų grįžti į Lenkiją.",
+        "Tai anoniminis pasakojimas, o ne patvirtintas teismo ar pasienio institucijų sprendimas. Nematėme keleivių dokumentų, todėl negalime nustatyti, kodėl buvo prašoma Rusijos pasų, kokią įtaką turėjo vizos ir ar jiems buvo taikoma Lenkijos taisyklių išimtis."
+      ],
+      [
+        "JAV pasas negarantuoja įvažiavimo iš Baltarusijos į Lenkiją",
+        "JAV piliečiams paprastai leidžiamos trumpalaikės bevizės kelionės Šengeno erdvėje. Tačiau Lenkija taiko atskiras įvažiavimo iš Baltarusijos krypties ribojimo taisykles: užsieniečiai turi priklausyti vienai iš leidžiamų kategorijų pagal Lenkijos pasienio eismo ribojimo reglamento 3 straipsnio 2 dalį (§ 3 ust. 2). JAV Valstybės departamentas specialiai įspėja, kad JAV piliečiams būtina atitikti vieną iš išimčių. [1] [2]",
+        "Išimtys gali priklausyti nuo teisės gyventi, šeiminių ryšių ar kito teisiškai numatyto pagrindo. Tai nėra visuotinis draudimas JAV, Izraelio ar Grenados piliečiams lankytis Lenkijoje. Lemiamą reikšmę turi sienos kirtimo kryptis ir konkretus teisinis pagrindas. [1]"
+      ],
+      [
+        "Dviguba pilietybė ir Baltarusijos viza",
+        "JAV ir Rusijos pilietybę turintis asmuo privalo išsiaiškinti, kurių pasų Baltarusija gali reikalauti atvykstant ir išvykstant, ir kokie dokumentai tinkami kitai valstybei. Baltarusijos viza JAV pase nesuteikia teisės įvažiuoti į Lenkiją ir savaime nepakeičia kito dokumento, jei jo teisėtai reikalaujama.",
+        "Nežinome konkretaus Baltarusijos pareigūnų prašymo teisinio pagrindo. Dėl savo aplinkybių kreipkitės į kompetentingas konsulines ar pasienio institucijas. JAV Valstybės departamentas Baltarusijai taiko aukščiausią, 4 lygio įspėjimą nevykti, taip pat įspėja dėl ribotos konsulinės pagalbos. [8] [10]"
+      ],
+      [
+        "Rusijos nebiometriniai pasai: Lenkijos ir Lietuvos skirtumai",
+        "Lenkija nustojo pripažinti Rusijos nebiometrinius diplomatinius ir tarnybinius pasus nuo 2026 m. sausio 1 d., o įprastus užsienio pasus — nuo 2026 m. balandžio 1 d. Lietuvoje apribojimas įsigaliojo 2025 m. birželio 1 d., su pereinamojo laikotarpio taisyklėmis kai kuriems leidimų gyventi turėtojams ir specialia geležinkelio tranzito išimtimi. [3] [4]",
+        "Šengeno sienų kodekso reikalavimas, kad trumpalaikiam atvykimui dokumentas paprastai būtų išduotas per pastaruosius dešimt metų, nereiškia, kad kiekvienas pasas privalo galioti lygiai dešimt metų. Biometrinio dokumento pripažinimas yra kitas klausimas. [5]"
+      ],
+      [
+        "Ukrainos piliečiai: bevizis režimas nėra vienintelis pagrindas",
+        "Įprastam trumpalaikiam beviziam atvykimui Ukrainos piliečiams reikia tinkamo biometrinio paso. Tačiau kitos teisinės aplinkybės, pavyzdžiui, viza, leidimas gyventi ar humanitarinė apsauga, gali būti vertinamos kitaip. Negalima teigti, kad be biometrinio paso visi Ukrainos piliečiai visada negali kirsti sienos. [6] [7]",
+        "ES humanitarinės gairės žmonėms, bėgantiems nuo karo Ukrainoje, nėra automatinis leidimas visiems atvykstantiems iš Baltarusijos. Vertinamas konkretus maršrutas ir statusas. [7]"
+      ],
+      [
+        "Lietuvos taisyklės nėra Lenkijos taisyklės",
+        "Lenkijos nacionalinio reglamento išimtis negalima tiesiog perkelti į Lietuvos sieną. Lietuva turi atskiras kelionės dokumentų, nacionalinio saugumo ir sienos kirtimo taisykles; pasienio punktų veikla gali keistis. JAV ar Izraelio pasas savaime neužtikrina įvažiavimo, bet ir nereiškia visuotinio draudimo. [4] [9]",
+        "Prieš kelionę patikrinkite konkretaus punkto darbą, kryptį, leidžiamą transporto rūšį ir dokumentų tinkamumą. [5]"
+      ],
+      [
+        "Grįžimą suplanuokite dar neišvykę",
+        "Susirašykite visas pilietybes, pasiimkite reikiamus pasus, patikrinkite jų pripažinimą, galiojimą, vizas ir leidimus gyventi. Iš anksto išsiaiškinkite, ar galite grįžti į Lenkiją pasirinktame punkte arba įvažiuoti į Lietuvą. Pasitikrinkite automobilio reikalavimus ir sienos punkto darbo laiką.",
+        "Tai, kad pavyko išvykti iš Lenkijos ir atvykti į Baltarusiją, nereiškia teisės grįžti tuo pačiu keliu. Aktualią informaciją gaukite iš oficialių institucijų, o ne vien iš senų straipsnių ar keliautojų pasakojimų. [1] [2] [8]"
+      ]
+    ],
+    "checks": [
+      "Įvertinkite visas pilietybes ir pasiimkite galiojančius pasus.",
+      "Patikrinkite atvykimo į Baltarusiją ir išvykimo sąlygas.",
+      "Patvirtinkite grįžimo į Lenkiją pagrindą ar Lietuvos reikalavimus.",
+      "Patikrinkite biometrinius duomenis, galiojimą, vizas ir leidimus.",
+      "Įsitikinkite, kad sienos punktas atidarytas jūsų transporto rūšiai.",
+      "Dar kartą perskaitykite oficialius pranešimus prieš pat išvykimą."
+    ]
+  },
+  "lv": {
+    "title": "Divas pases, bet neskaidrs atpakaļceļš: stāsts no Baltkrievijas un Polijas robežas",
+    "shortTitle": "Divas pases un atgriešanās risks",
+    "description": "Vadītāja pieredze ar ASV un Krievijas pasēm, Baltkrievijas vīzām un Polijas robežas ierobežojumiem — juridisks skaidrojums ar oficiāliem avotiem.",
+    "tag": "Robežas stāsti",
+    "read": "Lasīt juridisko apskatu",
+    "back": "Visi ceļveža raksti",
+    "reviewed": "Pārbaudītie avoti",
+    "sources": "Oficiālie avoti pārbaudei pirms ceļojuma",
+    "checklist": "Pirms brauciena pārbaudiet",
+    "disclaimerTitle": "Svarīgi: informatīvs materiāls, nevis oficiāls avots",
+    "disclaimer": "Raksts paredzēts tikai personiskai informācijai un ceļojuma plānošanai. ComfortLine nav valsts iestāde, un šis materiāls nav oficiāls tiesību avots, juridiska konsultācija vai garantija ieceļošanai. Normatīvie akti, izņēmumi un robežpunktu darbība var mainīties. Tieši pirms brauciena pārbaudiet norādītos oficiālos dokumentus un attiecīgo robežsardzes un konsulāro iestāžu informāciju. Lēmumu pieņem kompetentās iestādes.",
+    "sections": [
+      [
+        "Vadītāja pieredze: Krievijas pases bija palikušas mājās",
+        "ComfortLine vadītājs stāstīja par pasažieriem, kuri no Polijas devās uz Baltkrieviju ar ASV pasēm. Baltkrievijas pasu kontrolē amatpersonas jautāja par viņu Krievijas pasēm, taču tās nebija paņemtas līdzi. Pasažieriem bija Baltkrievijas vīzas. Vadītājs sāka raizēties par iespējamu sarežģījumu ne tikai ieceļojot Baltkrievijā, bet arī atgriežoties Polijā.",
+        "Tas ir anonimizēts aculiecinieka stāsts, nevis apstiprināts iestādes lēmums. Mēs neesam pārbaudījuši pasažieru dokumentus un nevaram apgalvot, kādēļ tika pieprasītas Krievijas pases, vai vīzas mainīja iznākumu un vai personas atbilda Polijas izņēmumam."
+      ],
+      [
+        "ASV pase pati par sevi nedod tiesības iebraukt Polijā no Baltkrievijas",
+        "ASV pilsoņi parasti var īslaicīgi ceļot Šengenas zonā bez vīzas. Taču ieceļošanai Polijā no Baltkrievijas ir īpaši ierobežojumi: ārvalstniekam jāietilpst Polijas robežsatiksmes noteikumu § 3(2) paredzētajā kategorijā. ASV Valsts departaments atsevišķi brīdina, ka ASV pilsonim nepieciešams piemērojams izņēmums. [1] [2]",
+        "Izņēmumi var būt saistīti ar uzturēšanās tiesībām, ģimenes apstākļiem vai citu dokumentētu pamatu. Tas nav vispārējs aizliegums ASV, Izraēlas vai Grenādas pilsoņiem ieceļot Polijā. Svarīgs ir ieceļošanas virziens un konkrētais juridiskais pamats. [1]"
+      ],
+      [
+        "Dubultpilsonība un Baltkrievijas vīza",
+        "Personai ar ASV un Krievijas pilsonību jānoskaidro, kādi dokumenti Baltkrievijai vajadzīgi ieceļošanai un izceļošanai, kā arī kas nepieciešams nākamajā valstī. Baltkrievijas vīza ASV pasē pati par sevi neaizstāj citas pases, ja tā likumīgi jāuzrāda, un nedod tiesības atgriezties Polijā.",
+        "Nav zināms, uz kādas konkrētas Baltkrievijas tiesību normas pamata amatpersonas pieprasīja Krievijas pases. Individuālu situāciju vēlams noskaidrot kompetentā konsulātā vai robežsardzē. ASV Valsts departaments Baltkrievijai noteicis 4. līmeņa brīdinājumu neceļot, tostarp ierobežotas konsulārās palīdzības dēļ. [8] [10]"
+      ],
+      [
+        "Krievijas nebiometriskās pases: Polijas un Lietuvas termiņi",
+        "Polija pārtrauca atzīt Krievijas nebiometriskās diplomātiskās un dienesta pases no 2026. gada 1. janvāra un parastās pases no 2026. gada 1. aprīļa. Lietuvas ierobežojums stājās spēkā 2025. gada 1. jūnijā, paredzot īpašu pārejas periodu noteiktiem uzturēšanās atļauju turētājiem un dzelzceļa tranzīta izņēmumu. [3] [4]",
+        "Šengenas Robežu kodeksa noteikums, ka īstermiņa ieceļošanai pase parasti jāizdod pēdējo desmit gadu laikā, nenozīmē, ka katrai pasei jābūt derīgai tieši desmit gadus. Biometriskā dokumenta atzīšana ir atsevišķs jautājums. [5]"
+      ],
+      [
+        "Ukrainas pilsoņu dokumenti",
+        "Parastam īstermiņa bezvīzu braucienam Ukrainas pilsoņiem nepieciešama atbilstoša biometriskā pase. Taču vīza, uzturēšanās atļauja vai piemērojama humānā aizsardzība var radīt citu tiesisku situāciju. Tādēļ nav precīzi apgalvot, ka visos gadījumos bez biometrijas ieceļošana nav iespējama. [6] [7]",
+        "ES norādes cilvēkiem, kuri bēg no kara Ukrainā, attiecas uz konkrētiem apstākļiem. Tās nedrīkst automātiski attiecināt uz jebkuru braucienu no Baltkrievijas. [7]"
+      ],
+      [
+        "Lietuvai ir savi robežnoteikumi",
+        "Polijas § 3(2) noteikumu nevar attiecināt uz Lietuvu. Lietuvai ir atsevišķi ceļošanas dokumentu atzīšanas, valsts drošības un robežšķērsošanas noteikumi. Robežpunktu darbība var mainīties. ASV vai Izraēlas pase pati par sevi nenozīmē ne garantētu ieceļošanu, ne automātisku aizliegumu. [4] [9]",
+        "Katram ceļam atsevišķi pārbaudiet robežpunktu, virzienu, atļauto transporta veidu un konkrētos dokumentus. [5]"
+      ],
+      [
+        "Atpakaļceļu pārbaudiet pirms izbraukšanas",
+        "Noskaidrojiet visas pilsonības, paņemiet atbilstošās pases, pārbaudiet to atzīšanu, derīgumu, vīzas un uzturēšanās atļaujas. Pārliecinieties par juridisko pamatu iebraukt Polijā no Baltkrievijas vai šķērsot Lietuvas robežu. Pārbaudiet automašīnas noteikumus un robežpunkta darbību.",
+        "Tas, ka iespējams izbraukt no Polijas un iebraukt Baltkrievijā, vēl nenozīmē, ka atgriešanās pa to pašu maršrutu būs atļauta. Pirms došanās ceļā izmantojiet valsts iestāžu aktuālo informāciju. [1] [2] [8]"
+      ]
+    ],
+    "checks": [
+      "Apziniet visas pilsonības un paņemiet derīgās pases.",
+      "Noskaidrojiet ieceļošanas un izceļošanas pamatu Baltkrievijā.",
+      "Pārbaudiet tiesisko pamatu atgriezties Polijā vai iebraukt Lietuvā.",
+      "Pārbaudiet biometriju, derīgumu, vīzas un uzturēšanās atļaujas.",
+      "Pārliecinieties, ka robežpunkts ir atvērts attiecīgajam transportam.",
+      "Pirms brauciena atkārtoti pārbaudiet oficiālos paziņojumus."
+    ]
   }
 };
