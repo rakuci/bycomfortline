@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="788" viewBox="0 0 1400 788" role="img" aria-labelledby="headline description">
+<title id="headline">€60 at the border? The long journey to the currency exchange</title>
+<desc id="description">Satirical editorial illustration: an anxious driver holding euro and zloty notes is questioned by a customs officer at the Lithuania–Latvia route toward Belarus, and an arrow points to an exchange office in the next town. Actual law requires checking EU banknote sanctions and separate EUR 10,000 and USD 10,000 cash declaration thresholds. The place is imaginary.</desc>
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#cce4e8"/><stop offset="1" stop-color="#f9edcd"/></linearGradient>
+<linearGradient id="dark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#102f41"/><stop offset="1" stop-color="#235d64"/></linearGradient>
+<linearGradient id="road" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d7ddd5"/><stop offset="1" stop-color="#aeb9b3"/></linearGradient>
+<filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#10303f" flood-opacity=".22"/></filter>
+</defs>
+<rect width="1400" height="788" fill="url(#sky)"/>
+<path d="M0 408 Q180 350 392 402 T890 395 T1400 382V788H0Z" fill="#b4d6bf"/>
+<path d="M0 486H1400V788H0Z" fill="url(#road)"/>
+<path d="M0 721H1400" stroke="#f7f9ea" stroke-width="9" stroke-dasharray="85 65"/>
+<rect width="1400" height="143" fill="url(#dark)"/>
+<text x="75" y="98" font-family="Arial,Helvetica,sans-serif" font-size="84" font-weight="900" fill="#f9ca63">€60?</text>
+<text x="325" y="77" font-family="Arial,Helvetica,sans-serif" font-size="48" font-weight="900" fill="#fff">AT THE BORDER</text>
+<text x="329" y="122" font-family="Arial,Helvetica,sans-serif" font-size="24" fill="#d1ebe4">EUR + PLN → BELARUS · PERSONAL TRAVEL EXCEPTION</text>
+<!-- checkpoint -->
+<g filter="url(#shadow)">
+<rect x="808" y="248" width="288" height="228" rx="13" fill="#e7efeb" stroke="#547b85" stroke-width="5"/>
+<rect x="773" y="225" width="367" height="35" rx="8" fill="#193947"/>
+<rect x="844" y="286" width="218" height="93" rx="7" fill="#80aeb9" stroke="#537985" stroke-width="5"/>
+<path d="M951 287v90" stroke="#e0edf0" stroke-width="8"/>
+<rect x="839" y="400" width="224" height="20" rx="4" fill="#aec4c2"/>
+</g>
+<g filter="url(#shadow)"><rect x="821" y="157" width="279" height="56" rx="9" fill="#12466c"/><text x="838" y="195" font-family="Arial,sans-serif" font-weight="900" font-size="28" fill="#fff">LT / LV  →  BY</text></g>
+<!-- barrier -->
+<rect x="770" y="427" width="30" height="153" rx="7" fill="#244853"/>
+<rect x="226" y="440" width="549" height="24" rx="8" fill="#fff" stroke="#be4444" stroke-width="3"/>
+<path d="M230 440l31 24h49l-31-24zm106 0l31 24h49l-31-24zm106 0l31 24h49l-31-24zm106 0l31 24h49l-31-24zm106 0l31 24h49l-31-24z" fill="#d6534f"/>
+<!-- distant exchange station road -->
+<path d="M1035 470q137 24 96 97t156 129" stroke="#738c8c" stroke-width="84" fill="none" stroke-linecap="round"/>
+<path d="M1035 470q137 24 96 97t156 129" stroke="#f6eccc" stroke-width="4" fill="none" stroke-dasharray="20 22"/>
+<g filter="url(#shadow)">
+<rect x="1105" y="204" width="255" height="118" rx="12" fill="#174f72"/>
+<text x="1232" y="241" font-family="Arial,sans-serif" text-anchor="middle" font-size="23" font-weight="900" fill="#fff">EXCHANGE OFFICE</text>
+<text x="1232" y="276" font-family="Arial,sans-serif" text-anchor="middle" font-size="24" fill="#ffe090">NEXT TOWN</text>
+<path d="M1195 314l37 34 37-34" stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round"/>
+</g>
+<g transform="translate(1190 379)" filter="url(#shadow)"><rect width="142" height="91" rx="7" fill="#e4d4b5"/><path d="M-8 0h158l-22-33H18Z" fill="#bf6262"/><rect x="30" y="38" width="81" height="35" fill="#8db9c2"/><text x="70" y="29" text-anchor="middle" fill="#214150" font-family="Arial,sans-serif" font-size="18" font-weight="900">EXCHANGE</text></g>
+<!-- car -->
+<g filter="url(#shadow)">
+<path d="M61 539l45-65q14-22 43-26h318q29 1 50 25l44 67 33 15v65H45v-50q0-21 16-31" fill="#356776" stroke="#183a48" stroke-width="6"/>
+<path d="M155 462h303q20 3 33 27l26 41H89l30-47q15-21 36-21" fill="#c1dce0" stroke="#1c4455" stroke-width="5"/>
+<path d="M294 463v67" stroke="#355b68" stroke-width="8"/>
+<rect x="46" y="580" width="548" height="35" rx="13" fill="#254b58"/>
+<circle cx="173" cy="606" r="61" fill="#22363f"/><circle cx="173" cy="606" r="38" fill="#b6c9ca"/><circle cx="173" cy="606" r="20" fill="#667f83"/>
+<circle cx="479" cy="606" r="61" fill="#22363f"/><circle cx="479" cy="606" r="38" fill="#b6c9ca"/><circle cx="479" cy="606" r="20" fill="#667f83"/>
+<rect x="296" y="564" width="79" height="30" rx="5" fill="#f3eee1"/><text x="335" y="586" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" font-weight="800" fill="#20506e">EU</text>
+</g>
+<!-- driver -->
+<g>
+<path d="M332 502q-15-66 51-94 72-20 88 53l-8 75-115 5z" fill="#bc754f" stroke="#643e34" stroke-width="5"/>
+<ellipse cx="400" cy="395" rx="44" ry="51" fill="#e7ac80" stroke="#5a3935" stroke-width="4"/>
+<path d="M353 391q-10-54 44-65 56-8 52 56-35-19-67-5l-29 14" fill="#533b30"/>
+<circle cx="384" cy="392" r="5" fill="#2b3440"/><circle cx="414" cy="392" r="5" fill="#2b3440"/>
+<path d="M387 427q12-12 29 0" stroke="#9c5f52" stroke-width="5" fill="none" stroke-linecap="round"/>
+<path d="M349 462q-49-36-29-71l18-11 26 12-9 29" fill="#e7ac80" stroke="#704639" stroke-width="5"/>
+</g>
+<!-- money -->
+<g transform="rotate(-12 448 460)" filter="url(#shadow)">
+<rect x="441" y="430" width="92" height="54" rx="5" fill="#e7a0a4" stroke="#b75158" stroke-width="4"/><text x="486" y="467" font-size="34" font-family="Arial,sans-serif" font-weight="900" text-anchor="middle" fill="#7a3232">50 €</text>
+<rect x="450" y="445" width="92" height="54" rx="5" fill="#91c0b9" stroke="#497973" stroke-width="4"/><text x="496" y="481" font-size="31" font-family="Arial,sans-serif" font-weight="900" text-anchor="middle" fill="#244b50">PLN</text>
+</g>
+<!-- officer -->
+<g>
+<path d="M659 629V519q10-54 72-54t64 59v105" fill="#2e5b68" stroke="#25414c" stroke-width="5"/>
+<path d="M699 492l32 34 26-34" fill="#eff2e7" stroke="#25414c" stroke-width="3"/>
+<ellipse cx="726" cy="423" rx="36" ry="49" fill="#dfaa87" stroke="#694a41" stroke-width="4"/>
+<path d="M685 406q4-45 42-44 34 0 38 38-47-7-80 6" fill="#403f42"/>
+<path d="M688 378l33-27h42l17 27z" fill="#2d4c5b"/><rect x="680" y="376" width="105" height="13" rx="6" fill="#183744"/>
+<circle cx="714" cy="425" r="4" fill="#253848"/><circle cx="744" cy="425" r="4" fill="#253848"/>
+<path d="M712 451q16 8 26-3" fill="none" stroke="#9a5f55" stroke-width="4"/>
+<path d="M689 526q-42-12-62-35l-20 23q30 62 82 64" fill="#e1a785" stroke="#694a41" stroke-width="5"/>
+</g>
+<!-- officers board -->
+<g transform="rotate(3 800 520)" filter="url(#shadow)">
+<rect x="758" y="465" width="170" height="145" rx="11" fill="#fff8e6" stroke="#415962" stroke-width="5"/>
+<rect x="819" y="450" width="51" height="25" rx="6" fill="#5d7d81"/>
+<text x="844" y="525" text-anchor="middle" font-family="Arial,sans-serif" font-size="52" font-weight="900" fill="#c04746">€60?</text>
+<path d="M786 555h112M786 576h112" stroke="#b8c1b8" stroke-width="6" stroke-linecap="round"/>
+</g>
+<!-- bubble -->
+<g filter="url(#shadow)">
+<path d="M70 210h470q27 0 27 29v86q0 27-27 27H310l-44 43 10-43H70q-27 0-27-27v-86q0-29 27-29Z" fill="#fffef6" stroke="#31525f" stroke-width="5"/>
+<text x="302" y="260" text-anchor="middle" font-family="Arial,sans-serif" font-size="27" font-weight="800" fill="#183c4d">I SHOULD HAVE CHECKED</text>
+<text x="302" y="298" text-anchor="middle" font-family="Arial,sans-serif" font-size="29" fill="#bd5c47">BEFORE LEAVING!</text>
+</g>
+<!-- bottom rule -->
+<rect x="0" y="672" width="1400" height="116" fill="#143a4a"/>
+<rect x="33" y="691" width="660" height="75" rx="14" fill="#e9f3ed"/>
+<rect x="712" y="691" width="655" height="75" rx="14" fill="#e9f3ed"/>
+<text x="55" y="725" font-family="Arial,sans-serif" font-size="24" font-weight="900" fill="#275568">EU: DECLARE</text>
+<text x="55" y="755" font-family="Arial,sans-serif" font-size="26" font-weight="900" fill="#194c59">€10,000 OR MORE</text>
+<text x="734" y="725" font-family="Arial,sans-serif" font-size="24" font-weight="900" fill="#275568">BELARUS / EAEU: DECLARE</text>
+<text x="734" y="755" font-family="Arial,sans-serif" font-size="26" font-weight="900" fill="#194c59">MORE THAN $10,000</text>
+</svg>
