@@ -1459,6 +1459,7 @@ function destinationPage(lang,dest){
       <h2>${esc(localeWords(ui.keyOrigin,values))}</h2><p>${esc(ui.available)}</p></div>
     ${byCountry}
     <p class="dest-directory-help">${esc(ui.unlisted)}</p>
+    ${longDistanceTeaser(lang)}
   </section>
   <section class="section dest-border-guide"><h2>${esc(ui.safety)}</h2>
     <p>${esc(ui.borderAdvice)}</p><p>${esc(ui.priceAdvice)}</p>
@@ -1549,6 +1550,7 @@ function transferPairPage(lang,origin,dest){
       <a href="#booking-dialog" class="button primary" data-open-booking
          aria-controls="booking-dialog" aria-haspopup="dialog">${esc(ui.booking)} ${icons.arrow}</a>
     </div>
+    ${longDistanceTeaser(lang,{from,to})}
     <div class="dest-pair-related">
       <section><h2>${esc(localeWords(ui.otherOrigins,values))}</h2><div>
          ${similar.map(other=>`<a href="${destinationRouteUrl(lang,other,dest)}">${esc(other.names[lang])} ↗</a>`).join("")}
@@ -1638,6 +1640,7 @@ function geoDirectoryPage(lang,type) {
       <a class="button primary geo-list-cta" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a>
     </div>
     <section class="geo-simple-service section" id="service"><h2>${esc(t.why)}</h2><p>${esc(t.whyText)}</p></section>
+    ${longDistanceTeaser(lang)}
     ${homeBookingTransparency(lang)}
     ${faq(l)}
   </main>${footer(l)}`;
@@ -1893,6 +1896,7 @@ function geoLocationPage(lang,place) {
         <a href="${parentRoute}#fleet">${esc(l.serviceTitle)} ↗</a>
       </section>
       ${destinationCardList(lang,place)}
+      ${longDistanceTeaser(lang,{from:name,isAirport})}
       <section class="geo-related" aria-label="${esc(t.localLinks)}">
         <h2>${esc(t.localLinks)}</h2>
         <div>${countyLinks}</div>
@@ -1932,6 +1936,7 @@ function routePage(lang, key) {
     ${routeEditorial(lang, key)}
     ${destinationCardList(lang,coreOriginProfiles.find(origin=>origin.id===key))}
     ${returnTripInfo(lang,key)}
+    ${longDistanceTeaser(lang)}
     ${fleetShowcase(lang)}
     ${routeBookingTransparency(lang, key)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">${esc(l.routeNames[key])}</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
