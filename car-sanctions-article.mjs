@@ -168,5 +168,197 @@ export const carSanctionsArticle = {
       "Проверьте, что выбранный пункт Литва — Беларусь открыт для вашего типа транспорта.",
       "Перед выездом повторно откройте официальные источники; предусмотрите законный запасной план."
     ]
+  },
+  "pl": {
+    "title": "165 milimetrów, które zatrzymują samochód: wyjazd z Litwy na Białoruś a sankcje UE",
+    "shortTitle": "165 mm: dlaczego auto może zostać na Litwie",
+    "description": "Historia kierowcy ComfortLine i analiza przepisów UE dotyczących wywozu aut na Białoruś: silniki powyżej 1900 cm³, prześwit, hybrydy, pojazdy elektryczne i dokumenty.",
+    "tag": "Historie kierowców · Cło i sankcje",
+    "read": "Przeczytaj historię i analizę prawa",
+    "back": "Powrót do poradnika",
+    "reviewed": "Sprawdzono 3 listopada 2026",
+    "sources": "Oficjalne źródła do sprawdzenia przed wyjazdem",
+    "checklist": "Sześć rzeczy do sprawdzenia",
+    "disclaimerTitle": "Ważne: informacja prywatna, nie urzędowa wykładnia prawa",
+    "disclaimer": "Materiał służy wyłącznie do osobistego zapoznania się z przepisami i planowania podróży. ComfortLine nie jest organem celnym ani granicznym. Tekst nie stanowi oficjalnego źródła prawa, porady prawnej ani gwarancji przekroczenia granicy. Prawo, wyjątki, klasyfikacje celne i praca przejść mogą się zmieniać. Przed każdą podróżą sprawdź aktualne akty UE, komunikaty litewskiej służby celnej i w razie wątpliwości uzyskaj wyjaśnienie dotyczące konkretnego pojazdu. Decyzję podejmują właściwe organy.",
+    "illustrationCaption": "Ilustracja satyryczna: postacie i samochód są fikcyjne. Próg 165 mm jest rzeczywisty, ale o klasyfikacji samochodu nie decyduje rysunek.",
+    "sections": [
+      [
+        "Historia kierowcy: dokumenty są, brakuje jednego wymiaru",
+        "Według obserwacji kierowcy ComfortLine jesienią 2026 r. częściej pojawiały się relacje o samochodach z unijnymi tablicami zawracanych przez litewską służbę celną przed wyjazdem na Białoruś. Najwięcej pytań budzą SUV-y, crossovery, niektóre minibusy oraz pojazdy z zawieszeniem pneumatycznym. Kierowca ma paszport, ubezpieczenie, kawę i trasę w nawigacji, a przy szlabanie rozmowa nagle dotyczy milimetrów pod podwoziem.",
+        "To uogólniona, anonimowa obserwacja kierowcy, nie oficjalna statystyka odmów. Nie znaleźliśmy danych potwierdzających wzrost liczby zawróceń dokładnie od października 2026 r. Podstawa sankcyjna istnieje od 2024 r., a litewskie służby opublikowały szczegółowe przypomnienia w sierpniu i wrześniu 2026 r. [1] [2] [3]"
+      ],
+      [
+        "Dlaczego weekendowa podróż jest traktowana jak wywóz",
+        "Podstawą jest art. 1bb i załącznik XVIII do rozporządzenia Rady (WE) nr 765/2006, ze zmianami m.in. z 2024 i 2025 r. Przepisy zakazują sprzedaży, dostarczania, przekazywania lub wywozu określonych towarów na Białoruś albo do wykorzystania na Białorusi. Decyduje klasyfikacja samochodu, a nie wyłącznie to, czy jego właściciel chce go sprzedać. [4] [5] [6]",
+        "Artykuły 137, 140 i 141 rozporządzenia delegowanego 2015/2446 pozwalają traktować samo przekroczenie granicy celnej UE jako zgłoszenie wywozu pojazdu zarejestrowanego w UE, nawet jeśli ma on później wrócić. Nie zawsze trzeba wypełniać elektroniczne zgłoszenie, ale sankcje nadal obowiązują. Numer rejestracyjny UE i planowany powrót za trzy dni nie dają automatycznego wyjątku. [1] [7]"
+      ],
+      [
+        "Benzyna i diesel: dwa warunki jednocześnie",
+        "Dla zwykłych samochodów benzynowych sklasyfikowanych w ex 8703 23/24 oraz diesli ex 8703 32/33 opis zakazu łączy **pojemność silnika większą niż 1900 cm³** z **prześwitem co najmniej 165 mm**. To warunki łączne. Silnik 1998 cm³ i 175 mm prześwitu spełnia oba; dokładnie 1900 cm³ nie jest wartością większą niż 1900, natomiast dokładnie 165 mm spełnia próg prześwitu. [1] [5]",
+        "Znaczenie mają rzeczywisty kod Nomenklatury Scalonej (CN) i konkretna wersja pojazdu. Hasło reklamowe 'SUV' nie jest kategorią prawną. Poniżej tych wartości nadal trzeba sprawdzić inne ograniczenia. W wymienionych pozycjach silników spalinowych wyłączono karetki pogotowia, ale wyjątku nie wolno rozszerzać na wszystkie kategorie. [1]"
+      ],
+      [
+        "Hybrydy i elektryki: 1900 cm³ nie jest dodatkowym warunkiem",
+        "W odniesieniu do opisanych w załączniku hybryd (ex 8703 40/50), hybryd plug-in (ex 8703 60/70) i samochodów elektrycznych (ex 8703 80) wskazany jest prześwit **165 mm lub więcej**. Próg pojemności silnika >1900 cm³ nie działa tu jako druga obowiązkowa przesłanka. Hybryda z silnikiem 1500 cm³ albo elektryczny crossover może zatem podlegać ograniczeniu. [1] [5]",
+        "Nie każda pozycja w załączniku działa tak samo: 8703 10 dotyczy określonych pojazdów śnieżnych i golfowych, a 8703 90 pojazdów o innym rodzaju napędu; przy tych pozycjach nie wskazano tego samego progu prześwitu. Oznaczenie 'ex' oznacza, że tylko część towarów o danym kodzie spełniająca opis jest objęta wskazanym zakazem. [1]"
+      ],
+      [
+        "Pięć przykładów: liczby nie zastąpią klasyfikacji",
+        "Benzyna 1998 cm³ i 175 mm — zasadnicze warunki odpowiedniej pozycji są spełnione. Diesel 2200 cm³ i 160 mm — próg prześwitu w tej pozycji nie został osiągnięty, ale to jeszcze nie certyfikat legalnego wyjazdu. Benzyna dokładnie 1900 cm³ i 180 mm — warunek 'powyżej 1900' nie jest spełniony. Hybryda 1500 cm³ i 170 mm — mały silnik spalinowy nie wyklucza sankcji. Elektryk z prześwitem dokładnie 165 mm — próg jest osiągnięty. [1] [5]",
+        "To przykłady szkoleniowe, nie decyzje celne. W indywidualnej sprawie liczą się VIN, wyposażenie, kod CN, opis prawny, ewentualne szczególne zezwolenia i przepisy obowiązujące w dniu przekroczenia granicy."
+      ],
+      [
+        "Zawieszenie pneumatyczne i zaświadczenie od dealera",
+        "Regulacja opisuje odległość pionową między spodem podwozia a drogą. Dane z katalogu mogą posługiwać się innym sposobem pomiaru; wysokość może zależeć od wersji zawieszenia, trybu jazdy, obciążenia, kół i odmiany modelu. Wynik przyłożenia miarki na parkingu niekoniecznie rozstrzyga spór co do prawnej charakterystyki pojazdu. [1] [5]",
+        "Przy wątpliwościach warto zdobyć dokument od producenta, importera lub autoryzowanego dealera wskazujący VIN, wersję, rok, jednostkę napędową, prześwit i warunki pomiaru. Nie znaleźliśmy jednak urzędowej normy, według której **wyłącznie zaświadczenie dealera** jest dopuszczalnym dowodem lub gwarantuje przejazd. Litewski organ celny ocenia sytuację samodzielnie; najlepiej uzyskać jego pisemne stanowisko przed podróżą. [1] [3]"
+      ],
+      [
+        "'Przecież poprzednio przejechałem' nie jest wyjątkiem",
+        "Litewska służba celna wyjaśnia wprost, że wcześniejszy wyjazd na Białoruś i powrót, liczba wcześniejszych przekroczeń oraz cel obecnej podróży nie uchylają zakazu, jeśli pojazd spełnia kryteria. Każdy wyjazd podlega ocenie według aktualnego stanu faktycznego i prawa. [3]",
+        "Nie należy próbować obchodzić sankcji przez manipulowanie wysokością pojazdu lub szukanie mniej skrupulatnej bramki. Przepisy UE obowiązują niezależnie od konkretnego szlabanu. Sprawdź zawczasu legalny plan alternatywny; rezerwacja transportu nie daje gwarancji przekroczenia granicy."
+      ],
+      [
+        "Najlepsza oszczędność czasu: pytanie do urzędu przed startem",
+        "Sprawdź kod CN, napęd, pojemność i prześwit odpowiedniej odmiany, porównaj je z aktualnym załącznikiem XVIII oraz art. 1bb, a następnie zweryfikuj przejście graniczne i ewentualnie poproś litewską służbę celną o pisemne wyjaśnienie. W dniu wyjazdu sprawdź ponownie informacje urzędowe. [1] [4] [9]",
+        "Morał jest nieco absurdalny: paszport i bagaż można spakować na tydzień przed podróżą, ale kilka milimetrów pod autem potrafi zmienić cały plan. Lepiej znać je w garażu niż przy zamkniętym szlabanie."
+      ]
+    ],
+    "checks": [
+      "Ustal VIN i właściwy kod CN, a nie tylko marketingową kategorię pojazdu.",
+      "Sprawdź rodzaj napędu i dokładną pojemność silnika, jeśli dotyczy.",
+      "Przygotuj wiarygodne dane fabryczne o prześwicie danej wersji i zawieszeniu.",
+      "Sprawdź aktualny art. 1bb i załącznik XVIII; wątpliwości konsultuj z urzędem.",
+      "Potwierdź otwarcie wybranego przejścia i dopuszczenie danego pojazdu.",
+      "Sprawdź komunikaty urzędowe ponownie tuż przed podróżą."
+    ]
+  },
+  "lt": {
+    "title": "165 milimetrai, sustabdę kelionę: kodėl automobilis su ES numeriais gali neišvykti į Baltarusiją",
+    "shortTitle": "165 mm: kai automobilis lieka pasienyje",
+    "description": "ComfortLine vairuotojo istorija ir ES sankcijų analizė: Lietuvos muitinė, 1900 cm³ varikliai, prošvaisa, hibridai, elektromobiliai bei techniniai dokumentai.",
+    "tag": "Vairuotojų istorijos · Muitinė ir sankcijos",
+    "read": "Skaityti istoriją ir teisės apžvalgą",
+    "back": "Grįžti į kelionių gidą",
+    "reviewed": "Patikrinta 2026 m. lapkričio 3 d.",
+    "sources": "Oficialūs šaltiniai, kuriuos verta tikrinti",
+    "checklist": "Šeši patikrinimai prieš išvykstant",
+    "disclaimerTitle": "Svarbu: informacinis tekstas, ne oficialus teisės šaltinis",
+    "disclaimer": "Šis straipsnis skirtas tik asmeniniam informavimuisi ir kelionės planavimui. ComfortLine nėra muitinės ar pasienio institucija. Tekstas nėra oficialus teisės aiškinimas, individuali teisinė konsultacija ar leidimo kirsti sieną garantija. Teisės aktai, išimtys, tarifinis klasifikavimas ir pasienio punktų veikla gali keistis. Prieš kelionę tikrinkite naujausią ES teisę ir Lietuvos muitinės informaciją, prireikus kreipkitės dėl konkretaus automobilio. Galutinį sprendimą priima atsakingos institucijos.",
+    "illustrationCaption": "Satyrinė iliustracija: veikėjai ir automobilis išgalvoti. 165 mm riba tikra, tačiau pagal piešinį konkretaus automobilio klasifikuoti negalima.",
+    "sections": [
+      [
+        "Vairuotojo istorija: svarbiausias skaičius nebuvo navigacijoje",
+        "ComfortLine vairuotojo pastebėjimais, 2026 m. rudenį dažniau aptarinėti atvejai, kai Lietuvos muitinė neleido išvykti į Baltarusiją ES numerius turintiems automobiliams. Minimi visureigiai, krosoveriai, kai kurie mikroautobusai ir transporto priemonės su pneumatine pakaba. Keleiviai pasiruošę pasus, kelionės draudimą ir lagaminus, tačiau pasienyje klausimas staiga tampa ne apie kelionės tikslą, o apie centimetrus po automobilio dugnu.",
+        "Tai apibendrintas, anoniminis vairuotojo pasakojimas, o ne oficiali atsisakymų statistika. Neturime įrodymų, kad nuo 2026 m. spalio atsisakymų skaičius oficialiai išaugo. Pats ES draudimo pagrindas atsirado 2024 m.; Lietuvos muitinė papildomai aiškino taisykles 2026 m. rugpjūtį ir rugsėjį. [1] [2] [3]"
+      ],
+      [
+        "Kodėl asmeninė kelionė laikoma eksportu",
+        "Reglamento (EB) Nr. 765/2006 1bb straipsnis ir XVIII priedas, iš dalies pakeisti 2024 ir 2025 m., draudžia tam tikrų prekių pardavimą, tiekimą, perdavimą ar eksportą į Baltarusiją arba naudojimui joje. Draudimas gali apimti ir lengvuosius automobilius pagal jų techninį aprašymą bei Kombinuotosios nomenklatūros kodą. [4] [5] [6]",
+        "Deleguotojo reglamento (ES) 2015/2446 137, 140 ir 141 straipsniai leidžia laikyti ES registruoto ir grąžinti numatyto automobilio išvežimą per išorinę muitų sieną eksporto deklaravimo veiksmu. Įprastos elektroninės deklaracijos dažniausiai nereikia, tačiau sankcijos galioja. Vien ES registracija, trumpas vizitas ar planas sugrįžti nesukuria išimties. [1] [7]"
+      ],
+      [
+        "Benzinas ir dyzelinas: abu kriterijai kartu",
+        "Atitinkamose ex 8703 23/24 benzino ir ex 8703 32/33 dyzelino kategorijose nurodyti du kartu taikomi parametrai: **variklio tūris turi viršyti 1900 cm³**, o **prošvaisa būti ne mažesnė kaip 165 mm**. 1998 cm³ variklis ir 175 mm prošvaisa tenkina abu parametrus; lygiai 1900 cm³ nėra daugiau nei 1900, o lygiai 165 mm jau atitinka antrąją ribą. [1] [5]",
+        "Svarbu ir tikslus KN kodas. Reklaminis apibūdinimas 'visureigis' ar 'SUV' nėra teisinė kategorija. Mažesni skaičiai automatiškai negarantuoja, kad nebus kitų ribojimų. Kai kurių išvardytų vidaus degimo variklių kategorijų aprašyme greitosios pagalbos automobiliai išskirti, bet tai ne universali išimtis. [1]"
+      ],
+      [
+        "Hibridai ir elektromobiliai: 1900 cm³ čia nėra papildoma sąlyga",
+        "Į XVIII priedą įtrauktiems įprastiems hibridams (ex 8703 40/50), iš tinklo įkraunamiems hibridams (ex 8703 60/70) ir elektromobiliams (ex 8703 80) nurodyta **165 mm ar didesnė prošvaisa**. 1900 cm³ variklio tūris nėra antras bendras reikalavimas šioms kategorijoms. Todėl net 1500 cm³ hibridas ar elektra varomas krosoveris gali būti vertinamas kaip ribojamas. [1] [5]",
+        "Ne visi KN įrašai turi vienodas ribas: 8703 10 nurodytos tam tikros sniego ir golfo transporto priemonės be prošvaisos kriterijaus; 8703 90 taip pat turi atskirą aprašą. Ženklas ex reiškia, kad draudimas apima tik tą prekės kodo dalį, kuri atitinka teisinį aprašą. [1]"
+      ],
+      [
+        "Penki pavyzdžiai, kurie palengvina supratimą",
+        "Benzinas 1998 cm³ ir 175 mm: abu atitinkamos kategorijos parametrai pasiekti. Dyzelinas 2200 cm³ ir 160 mm: šios eilutės prošvaisos ribos nepasiekia, tačiau tai nėra bendras leidimas išvykti. Benzinas lygiai 1900 cm³ ir 180 mm: sąlyga 'viršija 1900' neįvykdyta. Hibridas 1500 cm³ ir 170 mm: mažas variklio tūris nepanaikina galimos hibrido ribojimo. Elektromobilis lygiai 165 mm: įtrauktinė prošvaisos riba pasiekta. [1] [5]",
+        "Tai pavyzdžiai, ne muitinės sprendimai. Tikslus VIN, komplektacija, KN klasifikavimas, galimos įstatymų išimtys ir kelionės dieną galiojanti teisė gali nulemti kitokį vertinimą."
+      ],
+      [
+        "Pneumatinė pakaba ir atstovo pažyma",
+        "Pagal aprašą prošvaisa matuojama kaip vertikalus atstumas nuo automobilio važiuoklės apatinės dalies iki kelio. Reklaminės charakteristikos gali būti apskaičiuotos kitaip. Pneumatinės pakabos režimai, modelio versija, apkrova ir ratų komplektacija didina neapibrėžtumą. Matavimas atsitiktine liniuote prie užtvaro nebūtinai pateikia teisiškai reikšmingą specifikaciją. [1] [5]",
+        "Ginčytinu atveju naudinga turėti gamintojo, oficialaus importuotojo ar atstovo dokumentą pagal VIN, kuriame nurodyta versija, variklis, gamybos metai, prošvaisa ir matavimo sąlygos. Tačiau neradome oficialios normos, teigiančios, kad **tik atstovo pažyma** yra pripažįstama arba užtikrina leidimą išvykti. Galutinį vertinimą atlieka muitinė; geriausia kreiptis į ją raštu iš anksto. [1] [3]"
+      ],
+      [
+        "'Anksčiau juk važiavau!' nėra išimtis",
+        "Lietuvos muitinė aiškiai pažymi, kad ankstesni automobilio išvykimai, sienos kirtimų skaičius ir kelionės tikslas savaime nepanaikina teisės aktuose nustatyto draudimo. Kiekvienas išvykimas vertinamas pagal tuo metu galiojančią teisę ir faktines aplinkybes. [3]",
+        "Atsisakymas gali sugriauti planus ir padidinti išlaidas. Nedera bandyti apeiti sankcijų dirbtinai keičiant automobilio aukštį ar renkantis kitą punktą tik tam, kad būtų išvengta patikros. Pasidomėkite teisėta alternatyva iš anksto."
+      ],
+      [
+        "Patikrinti prieš kelionę lengviau nei ginčytis pasienyje",
+        "Išsiaiškinkite KN kodą, pavaros tipą, variklio tūrį (kai taikoma) ir tikslią savo versijos prošvaisą. Palyginkite informaciją su naujausiu XVIII priedu ir 1bb straipsniu, patikrinkite pasirinkto punkto veiklą, o jei duomenys neaiškūs, iš anksto raštu kreipkitės į Lietuvos muitinę. Prieš išvykdami dar kartą patikrinkite pranešimus. [1] [4] [9]",
+        "Šios istorijos pamoka kiek ironiška: galima puikiai suplanuoti sustojimus ir lagaminus, bet būtent keli milimetrai po važiuokle kartais pakeičia visą maršrutą. Geriau juos sužinoti namie, ne prie uždaryto užtvaro."
+      ]
+    ],
+    "checks": [
+      "Nustatykite VIN ir tikslų KN kodą; vien SUV pavadinimo nepakanka.",
+      "Patikrinkite pavaros tipą ir variklio tūrį, jei jis aktualus.",
+      "Pasiruoškite konkrečios komplektacijos gamyklinius prošvaisos duomenis.",
+      "Patikrinkite naujausią 1bb straipsnį ir XVIII priedą; kilus abejonių kreipkitės į muitinę.",
+      "Patikrinkite, ar pasienio punktas atviras jūsų transporto priemonei.",
+      "Prieš išvykdami dar kartą perskaitykite oficialius pranešimus."
+    ]
+  },
+  "lv": {
+    "title": "165 milimetri, kas aptur braucienu: kāpēc auto ar ES numuriem nevar izbraukt uz Baltkrieviju",
+    "shortTitle": "165 mm un negaidīta apstāšanās uz robežas",
+    "description": "ComfortLine vadītāja stāsts un ES sankciju skaidrojums: Lietuvas muita, motora tilpums virs 1900 cm³, klīrenss, hibrīdi, elektroauto un tehniskie dokumenti.",
+    "tag": "Vadītāju stāsti · Muita un sankcijas",
+    "read": "Lasīt stāstu un juridisko analīzi",
+    "back": "Atpakaļ uz ceļvedi",
+    "reviewed": "Pārbaudīts 2026. gada 3. novembrī",
+    "sources": "Oficiālie avoti pārbaudei pirms brauciena",
+    "checklist": "Seši pārbaudes soļi",
+    "disclaimerTitle": "Svarīgi: informatīvs materiāls, nevis oficiāls tiesību avots",
+    "disclaimer": "Publikācija paredzēta tikai personiskai informācijai un ceļojuma plānošanai. ComfortLine nav muitas vai robežsardzes iestāde. Raksts nav oficiāla tiesību aktu interpretācija, juridiska konsultācija vai garantija robežas šķērsošanai. Sankcijas, izņēmumi, muitas klasifikācija un robežpunktu darbība var mainīties. Pirms brauciena pārbaudiet aktuālos ES tiesību aktus un Lietuvas muitas skaidrojumus; neskaidrību gadījumā vērsieties iestādē par konkrēto transportlīdzekli. Galīgo lēmumu pieņem kompetentās iestādes.",
+    "illustrationCaption": "Satīriska ilustrācija: automašīna un cilvēki ir izdomāti. 165 mm robeža ir reāla, bet attēls nenosaka konkrētas automašīnas tiesisko statusu.",
+    "sections": [
+      [
+        "Vadītāja stāsts: negaidītais skaitlis zem automašīnas",
+        "ComfortLine vadītājs stāsta, ka 2026. gada rudenī biežāk dzirdēti gadījumi, kad Lietuvas muita nav ļāvusi automašīnām ar ES reģistrācijas numuriem izbraukt uz Baltkrieviju. Īpaši bieži tiek pieminēti krosoveri, apvidus automašīnas, daži mikroautobusi un auto ar pneimopiekari. Pases, bagāža, apdrošināšana un navigācija ir sagatavotas, bet robežkontrolē izšķirošs pēkšņi kļūst klīrenss.",
+        "Tas ir vispārināts, anonīms vadītāja vērojums, nevis oficiāla statistika. Mēs nevaram apstiprināt atteikumu skaita pieaugumu tieši no 2026. gada oktobra. ES noteikumu juridiskais pamats ir spēkā kopš 2024. gada; Lietuvas muita 2026. gada augustā un septembrī publicēja detalizētus atgādinājumus. [1] [2] [3]"
+      ],
+      [
+        "Kāpēc personiska izbraukšana skaitās eksports",
+        "Regulas (EK) Nr. 765/2006 1bb pants un XVIII pielikums, kas papildināti ar 2024. un 2025. gada grozījumiem, aizliedz noteiktu preču pārdošanu, piegādi, nodošanu un eksportu uz Baltkrieviju vai izmantošanai tajā. Automašīnas klasifikācija un tehniskie parametri ir svarīgāki par vadītāja nodomu to pārdot vai nepārdot. [4] [5] [6]",
+        "Saskaņā ar Deleģētās regulas 2015/2446 137., 140. un 141. pantu ES reģistrēta auto izbraukšana pāri ārējai muitas robežai var tikt uzskatīta par eksporta deklarāciju pat tad, ja plānota atgriešanās. Parasti elektroniska deklarācija nav vajadzīga, taču sankcijas joprojām ir spēkā. Numurzīme ar ES simbolu nav atbrīvojums. [1] [7]"
+      ],
+      [
+        "Benzīns un dīzelis: vajadzīgi abi kritēriji",
+        "Atbilstošajām ex 8703 23/24 benzīna un ex 8703 32/33 dīzeļa vieglo automašīnu kategorijām vienlaikus noteikts **motora tilpums vairāk nekā 1900 cm³** un **klīrenss vismaz 165 mm**. Piemēram, 1998 cm³ un 175 mm atbilst abiem nosacījumiem. Precīzi 1900 cm³ nepārsniedz šo tilpumu, bet precīzi 165 mm jau sasniedz klīrensa slieksni. [1] [5]",
+        "Vienlaikus jānosaka precīzs Kombinētās nomenklatūras (KN) kods. Reklāmas vārds 'SUV' pats par sevi nav juridisks pierādījums. Ja šie parametri nav izpildīti, joprojām jāpārbauda citi ierobežojumi. Noteiktajos iekšdedzes dzinēju ierakstos ir izņēmums neatliekamās palīdzības automašīnām. [1]"
+      ],
+      [
+        "Hibrīdi un elektroauto: cita loģika",
+        "Pielikumā minētajiem parastajiem hibrīdiem (ex 8703 40/50), uzlādējamiem hibrīdiem (ex 8703 60/70) un elektroauto (ex 8703 80) noteiktais slieksnis ir **165 mm klīrenss vai vairāk**. Motora tilpums virs 1900 cm³ šajās pozīcijās nav vēl viens obligāts nosacījums. Tādēļ arī 1500 cm³ hibrīds vai elektrisks krosovers var iekļauties aizliegumā. [1] [5]",
+        "Citu KN pozīciju apraksts var atšķirties: 8703 10 attiecas uz noteiktiem sniega transportlīdzekļiem un golfa auto bez klīrensa sliekšņa; 8703 90 ir atsevišķs citu piedziņu ieraksts. Apzīmējums 'ex' nozīmē tikai konkrētu šā koda preču daļu. [1]"
+      ],
+      [
+        "Pieci piemēri, kas ilustrē risku",
+        "Benzīns 1998 cm³ un 175 mm: abi attiecīgās kategorijas nosacījumi izpildīti. Dīzelis 2200 cm³ un 160 mm: klīrensa nosacījums šajā pozīcijā nav sasniegts, bet tas vēl nav vispārēja eksporta atļauja. Benzīns tieši 1900 cm³ un 180 mm: prasība 'vairāk nekā 1900' nav izpildīta. Hibrīds 1500 cm³ un 170 mm: mazs dzinējs pats par sevi sankciju risku neatceļ. Elektroauto tieši 165 mm: klīrensa slieksnis ir sasniegts. [1] [5]",
+        "Tie ir mācību piemēri. Konkrēto lēmumu ietekmē VIN, modifikācija, KN kods, piemērojamie izņēmumi un aktuālais regulējums."
+      ],
+      [
+        "Pneimopiekare un dīlera izziņa",
+        "Normatīvajā aprakstā klīrenss nozīmē vertikālo attālumu no automašīnas šasijas apakšējās daļas līdz ceļam. Reklāmas materiālos var būt citas mērīšanas metodes. Pneimopiekare, režīmi, riteņi un komplektācija ietekmē rādītājus. Ar mērlenti pie robežbarjeras ne vienmēr pietiek, lai pierādītu juridiski nozīmīgo tehnisko specifikāciju. [1] [5]",
+        "Pirms brauciena ieteicams pieprasīt ražotāja, oficiālā importētāja vai autorizēta dīlera dokumentu ar VIN, versiju, dzinēju, klīrensu un mērīšanas nosacījumiem. **Nav atrasta oficiāla prasība, ka tikai dīlera izziņa ir pieļaujama vai automātiski garantē izbraukšanu.** Muita izvērtē pierādījumus un tiesisko situāciju; sarežģītos gadījumos ieteicama rakstiska konsultācija pirms brauciena. [1] [3]"
+      ],
+      [
+        "'Iepriekš taču šķērsoju' neko negarantē",
+        "Lietuvas muita īpaši uzsver, ka iepriekšēja veiksmīga šķērsošana, braucienu skaits un ceļojuma mērķis neatceļ aizliegumu, ja auto atbilst sankciju pazīmēm. Katrs gadījums tiek vērtēts atbilstoši izbraukšanas brīdī spēkā esošajām normām. [3]",
+        "Atteikums var izjaukt visu maršrutu un radīt izdevumus. Nemēģiniet apiet ierobežojumus, manipulējot ar automašīnas augstumu vai meklējot citu punktu tikai kontroles apiešanai. Juridiski pieļaujamu alternatīvu pārbaudiet iepriekš."
+      ],
+      [
+        "Pārbaudiet pirms došanās ceļā",
+        "Noskaidrojiet KN kodu, piedziņas veidu, motora tilpumu un tieši jūsu automašīnas versijas klīrensu. Salīdziniet ar aktuālo 1bb pantu un XVIII pielikumu, pārbaudiet robežpunkta darba režīmu un šaubu gadījumā jautājiet Lietuvas muitai rakstiski. Neilgi pirms brauciena atkārtoti apskatiet oficiālos paziņojumus. [1] [4] [9]",
+        "Šī stāsta mazliet ironiskā atziņa: var rūpīgi saplānot visu ceļojumu, bet dažus milimetrus zem šasijas aizmirst. Labāk tos noskaidrot garāžā, nevis pie aizvērtas barjeras."
+      ]
+    ],
+    "checks": [
+      "Nosakiet VIN un precīzu KN kodu, nepaļaujieties tikai uz SUV apzīmējumu.",
+      "Pārbaudiet piedziņas tipu un precīzu motora tilpumu, ja piemērojams.",
+      "Sagatavojiet konkrētās komplektācijas rūpnīcas klīrensa datus.",
+      "Pārbaudiet aktuālo 1bb pantu un XVIII pielikumu; neskaidrības noskaidrojiet muitā.",
+      "Apstipriniet robežpunkta atvērtību jūsu transportam.",
+      "Atkārtoti pārbaudiet oficiālo informāciju īsi pirms izbraukšanas."
+    ]
   }
 };
