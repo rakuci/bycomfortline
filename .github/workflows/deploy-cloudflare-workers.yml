@@ -1,0 +1,78 @@
+name: Deploy built ComfortLine website to Cloudflare Workers
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Build and audit every landing page photograph
+    types: [completed]
+    branches: [main]
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/deploy-cloudflare-workers.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bycomfortline-cloudflare-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Rebuild pages, SEO, citations and photo audit
+        run: |
+          node build.mjs
+          node scripts/check-travel-guide.mjs
+          node scripts/landing_image_report.mjs
+      - name: Check Cloudflare credentials without exposing secret values
+        id: credentials
+        env:
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [[ -z "$CF_ACCOUNT" || -z "$CF_TOKEN" ]]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Live deployment was skipped because Cloudflare credentials are missing."
+            echo "Add CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN in GitHub repository Settings > Secrets and variables > Actions."
+            echo "Create a least-privilege Cloudflare API token with Edit Cloudflare Workers permission for the correct account."
+            echo "After creating those secrets, re-run this workflow using Actions > Deploy built ComfortLine website to Cloudflare Workers > Run workflow."
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+            echo "Cloudflare credentials found. Deploying the Worker and static assets."
+          fi
+      - name: Deploy worker named bycomfortline and all static articles
+        if: steps.credentials.outputs.ready == 'true'
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --config wrangler.jsonc
+      - name: Verify live domain is linked to the deployed Worker
+        if: steps.credentials.outputs.ready == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://bycomfortline.com/ru/travel-guide/lithuania-belarus-car-export-sanctions-165mm/"
+          status=$(curl -L --retry 3 --retry-delay 2 -sS --max-time 25 -o /tmp/comfortline-article.html -w '%{http_code}' "$url")
+          echo "Public article: HTTP $status"
+          if [[ "$status" != "200" ]]; then
+            echo "::error::Cloudflare deployed but bycomfortline.com is not yet serving the new article. Check the Worker custom-domain/route binding, not just the GitHub build."
+            exit 1
+          fi
+          if ! grep -q 'guide-article-cartoon' /tmp/comfortline-article.html; then
+            echo "::error::The public domain returned HTML but not the expected updated article. Check the active Cloudflare Worker/route."
+            exit 1
+          fi
+          echo "Success: latest ComfortLine car-sanctions article and illustration markup are live."
