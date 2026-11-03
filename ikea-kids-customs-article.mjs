@@ -459,5 +459,135 @@ export const ikeaKidsArticle = {
       "Ja pārsniegtas normas vai rodas neskaidrības, sazinieties ar muitu un deklarējiet preces.",
       "Pirms brauciena vēlreiz pārbaudiet abu valstu jaunākos noteikumus."
     ]
+  },
+  "de": {
+    "title": "16 IKEA-Sachen fürs Kind: Wie oft darf ein Fahrer nach Belarus reisen und was darf er einführen?",
+    "shortTitle": "IKEA fürs Kind: Wie viel darf über die Grenze?",
+    "description": "Ein erfundener Fahrer kauft ANTILOP, LILLABO, DUKTIG und MÅLA. Fakten zum EAWU-Freibetrag von 500 € und 25 kg, häufigen Grenzfahrten, Zollbelegen und EU-Sanktionen.",
+    "tag": "Fahrergeschichten · Einkaufen und Zoll",
+    "read": "IKEA-Zollratgeber lesen",
+    "back": "Zurück zum Reiseratgeber",
+    "reviewed": "Geprüft am 3. November 2026",
+    "disclaimerTitle": "Wichtig: Nur zur persönlichen Information, keine amtliche Rechtsauskunft",
+    "disclaimer": "Dieser Beitrag dient ausschließlich der persönlichen Information und Reisevorbereitung. ComfortLine ist keine Zoll- oder Regierungsbehörde. Der Text ist keine amtliche Rechtsquelle, keine individuelle Rechtsberatung und keine Garantie für die Einfuhr. Prüfen Sie unmittelbar vor der Fahrt die geltenden Vorschriften der EAWU, von Belarus, die EU-Ausfuhrsanktionen und die Anweisungen des Ausreisestaats. Erbitten Sie bei Zweifeln eine schriftliche Auskunft der zuständigen Zollbehörde.",
+    "productsTitle": "Der IKEA-Einkaufszettel: 16 Artikel fürs Kind",
+    "productsIntro": "Dies ist eine Wunschliste, keine Bestätigung der aktuellen Verfügbarkeit. Artikelnummern werden aus der Vorlage übernommen. Preise, Verpackungsgewichte, Herkunft und Beschränkungen müssen im jeweiligen IKEA-Land kontrolliert werden. Die drei ANTILOP-Teile ergeben einen Hochstuhl.",
+    "sources": "Amtliche Dokumente und Behörden",
+    "checklistTitle": "Sechs Kontrollen vor der Fahrt",
+    "sections": [
+      [
+        "Ein Fahrer mit einem sehr kleinen Stammkunden",
+        "Stellen wir uns den ComfortLine-Fahrer Max vor. Er pendelt regelmäßig zwischen der EU und Belarus; zu Hause wartet sein Kind. Auf seinem IKEA-Zettel stehen der ANTILOP-Hochstuhl, das LOCKIG-Töpfchen, eine LILLABO-Holzeisenbahn, die DUKTIG-Spielkasse, der UNDERHÅLLA-Abakus und MÅLA-Malstifte.",
+        "Sechzehn Artikelnummern passen leicht auf einen Zettel. Doch an der Grenze fragt der Zoll nicht nach dem Geburtstag des Kindes, sondern nach Gesamtwert, Gewicht, Stückzahl, Verwendungszweck und Reisehäufigkeit. Bei der Ausreise aus der EU kommen mögliche Exportverbote hinzu. Die Geschichte ist fiktiv; die Rechtsfragen sind real."
+      ],
+      [
+        "Die grundlegende Grenze: 500 € UND 25 kg",
+        "Für als persönlich anerkannte Waren, die auf dem Landweg nach Belarus über die Zollgrenze der EAWU eingeführt werden, gilt grundsätzlich **500 € Gesamtwert UND 25 kg Gesamtgewicht pro Person** als abgabenfreie Grenze. Beide Voraussetzungen müssen erfüllt sein. 480 € und 26 kg überschreiten das Gewicht; 540 € und 20 kg überschreiten den Wert. Ein bezahlter Kundentransport wird dadurch nicht automatisch zum persönlichen Gepäck. [1] [6]",
+        "Bewahren Sie Belege, Rechnungen, Zahlungsnachweise und Angaben zu tatsächlichen Verpackungsgewichten auf. Ohne Nachweise kann der Zoll den Warenwert anhand eigener Informationen bestimmen. [7]"
+      ],
+      [
+        "Halbjährlich, wöchentlich oder mehrmals am Tag?",
+        "**Einmal pro Halbjahr:** Ein plausibles Set für das eigene Kind lässt sich leichter als Familienbedarf erklären. **Wöchentlich:** Die 500-€/25-kg-Grenze sinkt nicht automatisch; trotzdem beurteilt der Zoll die Häufigkeit. Die veröffentlichten belarussischen Leitlinien nennen bei Fahrten einmal in sieben Tagen oder seltener bis zu zehn Stück einer Warenart als Orientierungswert, sofern dies zur üblichen Haushaltsnutzung passt – keine Erlaubnis für zehn identische Kinderstühle. [1] [5]",
+        "**Häufiger als alle sieben Tage:** als Orientierungswert höchstens ein Stück jeder Warenart; **häufiger als alle drei Tage:** ein Stück einer Warenart; **mehrmals an einem Kalendertag:** bereits verwendete Gegenstände, die für Reise oder Aufenthalt benötigt werden. Eine neue 16-teilige Sammlung kann bei sehr häufigen Einreisen deshalb Fragen auslösen. Dies sind Risikokriterien für die persönliche Zweckbestimmung, keine neuen Freibeträge. [5]"
+      ],
+      [
+        "Der hartnäckige Mythos von 300 € und 20 kg",
+        "Ältere Websites nennen noch 300 € und 20 kg bei Reisen häufiger als einmal in drei Monaten. Diese Angaben stammen aus alten Fassungen des belarussischen Dekrets Nr. 360. Mit Dekret Nr. 146 wurde 2020 die besondere Freigrenze gestrichen; Dekret Nr. 73 formulierte 2022 auch die damalige Klassifizierungsbestimmung neu. Historische Tabellen dürfen nicht als heutiges Recht präsentiert werden. [3] [4]",
+        "Es gilt für anerkanntes persönliches Gepäck der allgemeine EAWU-Rahmen von 500 €/25 kg. Wiederholte Lieferungen an Kunden können dennoch als gewerblich eingestuft werden. [1] [5]"
+      ],
+      [
+        "Was kostet eine Überschreitung?",
+        "Soweit die Waren weiterhin als persönliche Gegenstände anerkannt sind, beträgt der einschlägige Satz **30 % des Werts über 500 €, mindestens aber 4 € je Kilogramm über 25 kg**. Beispiele: 540 € bei 24 kg ergeben 12 € wegen des Werts; 400 € bei 28 kg 12 € wegen des Gewichts; 600 € bei 28 kg 30 € als höheren Vergleichswert. Weitere Kosten oder Verbote können relevant sein. [2]",
+        "Abgabenpflichtige Waren müssen auf dem roten Weg angemeldet werden. Handelt es sich tatsächlich um gewerbliche Waren, kann die vereinfachte Berechnung für persönliches Gepäck ausgeschlossen sein. [2] [7]"
+      ],
+      [
+        "Familiengeschenk oder bezahlter Lieferdienst?",
+        "Ein Hochstuhl, ein Töpfchen, verschiedene Spielsachen und Stifte für das eigene Kind sind plausibel. Ständig neue Bestellungen zahlender Kunden mit identischen Kartons wirken anders. Das Wort 'Kinderspielzeug' reicht nicht aus, um eine gewerbliche Ware zu persönlichem Gepäck zu machen. [5] [12]",
+        "Bei ANTILOP sind Tablett, Sitz und Beine eigene Artikelnummern, gehören aber zu einem funktionalen Hochstuhl. Wert und Gewicht aller Komponenten zählen. Durch künstliches Aufteilen von Kassenzetteln auf Reisende lässt sich der tatsächliche Zweck nicht ändern."
+      ],
+      [
+        "Die EU-Ausreise hat eigene Regeln",
+        "Die **500-€-Grenze von Belarus ist keine EU-Ausfuhrgenehmigung für alle IKEA-Produkte**. Beim Verlassen von Litauen, Lettland oder Polen sind die EU-Verordnung 765/2006, Zolltarifnummern, Warenbeschreibungen und Ausnahmen zu kontrollieren. Keiner der 16 Artikel darf ohne Prüfung pauschal als sanktionsfrei bezeichnet werden. [8] [9] [11]",
+        "Die oft diskutierten **60 € betreffen das Thema Euro-Banknoten**, nicht einen allgemeinen Wertgrenzbetrag für IKEA-Waren. Die **300 € für die Einreise nach Litauen aus Belarus** betreffen wiederum die entgegengesetzte Richtung. [8] [10]"
+      ],
+      [
+        "Ein gutes Ende beginnt mit einer ordentlichen Quittung",
+        "Max sammelt die 16 Artikelcodes, Belege und tatsächlichen Gewichte, klärt den Familienzweck und bittet bei Zweifeln an der Exportklassifizierung frühzeitig um Behördenauskunft.",
+        "Das Kind möchte am Ende die LILLABO-Eisenbahn sehen. Sein Vater möchte vor allem mit dieser Eisenbahn tatsächlich nach Hause kommen."
+      ]
+    ],
+    "checklist": [
+      "Alle 16 IKEA-Artikelnummern mit den aktuellen Kassenzetteln abgleichen.",
+      "Gesamtwert und tatsächliche Masse einschließlich relevanter Verpackung ermitteln.",
+      "Einreisehäufigkeit und familiären Verwendungszweck prüfen.",
+      "EU-Exportverbote anhand der Warencodes kontrollieren.",
+      "Bei Überschreitung oder Unklarheit den Zoll fragen und Waren anmelden.",
+      "Grenzöffnungen und aktuelle Hinweise beider Länder vor Abfahrt erneut prüfen."
+    ]
+  },
+  "fr": {
+    "title": "16 achats IKEA pour son enfant : que peut rapporter un chauffeur qui passe souvent la frontière du Bélarus ?",
+    "shortTitle": "IKEA pour les enfants : combien peut-on rapporter ?",
+    "description": "Un chauffeur fictif achète ANTILOP, LILLABO, DUKTIG et MÅLA. Franchise de 500 € et 25 kg au Bélarus, trajets fréquents, reçus, droits et sanctions de l'UE.",
+    "tag": "Histoires de chauffeurs · Achats et douane",
+    "read": "Lire le guide douanier IKEA",
+    "back": "Retour au Guide de voyage",
+    "reviewed": "Vérifié le 3 novembre 2026",
+    "disclaimerTitle": "Important : information personnelle, non source juridique officielle",
+    "disclaimer": "Cette publication est destinée uniquement à l'information personnelle et à la préparation du voyage. ComfortLine n'est ni une autorité douanière ni une administration publique. Ce texte n'est pas une source juridique officielle, un conseil juridique personnalisé ou une garantie d'admission des marchandises. Vérifiez avant chaque trajet les règles de l'UEEA, du Bélarus, les sanctions européennes et les exigences des douanes du pays de départ. Demandez une réponse écrite aux autorités pour tout cas incertain.",
+    "productsTitle": "La liste IKEA : 16 articles pour un enfant",
+    "productsIntro": "Il s'agit d'une liste de souhaits, pas d'une confirmation de disponibilité. Les références ont été conservées telles que fournies. Vérifiez prix, poids emballés, origine et restrictions dans le magasin concerné. Les trois pièces ANTILOP constituent ensemble une chaise haute.",
+    "sources": "Documents et administrations officiels",
+    "checklistTitle": "Six vérifications avant la route",
+    "sections": [
+      [
+        "Le chauffeur et son plus jeune client",
+        "Imaginons Maxime, chauffeur ComfortLine, qui voyage régulièrement entre le Bélarus et l'Union européenne. À la maison, son jeune enfant attend une chaise haute ANTILOP, un pot LOCKIG, un train en bois LILLABO, une caisse de jeu DUKTIG, un boulier UNDERHÅLLA et des fournitures MÅLA.",
+        "Seize références IKEA paraissent bien innocentes. Pourtant, la douane examine le prix total, le poids, les quantités, l'usage familial et la fréquence des passages. À la sortie de l'UE, les sanctions peuvent constituer une autre condition. Ce récit est fictif, mais l'analyse repose sur des règles réelles."
+      ],
+      [
+        "La franchise générale : 500 € ET 25 kg",
+        "Pour des marchandises reconnues comme destinées à un usage personnel et entrant au Bélarus par voie terrestre via la frontière douanière de l'UEEA, la limite générale sans droits est de **500 € de valeur totale ET 25 kg de poids total par personne**. Ces deux conditions sont cumulatives. Un panier de 480 € et 26 kg dépasse le poids; 540 € et 20 kg dépassent la valeur. Les commandes livrées contre paiement pour des clients ne deviennent pas automatiquement des bagages personnels. [1] [6]",
+        "Conservez factures, reçus, confirmations de commande et poids réels des emballages. Sans preuve suffisante, la douane peut établir la valeur selon ses informations. [7]"
+      ],
+      [
+        "Tous les six mois, chaque semaine ou plusieurs fois par jour",
+        "**Tous les six mois :** un jeu d'articles pour son propre enfant est plus facile à justifier. **Chaque semaine :** la franchise de 500 €/25 kg ne baisse pas automatiquement, mais la fréquence compte dans l'appréciation. Les recommandations publiées par les douanes bélarusses évoquent, pour un passage tous les sept jours ou moins fréquent, jusqu'à dix unités d'une même catégorie selon les besoins domestiques ordinaires. Cela ne donne pas carte blanche pour dix chaises identiques. [1] [5]",
+        "**Plus d'une fois en sept jours :** l'indicateur devient une unité de chaque type; **plus d'une fois en trois jours :** une unité d'un seul type; **plusieurs fois le même jour :** les effets déjà utilisés nécessaires au trajet ou à destination. Une collection neuve de 16 références peut donc éveiller des questions. Ces indicateurs servent à évaluer l'usage personnel, pas à créer de nouvelles franchises fiscales. [5]"
+      ],
+      [
+        "Pourquoi les anciens 300 € / 20 kg ne conviennent plus",
+        "On trouve encore des tableaux limitant les passages fréquents à 300 € et 20 kg. Ils reprennent d'anciennes versions du décret bélarusse no 360. Le décret no 146 de 2020 a supprimé le seuil spécial, puis le décret no 73 de 2022 a remanié l'ancien critère de qualification. Il serait trompeur de citer ces anciennes limites comme règle actuelle. [3] [4]",
+        "La franchise générale de l'UEEA s'applique au vrai bagage personnel. Des livraisons régulières pour des clients peuvent néanmoins être traitées comme des marchandises commerciales. [1] [5]"
+      ],
+      [
+        "Si la valeur ou le poids dépasse la franchise",
+        "Lorsque les biens demeurent éligibles à l'usage personnel, les droits sont calculés à **30 % de la valeur supérieure à 500 €, avec un minimum de 4 € par kilogramme au-delà de 25 kg**. Exemples : 540 € et 24 kg — 12 €; 400 € et 28 kg — 12 €; 600 € et 28 kg — 30 € en retenant le montant le plus élevé. Il peut exister d'autres frais ou règles. [2]",
+        "Les biens imposables sont à déclarer dans le couloir rouge. Une livraison commerciale peut relever d'une procédure différente, sans bénéficier du calcul simplifié. [2] [7]"
+      ],
+      [
+        "Pour son enfant ou pour des clients payants ?",
+        "Une seule chaise haute, un pot et des jouets variés destinés à son enfant sont compatibles avec un usage familial. En revanche, recevoir chaque semaine des commandes payantes, transporter des cartons identiques ou agir comme coursier peut caractériser une activité commerciale. La mention 'enfants' sur l'emballage ne résout pas la question. [5] [12]",
+        "Le plateau, le siège et les pieds ANTILOP sont trois références mais composent une chaise haute. Il faut compter la vraie valeur et le poids de l'ensemble. Fractionner artificiellement des reçus entre passagers ne change pas le but du transport."
+      ],
+      [
+        "Le départ de l'UE : sanctions à vérifier séparément",
+        "La **franchise bélarusse de 500 € n'autorise pas à exporter automatiquement les 16 produits IKEA depuis l'UE**. En quittant la Lituanie, la Lettonie ou la Pologne, il faut vérifier le règlement 765/2006, les codes NC, la description exacte des produits et les exceptions. Impossible de garantir le statut de chaque référence sur son seul nom commercial. [8] [9] [11]",
+        "La question souvent évoquée des **60 € concerne les billets en euros**, et non une limite générale de marchandises IKEA. De même, le seuil de **300 € pour l'entrée en Lituanie depuis le Bélarus** concerne le sens inverse du voyage. [8] [10]"
+      ],
+      [
+        "La vraie bonne affaire : rentrer avec ses achats",
+        "Maxime garde ses 16 références, les tickets et poids réels, vérifie la destination familiale des achats et contacte les douanes pour les classifications incertaines avant de prendre la route.",
+        "L'enfant rêve du train LILLABO. Son père, lui, rêve surtout de rentrer avec le train plutôt qu'avec un dossier de formalités douanières."
+      ]
+    ],
+    "checklist": [
+      "Comparer les 16 références aux vrais reçus IKEA.",
+      "Calculer la valeur et la masse de l'ensemble des achats et emballages.",
+      "Tenir compte de la fréquence et du véritable usage familial.",
+      "Contrôler les codes NC et les sanctions de l'UE à l'export.",
+      "En cas de dépassement ou d'incertitude, consulter les douanes et déclarer les biens.",
+      "Revérifier l'ouverture des frontières et les règles des deux côtés avant de partir."
+    ]
   }
 };
