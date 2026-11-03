@@ -87,3 +87,35 @@ for(const lang of langs){
   assert.equal((html.match(/class="guide-article-section"/g)||[]).length,c.sections.length,lang+": missing sections");
 }
 console.log("Verified both optimized story WebPs and their seven localized article/card placements, disclaimers, official sources and SEO.");
+
+
+import {ikeaKidsArticle,ikeaKidsProducts,ikeaKidsSources} from "../ikea-kids-customs-article.mjs";
+const ikeaSlug="ikea-shopping-belarus-customs-limits-frequency";
+assert.equal(Object.keys(ikeaKidsArticle).length,7,"IKEA story requires seven adapted translations");
+assert.equal(ikeaKidsProducts.length,16,"All 16 provided IKEA products must appear");
+assert(ikeaKidsSources.length>=10,"IKEA story needs substantive official customs references");
+assert(css.includes(".guide-ikea-inventory")&&css.includes(".guide-ikea-facts"),"Missing IKEA responsive styling");
+for(const lang of langs){
+ const c=ikeaKidsArticle[lang], url=`${base}/${lang}/travel-guide/${ikeaSlug}/`;
+ assert(c.sections.length===8&&c.checklist.length===6,lang+": IKEA narrative incomplete");
+ const [guide,html]=await Promise.all([
+  readFile(`dist/${lang}/travel-guide/index.html`,"utf8"),
+  readFile(`dist/${lang}/travel-guide/${ikeaSlug}/index.html`,"utf8")]);
+ assert(guide.includes(`href="/${lang}/travel-guide/${ikeaSlug}/"`),lang+": IKEA guide card missing");
+ assert(html.includes(`<link rel="canonical" href="${url}"`),lang+": incorrect IKEA canonical");
+ assert(html.includes(`<html lang="${lang}"`),lang+": wrong IKEA document language");
+ assert(html.includes(c.disclaimerTitle),lang+": disclaimer missing");
+ assert(html.indexOf("guide-article-warning")<html.indexOf('class="guide-article-section"'),lang+": disclaimer not first");
+ assert(html.includes('id="ikea-shopping-list"'),lang+": product inventory absent");
+ assert.equal((html.match(/class="guide-ikea-product"/g)||[]).length,16,lang+": not all 16 IKEA products shown");
+ for(const [sku] of ikeaKidsProducts)assert(html.includes(sku),lang+": missing SKU "+sku);
+ assert(html.includes("500 €")&&html.includes("25 kg"),lang+": basic import limit missing");
+ assert(html.includes('"@type":"BlogPosting"'),lang+": BlogPosting schema missing");
+ assert(sitemap.includes(`<loc>${url}</loc>`)&&yandex.includes(`<loc>${url}</loc>`),lang+": IKEA sitemap entry missing");
+ assert(html.includes('href="#guide-source-1"')&&html.includes('id="guide-source-13"'),lang+": official source anchors missing");
+ for(const source of ikeaKidsSources)assert(html.includes(source.url),lang+": source missing "+source.url);
+ for(const other of langs)assert(html.includes(`hreflang="${other}" href="${base}/${other}/travel-guide/${ikeaSlug}/"`),lang+": alternate language missing "+other);
+ assert(html.includes(`hreflang="x-default" href="${base}/en/travel-guide/${ikeaSlug}/"`),lang+": x-default missing");
+ assert.equal((html.match(/class="guide-article-section"/g)||[]).length,c.sections.length,lang+": missing narrative sections");
+}
+console.log("Verified seven localised IKEA customs articles: 16 SKUs, source links, legal disclaimer, guide links, sitemaps and SEO.");
