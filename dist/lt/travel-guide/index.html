@@ -28,7 +28,7 @@
         <h2><a href="/lt/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/">60 € pasienyje: iki valiutos keityklos dar toli</a></h2><p>Kodėl prieš kelionę į Baltarusiją svarbūs 60 € ir EUR/PLN banknotų ribojimai, kuo skiriasi USD, 10 000 € ir 10 000 USD deklaravimo taisyklės, raudonasis ir žaliasis kanalai.</p>
         <a class="travel-guide-featured-link" href="/lt/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/">Skaityti apie 60 € pasienyje <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
-      <a class="travel-guide-featured-thumbnail travel-guide-featured-thumbnail--cash" href="/lt/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/" aria-label="Skaityti apie 60 € pasienyje"><img src="/assets/stories/euro-60-cash-border-exchange-cartoon.svg" width="1400" height="788" loading="lazy" decoding="async" alt=""></a>
+      <a class="travel-guide-featured-thumbnail travel-guide-featured-thumbnail--cash" href="/lt/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/" aria-label="Skaityti apie 60 € pasienyje"><img src="/assets/stories/euro-60-border-exchange-office-driver.webp" width="1672" height="941" loading="lazy" decoding="async" alt=""></a>
     </section>
     <section class="travel-guide-featured" aria-label="Pasakojimai iš pasienio">
       <div class="travel-guide-featured-copy"><span class="travel-guide-featured-label">Pasakojimai iš pasienio · <time datetime="2026-11-03">03.11.2026</time></span>
@@ -48,19 +48,47 @@
       <a class="travel-guide-featured-link" href="/lt/travel-guide/ikea-shopping-belarus-customs-limits-frequency/">Skaityti IKEA muitinės gidą <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
       <a class="guide-ikea-feature-symbol" href="/lt/travel-guide/ikea-shopping-belarus-customs-limits-frequency/" aria-label="Skaityti IKEA muitinės gidą"><span aria-hidden="true">IKEA</span><span aria-hidden="true">16</span></a>
     </section>
-    <section class="travel-guide-section">
-      <div class="travel-guide-heading"><h2>Rengiami straipsniai</h2><p>Rengiame atsakymus į dažniausiai keliautojų užduodamus klausimus.</p></div>
-      <div class="travel-guide-grid"><article class="travel-guide-card">
-      <span class="travel-guide-card-count">01</span>
-      <div><span class="travel-guide-card-status">Straipsnis rengiamas</span><h2>Muitinė ir 60 € klausimas</h2><p>Ką patikrinti dėl asmeninių daiktų ir galimų vertės ribų vykstant iš Baltarusijos į Lietuvą ar Latviją.</p></div>
-    </article><article class="travel-guide-card">
-      <span class="travel-guide-card-count">02</span>
-      <div><span class="travel-guide-card-status">Straipsnis rengiamas</span><h2>Automobiliai ir sankcijos</h2><p>Kaip automobilio registracija, variklio tūris, vertė, amžius ir maršrutas gali paveikti kelionę.</p></div>
-    </article><article class="travel-guide-card">
-      <span class="travel-guide-card-count">03</span>
-      <div><span class="travel-guide-card-status">Straipsnis rengiamas</span><h2>Prieš kelionę</h2><p>Dokumentai, bagažas, kelionės su vaikais, paėmimo vieta ir privataus pervežimo planavimas.</p></div>
-    </article></div>
-    </section>
+    <section class="travel-guide-contribute" id="share-your-story" aria-labelledby="travel-guide-contribute-title">
+    <div class="travel-guide-contribute-heading">
+      <span class="travel-guide-eyebrow">COMFORTLINE · Kelionių gidas</span>
+      <h2 id="travel-guide-contribute-title">Turite idėją straipsniui ar istoriją iš pasienio?</h2>
+      <p>Pasiūlykite naują temą arba pasidalykite savo kelionės patirtimi. Tai gali padėti kitiems geriau pasiruošti sienos kirtimui.</p>
+    </div>
+    <form class="travel-guide-story-form" data-travel-guide-submission data-lang="lt" data-sending="Siunčiama…" data-success="Ačiū! Žinutė priimta peržiūrai. Numeris:" data-error="Nepavyko išsiųsti. Bandykite dar kartą." data-validation="Patikrinkite laukus ir bandykite iš naujo." data-rate-limited="Pašto paslauga užimta. Bandykite vėliau." method="post" action="/api/travel-guide-submission">
+      <div class="guide-story-form-grid">
+        <label class="guide-story-form-field guide-story-type">
+          <span>Ką norite atsiųsti?</span>
+          <select name="type" required>
+            <option value="idea">Pasiūlyti straipsnį</option>
+            <option value="story">Pasidalyti istorija</option>
+          </select>
+        </label>
+        <label class="guide-story-form-field guide-story-title">
+          <span>Temos arba istorijos pavadinimas</span>
+          <input type="text" name="title" minlength="6" maxlength="140" placeholder="Pvz., ką daryti uždarius pasienio punktą?" autocomplete="off" required>
+        </label>
+        <label class="guide-story-form-field guide-story-message">
+          <span>Jūsų pasiūlymas arba istorija</span>
+          <textarea name="message" minlength="25" maxlength="4000" rows="7" placeholder="Papasakokite, kas nutiko, kur ir ką turėtų žinoti kiti keliautojai…" required></textarea>
+        </label>
+        <label class="guide-story-form-field">
+          <span>Jūsų vardas (nebūtina)</span>
+          <input type="text" name="name" maxlength="100" placeholder="Vardas arba slapyvardis" autocomplete="name">
+        </label>
+        <label class="guide-story-form-field">
+          <span>El. paštas atsakymui (nebūtina)</span>
+          <input type="email" name="email" maxlength="190" placeholder="you@example.com" autocomplete="email">
+        </label>
+        <div class="guide-story-honeypot" aria-hidden="true"><label>Website <input name="website" autocomplete="off" tabindex="-1"></label></div>
+        <label class="guide-story-consent"><input type="checkbox" name="consent" value="yes" required><span>Sutinku, kad ComfortLine tvarkytų mano žinutę ir pateiktus kontaktus pasiūlymui peržiūrėti bei prireikus atsakyti.</span></label>
+      </div>
+      <p class="guide-story-privacy">Nesiųskite paso numerių, adresų ar kitos jautrios informacijos. Jūsų istorijos neskelbsime be atskiro susitarimo.</p>
+      <div class="guide-story-submit-row">
+        <button class="button primary guide-story-submit" type="submit">Siųsti ComfortLine</button>
+        <p class="guide-story-form-status" role="status" aria-live="polite" hidden></p>
+      </div>
+    </form>
+  </section>
     <section class="travel-guide-disclaimer" aria-label="Taisyklės gali keistis">
       <span class="travel-guide-note-icon" aria-hidden="true">i</span>
       <div><h2>Taisyklės gali keistis</h2><p>Sienos kirtimo, muitinės, sankcijų ir įvažiavimo taisyklės gali keistis. Prieš išvykdami patikrinkite naujausią informaciją oficialiuose pasienio, muitinės ir valstybės institucijų šaltiniuose.</p></div>

@@ -28,7 +28,7 @@
         <h2><a href="/lv/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/">60 € pie robežas: tālā valūtas maiņas punkta stāsts</a></h2><p>60 eiro jautājums uz robežas ar Baltkrieviju: sankcijas EUR un PLN banknotēm, USD atšķirība, ES 10 000 € un Baltkrievijas 10 000 USD deklarēšana, sarkanais/zaļais koridors.</p>
         <a class="travel-guide-featured-link" href="/lv/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/">Lasīt par 60 € jautājumu <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
-      <a class="travel-guide-featured-thumbnail travel-guide-featured-thumbnail--cash" href="/lv/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/" aria-label="Lasīt par 60 € jautājumu"><img src="/assets/stories/euro-60-cash-border-exchange-cartoon.svg" width="1400" height="788" loading="lazy" decoding="async" alt=""></a>
+      <a class="travel-guide-featured-thumbnail travel-guide-featured-thumbnail--cash" href="/lv/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/" aria-label="Lasīt par 60 € jautājumu"><img src="/assets/stories/euro-60-border-exchange-office-driver.webp" width="1672" height="941" loading="lazy" decoding="async" alt=""></a>
     </section>
     <section class="travel-guide-featured" aria-label="Robežas stāsti">
       <div class="travel-guide-featured-copy"><span class="travel-guide-featured-label">Robežas stāsti · <time datetime="2026-11-03">03.11.2026</time></span>
@@ -48,19 +48,47 @@
       <a class="travel-guide-featured-link" href="/lv/travel-guide/ikea-shopping-belarus-customs-limits-frequency/">Lasīt IKEA muitas ceļvedi <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
       <a class="guide-ikea-feature-symbol" href="/lv/travel-guide/ikea-shopping-belarus-customs-limits-frequency/" aria-label="Lasīt IKEA muitas ceļvedi"><span aria-hidden="true">IKEA</span><span aria-hidden="true">16</span></a>
     </section>
-    <section class="travel-guide-section">
-      <div class="travel-guide-heading"><h2>Gatavojam rakstus</h2><p>Apkopojam biežākos robežšķērsotāju jautājumus un oficiālos informācijas avotus.</p></div>
-      <div class="travel-guide-grid"><article class="travel-guide-card">
-      <span class="travel-guide-card-count">01</span>
-      <div><span class="travel-guide-card-status">Raksts top</span><h2>Muita un 60 € jautājums</h2><p>Kādi personīgo mantu noteikumi un iespējamie vērtības ierobežojumi jāpārbauda, iebraucot Latvijā vai Lietuvā no Baltkrievijas.</p></div>
-    </article><article class="travel-guide-card">
-      <span class="travel-guide-card-count">02</span>
-      <div><span class="travel-guide-card-status">Raksts top</span><h2>Automašīnas un sankcijas</h2><p>Kā reģistrācija, motora tilpums, vērtība, vecums un maršruts var ietekmēt robežas šķērsošanu.</p></div>
-    </article><article class="travel-guide-card">
-      <span class="travel-guide-card-count">03</span>
-      <div><span class="travel-guide-card-status">Raksts top</span><h2>Pirms ceļojuma</h2><p>Dokumenti, bagāža, bērni, sagaidīšanas vieta un privātā transfēra plānošana.</p></div>
-    </article></div>
-    </section>
+    <section class="travel-guide-contribute" id="share-your-story" aria-labelledby="travel-guide-contribute-title">
+    <div class="travel-guide-contribute-heading">
+      <span class="travel-guide-eyebrow">COMFORTLINE · Ceļvedis</span>
+      <h2 id="travel-guide-contribute-title">Ir ideja rakstam vai stāsts no robežas?</h2>
+      <p>Iesakiet jaunu tēmu vai dalieties savā ceļojuma pieredzē. Tas var palīdzēt citiem ceļotājiem labāk sagatavoties robežšķērsošanai.</p>
+    </div>
+    <form class="travel-guide-story-form" data-travel-guide-submission data-lang="lv" data-sending="Sūta…" data-success="Paldies! Ziņojums pieņemts izskatīšanai. Numurs:" data-error="Neizdevās nosūtīt. Lūdzu, mēģiniet vēlreiz." data-validation="Pārbaudiet laukus un mēģiniet vēlreiz." data-rate-limited="Pasta pakalpojums ir noslogots. Mēģiniet vēlāk." method="post" action="/api/travel-guide-submission">
+      <div class="guide-story-form-grid">
+        <label class="guide-story-form-field guide-story-type">
+          <span>Ko vēlaties nosūtīt?</span>
+          <select name="type" required>
+            <option value="idea">Ieteikt raksta tēmu</option>
+            <option value="story">Pastāstīt savu stāstu</option>
+          </select>
+        </label>
+        <label class="guide-story-form-field guide-story-title">
+          <span>Tēmas vai stāsta nosaukums</span>
+          <input type="text" name="title" minlength="6" maxlength="140" placeholder="Piemēram, ja robežpunkts ir slēgts?" autocomplete="off" required>
+        </label>
+        <label class="guide-story-form-field guide-story-message">
+          <span>Jūsu ieteikums vai stāsts</span>
+          <textarea name="message" minlength="25" maxlength="4000" rows="7" placeholder="Pastāstiet, kas notika, kur un ko būtu vērts zināt citiem ceļotājiem…" required></textarea>
+        </label>
+        <label class="guide-story-form-field">
+          <span>Jūsu vārds (nav obligāti)</span>
+          <input type="text" name="name" maxlength="100" placeholder="Vārds vai segvārds" autocomplete="name">
+        </label>
+        <label class="guide-story-form-field">
+          <span>E-pasts atbildei (nav obligāti)</span>
+          <input type="email" name="email" maxlength="190" placeholder="you@example.com" autocomplete="email">
+        </label>
+        <div class="guide-story-honeypot" aria-hidden="true"><label>Website <input name="website" autocomplete="off" tabindex="-1"></label></div>
+        <label class="guide-story-consent"><input type="checkbox" name="consent" value="yes" required><span>Piekrītu, ka ComfortLine apstrādā manu ziņojumu un norādīto kontaktinformāciju, lai to izskatītu un vajadzības gadījumā atbildētu.</span></label>
+      </div>
+      <p class="guide-story-privacy">Nesūtiet pases numurus, adreses vai citu sensitīvu informāciju. Stāstu nepublicēsim bez saskaņošanas.</p>
+      <div class="guide-story-submit-row">
+        <button class="button primary guide-story-submit" type="submit">Nosūtīt ComfortLine</button>
+        <p class="guide-story-form-status" role="status" aria-live="polite" hidden></p>
+      </div>
+    </form>
+  </section>
     <section class="travel-guide-disclaimer" aria-label="Noteikumi var mainīties">
       <span class="travel-guide-note-icon" aria-hidden="true">i</span>
       <div><h2>Noteikumi var mainīties</h2><p>Robežas, muitas, sankciju un ieceļošanas noteikumi var mainīties. Pirms ceļojuma pārbaudiet aktuālo informāciju kompetento robežsardzes, muitas un valsts iestāžu oficiālajās vietnēs.</p></div>

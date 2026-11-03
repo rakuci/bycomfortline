@@ -28,7 +28,7 @@
         <h2><a href="/fr/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/">60 € à la frontière : le détour vers le bureau de change</a></h2><p>La question des 60 € à la sortie de Lituanie ou Lettonie vers le Bélarus, sanctions sur billets EUR/PLN, distinction USD, déclarations UE 10 000 € et Bélarus 10 000 $ et couloirs douaniers.</p>
         <a class="travel-guide-featured-link" href="/fr/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/">Découvrir la question des 60 € <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
-      <a class="travel-guide-featured-thumbnail travel-guide-featured-thumbnail--cash" href="/fr/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/" aria-label="Découvrir la question des 60 €"><img src="/assets/stories/euro-60-cash-border-exchange-cartoon.svg" width="1400" height="788" loading="lazy" decoding="async" alt=""></a>
+      <a class="travel-guide-featured-thumbnail travel-guide-featured-thumbnail--cash" href="/fr/travel-guide/60-euro-cash-eur-pln-belarus-border-lithuania-latvia/" aria-label="Découvrir la question des 60 €"><img src="/assets/stories/euro-60-border-exchange-office-driver.webp" width="1672" height="941" loading="lazy" decoding="async" alt=""></a>
     </section>
     <section class="travel-guide-featured" aria-label="Récits de frontière">
       <div class="travel-guide-featured-copy"><span class="travel-guide-featured-label">Récits de frontière · <time datetime="2026-11-03">03.11.2026</time></span>
@@ -48,19 +48,47 @@
       <a class="travel-guide-featured-link" href="/fr/travel-guide/ikea-shopping-belarus-customs-limits-frequency/">Lire le guide douanier IKEA <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
       <a class="guide-ikea-feature-symbol" href="/fr/travel-guide/ikea-shopping-belarus-customs-limits-frequency/" aria-label="Lire le guide douanier IKEA"><span aria-hidden="true">IKEA</span><span aria-hidden="true">16</span></a>
     </section>
-    <section class="travel-guide-section">
-      <div class="travel-guide-heading"><h2>Articles en préparation</h2><p>Nous préparons des contenus documentés sur les questions les plus fréquentes des voyageurs.</p></div>
-      <div class="travel-guide-grid"><article class="travel-guide-card">
-      <span class="travel-guide-card-count">01</span>
-      <div><span class="travel-guide-card-status">Article en préparation</span><h2>Douane et question des 60 €</h2><p>Comment vérifier les règles relatives aux effets personnels et les éventuels seuils de valeur en arrivant du Bélarus en Lettonie ou en Lituanie.</p></div>
-    </article><article class="travel-guide-card">
-      <span class="travel-guide-card-count">02</span>
-      <div><span class="travel-guide-card-status">Article en préparation</span><h2>Véhicules et sanctions</h2><p>En quoi l'immatriculation, la cylindrée, la valeur, l'âge du véhicule et l'itinéraire peuvent influencer le passage de la frontière.</p></div>
-    </article><article class="travel-guide-card">
-      <span class="travel-guide-card-count">03</span>
-      <div><span class="travel-guide-card-status">Article en préparation</span><h2>Avant le départ</h2><p>Documents, bagages, voyages avec enfants, point de rendez-vous et préparation d'un transfert privé.</p></div>
-    </article></div>
-    </section>
+    <section class="travel-guide-contribute" id="share-your-story" aria-labelledby="travel-guide-contribute-title">
+    <div class="travel-guide-contribute-heading">
+      <span class="travel-guide-eyebrow">COMFORTLINE · Guide de voyage</span>
+      <h2 id="travel-guide-contribute-title">Une idée d'article ou une histoire de frontière ?</h2>
+      <p>Proposez un sujet ou racontez votre voyage. Votre expérience peut aider d'autres voyageurs à mieux préparer leur passage de frontière.</p>
+    </div>
+    <form class="travel-guide-story-form" data-travel-guide-submission data-lang="fr" data-sending="Envoi en cours…" data-success="Merci ! Votre message a été reçu pour examen. Référence :" data-error="L'envoi a échoué. Veuillez réessayer." data-validation="Vérifiez les champs et réessayez." data-rate-limited="Le service de messagerie est occupé. Réessayez plus tard." method="post" action="/api/travel-guide-submission">
+      <div class="guide-story-form-grid">
+        <label class="guide-story-form-field guide-story-type">
+          <span>Que souhaitez-vous envoyer ?</span>
+          <select name="type" required>
+            <option value="idea">Proposer un article</option>
+            <option value="story">Partager mon histoire</option>
+          </select>
+        </label>
+        <label class="guide-story-form-field guide-story-title">
+          <span>Titre du sujet ou du récit</span>
+          <input type="text" name="title" minlength="6" maxlength="140" placeholder="Ex. : que faire si le poste-frontière ferme ?" autocomplete="off" required>
+        </label>
+        <label class="guide-story-form-field guide-story-message">
+          <span>Votre suggestion ou votre histoire</span>
+          <textarea name="message" minlength="25" maxlength="4000" rows="7" placeholder="Racontez ce qui s'est passé, où et ce que les autres devraient savoir…" required></textarea>
+        </label>
+        <label class="guide-story-form-field">
+          <span>Votre nom (facultatif)</span>
+          <input type="text" name="name" maxlength="100" placeholder="Nom ou pseudonyme" autocomplete="name">
+        </label>
+        <label class="guide-story-form-field">
+          <span>Email pour réponse (facultatif)</span>
+          <input type="email" name="email" maxlength="190" placeholder="you@example.com" autocomplete="email">
+        </label>
+        <div class="guide-story-honeypot" aria-hidden="true"><label>Website <input name="website" autocomplete="off" tabindex="-1"></label></div>
+        <label class="guide-story-consent"><input type="checkbox" name="consent" value="yes" required><span>J'accepte que ComfortLine traite mon message et les coordonnées fournies pour examiner ma contribution et me répondre si nécessaire.</span></label>
+      </div>
+      <p class="guide-story-privacy">N'envoyez pas de numéros de passeport, d'adresses ni d'informations sensibles. Aucun récit ne sera publié sans accord préalable.</p>
+      <div class="guide-story-submit-row">
+        <button class="button primary guide-story-submit" type="submit">Envoyer à ComfortLine</button>
+        <p class="guide-story-form-status" role="status" aria-live="polite" hidden></p>
+      </div>
+    </form>
+  </section>
     <section class="travel-guide-disclaimer" aria-label="Les règles peuvent changer">
       <span class="travel-guide-note-icon" aria-hidden="true">i</span>
       <div><h2>Les règles peuvent changer</h2><p>Les conditions aux frontières, les règles douanières, les sanctions et les formalités d'entrée évoluent. Consultez les autorités frontalières, douanières et gouvernementales compétentes avant votre départ.</p></div>
