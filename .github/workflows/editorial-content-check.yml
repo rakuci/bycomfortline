@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - build.mjs
+      - car-sanctions-article.mjs
+      - dist/assets/stories/**
       - check-seo.mjs
       - border-passports-article.mjs
       - scripts/check-travel-guide.mjs
