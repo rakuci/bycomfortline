@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - build.mjs
+      - car-sanctions-article.mjs
+      - dist/assets/stories/**
       - border-passports-article.mjs
       - travel-guide-content.mjs
       - scripts/check-travel-guide.mjs
