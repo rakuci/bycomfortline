@@ -27,8 +27,8 @@ import { dirname, join } from "node:path";
 
 const out = new URL("./dist/", import.meta.url).pathname;
 const base = "https://bycomfortline.com";
-const seoLastmod = "2026-10-19";
-const photoLastmod = "2026-10-20";
+const seoLastmod = "2026-11-03";
+const photoLastmod = "2026-11-03";
 const phoneDisplay = "+375 29 155 27 76";
 const phoneHref = "+375291552776";
 const email = "info@comfortline.by";
@@ -2093,6 +2093,8 @@ const sitemapEntries = [
 
 const imageSitemapIndex = new Map();
 for (const lang of Object.keys(locale)) {
+  const serviceImage=cityPhotoUrl("minsk");
+  if(serviceImage)imageSitemapIndex.set(base+longDistancePath(lang),serviceImage);
   for (const place of geoCities) {
     const image = cityPhotoUrl(place.id);
     if(image)imageSitemapIndex.set(base+geoPath(lang,place),image);
