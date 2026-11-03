@@ -207,8 +207,8 @@ for(const airport of geoAirports) {
 }
 const editorialPages=htmlFiles.filter(path=>/\/(en|ru|pl|lt|lv|de|fr)\/travel-guide\//.test('/'+relative(root,path).replaceAll('\\','/'))).length;
 if (editorialPages !== 5*langs.length) issues.push('Expected five editorial pages in each of seven languages; found '+editorialPages);
-if (htmlFiles.length !== 1506+editorialPages) issues.push('Expected '+(1506+editorialPages)+' HTML pages including editorial content; found '+htmlFiles.length);
-if (googleLocs.length !== 1499+editorialPages) issues.push('Expected '+(1499+editorialPages)+' indexable URLs including editorial content; found '+googleLocs.length);
+if (htmlFiles.length !== 1513+editorialPages) issues.push('Expected '+(1513+editorialPages)+' HTML pages including editorial and long-distance content; found '+htmlFiles.length);
+if (googleLocs.length !== 1506+editorialPages) issues.push('Expected '+(1506+editorialPages)+' indexable URLs including editorial and long-distance content; found '+googleLocs.length);
 if (!known.has('/ru/aeroport-ber-minsk/index.html')) issues.push('Russian BER page missing');
 if (!known.has('/de/berlin-minsk-privattransfer/index.html')) issues.push('German Berlin page missing');
 if (!known.has('/fr/paris-minsk-transfert-prive/index.html')) issues.push('French Paris page missing');

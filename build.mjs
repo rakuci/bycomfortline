@@ -1,6 +1,7 @@
 import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import { readFileSync, existsSync } from "node:fs";
 import { routeSeo } from "./route-seo.mjs";
+import { longDistanceSeo, longDistanceRegionOriginIds } from "./long-distance-seo.mjs";
 import { travelGuideContent } from "./travel-guide-content.mjs";
 import { editorialContributionLocale } from "./travel-guide-contribution-locales.mjs";
 import { borderPassportArticle, borderPassportSources } from "./border-passports-article.mjs";
@@ -26,8 +27,8 @@ import { dirname, join } from "node:path";
 
 const out = new URL("./dist/", import.meta.url).pathname;
 const base = "https://bycomfortline.com";
-const seoLastmod = "2026-10-19";
-const photoLastmod = "2026-10-20";
+const seoLastmod = "2026-11-03";
+const photoLastmod = "2026-11-03";
 const phoneDisplay = "+375 29 155 27 76";
 const phoneHref = "+375291552776";
 const email = "info@comfortline.by";
@@ -390,6 +391,8 @@ function geoMenu(lang, type, place) {
 
 function routePath(lang, key) { return `/${lang}/${locale[lang].slugs[key]}/`; }
 function guidePath(lang) { return `/${lang}/travel-guide/`; }
+function longDistancePath(lang){return `/${lang}/${longDistanceSeo[lang].slug}/`;}
+function longDistanceAlternates(){return [...Object.keys(locale).map(code=>`<link rel="alternate" hreflang="${code}" href="${base}${longDistancePath(code)}">`),`<link rel="alternate" hreflang="x-default" href="${base}${longDistancePath("en")}">`].join("\n");}
 const borderStorySlug = "dual-passports-belarus-poland-border";
 function borderStoryPath(lang) { return guidePath(lang)+borderStorySlug+"/"; }
 const carStorySlug = "lithuania-belarus-car-export-sanctions-165mm";
@@ -418,6 +421,7 @@ function alternateLinks(pathType, routeKey) {
 function languageMenu(lang, type, routeKey) {
   return Object.entries(locale).map(([code, l]) => {
     const href = type === "home" ? l.home
+      : type === "long-distance" ? longDistancePath(code)
       : type === "guide" ? guidePath(code)
       : type === "guide-story" ? borderStoryPath(code)
       : type === "car-story" ? carStoryPath(code)
@@ -441,9 +445,9 @@ function header(lang, type = "home", routeKey) {
       <img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56">
     </a>
     <nav class="main-nav" aria-label="${esc(l.nav.routes)}">
-      <a href="${l.home}#routes">${l.nav.routes}</a><a href="${l.home}#service">${l.nav.service}</a><a href="${l.home}#faq">${l.nav.faq}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story" || type==="cash-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${l.nav.contact}</a>
+      <a href="${l.home}#routes">${l.nav.routes}</a><a href="${l.home}#service">${l.nav.service}</a><a href="${l.home}#faq">${l.nav.faq}</a><a href="${longDistancePath(lang)}"${type==="long-distance"?' aria-current="page"':""}>${esc(l.nav.longDistance)}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story" || type==="cash-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${l.nav.contact}</a>
     </nav>
-    <details class="mobile-nav"><summary aria-label="${esc(menuLabel)}"><span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span>${esc(menuLabel)}</span></summary><nav class="mobile-nav-links" aria-label="${esc(menuLabel)}"><a href="${l.home}#routes">${esc(l.nav.routes)}</a><a href="${l.home}#service">${esc(l.nav.service)}</a><a href="${l.home}#faq">${esc(l.nav.faq)}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story" || type==="cash-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.nav.contact)}</a></nav></details>
+    <details class="mobile-nav"><summary aria-label="${esc(menuLabel)}"><span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span>${esc(menuLabel)}</span></summary><nav class="mobile-nav-links" aria-label="${esc(menuLabel)}"><a href="${l.home}#routes">${esc(l.nav.routes)}</a><a href="${l.home}#service">${esc(l.nav.service)}</a><a href="${l.home}#faq">${esc(l.nav.faq)}</a><a href="${longDistancePath(lang)}"${type==="long-distance"?' aria-current="page"':""}>${esc(l.nav.longDistance)}</a><a href="${guidePath(lang)}"${(type==="guide" || type==="guide-story" || type==="car-story" || type==="ikea-story" || type==="cash-story") ? ' aria-current="page"' : ""}>${esc(l.nav.guide)}</a><a href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.nav.contact)}</a></nav></details>
     <details class="language-menu"><summary aria-label="${esc(l.label)}"><svg class="language-globe" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4.5 6 4.5 9s-1.5 6-4.5 9c-3-3-4.5-6-4.5-9S9 6 12 3Z"/></svg><span class="language-current">${l.code.toUpperCase()}</span></summary><div class="language-options">${languageMenu(lang, type, routeKey)}</div></details>
   </header>`;
 }
@@ -552,7 +556,10 @@ for (const lang of ["de", "fr"]) {
   fleetCopy[lang] = translations.fleet;
   reverseJourneyCopy[lang] = translations.reverse;
 }
-for(const lang of Object.keys(locale)) locale[lang].nav.guide = travelGuideContent[lang].nav;
+for(const lang of Object.keys(locale)) {
+  locale[lang].nav.guide = travelGuideContent[lang].nav;
+  locale[lang].nav.longDistance = longDistanceSeo[lang].nav;
+}
 // City and airport names remain searchable in their original spelling as well.
 for (const place of locationCatalog) {
   place.names.de ??= place.names.en;
@@ -677,6 +684,7 @@ function quickBooking(lang, routeKey = "vilnius", originOverride = null, destina
   </form>`;
 }
 
+const bespokeDestinationFieldLabels={"en":["Exact drop-off address (any destination)","Street, city and country"],"ru":["Точный адрес прибытия (любой город)","Улица, дом, город и страна"],"pl":["Dokładny adres docelowy (dowolne miasto)","Ulica, miasto i kraj"],"lt":["Tikslus atvykimo adresas (bet kuris miestas)","Gatvė, miestas ir šalis"],"lv":["Precīza galamērķa adrese (jebkura pilsēta)","Iela, pilsēta un valsts"],"de":["Genaue Zieladresse (beliebige Stadt)","Straße, Stadt und Land"],"fr":["Adresse d'arrivée exacte (toute ville)","Rue, ville et pays"]};
 function bookingForm(lang, routeKey = "vilnius", originOverride = null, destinationOverride = null) {
   const l = locale[lang], ui = bookingLabels[lang], popup = bookingPopupUi[lang];
   return `<dialog class="booking-dialog" id="booking-dialog" aria-labelledby="booking-dialog-title">
@@ -689,7 +697,7 @@ function bookingForm(lang, routeKey = "vilnius", originOverride = null, destinat
         ${locationFormField(lang, "fromPreset", "details", originOverride !== null ? originOverride : l.fromNames[routeKey])}
         ${locationFormField(lang, "to", "details", destinationOverride !== null ? destinationOverride : l.fieldValues.to)}
         <label><span>${esc(ui.pickupAddress)}</span><input name="pickupAddress" placeholder="${esc(l.fieldValues.fromPlaceholder)}"></label>
-        <label><span>${esc(ui.dropAddress)}</span><input name="dropAddress" placeholder="${esc(l.fieldValues.to)}"></label>
+        <label><span>${esc(destinationOverride===""?bespokeDestinationFieldLabels[lang][0]:ui.dropAddress)}</span><input name="dropAddress" placeholder="${esc(destinationOverride===""?bespokeDestinationFieldLabels[lang][1]:l.fieldValues.to)}"></label>
         <label><span>${esc(ui.date)}</span><input type="datetime-local" name="date" required></label>
         ${passengerPicker(lang, "details")}
         <label class="vehicle-model-field full"><span>${esc(fleetCopy[lang].choiceLabel)}</span>
@@ -719,7 +727,7 @@ function faq(l) {
 }
 
 function footer(l) {
-  return `<footer id="operator-info"><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}<a href="${geoIndexPath(l.code,"airport")}">${esc(geoLocale[l.code].browseAirports)}</a><a href="${geoIndexPath(l.code,"city")}">${esc(geoLocale[l.code].browseCities)}</a><a href="${destinationIndexPath(l.code)}">${esc(destinationLocale[l.code].browse)}</a><a href="${guidePath(l.code)}">${esc(l.nav.guide)}</a></div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
+  return `<footer id="operator-info"><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}<a href="${geoIndexPath(l.code,"airport")}">${esc(geoLocale[l.code].browseAirports)}</a><a href="${geoIndexPath(l.code,"city")}">${esc(geoLocale[l.code].browseCities)}</a><a href="${destinationIndexPath(l.code)}">${esc(destinationLocale[l.code].browse)}</a><a href="${longDistancePath(l.code)}">${esc(l.nav.longDistance)}</a><a href="${guidePath(l.code)}">${esc(l.nav.guide)}</a></div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
 }
 
 function floatingContact() {
@@ -1031,6 +1039,91 @@ function travelGuidePage(lang) {
   return layout({lang,title,description:c.metaDescription,canonical,alternates:guideAlternates(),body,schema});
 }
 
+
+function longDistanceTeaser(lang,{from="",to="",isAirport=false}={}){
+  const c=longDistanceSeo[lang];
+  const title=from?c.customHeading.replace("{place}",from):c.routeCrossHeading;
+  const description=from
+    ?(to?c.customPairText.replace("{from}",from).replace("{to}",to)
+       :(isAirport?c.customAirport:c.customCity).replace("{place}",from))
+    :c.routeCrossText;
+  return `<aside class="long-distance-teaser" aria-label="${esc(c.nav)}">
+    <div><span class="eyebrow">ComfortLine · 300+ km</span><h2>${esc(title)}</h2><p>${esc(description)}</p></div>
+    <a class="button primary" href="${longDistancePath(lang)}">${esc(c.customLink)} ${icons.arrow}</a>
+  </aside>`;
+}
+function longDistanceCountryDirectory(lang){
+  const c=longDistanceSeo[lang];
+  return longDistanceRegionOriginIds.map(region=>{
+    const name=geoLocale[lang].countryLabels[region.id];
+    const context=sourceCountryContext[region.id][lang];
+    const links=region.originIds.map(id=>{
+      const place=coreOriginProfiles.find(item=>item.id===id)||geoIds.get(id);
+      if(!place || place.country!==region.id)throw Error("Invalid long-distance hub origin "+id);
+      const href=coreOriginProfiles.some(item=>item.id===id)?routePath(lang,id):geoPath(lang,place);
+      const display=place.names[lang]+(place.code?" ("+place.code+")":"");
+      return `<a class="long-distance-origin-link" href="${href}">${esc(display)} <span aria-hidden="true">↗</span></a>`;
+    }).join("");
+    return `<section class="long-distance-country" id="departure-${region.id.toLowerCase()}">
+      <h3>${esc(name)}</h3><p>${esc(context)}</p><div class="long-distance-origin-links">${links}</div>
+    </section>`;
+  }).join("");
+}
+function longDistancePage(lang){
+  const l=locale[lang],c=longDistanceSeo[lang],canonical=base+longDistancePath(lang);
+  const serviceType=lang==="ru"?"Междугородний трансфер по индивидуальному запросу":"Private intercity and cross-border transfer enquiry";
+  const destinations=belarusDestinations.map(dest=>
+    `<a href="${destinationPath(lang,dest)}">${esc(dest.names[lang])} <span aria-hidden="true">↗</span></a>`).join("");
+  const benefits=c.benefits.map(([h,p])=>`<article class="long-distance-benefit"><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("");
+  const steps=c.steps.map(([h,p],i)=>`<li><span>${String(i+1).padStart(2,"0")}</span><div><h3>${esc(h)}</h3><p>${esc(p)}</p></div></li>`).join("");
+  const faq=c.faq.map(([q,a])=>`<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("");
+  const schema={"@context":"https://schema.org","@graph":[businessSchema(lang,canonical),
+    {"@type":"Service","@id":canonical+"#service","name":c.h1,"serviceType":serviceType,
+     "description":c.meta,"url":canonical,"provider":{"@id":base+"/#business"},
+     "areaServed":["Belarus","Lithuania","Latvia","Poland","Germany","France"],
+     "availableChannel":{"@type":"ServiceChannel","serviceUrl":canonical}},
+    {"@type":"BreadcrumbList","itemListElement":[
+     {"@type":"ListItem","position":1,"name":l.nav.routes,"item":base+l.home},
+     {"@type":"ListItem","position":2,"name":c.nav,"item":canonical}
+    ]}
+  ]};
+  const body=`${header(lang,"long-distance")}<main>
+    <section class="long-distance-hero"><div class="long-distance-hero-inner">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(c.nav)}</span></nav>
+      <span class="eyebrow light">${esc(c.kicker)}</span>
+      <h1>${esc(c.h1)}</h1>
+      <p>${esc(c.lead)}</p>
+      <div class="hero-actions"><a href="#booking-dialog" class="button primary" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(c.quote)} ${icons.arrow}</a>
+        <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a></div>
+      ${quickBooking(lang,"vilnius","","")}
+    </div></section>
+    <section class="section long-distance-landmark" aria-label="${esc(destinationLabels[lang])}">${cityPhotoFigure(lang,"minsk")}</section>
+    <section class="section long-distance-overview" id="long-distance-service">
+      <div class="section-head"><span class="eyebrow">ComfortLine · 300+ km</span><h2>${esc(c.whoHeading)}</h2><p>${esc(c.whoIntro)}</p></div>
+      <div class="long-distance-benefits">${benefits}</div>
+    </section>
+    <section class="section long-distance-costs"><h2>${esc(c.conditionsHeading)}</h2><p>${esc(c.conditionsText)}</p></section>
+    <section class="section long-distance-departures" id="departures">
+      <div class="section-head"><span class="eyebrow">${esc(c.countryHeading)}</span>
+        <h2>${esc(c.coverageHeading)}</h2><p>${esc(c.coverageIntro)}</p></div>
+      <div class="long-distance-country-grid">${longDistanceCountryDirectory(lang)}</div>
+      <h2 class="long-distance-destinations-title">${esc(destinationLocale[lang].section)}</h2>
+      <div class="long-distance-destination-links">${destinations}</div>
+    </section>
+    <section class="section long-distance-steps" id="request-a-quote">
+      <div class="section-head"><span class="eyebrow">${esc(c.kicker)}</span><h2>${esc(c.stepsHeading)}</h2></div>
+      <ol>${steps}</ol><a href="#booking-dialog" class="button primary" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(c.quote)} ${icons.arrow}</a>
+    </section>
+    <section class="section long-distance-faq" id="faq"><h2>${esc(c.faqHeading)}</h2><div class="long-distance-faq-list">${faq}</div>
+      <p class="long-distance-disclaimer">${esc(c.evidence)}</p>
+      <a href="${guidePath(lang)}">${esc(l.nav.guide)} ↗</a>
+    </section>
+    ${homeBookingTransparency(lang)}
+   </main>${footer(l)}`;
+  return layout({lang,title:c.title,description:c.meta,canonical,alternates:longDistanceAlternates(),
+    body,schema,routeKey:"vilnius",originOverride:"",destinationOverride:"",ogImage:cityPhotoPreviewUrl("minsk")});
+}
+
 function hubPage(lang) {
   const l = locale[lang];
   const canonical = `${base}/${lang}/`;
@@ -1042,6 +1135,7 @@ function hubPage(lang) {
     <section class="section routes-section" id="routes"><div class="section-head"><span class="eyebrow">Comfortline routes</span><h2>${esc(l.routesTitle)}</h2><p>${esc(l.routesLead)}</p></div><div class="route-grid three">${routeCards(lang)}</div></section>
     ${airportRouteLinks(lang)}
     ${geoHubDirectoryLinks(lang)}
+    ${longDistanceTeaser(lang)}
     ${destinationCardList(lang)}
     ${fleetShowcase(lang)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">Door to door</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
@@ -1366,6 +1460,7 @@ function destinationPage(lang,dest){
       <h2>${esc(localeWords(ui.keyOrigin,values))}</h2><p>${esc(ui.available)}</p></div>
     ${byCountry}
     <p class="dest-directory-help">${esc(ui.unlisted)}</p>
+    ${longDistanceTeaser(lang)}
   </section>
   <section class="section dest-border-guide"><h2>${esc(ui.safety)}</h2>
     <p>${esc(ui.borderAdvice)}</p><p>${esc(ui.priceAdvice)}</p>
@@ -1456,6 +1551,7 @@ function transferPairPage(lang,origin,dest){
       <a href="#booking-dialog" class="button primary" data-open-booking
          aria-controls="booking-dialog" aria-haspopup="dialog">${esc(ui.booking)} ${icons.arrow}</a>
     </div>
+    ${longDistanceTeaser(lang,{from,to})}
     <div class="dest-pair-related">
       <section><h2>${esc(localeWords(ui.otherOrigins,values))}</h2><div>
          ${similar.map(other=>`<a href="${destinationRouteUrl(lang,other,dest)}">${esc(other.names[lang])} ↗</a>`).join("")}
@@ -1545,6 +1641,7 @@ function geoDirectoryPage(lang,type) {
       <a class="button primary geo-list-cta" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a>
     </div>
     <section class="geo-simple-service section" id="service"><h2>${esc(t.why)}</h2><p>${esc(t.whyText)}</p></section>
+    ${longDistanceTeaser(lang)}
     ${homeBookingTransparency(lang)}
     ${faq(l)}
   </main>${footer(l)}`;
@@ -1800,6 +1897,7 @@ function geoLocationPage(lang,place) {
         <a href="${parentRoute}#fleet">${esc(l.serviceTitle)} ↗</a>
       </section>
       ${destinationCardList(lang,place)}
+      ${longDistanceTeaser(lang,{from:name,isAirport})}
       <section class="geo-related" aria-label="${esc(t.localLinks)}">
         <h2>${esc(t.localLinks)}</h2>
         <div>${countyLinks}</div>
@@ -1839,6 +1937,7 @@ function routePage(lang, key) {
     ${routeEditorial(lang, key)}
     ${destinationCardList(lang,coreOriginProfiles.find(origin=>origin.id===key))}
     ${returnTripInfo(lang,key)}
+    ${longDistanceTeaser(lang)}
     ${fleetShowcase(lang)}
     ${routeBookingTransparency(lang, key)}
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">${esc(l.routeNames[key])}</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
@@ -1907,6 +2006,7 @@ await put("index.html", gateway());
 for (const lang of Object.keys(locale)) {
   await put(`${lang}/index.html`, hubPage(lang));
   await put(guidePath(lang).slice(1)+"index.html", travelGuidePage(lang));
+  await put(longDistancePath(lang).slice(1)+"index.html", longDistancePage(lang));
   await put(borderStoryPath(lang).slice(1)+"index.html", borderStoryPage(lang));
   await put(carStoryPath(lang).slice(1)+"index.html", carStoryPage(lang));
   await put(ikeaStoryPath(lang).slice(1)+"index.html", ikeaStoryPage(lang));
@@ -1925,6 +2025,11 @@ for (const lang of Object.keys(locale)) {
 }
 
 const sitemapEntries = [
+  ...Object.keys(locale).map(lang=>{
+    const url=base+longDistancePath(lang);
+    const alt=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+longDistancePath(code)}"/>`).join("");
+    return `<url><loc>${url}</loc><lastmod>2026-11-03</lastmod>${alt}<xhtml:link rel="alternate" hreflang="x-default" href="${base+longDistancePath("en")}"/></url>`;
+  }),
   ...Object.keys(locale).map(lang=>{
     const url=base+cashStoryPath(lang);
     const alts=Object.keys(locale).map(code=>`<xhtml:link rel="alternate" hreflang="${code}" href="${base+cashStoryPath(code)}"/>`).join("");
@@ -1988,6 +2093,8 @@ const sitemapEntries = [
 
 const imageSitemapIndex = new Map();
 for (const lang of Object.keys(locale)) {
+  const serviceImage=cityPhotoUrl("minsk");
+  if(serviceImage)imageSitemapIndex.set(base+longDistancePath(lang),serviceImage);
   for (const place of geoCities) {
     const image = cityPhotoUrl(place.id);
     if(image)imageSitemapIndex.set(base+geoPath(lang,place),image);

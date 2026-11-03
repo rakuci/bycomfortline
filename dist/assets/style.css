@@ -4641,3 +4641,52 @@ body { background:var(--cl-pearl); }
   .travel-guide-featured-thumbnail--passport,
   .travel-guide-featured-thumbnail--cash{border-radius:13px}
 }
+
+/* Search-accessible, mobile-first custom intercity and 300+ km service hub. */
+.long-distance-hero{position:relative;isolation:isolate;background:#112e3a;color:#fff;overflow:hidden}
+.long-distance-hero::before{content:"";position:absolute;inset:0;background:url("/assets/comfortline-transfer-van.webp") center 43%/cover no-repeat;z-index:-2}
+.long-distance-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(93deg,rgba(7,31,43,.95),rgba(7,31,43,.78) 58%,rgba(7,31,43,.54));z-index:-1}
+.long-distance-hero-inner{width:min(1150px,calc(100% - 44px));margin:auto;padding:clamp(58px,6vw,105px) 0 clamp(55px,7vw,108px)}
+.long-distance-hero .breadcrumbs{color:#c5e0df;margin:0 0 30px}
+.long-distance-hero .breadcrumbs a{color:#e4f4ef}
+.long-distance-hero h1{max-width:920px;color:#fff;font-size:clamp(2.35rem,5vw,4.65rem);letter-spacing:-.042em;line-height:1.12;margin:18px 0 23px;text-wrap:balance}
+.long-distance-hero-inner>p{font-size:clamp(16px,1.7vw,20px);line-height:1.8;color:#e2eeec;max-width:900px;margin:0 0 25px}
+.long-distance-hero .quick-booking{max-width:1030px;margin-top:25px}
+.long-distance-landmark{margin-top:22px;margin-bottom:32px}
+.long-distance-overview,.long-distance-departures,.long-distance-steps,.long-distance-costs,.long-distance-faq{max-width:1190px;margin-inline:auto}
+.long-distance-overview .section-head,.long-distance-departures .section-head{max-width:930px}
+.long-distance-benefits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin:25px auto 0}
+.long-distance-benefit{border:1px solid #d9e6e5;background:#f9fbfa;border-radius:17px;padding:clamp(21px,3vw,32px);min-width:0}
+.long-distance-benefit h3{margin:0 0 12px;line-height:1.3;color:#103443;font-size:clamp(17px,2vw,22px)}
+.long-distance-benefit p{margin:0;color:#45646c;line-height:1.8}
+.long-distance-costs{background:#eaf3f0;border-radius:19px;padding:clamp(24px,3.5vw,43px);margin-block:35px}
+.long-distance-costs h2{color:#113d46;font-size:clamp(23px,2.5vw,31px);line-height:1.25;margin:0 0 16px}
+.long-distance-costs p{color:#3b5c63;max-width:930px;line-height:1.9;margin:0}
+.long-distance-country-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:27px}
+.long-distance-country{background:#f8faf9;border:1px solid #dce6e4;border-radius:17px;padding:clamp(18px,2.6vw,30px);min-width:0}
+.long-distance-country h3{font-size:clamp(21px,2.6vw,26px);color:#133f4c;margin:0 0 11px}
+.long-distance-country p{font-size:14px;line-height:1.8;color:#4c6870;margin:0 0 18px}
+.long-distance-origin-links,.long-distance-destination-links{display:flex;gap:9px;flex-wrap:wrap}
+.long-distance-origin-link,.long-distance-destination-links a{display:inline-flex;gap:8px;align-items:center;font-size:13px;line-height:1.45;text-decoration:none;color:#1c5869;font-weight:720;border:1px solid #ccdfdf;border-radius:99px;padding:9px 13px;background:#fff;transition:border-color .2s,background .2s}
+.long-distance-origin-link:hover,.long-distance-destination-links a:hover{border-color:#72a7ad;background:#ebf5f3}
+.long-distance-destinations-title{font-size:clamp(24px,2.8vw,32px);color:#133c49;margin:38px 0 16px}
+.long-distance-steps>ol{list-style:none;padding:0;margin:20px 0 27px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.long-distance-steps li{background:#f0f5f3;border-radius:14px;padding:20px;display:flex;gap:14px;min-width:0}
+.long-distance-steps li>span{font-weight:800;color:#aa854d;font-size:21px}
+.long-distance-steps h3{color:#143e49;margin:0 0 9px;font-size:17px}
+.long-distance-steps p{color:#526d73;font-size:14px;line-height:1.6;margin:0}
+.long-distance-faq h2{font-size:clamp(24px,3vw,35px);color:#113847}
+.long-distance-faq-list{display:grid;gap:12px;margin:19px 0}
+.long-distance-faq-list details{border:1px solid #d9e4e3;border-radius:13px;padding:19px 22px;background:#fff}
+.long-distance-faq-list summary{font-size:16px;font-weight:760;color:#113c48;cursor:pointer}
+.long-distance-faq-list p{color:#47646c;line-height:1.8;margin:12px 0 0}
+.long-distance-disclaimer{margin:20px 0 12px;color:#6b7d7e;font-size:13px;line-height:1.75}
+.long-distance-teaser{width:min(1100px,calc(100% - 40px));margin:32px auto;padding:clamp(25px,3.5vw,38px);background:linear-gradient(125deg,#e9f3f1,#f6faf8);border:1px solid #cddfda;border-radius:18px;display:flex;align-items:center;justify-content:space-between;gap:26px;color:#173f47;min-width:0}
+.long-distance-teaser>div{min-width:0;max-width:790px}
+.long-distance-teaser .eyebrow{color:#9a794b}
+.long-distance-teaser h2{margin:10px 0 10px;font-size:clamp(22px,2.6vw,31px);line-height:1.25;overflow-wrap:break-word}
+.long-distance-teaser p{margin:0;color:#4b6870;line-height:1.75;font-size:14px}
+.long-distance-teaser .button{flex:0 0 auto;max-width:100%;text-align:center}
+@media(max-width:900px){.long-distance-teaser{flex-direction:column;align-items:flex-start}.long-distance-country-grid{grid-template-columns:1fr}.long-distance-steps>ol{grid-template-columns:1fr}}
+@media(max-width:650px){.long-distance-hero-inner{width:calc(100% - 34px);padding:42px 0 57px}.long-distance-hero h1{font-size:clamp(30px,8.3vw,42px)}.long-distance-benefits{grid-template-columns:1fr}.long-distance-teaser{width:calc(100% - 30px);padding:24px 19px}.long-distance-teaser .button{width:100%}.long-distance-country{padding:20px 16px}.long-distance-hero .quick-booking{margin-top:21px}}
+@media(prefers-reduced-motion:reduce){.long-distance-origin-link,.long-distance-destination-links a{transition:none}}

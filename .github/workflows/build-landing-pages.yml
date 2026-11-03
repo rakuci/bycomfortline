@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - build.mjs
+      - long-distance-seo.mjs
+      - scripts/check-long-distance-seo.mjs
       - src/worker.mjs
       - travel-guide-contribution-locales.mjs
       - travel-guide-cash-image-labels.mjs
@@ -61,6 +63,8 @@ jobs:
         run: node scripts/check-travel-guide.mjs
       - name: Validate both XML sitemaps and article images
         run: node scripts/check-sitemaps.mjs
+      - name: Validate bespoke transfer hubs and localized SEO content
+        run: node scripts/check-long-distance-seo.mjs
       - name: Verify seven-language reader submissions without sending email
         run: node scripts/check-travel-guide-submission.mjs
       - name: Create a canonical-URL-to-image coverage and provenance report

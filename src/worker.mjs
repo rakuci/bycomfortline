@@ -433,6 +433,21 @@ async function submitEditorialContribution(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    // Consolidate indexed duplicate hostname variants into the site's declared
+    // canonical HTTPS domain. This applies only when this Worker actually serves
+    // the alias; the separate comfortline.by property is intentionally untouched.
+    // Preserve API endpoints on their originating host to avoid redirecting POSTs.
+    if ((request.method === "GET" || request.method === "HEAD") &&
+        !url.pathname.startsWith("/api/") &&
+        ["bycomfortline.by","www.bycomfortline.by","www.bycomfortline.com"].includes(url.hostname.toLowerCase())) {
+      url.protocol="https:";
+      url.hostname="bycomfortline.com";
+      url.port="";
+      return new Response(null, {
+        status:301,
+        headers:{"Location":url.toString(),"Cache-Control":"public, max-age=3600"}
+      });
+    }
     if (url.pathname === "/api/travel-guide-submission") {
       if (request.method !== "POST") {
         return new Response(null,{status:405,headers:{"Allow":"POST","Cache-Control":"no-store"}});

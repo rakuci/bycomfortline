@@ -20,7 +20,14 @@ const canonicalUrls=[...sitemap.matchAll(/<loc>(https:\/\/bycomfortline\.com\/[^
 // Editorial Travel Guide pages contain information rather than destination photographs.
 // They remain indexable in both sitemaps, but belong in the article/SEO audit below.
 const editorialPath=/^\/(?:en|ru|pl|lt|lv|de|fr)\/travel-guide\//;
-const urls=canonicalUrls.filter(url=>!editorialPath.test(new URL(url).pathname));
+const additionalServiceSlugs={
+  en:"long-distance-private-transfers",ru:"dalnie-transfery-ot-300-km",
+  pl:"transfery-dlugodystansowe-300-km",lt:"ilgu-atstumu-pervezimai-300-km",
+  lv:"talie-privatie-transferi-300-km",de:"langstrecken-privattransfer-ab-300-km",
+  fr:"transferts-prives-longue-distance-300-km"};
+const customServicePath=new RegExp("^/("+Object.keys(additionalServiceSlugs).join("|")+")/("+
+  Object.values(additionalServiceSlugs).join("|")+")/$");
+const urls=canonicalUrls.filter(url=>{const path=new URL(url).pathname;return !editorialPath.test(path)&&!customServicePath.test(path);});
 assert.equal(urls.length,1499,"Expected 1,499 transfer/destination landing URLs (excluding editorial pages)");
 const entries=[];
 for(const url of urls){
