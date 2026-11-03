@@ -1,0 +1,31 @@
+name: Validate multilingual Travel Guide articles
+
+on:
+  pull_request:
+    paths:
+      - build.mjs
+      - check-seo.mjs
+      - border-passports-article.mjs
+      - scripts/check-travel-guide.mjs
+      - scripts/landing_image_report.mjs
+      - .github/workflows/editorial-content-check.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build website and verify all SEO links
+        run: node build.mjs
+      - name: Verify legal article, citations and all language alternates
+        run: node scripts/check-travel-guide.mjs
+      - name: Confirm transfer photo audit excludes editorial content
+        run: node scripts/landing_image_report.mjs

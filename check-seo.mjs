@@ -112,6 +112,8 @@ for (const path of htmlFiles) {
   const local = '/' + relative(root,path).replaceAll('\\','/');
   const title = html.match(/<title>([^<]*)<\/title>/)?.[1] || '';
   const isThankyou = local.includes('/thank-you/');
+  // Editorial guides and articles are not destination/transfer landing pages.
+  const isEditorial = /^\/(en|ru|pl|lt|lv|de|fr)\/travel-guide\//.test(local);
   const canon = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
   if (!title) issues.push(local + ': missing title');
   if (!isThankyou && (html.match(/<h1\b/g)||[]).length !== 1) issues.push(local + ': invalid H1');
@@ -142,9 +144,9 @@ for (const path of htmlFiles) {
     }
   }
   if (isThankyou && !html.includes('content="noindex,follow"')) issues.push(local+': thank-you is indexable');
-  // Every indexable landing URL must show an actual, locally hosted photograph
-  // of the DESTINATION, never just the departure city, a CSS background, or an icon.
-  if (!isThankyou) {
+  // Transfer/destination landing pages must show a locally hosted destination photo.
+  // Editorial articles are audited for sourced claims separately.
+  if (!isThankyou && !isEditorial) {
     const main = html.split('<main>')[1]?.split('</main>')[0] || '';
     const landingPhotos = [...main.matchAll(/<figure\b[^>]*\bdata-destination-id="([^"]+)"[^>]*>([\s\S]*?)<\/figure>/g)];
     if (landingPhotos.length === 0) {
@@ -203,8 +205,10 @@ for(const airport of geoAirports) {
     }
   }
 }
-if (htmlFiles.length !== 1506) issues.push('Expected 1506 HTML files; found ' + htmlFiles.length);
-if (googleLocs.length !== 1499) issues.push('Expected 1499 indexable URLs; found ' + googleLocs.length);
+const editorialPages=htmlFiles.filter(path=>/\/(en|ru|pl|lt|lv|de|fr)\/travel-guide\//.test('/'+relative(root,path).replaceAll('\\','/'))).length;
+if (editorialPages !== 2*langs.length) issues.push('Expected two editorial pages in each of seven languages; found '+editorialPages);
+if (htmlFiles.length !== 1506+editorialPages) issues.push('Expected '+(1506+editorialPages)+' HTML pages including editorial content; found '+htmlFiles.length);
+if (googleLocs.length !== 1499+editorialPages) issues.push('Expected '+(1499+editorialPages)+' indexable URLs including editorial content; found '+googleLocs.length);
 if (!known.has('/ru/aeroport-ber-minsk/index.html')) issues.push('Russian BER page missing');
 if (!known.has('/de/berlin-minsk-privattransfer/index.html')) issues.push('German Berlin page missing');
 if (!known.has('/fr/paris-minsk-transfert-prive/index.html')) issues.push('French Paris page missing');

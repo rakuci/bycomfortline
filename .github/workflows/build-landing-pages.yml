@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - build.mjs
+      - border-passports-article.mjs
+      - travel-guide-content.mjs
+      - scripts/check-travel-guide.mjs
+      - scripts/landing_image_report.mjs
       - check-seo.mjs
       - city-landmark-photos.json
       - heritage-landmark-photos.json
@@ -16,7 +20,6 @@ on:
       - geo-locales.mjs
       - route-seo.mjs
       - route-pair-context.mjs
-      - scripts/landing_image_report.mjs
       - .github/workflows/build-landing-pages.yml
       - dist/assets/cities/**
       - dist/assets/heritage/**
@@ -42,9 +45,11 @@ jobs:
           node-version: '22'
       - name: Render all seven language variants and run rigorous SEO/photo audit
         run: node build.mjs
+      - name: Verify published Travel Guide articles, sources and SEO
+        run: node scripts/check-travel-guide.mjs
       - name: Create a canonical-URL-to-image coverage and provenance report
         run: node scripts/landing_image_report.mjs
-      - name: Check all 1,499 sitemap URLs and verified image coverage
+      - name: Check all 1,499 transfer landing URLs and verified image coverage
         run: |
           node --input-type=module <<'JS'
           import fs from 'node:fs';
