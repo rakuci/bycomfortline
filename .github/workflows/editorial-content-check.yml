@@ -9,6 +9,7 @@ on:
       - destination-locales.mjs
       - route-pair-context.mjs
       - scripts/check-long-distance-seo.mjs
+      - scripts/check-gsc-77-live.mjs
       - scripts/check-sitemaps.mjs
       - src/worker.mjs
       - travel-guide-contribution-locales.mjs
@@ -52,3 +53,5 @@ jobs:
         run: node scripts/check-travel-guide-submission.mjs
       - name: Confirm transfer photo audit excludes editorial content
         run: node scripts/landing_image_report.mjs
+      - name: Independently verify Google-excluded URL samples and alias redirects
+        run: node scripts/check-gsc-77-live.mjs
