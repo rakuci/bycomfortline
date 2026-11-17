@@ -20,7 +20,7 @@ export const routeExtras = {
       ],
       "pickupContext": "Choose the exact meeting address in Vilnius or enter Vilnius Airport (VNO) as your starting point. If you arrive on a flight, include its number and landing time so the meeting instructions can be agreed before you travel.",
       "vehicleContext": "Request a private sedan, comfort or business-class car, or ask about a larger vehicle if you have children and substantial luggage. Car class is a preference until the coordinator confirms the available vehicle; child seats and travel with pets should be mentioned in the enquiry.",
-      "quoteContext": "Vilnius–Minsk is an international journey, not a metered ride within Vilnius. We prepare an individual quote based on the pickup address, date, number of people, luggage and vehicle request. A submitted form is an enquiry, not an instant confirmed booking.",
+      "quoteContext": "The Vilnius–Minsk transfer price is quoted for your exact trip, not calculated by a city taxi meter. Give both addresses, date, group size, luggage and flight number if you arrive at VNO. Before confirming, clarify the total fare, any airport and border waiting, tolls, payment method and cancellation policy. Sending the form is not a confirmed booking.",
       "arrivalContext": "The destination is Minsk in Belarus. Give your hotel, apartment or other drop-off address in Minsk; if you need another Belarusian city, describe it in the request. Check current border-crossing eligibility and travel-document requirements before departure."
     },
     "warsaw": {
@@ -50,7 +50,7 @@ export const routeExtras = {
   },
   "ru": {
     "ui": {
-      "pickupTitle": "Где возможна подача в {city} и аэропорту",
+      "pickupTitle": "Подача автомобиля: {city}, вокзал или аэропорт",
       "vehicleTitle": "Частный водитель, класс авто и багаж",
       "quoteTitle": "Стоимость трансфера и оформление",
       "arrivalTitle": "Прибытие в Минск, Беларусь",
@@ -67,7 +67,7 @@ export const routeExtras = {
       ],
       "pickupContext": "Укажите адрес отеля, квартиры или офиса в Вильнюсе либо выберите аэропорт Вильнюса (VNO). Если прилетаете самолётом, сообщите номер рейса и время посадки: место встречи с водителем согласовывается заранее.",
       "vehicleContext": "Трансфер предполагает отдельный автомобиль для вашей компании. Можно запросить комфортный, бизнес- или премиальный класс, указать количество детей, детских кресел, чемоданов и наличие питомцев. Конкретную модель и доступность авто подтверждает менеджер.",
-      "quoteContext": "Цена такси Вильнюс–Минск рассчитывается индивидуально, поскольку это международная поездка, а не городской тариф такси. Для расчёта нужны адрес подачи, дата, количество пассажиров и багаж. После отправки заявки менеджер согласует стоимость и возможность поездки.",
+      "quoteContext": "Стоимость трансфера Вильнюс–Минск рассчитывается для конкретной поездки, а не по городскому таксометру. Укажите адреса в Вильнюсе и Минске, дату, пассажиров, багаж и номер рейса при встрече в VNO. До подтверждения уточните итоговую сумму, валюту, ожидание в аэропорту и на границе, платные дороги, оплату и условия отмены. Заявка не означает автоматического бронирования.",
       "arrivalContext": "Конечный пункт — Минск в Беларуси. Укажите полный адрес гостиницы, квартиры или другого объекта; для поездки в иной город Беларуси уточните пункт назначения отдельно. Перед выездом проверьте действующие правила границы и документы."
     },
     "warsaw": {
@@ -144,7 +144,7 @@ export const routeExtras = {
   },
   "lt": {
     "ui": {
-      "pickupTitle": "Paėmimo vietos {city} ir oro uoste",
+      "pickupTitle": "Paėmimo vietos mieste ir oro uoste: {city}",
       "vehicleTitle": "Privatus vairuotojas, automobilio klasė ir bagažas",
       "quoteTitle": "Kaina ir užsakymo eiga",
       "arrivalTitle": "Atvykimas į Minską, Baltarusiją",
@@ -161,7 +161,7 @@ export const routeExtras = {
       ],
       "pickupContext": "Nurodykite tikslų adresą Vilniuje, viešbutį arba Vilniaus oro uostą (VNO). Atvykstant lėktuvu svarbu įrašyti skrydžio numerį ir nusileidimo laiką, kad iš anksto būtų galima suderinti susitikimo vietą.",
       "vehicleContext": "Tai individualus pervežimas tik jūsų keleivių grupei. Galite pasirinkti pageidaujamą komforto, verslo ar premium klasę, nurodyti vaikus, kėdutes, augintinius ir lagaminus. Konkretaus automobilio prieinamumą patvirtina vadybininkas.",
-      "quoteContext": "Pervežimo Vilnius–Minskas kaina priklauso nuo paėmimo adreso, datos, keleivių ir transporto klasės; tai nėra įprastas taksi tarifas Vilniuje. Užpildykite užklausą ir prieš kelionę gausite kainos bei galimybės patvirtinimą.",
+      "quoteContext": "Privataus pervežimo Vilnius–Minskas kaina apskaičiuojama pagal konkrečią kelionę, o ne miesto taksometrą. Nurodykite abu adresus, datą, keleivių skaičių, bagažą ir skrydžio numerį, jei atvykstate į VNO. Prieš patvirtindami aptarkite galutinę kainą, valiutą, laukimą oro uoste bei pasienyje, mokamus kelius, mokėjimą ir atšaukimą. Užklausa dar nėra patvirtintas užsakymas.",
       "arrivalContext": "Kelionės tikslas – Minskas Baltarusijoje. Įrašykite viešbučio arba kitą tikslų adresą Minske; jei reikia kito Baltarusijos miesto, jį nurodykite atskirai. Prieš išvykstant patikrinkite pasienio punktų veikimą ir kelionės dokumentus."
     },
     "warsaw": {
