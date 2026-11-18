@@ -16,10 +16,10 @@ export const routeSeo = {
       ]
     },
     "vilnius": {
-      "title": "Vilnius–Minsk Private Transfer & Airport Taxi | byComfortLine",
-      "description": "Private taxi from Vilnius city or Vilnius Airport (VNO) to Minsk, Belarus. Door-to-door transfers, child seats on request and a tailored price quote.",
-      "h1": "Vilnius to Minsk private taxi and airport transfer",
-      "intro": "Travelling from Lithuania to Belarus? Arrange a pre-booked private car from Vilnius or Vilnius Airport (VNO) to an address in Minsk. Your group travels together without shared shuttle stops, and we agree on a pickup plan before departure.",
+      "title": "Vilnius to Minsk Transfer & Private Taxi | ComfortLine",
+      "description": "Private transfer from Vilnius to Minsk, Belarus: pickup in the city or at Vilnius Airport (VNO), a car for your group, and a quote before booking.",
+      "h1": "Vilnius to Minsk transfer: private taxi and airport pickup",
+      "intro": "Need a private transfer from Vilnius to Minsk, Belarus? Request pickup at your Vilnius address or Vilnius Airport (VNO). Tell us your date and group size; the coordinator will confirm the proposed border route, vehicle and total price before the booking is agreed.",
       "pickupText": "Choose a hotel, home, office or other agreed address in Vilnius. Tell us exactly where to meet, the number of travellers and how much luggage you have so we can discuss an appropriate vehicle.",
       "airportText": "Flying into Vilnius International Airport (VNO)? Send your flight number and expected landing time when you request the transfer. We will agree on the meeting point and pickup time in advance.",
       "planningText": "This journey crosses the Lithuania–Belarus border. Road conditions, queues, operating checkpoints and entry requirements may affect whether and when travel is possible. The published journey time is approximate, not guaranteed.",
@@ -35,6 +35,14 @@ export const routeSeo = {
         [
           "Can I arrange a Vilnius Airport (VNO) to Minsk transfer for my family?",
           "Yes. Give us your flight details, number of adults and children, suitcase count and Minsk address. We'll check a suitable private vehicle and quote before confirming."
+        ],
+        [
+          "How much is a private Vilnius to Minsk transfer?",
+          "There is no universal fixed fare. Send your pickup and Minsk drop-off addresses, date, passengers and luggage for a quote; confirm airport waiting, border delays and cancellation terms before accepting it."
+        ],
+        [
+          "Do I need to check the Lithuania–Belarus border before travelling?",
+          "Yes. Check current official border-crossing and entry requirements for every traveller. The route, vehicle eligibility and journey time must be confirmed for your date."
         ]
       ]
     },
@@ -102,10 +110,10 @@ export const routeSeo = {
       ]
     },
     "vilnius": {
-      "title": "Vilnius–Minskas: privatus taksi ir pervežimas | byComfortLine",
-      "description": "Privatus pervežimas Vilnius–Minskas iš miesto arba Vilniaus oro uosto VNO. Kelionė iki adreso Baltarusijoje, automobilis jūsų grupei, kainos užklausa.",
-      "h1": "Vilnius–Minskas: privatus taksi ir pervežimas",
-      "intro": "Ieškote pervežimo iš Vilniaus į Minską? ComfortLine organizuoja individualias keliones iš Vilniaus miesto arba Vilniaus oro uosto (VNO) į sutartą adresą Minske. Važiuojate tik su savo grupe, o paėmimo laiką suderiname iš anksto.",
+      "title": "Vilnius–Minskas pervežimas: privatus taksi | ComfortLine",
+      "description": "Privatus pervežimas iš Vilniaus į Minską: paėmimas mieste arba Vilniaus oro uoste (VNO), automobilis jūsų grupei. Kaina ir kelionės sąlygos pagal užklausą.",
+      "h1": "Vilnius–Minskas: privatus pervežimas ir taksi",
+      "intro": "Ieškote privataus pervežimo iš Vilniaus į Minską Baltarusijoje? Nurodykite paėmimo adresą Vilniuje arba Vilniaus oro uostą (VNO). Prieš patvirtinimą suderinsime datą, automobilį, kainą ir galimą sienos kirtimo maršrutą.",
       "pickupText": "Galime aptarti paėmimą iš Vilniaus viešbučio, namų, biuro ar kito konkretaus adreso. Užklausoje nurodykite vietą, kelionės datą, keleivių skaičių ir bagažą, kad parinktume tinkamą automobilį.",
       "airportText": "Atvykstate į Vilniaus oro uostą (VNO)? Atsiųskite skrydžio numerį ir planuojamą nusileidimo laiką. Susitikimo vietą ir pervežimo pradžią suderinsime prieš kelionę.",
       "planningText": "Maršrutas Vilnius–Minskas kerta Lietuvos ir Baltarusijos sieną. Kelionės laiką veikia pasienio eilės, punktų darbas ir eismas. Nurodyta trukmė yra orientacinė, o galimybę vykti patvirtiname individualiai.",
@@ -121,6 +129,14 @@ export const routeSeo = {
         [
           "Ar galima užsisakyti pervežimą iš Vilniaus oro uosto VNO su vaikais?",
           "Taip. Nurodykite skrydį, suaugusiųjų ir vaikų skaičių, lagaminus ir vaikiškų kėdučių poreikį. Automobilį ir kainą patvirtins vadybininkas."
+        ],
+        [
+          "Kiek kainuoja privatus pervežimas Vilnius–Minskas?",
+          "Vienos fiksuotos kainos visoms kelionėms nėra. Atsiųskite paėmimo ir atvykimo adresus, datą, keleivių ir bagažo skaičių. Prieš užsakydami patikslinkite laukimo, sienos kirtimo ir atšaukimo sąlygas."
+        ],
+        [
+          "Ką būtina patikrinti prieš vykstant per Lietuvos ir Baltarusijos sieną?",
+          "Patikrinkite kiekvieno keleivio dokumentus, teisę atvykti ir oficialią informaciją apie veikiančius pasienio punktus. Konkretus maršrutas bei automobilio galimybės patvirtinami prieš kelionę."
         ]
       ]
     },
@@ -360,10 +376,10 @@ export const routeSeo = {
       ]
     },
     "vilnius": {
-      "title": "Вильнюс — Минск: частное такси и трансфер | byComfortLine",
-      "description": "Индивидуальный трансфер Вильнюс–Минск из города или аэропорта VNO. Частное такси до адреса в Беларуси, детские кресла по запросу, расчёт цены.",
-      "h1": "Такси Вильнюс — Минск: индивидуальный трансфер",
-      "intro": "Нужно такси из Вильнюса в Минск? ComfortLine организует индивидуальный трансфер из города или аэропорта Вильнюса (VNO) до согласованного адреса в Минске. Без попутчиков и пересадок, с предварительным подтверждением подачи.",
+      "title": "Трансфер Вильнюс — Минск: частное такси | ComfortLine",
+      "description": "Трансфер из Вильнюса в Минск: подача по адресу или в аэропорту VNO, отдельный автомобиль для вашей группы. Стоимость и условия поездки согласовываются заранее.",
+      "h1": "Трансфер Вильнюс — Минск: частное такси",
+      "intro": "Нужен индивидуальный трансфер из Вильнюса в Минск? Укажите адрес подачи в городе или аэропорт Вильнюса (VNO), дату поездки и состав группы. Менеджер заранее согласует автомобиль, стоимость и допустимый маршрут через границу. Машина предназначена только для вашей компании.",
       "pickupText": "Можно согласовать подачу к отелю, дому, офису или другому адресу в Вильнюсе. Укажите точное место, дату, количество пассажиров и багаж, чтобы мы обсудили подходящий автомобиль.",
       "airportText": "Прилетаете в аэропорт Вильнюса VNO? Сообщите номер рейса и плановое время посадки. Заранее согласуем место встречи и время подачи водителя.",
       "planningText": "Маршрут Вильнюс–Минск проходит через литовско-белорусскую границу. Очереди, правила въезда и работа пунктов пропуска влияют на длительность поездки. Указанное время ориентировочное, возможность трансфера подтверждаем на дату заказа.",
@@ -379,6 +395,14 @@ export const routeSeo = {
         [
           "Можно заказать такси из аэропорта Вильнюса VNO до Минска с детьми?",
           "Да, в заявке укажите рейс, число взрослых, детей, младенцев и необходимость кресел. Менеджер уточнит автомобиль и цену до подтверждения."
+        ],
+        [
+          "Сколько стоит трансфер из Вильнюса в Минск?",
+          "Единого фиксированного тарифа нет. Для расчёта укажите точные адреса, дату, пассажиров и багаж. Перед подтверждением поездки уточните, входят ли в цену ожидание в аэропорту, задержки на границе, платные дороги и условия отмены."
+        ],
+        [
+          "Что проверить перед пересечением границы Литвы и Беларуси?",
+          "Уточните действующие пункты пропуска, право въезда и документы каждого пассажира по официальным источникам. Возможность поездки по выбранному маршруту и на конкретном автомобиле подтверждается индивидуально."
         ]
       ]
     },

@@ -23,6 +23,26 @@ const allFiles = await filesUnder(root);
 const known = new Set(allFiles.map(x => '/' + relative(root, x).replaceAll('\\','/')));
 const htmlFiles = allFiles.filter(x => x.endsWith('.html'));
 
+ // Conversion-critical Vilnius → Minsk route pages need useful localized content.
+ // Verify the generated HTML rather than merely checking the source strings.
+ // These are not ranking assertions; Search Console must establish indexing.
+const vilniusTargets = [
+  { lang: 'ru', slug: 'vilnius-minsk-transfer', heading: 'Трансфер Вильнюс — Минск: частное такси', priceQuestion: 'Сколько стоит трансфер из Вильнюса в Минск?' },
+  { lang: 'lt', slug: 'vilnius-minskas-pervezimas', heading: 'Vilnius–Minskas: privatus pervežimas ir taksi', priceQuestion: 'Kiek kainuoja privatus pervežimas Vilnius–Minskas?' },
+  { lang: 'en', slug: 'vilnius-minsk-transfer', heading: 'Vilnius to Minsk transfer: private taxi and airport pickup', priceQuestion: 'How much is a private Vilnius to Minsk transfer?' }
+];
+for (const target of vilniusTargets) {
+  const pagePath = `/${target.lang}/${target.slug}/`;
+  const html = await readFile(join(root, target.lang, target.slug, 'index.html'), 'utf8');
+  assert(html.includes(`<h1>${target.heading}</h1>`), `${pagePath}: commercial route H1 missing`);
+  assert(html.includes(`rel="canonical" href="${site}${pagePath}"`), `${pagePath}: incorrect canonical`);
+  assert(html.includes(target.priceQuestion), `${pagePath}: route-specific price explanation missing`);
+  assert(html.includes('VNO'), `${pagePath}: airport pickup context missing`);
+  assert(html.includes('href="#booking-dialog"'), `${pagePath}: booking action missing`);
+  assert(html.includes('hreflang="lt"') && html.includes('hreflang="ru"') && html.includes('hreflang="en"'),
+    `${pagePath}: language alternate links missing`);
+}
+
 const cityPhotos = JSON.parse(await readFile(join(process.cwd(),'city-landmark-photos.json'),'utf8')).images;
 const imageIds=new Set(cityPhotos.map(photo=>photo.id));
 if(imageIds.size!==cityPhotos.length)throw new Error("Duplicate landmark image IDs");
