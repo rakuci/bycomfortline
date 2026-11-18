@@ -1,0 +1,76 @@
+name: Public SEO smoke test - Vilnius and VNO
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/seo-route-live-smoke.yml
+  workflow_run:
+    workflows:
+      - Deploy built ComfortLine website to Cloudflare Workers
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-live-localized-pages:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download real public route HTML (not repository build output)
+        shell: bash
+        run: |
+          set -euo pipefail
+          for target in ru/vilnius-minsk-transfer lt/vilnius-minskas-pervezimas en/vilnius-minsk-transfer ru/aeroport-vno-minsk; do
+            file="/tmp/${target//\//_}.html"
+            url="https://bycomfortline.com/${target}/"
+            status=$(curl --compressed -LsS --retry 3 --retry-delay 2 --max-time 30 -o "$file" -w '%{http_code}' "$url")
+            echo "$status $url"
+            test "$status" = "200"
+            test -s "$file"
+          done
+          curl --compressed -fLsS --retry 3 --max-time 30 https://bycomfortline.com/sitemap.xml -o /tmp/seo-live-sitemap.xml
+      - name: Validate live canonical, route content and JSON-LD
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import html as html_lib
+          import json
+          import re
+          from pathlib import Path
+          host='https://bycomfortline.com'
+          routes={
+            'ru/vilnius-minsk-transfer':('Трансфер Вильнюс — Минск: частное такси','Сколько стоит трансфер из Вильнюса в Минск?'),
+            'lt/vilnius-minskas-pervezimas':('Vilnius–Minskas: privatus pervežimas ir taksi','Kiek kainuoja privatus pervežimas Vilnius–Minskas?'),
+            'en/vilnius-minsk-transfer':('Vilnius to Minsk transfer: private taxi and airport pickup','How much is a private Vilnius to Minsk transfer?')
+          }
+          sitemap=Path('/tmp/seo-live-sitemap.xml').read_text()
+          for route,(h1,faq) in routes.items():
+            src=Path('/tmp/'+route.replace('/','_')+'.html').read_text()
+            url=host+'/'+route+'/'
+            match=re.search(r'<h1[^>]*>(.*?)</h1>',src,re.S|re.I)
+            assert match, f'{route}: missing H1'
+            visible=re.sub(r'<[^>]+>','',match.group(1))
+            assert html_lib.unescape(visible).strip()==h1,(route,visible)
+            assert 'rel="canonical" href="'+url+'"' in src,route+': canonical missing'
+            assert faq in src,route+': pricing FAQ missing'
+            assert 'VNO' in src,route+': airport pickup content missing'
+            assert 'href="#booking-dialog"' in src,route+': booking CTA missing'
+            assert '<loc>'+url+'</loc>' in sitemap,route+': missing sitemap loc'
+            for lang in ('ru','lt','en'):
+              assert 'hreflang="'+lang+'"' in src,(route,lang)
+            scripts=re.findall(r'<script[^>]+type="application/ld\\+json"[^>]*>(.*?)</script>',src,re.S|re.I)
+            assert scripts,route+': JSON-LD missing'
+            for block in scripts: json.loads(block)
+            print('PASS',url,'JSON-LD blocks',len(scripts))
+          vno=Path('/tmp/ru_aeroport-vno-minsk.html').read_text()
+          assert 'rel="canonical" href="'+host+'/ru/aeroport-vno-minsk/"' in vno,'VNO canonical missing'
+          assert '<h1' in vno and 'VNO' in vno, 'VNO landing content missing'
+          assert '<loc>'+host+'/ru/aeroport-vno-minsk/</loc>' in sitemap,'VNO absent from sitemap'
+          print('PASS',host+'/ru/aeroport-vno-minsk/')
+          assert sitemap.count('<loc>')>=1500,'Unexpectedly truncated public sitemap'
+          print('PUBLIC SEO SMOKE PASS')
+          PY
