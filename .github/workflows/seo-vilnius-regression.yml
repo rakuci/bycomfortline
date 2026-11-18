@@ -61,9 +61,9 @@ jobs:
             assert(html.includes('VNO'),path+' VNO context missing');
             assert(html.includes('href="#booking-dialog"'),path+' booking link missing');
             assert(sitemap.includes('<loc>'+host+path+'</loc>'),path+' sitemap URL missing');
-            const scripts=[...html.matchAll(/<script type="application\\/ld\\+json">([^<]+)<\\/script>/g)];
+            const scripts=html.split('<script type="application/ld+json">').slice(1).map(part=>part.split('</script>')[0]);
             assert(scripts.length>0,path+' missing structured data');
-            for(const block of scripts)JSON.parse(block[1]);
+            for(const block of scripts)JSON.parse(block);
             console.log('SEO CHECK PASS',path, 'schema blocks:',scripts.length);
           }
           const airport='dist/ru/aeroport-vno-minsk/index.html';
