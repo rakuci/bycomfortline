@@ -62,7 +62,7 @@ jobs:
             assert '<loc>'+url+'</loc>' in sitemap,route+': missing sitemap loc'
             for lang in ('ru','lt','en'):
               assert 'hreflang="'+lang+'"' in src,(route,lang)
-            scripts=re.findall(r'<script[^>]+type="application/ld\\+json"[^>]*>(.*?)</script>',src,re.S|re.I)
+            scripts=[part.split('</script>')[0] for part in src.split('<script type="application/ld+json">')[1:]]
             assert scripts,route+': JSON-LD missing'
             for block in scripts: json.loads(block)
             print('PASS',url,'JSON-LD blocks',len(scripts))
