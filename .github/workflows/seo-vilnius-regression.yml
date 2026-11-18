@@ -1,0 +1,79 @@
+name: SEO regression - Vilnius Minsk priority routes
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [seo/vilnius-minsk-commercial-intent-20261117]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: seo-vilnius-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  seo-build-and-crawlability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out the proposed branch
+        uses: actions/checkout@v4
+      - name: Use same Node major as production workflow
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check edited JavaScript syntax
+        run: |
+          node --check route-seo.mjs
+          node --check route-extras.mjs
+          node --check check-seo.mjs
+      - name: Rebuild all static pages and run full SEO regression checks
+        run: node build.mjs
+      - name: Verify sitemap, translations, guide, images and booking source tests
+        run: |
+          node scripts/check-sitemaps.mjs
+          node scripts/check-long-distance-seo.mjs
+          node scripts/check-travel-guide.mjs
+          node scripts/check-travel-guide-submission.mjs
+          node scripts/landing_image_report.mjs
+      - name: Check localized commercial pages and structured data
+        shell: bash
+        run: |
+          node --input-type=module <<'JS'
+          import { readFileSync } from 'node:fs';
+          import assert from 'node:assert/strict';
+          const host='https://bycomfortline.com';
+          const routes=[
+            ['ru','vilnius-minsk-transfer','Трансфер Вильнюс — Минск: частное такси'],
+            ['lt','vilnius-minskas-pervezimas','Vilnius–Minskas: privatus pervežimas ir taksi'],
+            ['en','vilnius-minsk-transfer','Vilnius to Minsk transfer: private taxi and airport pickup']
+          ];
+          const sitemap=readFileSync('dist/sitemap.xml','utf8');
+          for(const [lang,slug,h1] of routes){
+            const path=`/${lang}/${slug}/`;
+            const html=readFileSync(`dist${path}index.html`,'utf8');
+            assert(html.includes('<h1>'+h1+'</h1>'), path+' missing route H1');
+            assert(html.includes('rel="canonical" href="'+host+path+'"'),path+' wrong canonical');
+            assert(html.includes('name="robots" content="index,follow'),path+' no index tag');
+            assert(html.includes('VNO'),path+' VNO context missing');
+            assert(html.includes('href="#booking-dialog"'),path+' booking link missing');
+            assert(sitemap.includes('<loc>'+host+path+'</loc>'),path+' sitemap URL missing');
+            const scripts=[...html.matchAll(/<script type="application\\/ld\\+json">([^<]+)<\\/script>/g)];
+            assert(scripts.length>0,path+' missing structured data');
+            for(const block of scripts)JSON.parse(block[1]);
+            console.log('SEO CHECK PASS',path, 'schema blocks:',scripts.length);
+          }
+          const airport='dist/ru/aeroport-vno-minsk/index.html';
+          const text=readFileSync(airport,'utf8');
+          assert(text.includes('rel="canonical" href="'+host+'/ru/aeroport-vno-minsk/"'),'Airport canonical invalid');
+          assert(text.includes('VNO'), 'Airport landing has no VNO context');
+          console.log('SEO CHECK PASS /ru/aeroport-vno-minsk/');
+          JS
+      - name: Report changed generated HTML without committing
+        shell: bash
+        run: |
+          git status --short | head -30
+          echo "This PR never deploys to production. The main branch workflow controls publication."
