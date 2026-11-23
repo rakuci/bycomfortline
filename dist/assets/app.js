@@ -1,4 +1,15 @@
 (() => {
+  if (!["bycomfortline.com", "www.bycomfortline.com"].includes(location.hostname)) return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+  const tagManager = document.createElement("script");
+  tagManager.async = true;
+  tagManager.src = "https://www.googletagmanager.com/gtm.js?id=GTM-PDPTL8MR";
+  document.head.appendChild(tagManager);
+})();
+
+(() => {
 
   // Wikimedia can throttle external image requests. If that happens, display
   // the already-hosted WebP of the actual Belarus destination, and update the
@@ -731,7 +742,7 @@
       }
     });
   });
-}
+
   // Reader suggestions and anonymised travel stories (Travel Guide only).
   document.querySelectorAll("[data-travel-guide-submission]").forEach((form) => {
     const status=form.querySelector(".guide-story-form-status");
