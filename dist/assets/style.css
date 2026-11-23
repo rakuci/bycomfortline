@@ -4690,3 +4690,10 @@ body { background:var(--cl-pearl); }
 @media(max-width:900px){.long-distance-teaser{flex-direction:column;align-items:flex-start}.long-distance-country-grid{grid-template-columns:1fr}.long-distance-steps>ol{grid-template-columns:1fr}}
 @media(max-width:650px){.long-distance-hero-inner{width:calc(100% - 34px);padding:42px 0 57px}.long-distance-hero h1{font-size:clamp(30px,8.3vw,42px)}.long-distance-benefits{grid-template-columns:1fr}.long-distance-teaser{width:calc(100% - 30px);padding:24px 19px}.long-distance-teaser .button{width:100%}.long-distance-country{padding:20px 16px}.long-distance-hero .quick-booking{margin-top:21px}}
 @media(prefers-reduced-motion:reduce){.long-distance-origin-link,.long-distance-destination-links a{transition:none}}
+
+.route-price { color: var(--ink); font-weight: 700; }
+.route-fares table { width: 100%; max-width: 48rem; border-collapse: collapse; }
+.route-fares th, .route-fares td { padding: .7rem .5rem; border-bottom: 1px solid #dce3e1; text-align: end; }
+.route-fares th:first-child { text-align: start; }
+.route-fares td { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.route-fares p { max-width: 48rem; line-height: 1.6; }

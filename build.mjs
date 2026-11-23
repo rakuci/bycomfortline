@@ -456,11 +456,44 @@ function trustStrip(l) {
   return `<div class="trust-strip">${l.trust.map((item, i) => `<span><b>${["✓", "1", "↗"][i]}</b>${esc(item)}</span>`).join("")}</div>`;
 }
 
+
+// Starting fares per vehicle for one-way journeys in either direction.
+// Source: ComfortLine's published city and airport tariffs, 24 November 2026.
+const routeFares = {
+  vilnius: [[249,820], [299,990], [399,1320], [549,1810], [399,1320], [499,1650]],
+  warsaw: [[399,1320], [499,1650], [649,2140], [799,2630], [549,1810], [699,2310]],
+  riga: [[349,1150], [449,1480], [549,1810], [649,2140], [499,1650], [649,2140]],
+};
+const airportFareRoutes = { vno: "vilnius", waw: "warsaw", wmi: "warsaw", rix: "riga" };
+const fareCopy = {
+  en: ["One-way fares per vehicle", "Vehicle class", "From", "Economy|Comfort|Business|VIP|Comfort minivan|Business minivan", "EUR amounts are for reference. Payment is in BYN. Request a quote for your date, addresses, passengers and luggage. We confirm the final fare before departure."],
+  ru: ["Цены за автомобиль в одну сторону", "Класс автомобиля", "От", "Эконом|Комфорт|Бизнес|VIP|Минивэн Комфорт|Минивэн Бизнес", "Суммы в EUR приведены для ориентира. Оплата в BYN. Укажите дату, адреса, число пассажиров и багаж в заявке. Подтвердим итоговую стоимость до выезда."],
+  pl: ["Ceny za samochód w jedną stronę", "Klasa pojazdu", "Od", "Ekonomiczna|Komfort|Biznes|VIP|Minivan komfort|Minivan biznes", "Kwoty w EUR są orientacyjne. Płatność w BYN. W zapytaniu podaj datę, adresy, liczbę pasażerów i bagaż. Potwierdzimy cenę przed wyjazdem."],
+  lt: ["Kelionės į vieną pusę kaina už automobilį", "Automobilio klasė", "Nuo", "Ekonominė|Komforto|Verslo|VIP|Komforto klasės mikroautobusas|Verslo klasės mikroautobusas", "Sumos eurais yra orientacinės. Atsiskaitoma Baltarusijos rubliais (BYN). Užklausoje nurodykite datą, adresus, keleivių skaičių ir bagažą. Galutinę kainą patvirtinsime prieš išvykimą."],
+  lv: ["Cena par automašīnu vienā virzienā", "Auto klase", "No", "Ekonomiskā|Komforta|Biznesa|VIP|Komforta minivens|Biznesa minivens", "Summas eiro ir orientējošas. Maksājumi tiek veikti Baltkrievijas rubļos (BYN). Pieprasījumā norādiet datumu, adreses, pasažieru skaitu un bagāžu. Gala cenu apstiprināsim pirms izbraukšanas."],
+  de: ["Preise pro Fahrzeug und einfacher Fahrt", "Fahrzeugklasse", "Ab", "Economy|Komfort|Business|VIP|Komfort-Minivan|Business-Minivan", "Eurobeträge dienen zur Orientierung. Die Zahlung erfolgt in BYN. Geben Sie bei der Anfrage Datum, Adressen, Personenzahl und Gepäck an. Den Endpreis bestätigen wir vor der Abfahrt."],
+  fr: ["Tarifs par véhicule pour un aller simple", "Classe du véhicule", "Dès", "Économique|Confort|Affaires|VIP|Minivan confort|Minivan affaires", "Les montants en euros sont indicatifs. Le règlement se fait en BYN. Précisez la date, les adresses, le nombre de passagers et les bagages dans votre demande. Nous confirmons le prix final avant le départ."],
+};
+
+function startingFare(lang, key) {
+  const [euros, rubles] = routeFares[key][0];
+  return `${fareCopy[lang][2]} €${euros} · ${rubles.toLocaleString(lang)} BYN`;
+}
+
+function fareTable(lang, key) {
+  const [heading, vehicle, from, labels, note] = fareCopy[lang];
+  const classes = labels.split("|");
+  const rows = routeFares[key].map(([eur, byn], index) =>
+    `<tr><th scope="row">${classes[index]}</th><td>${eur}</td><td>${byn.toLocaleString(lang)}</td></tr>`
+  ).join("");
+  return `<section class="section route-fares"><h2>${heading}</h2><table aria-label="${heading}"><thead><tr><th scope="col">${vehicle}</th><th scope="col">${from} EUR</th><th scope="col">${from} BYN</th></tr></thead><tbody>${rows}</tbody></table><p>${note}</p></section>`;
+}
+
 function routeCards(lang, current) {
   const l = locale[lang];
   return Object.keys(routes).filter(key => key !== current).map(key => {
     const r = routes[key];
-    return `<a class="route-card" href="${routePath(lang, key)}"><span class="route-card-top"><span>${esc(l.fromNames[key])}</span><span>${r.airport}</span></span><strong>${esc(l.routeNames[key])}</strong><span class="route-line"><i></i><i></i></span><span class="route-meta"><span>${r.distance}</span><span>${r.time}</span></span><span class="route-link">${esc(l.cardCta)} ${icons.arrow}</span></a>`;
+    return `<a class="route-card" href="${routePath(lang, key)}"><span class="route-card-top"><span>${esc(l.fromNames[key])}</span><span>${r.airport}</span></span><strong>${esc(l.routeNames[key])}</strong><span class="route-line"><i></i><i></i></span><span class="route-meta"><span>${r.distance}</span><span>${r.time}</span></span><span class="route-price">${startingFare(lang,key)}</span><span class="route-link">${esc(l.cardCta)} ${icons.arrow}</span></a>`;
   }).join("");
 }
 
@@ -1861,12 +1894,13 @@ function geoLocationPage(lang,place) {
         ${quickBooking(lang,place.parent,name)}
       </div>
     </section>
+    ${airportFareRoutes[place.id] ? fareTable(lang,airportFareRoutes[place.id]) : ""}
     <section class="section geo-airport-landmark-section" aria-label="${esc(t.arrival)}">${landmarkImage}</section>
     <div class="geo-content-wrap section">
       <div class="geo-page-facts">
         <div><span>${esc(isAirport?t.airport:t.city)}</span><strong>${esc(name)}</strong></div>
         <div><span>${esc(l.fields.to)}</span><strong>${esc(t.arrival)}</strong></div>
-        <div><span>${esc(t.cost)}</span><strong>${esc(reverseJourneyCopy[lang].label)}</strong></div>
+        <div><span>${esc(t.cost)}</span><strong>${airportFareRoutes[place.id] ? startingFare(lang,airportFareRoutes[place.id]) : esc(reverseJourneyCopy[lang].label)}</strong></div>
       </div>
       <div class="geo-detail-grid">
         <article class="geo-detail-card geo-distinct">
@@ -1930,6 +1964,7 @@ function routePage(lang, key) {
   const body = `${header(lang, "route", key)}<main>
     <section class="route-hero"><div class="route-hero-bg"></div><div class="route-hero-content"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(l.routeNames[key])}</span></nav><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(h1)}</h1><p>${esc(seo.intro)}</p><div class="hero-actions"><a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang, key)}</div><div class="journey-card"><div><span>${esc(l.fromNames[key])}</span><b>${r.airport}</b></div><div class="journey-line"><i></i><em>${r.distance}</em><i></i></div><div><span>${esc(destinationLabels[lang])}</span><b>BY</b></div></div></section>
     ${trustStrip(l)}
+    ${fareTable(lang,key)}
     <section class="section route-cultural-story" aria-label="${esc(destinationLabels[lang])}">
       ${heritagePhotoFigure(lang,origin,"minsk")}
     </section>
