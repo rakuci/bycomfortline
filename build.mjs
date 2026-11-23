@@ -1965,6 +1965,13 @@ function routePage(lang, key) {
     <section class="route-hero"><div class="route-hero-bg"></div><div class="route-hero-content"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(l.routeNames[key])}</span></nav><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(h1)}</h1><p>${esc(seo.intro)}</p><div class="hero-actions"><a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang, key)}</div><div class="journey-card"><div><span>${esc(l.fromNames[key])}</span><b>${r.airport}</b></div><div class="journey-line"><i></i><em>${r.distance}</em><i></i></div><div><span>${esc(destinationLabels[lang])}</span><b>BY</b></div></div></section>
     ${trustStrip(l)}
     ${fareTable(lang,key)}
+    ${lang === "ru" && key === "vilnius" ? `<section class="section" aria-labelledby="airport-review-title">
+      <h2 id="airport-review-title">Отзыв о встрече в аэропорту</h2>
+      <figure class="geo-detail-card">
+        <blockquote cite="https://comfortline.by/#reviews">«Нас встретили в аэропорту с табличкой, доехали быстро и дешево. Отличная организация трансфера.»</blockquote>
+        <figcaption>Евгений, Москва · Поездка в Минск компанией из шести человек. Аэропорт в отзыве не указан. <a href="https://comfortline.by/#reviews">Полный отзыв на comfortline.by</a></figcaption>
+      </figure>
+    </section>` : ""}
     <section class="section route-cultural-story" aria-label="${esc(destinationLabels[lang])}">
       ${heritagePhotoFigure(lang,origin,"minsk")}
     </section>
