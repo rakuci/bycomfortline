@@ -4090,7 +4090,7 @@ body { background:var(--cl-pearl); }
 }
 .quick-booking > .quick-submit:hover { background:#ddc195; transform:none; }
 .quick-booking > .quick-submit:focus-visible { outline:3px solid #bba57e; outline-offset:3px; }
-.passenger-chevron { display:none !important; }
+.booking-dialog .passenger-chevron svg { stroke:currentColor; }
 .passenger-toggle { padding-right:17px !important; }
 .vehicle-model-field select {
   -webkit-appearance:none;
@@ -4100,7 +4100,8 @@ body { background:var(--cl-pearl); }
   cursor:pointer;
 }
 .vehicle-model-field select::-ms-expand { display:none; }
-.booking-dialog { border-radius:20px; }
+.booking-dialog { border-radius:20px; overflow:hidden; }
+.booking-dialog .booking-form .passenger-toggle { color:#1b3641; }
 .booking-dialog .booking-form > label > span,
 .booking-dialog .booking-form > .location-form-field > label {
   color:#5c7175;
