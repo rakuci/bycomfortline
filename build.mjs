@@ -872,22 +872,115 @@ function quickBooking(lang, routeKey = "vilnius", originOverride = null, destina
   </form>`;
 }
 
-const destinationAddressLabels={"en":["Exact drop-off address (any destination)","Street, city and country"],"ru":["Точный адрес прибытия (любой город)","Улица, дом, город и страна"],"pl":["Dokładny adres docelowy (dowolne miasto)","Ulica, miasto i kraj"],"lt":["Tikslus atvykimo adresas (bet kuris miestas)","Gatvė, miestas ir šalis"],"lv":["Precīza galamērķa adrese (jebkura pilsēta)","Iela, pilsēta un valsts"],"de":["Genaue Zieladresse (beliebige Stadt)","Straße, Stadt und Land"],"fr":["Adresse d'arrivée exacte (toute ville)","Rue, ville et pays"]};
+const compactBookingCopy = {
+  "en": [
+    "Book a transfer",
+    "Route",
+    "Travel date",
+    "Contact details",
+    "Leave your contact details and our team will get back to you.",
+    "Additional trip details",
+    "I agree to the",
+    "privacy policy",
+    "and the",
+    "public offer",
+    "Country code"
+  ],
+  "ru": [
+    "Оформление трансфера",
+    "Маршрут",
+    "Дата поездки",
+    "Контактные данные",
+    "Оставьте контакты — менеджер свяжется с вами для подтверждения поездки.",
+    "Дополнительные пожелания",
+    "Я согласен с",
+    "политикой конфиденциальности",
+    "и",
+    "публичной офертой",
+    "Код страны"
+  ],
+  "pl": [
+    "Zamów transfer",
+    "Trasa",
+    "Data podróży",
+    "Dane kontaktowe",
+    "Zostaw dane kontaktowe, a skontaktujemy się z Tobą w sprawie przejazdu.",
+    "Dodatkowe informacje",
+    "Akceptuję",
+    "politykę prywatności",
+    "i",
+    "warunki oferty",
+    "Numer kierunkowy"
+  ],
+  "lt": [
+    "Užsakyti pervežimą",
+    "Maršrutas",
+    "Kelionės data",
+    "Kontaktiniai duomenys",
+    "Palikite kontaktinius duomenis ir susisieksime dėl kelionės.",
+    "Papildoma informacija",
+    "Sutinku su",
+    "privatumo politika",
+    "ir",
+    "viešojo pasiūlymo sąlygomis",
+    "Šalies kodas"
+  ],
+  "lv": [
+    "Pieteikt transfēru",
+    "Maršruts",
+    "Brauciena datums",
+    "Kontaktinformācija",
+    "Atstājiet kontaktinformāciju, un mēs ar jums sazināsimies par braucienu.",
+    "Papildu informācija",
+    "Piekrītu",
+    "privātuma politikai",
+    "un",
+    "publiskā piedāvājuma noteikumiem",
+    "Valsts kods"
+  ],
+  "fr": [
+    "Réserver un transfert",
+    "Trajet",
+    "Date du trajet",
+    "Coordonnées",
+    "Laissez vos coordonnées pour que nous puissions confirmer le trajet avec vous.",
+    "Précisions sur le trajet",
+    "J’accepte la",
+    "politique de confidentialité",
+    "et les",
+    "conditions de l’offre",
+    "Indicatif du pays"
+  ],
+  "de": [
+    "Transfer buchen",
+    "Strecke",
+    "Reisedatum",
+    "Kontaktdaten",
+    "Hinterlassen Sie Ihre Kontaktdaten. Wir melden uns bei Ihnen zur Bestätigung der Fahrt.",
+    "Weitere Fahrtwünsche",
+    "Ich akzeptiere die",
+    "Datenschutzerklärung",
+    "und die",
+    "Angebotsbedingungen",
+    "Ländervorwahl"
+  ]
+};
+const bookingDialCodes = [["BY", "+375"], ["LT", "+370"], ["PL", "+48"], ["LV", "+371"], ["AT", "+43"], ["AZ", "+994"], ["BE", "+32"], ["CZ", "+420"], ["DE", "+49"], ["DK", "+45"], ["EE", "+372"], ["ES", "+34"], ["FI", "+358"], ["FR", "+33"], ["GB", "+44"], ["GE", "+995"], ["GR", "+30"], ["HR", "+385"], ["HU", "+36"], ["IE", "+353"], ["IL", "+972"], ["IT", "+39"], ["KG", "+996"], ["KZ", "+7"], ["MD", "+373"], ["NL", "+31"], ["NO", "+47"], ["PT", "+351"], ["RO", "+40"], ["RU", "+7"], ["SE", "+46"], ["SK", "+421"], ["TR", "+90"], ["UA", "+380"], ["US", "+1"], ["UZ", "+998"]];
 function bookingForm(lang, routeKey = "vilnius", originOverride = null, destinationOverride = null) {
   const l = locale[lang], ui = bookingLabels[lang], popup = bookingPopupUi[lang];
+  const [title,route,date,contact,intro,extras,agree,privacy,and,offer,codeLabel] = compactBookingCopy[lang];
   return `<dialog class="booking-dialog" id="booking-dialog" aria-labelledby="booking-dialog-title">
     <div class="booking-dialog-shell">
-      <div class="booking-dialog-header"><div><span class="eyebrow">${esc(popup.help)}</span>
-        <h2 id="booking-dialog-title">${esc(popup.header)}</h2><p>${esc(popup.subtitle)}</p></div>
+      <div class="booking-dialog-header"><h2 id="booking-dialog-title">${esc(title)}</h2>
         <button type="button" class="booking-dialog-close" data-close-booking aria-label="${esc(popup.close)}"><span aria-hidden="true">×</span></button>
       </div>
       <form class="booking-form" data-lang="${lang}" data-email="${email}" data-sending="${esc(popup.sending)}" data-send-error="${esc(popup.sendError)}" data-storage-success="${esc(popup.storageSuccess)}" data-invalid-phone="${esc(popup.invalidPhone)}" data-invalid-route="${esc(popup.invalidRoute)}" data-invalid-form="${esc(popup.invalidForm)}" data-rate-limited="${esc(popup.rateLimited)}" data-service-unavailable="${esc(popup.serviceUnavailable)}" data-network-error="${esc(popup.networkError)}" data-capacity-error="${esc(fleetCopy[lang].capacityError)}" action="/api/booking" method="post">
+        <h3 class="full">${esc(route)}</h3>
         ${locationFormField(lang, "fromPreset", "details", originOverride !== null ? originOverride : l.fromNames[routeKey])}
         ${locationFormField(lang, "to", "details", destinationOverride !== null ? destinationOverride : l.fieldValues.to)}
-        <label><span>${esc(ui.pickupAddress)}</span><input name="pickupAddress" placeholder="${esc(l.fieldValues.fromPlaceholder)}"></label>
-        <label><span>${esc(destinationAddressLabels[lang][0])}</span><input name="dropAddress" placeholder="${esc(destinationAddressLabels[lang][1])}"></label>
-        <label><span>${esc(ui.date)}</span><input type="datetime-local" name="date" required></label>
+        <label class="full"><span>${esc(date)}</span><input type="date" name="date" required></label>
         ${passengerPicker(lang, "details")}
+        <details class="booking-extras full"><summary>${esc(extras)}</summary>
         <label class="vehicle-model-field full"><span>${esc(fleetCopy[lang].choiceLabel)}</span>
           <select name="vehicleModel" aria-describedby="vehicle-choice-note">
             <option value="">${esc(fleetCopy[lang].placeholder)}</option>
@@ -897,10 +990,13 @@ function bookingForm(lang, routeKey = "vilnius", originOverride = null, destinat
         </label>
         <label><span>${esc(ui.seats)}</span><input type="number" min="0" max="8" name="childSeats" value="0"></label>
         <label><span>${esc(ui.flight)}</span><input name="flight" placeholder="VNO / WAW / WMI / RIX"></label>
-        <label><span>${esc(ui.name)}</span><input name="customerName" autocomplete="name" required></label>
-        <label><span>${esc(ui.phone)}</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="50" placeholder="${esc(l.fieldValues.phone)}" required></label>
-        <label class="full"><span>${esc(ui.email)}</span><input type="email" name="customerEmail" autocomplete="email"></label>
-        <label class="full"><span>${esc(ui.notes)}</span><textarea name="notes" rows="3"></textarea></label>
+        </details>
+        <div class="booking-contact-intro full"><h3>${esc(contact)}</h3><p>${esc(intro)}</p></div>
+        <input class="full" name="customerName" autocomplete="name" placeholder="${esc(ui.name)}" aria-label="${esc(ui.name)}" required>
+        <input type="email" name="customerEmail" autocomplete="email" placeholder="${esc(ui.email)}" aria-label="${esc(ui.email)}">
+        <div class="booking-telephone"><select data-dial-code aria-label="${esc(codeLabel)}">${bookingDialCodes.map(([iso,code])=>`<option value="${code}">${iso} ${code}</option>`).join("")}</select><input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="50" placeholder="${esc(ui.phone)}" aria-label="${esc(ui.phone)}" required></div>
+        <textarea class="full" name="notes" rows="2" placeholder="${esc(ui.notes)}" aria-label="${esc(ui.notes)}"></textarea>
+        <label class="booking-consent full"><input type="checkbox" required><span>${esc(agree)} <a href="https://comfortline.by/privacy" target="_blank" rel="noopener">${esc(privacy)}</a> ${esc(and)} <a href="https://comfortline.by/terms" target="_blank" rel="noopener">${esc(offer)}</a></span></label>
         <div class="booking-spam-trap" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
         <button type="submit" class="booking-prepare">${esc(ui.submit)} ${icons.arrow}</button>
         <p class="booking-status" role="status" aria-live="polite" hidden></p>

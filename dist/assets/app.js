@@ -44,8 +44,8 @@
     const now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
     const minDate = now.toISOString().slice(0, 16);
-    document.querySelectorAll('input[type="datetime-local"]').forEach((input) => {
-      input.min = minDate;
+    document.querySelectorAll('input[name="date"]').forEach((input) => {
+      input.min = input.type === "date" ? minDate.slice(0, 10) : minDate;
     });
   })();
 
@@ -528,6 +528,8 @@
     modelSelect.dispatchEvent(new Event("change", { bubbles: true }));
     if (!bookingDialog.open) bookingDialog.showModal();
     syncMobileDialogViewport();
+    const extras = modelSelect.closest("details");
+    if (extras) extras.open = true;
     const field = modelSelect.closest(".vehicle-model-field");
     field?.scrollIntoView({ block: "center", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     // Do not focus the select here: focusing it may open the iPhone picker
@@ -564,7 +566,7 @@
       bookingDialog.showModal();
       // Do not show the mobile keyboard immediately: allow the user to review the form.
       if (!window.matchMedia("(max-width: 760px)").matches) {
-        getControl(details, "pickupAddress")?.focus({ preventScroll: true });
+        getControl(details, "date")?.focus({ preventScroll: true });
       }
     });
   });
@@ -590,9 +592,11 @@
       event.preventDefault();
       if (sending || !form.reportValidity()) return;
 
-      const phone = String(phoneInput?.value || "").trim();
+      const enteredPhone = String(phoneInput?.value || "").trim();
+      const dial = form.querySelector("[data-dial-code]")?.value || "";
+      const phone = enteredPhone.startsWith("+") ? enteredPhone : enteredPhone.startsWith("00") ? "+" + enteredPhone.slice(2) : dial + enteredPhone;
       const digits = phone.replace(/\D/g, "");
-      if (digits.length < 6 || digits.length > 16 || !/^[+\d()\s.-]+$/.test(phone)) {
+      if (enteredPhone.replace(/\D/g, "").length < 6 || digits.length < 6 || digits.length > 16 || !/^[+\d()\s.-]+$/.test(phone)) {
         const explanation = form.dataset.invalidPhone || "Enter a valid contact phone number.";
         phoneInput.setCustomValidity(explanation);
         phoneInput.reportValidity();
@@ -617,6 +621,8 @@
           .replace("{seats}", String(maximumSeats))
           .replace("{people}", String(people));
         showBookingError(explanation);
+        const extras = modelChoice.closest("details");
+        if (extras) extras.open = true;
         modelChoice.focus({ preventScroll: true });
         modelChoice.closest("label")?.scrollIntoView({ block: "center", behavior: "smooth" });
         return;
@@ -627,6 +633,7 @@
       const message = status;
       const originalButtonMarkup = sendButton?.innerHTML || "";
       const payload = Object.fromEntries(new FormData(form).entries());
+      payload.phone = phone;
       const lines = [...form.querySelectorAll("input[name], select[name], textarea[name]")]
         .filter((control) => control.name !== "website")
         .map((control) => {

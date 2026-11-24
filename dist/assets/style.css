@@ -4712,3 +4712,30 @@ body { background:var(--cl-pearl); }
 }
 .location-control.is-suggesting > .location-browse::after { transform:translateY(2px) rotate(225deg); }
 .location-control > .location-browse:focus-visible { outline:2px solid #14836b; }
+
+/* Compact booking dialog shared with the ComfortLine booking flow. */
+.booking-dialog {width:min(512px,calc(100% - 20px));}
+.booking-dialog .booking-dialog-header {align-items:center;padding:18px 24px;background:#fff;}
+.booking-dialog .booking-dialog-header h2 {margin:0;font-size:21px;letter-spacing:-.025em;}
+.booking-dialog .booking-dialog-close {position:static;flex:none;width:34px;height:34px;border:0;}
+.booking-dialog .booking-form {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:20px 24px;}
+.booking-dialog .booking-form .full,.booking-dialog .booking-form > .passenger-field {grid-column:1/-1;}
+.booking-dialog .booking-form > .location-form-field {grid-column:auto;min-width:0;}
+.booking-dialog .booking-form h3 {margin:0;font-size:16px;}
+.booking-contact-intro p {font-size:14px;margin:4px 0;color:#526171;}
+.booking-dialog .booking-form :is(input:not([type=hidden]):not([type=checkbox]),select,textarea) {min-width:0;width:100%;min-height:45px;padding:10px 12px;}
+.booking-dialog .booking-form .location-control > input[type=text] {padding:0 4px;min-height:42px;}
+.booking-dialog .booking-form .location-control {min-height:45px;}
+.booking-dialog .booking-form .passenger-toggle {min-height:45px;}
+.booking-dialog .booking-form .passenger-panel {position:static;width:100%;max-height:none;margin-top:6px;}
+.booking-extras summary {cursor:pointer;font-size:13px;color:#45615a;}
+.booking-extras label {display:grid;gap:4px;margin-top:10px;font-size:13px;}
+.booking-dialog .booking-telephone {display:flex;align-items:center;min-width:0;}
+.booking-dialog .booking-form .booking-telephone select {width:83px;flex:none;padding:6px;}
+.booking-dialog .booking-form > .booking-consent {display:flex;flex-direction:row;align-items:flex-start;gap:10px;}
+.booking-dialog .booking-consent input[type=checkbox] {width:18px;height:18px;min-height:18px;flex:none;margin:2px 0;padding:0;appearance:auto;}
+.booking-dialog .booking-consent a {text-decoration:underline;}
+.booking-dialog .booking-prepare {justify-content:center;background:#b59a70;color:#152923;}
+.booking-form:has(.booking-consent input:not(:checked)) .booking-prepare {background:#dccfb9;color:#52534e;}
+@media(max-width:760px){.booking-dialog{inset-inline:0;margin-inline:auto;}.booking-dialog .booking-form{padding:16px;}.booking-dialog .booking-dialog-header{padding:14px 16px;}}
+@media(max-width:470px){.booking-dialog .booking-form{grid-template-columns:minmax(0,1fr);}.booking-dialog .booking-form > *{grid-column:1;}}

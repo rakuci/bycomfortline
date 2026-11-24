@@ -78,7 +78,7 @@ function validateBooking(body) {
   // Stop automated bots that indiscriminately fill all form inputs.
   if (fields.website) return { bot: true };
   if (fields.fromPreset === fields.to) return null;
-  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(fields.date) || Number.isNaN(Date.parse(fields.date))) return null;
+  if (!/^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2})?$/.test(fields.date) || Number.isNaN(Date.parse(fields.date))) return null;
   if (!/^[1-8]$/.test(fields.passengers)) return null;
   const hasPassengerBreakdown = ["adults", "children", "infants"].some(name =>
     Object.prototype.hasOwnProperty.call(incoming, name));
