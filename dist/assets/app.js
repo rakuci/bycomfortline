@@ -828,3 +828,24 @@
   });
 
 })();
+
+// A single seasonal crossing per page, away from the booking controls.
+(() => {
+  const today = new Date();
+  const month = today.getMonth();
+  const day = today.getDate();
+  const festive = (month === 10 && day >= 24) || month === 11 || (month === 0 && day <= 7);
+  if (!festive || !document.querySelector(".atlas-hero") ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const sleigh = document.createElement("img");
+  sleigh.className = "christmas-sleigh";
+  sleigh.alt = "";
+  sleigh.setAttribute("aria-hidden", "true");
+  sleigh.draggable = false;
+  sleigh.addEventListener("load", () => {
+    document.body.append(sleigh);
+    sleigh.addEventListener("animationend", () => sleigh.remove(), {once:true});
+  }, {once:true});
+  sleigh.src = "/assets/christmas-sleigh.svg";
+})();
