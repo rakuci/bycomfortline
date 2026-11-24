@@ -10,6 +10,15 @@ body{background:var(--atlas-paper)}
 .atlas-copy>p{font-size:clamp(15px,1.15vw,18px);max-width:52ch;color:#375348;line-height:1.6}
 .atlas-copy .eyebrow.light,.atlas-copy .breadcrumbs,.atlas-copy .breadcrumbs a{color:#4a6053}
 .atlas-copy .eyebrow.light{background:none;border:0;padding:0}
+.eyebrow::before {
+  content:"";
+  width:16px;
+  height:16px;
+  flex:0 0 16px;
+  border-radius:0;
+  background:linear-gradient(130deg,#ebc87e,#ae7d35 74%);
+  clip-path:polygon(50% 0,55% 35%,76% 19%,64% 42%,100% 50%,64% 55%,78% 78%,55% 65%,50% 100%,44% 65%,22% 80%,36% 56%,0 50%,36% 43%,22% 20%,44% 35%);
+}
 .atlas-copy .hero-actions .button.primary{display:none}
 .atlas-copy .hero-actions .button.ghost{border:0;background:none;color:var(--atlas-ink);padding:0;min-height:32px;text-decoration:underline;text-underline-offset:4px}
 .atlas-shell>.quick-booking{position:relative;z-index:5;grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(155px,.7fr);width:100%;max-width:none;margin:0;padding:20px 0 24px;gap:18px;border:0;border-top:1px solid var(--atlas-rule);border-radius:0;background:var(--atlas-paper);box-shadow:none;align-items:end}
