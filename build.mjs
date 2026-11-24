@@ -475,6 +475,64 @@ const fareCopy = {
   fr: ["Tarifs par véhicule pour un aller simple", "Classe du véhicule", "Dès", "Économique|Confort|Affaires|VIP|Minivan confort|Minivan affaires", "Les montants en euros sont indicatifs. Le règlement se fait en BYN. Précisez la date, les adresses, le nombre de passagers et les bagages dans votre demande. Nous confirmons le prix final avant le départ."],
 };
 
+const vilniusSearchCopy = {
+  "ru": {
+    "cityTitle": "Трансфер Вильнюс — Минск",
+    "airportTitle": "Аэропорт Вильнюса (VNO) — Минск",
+    "from": "от €",
+    "cityLead": "Частное такси из Вильнюса в Минск",
+    "airportLead": "Трансфер из аэропорта Вильнюса в Минск",
+    "cityDetails": "за автомобиль в одну сторону. Подача у отеля, ж/д вокзала или автовокзала. Итоговую цену подтвердим в BYN.",
+    "airportDetails": "за автомобиль. Для встречи сообщите номер рейса, время прилёта и адрес в Минске. Оплата в BYN.",
+    "stationPickup": "В Вильнюсе два вокзала рядом. Если приезжаете поездом, укажите ж/д вокзал (Geležinkelio g. 16), если автобусом — автовокзал (Sodų g. 22). Сообщите время прибытия и согласуйте точку посадки. Для подачи к отелю укажите его название и адрес.",
+    "priceQuestion": "Сколько стоит трансфер из Вильнюса в Минск?",
+    "guideNote": "Если планируете оставить машину в Литве, посмотрите варианты поездки до Минска."
+  },
+  "lt": {
+    "cityTitle": "Privatus pervežimas iš Vilniaus į Minską",
+    "airportTitle": "Vilniaus oro uostas (VNO) – Minskas",
+    "from": "nuo €",
+    "cityLead": "Privatus taksi iš Vilniaus į Minską",
+    "airportLead": "Pervežimas iš Vilniaus oro uosto į Minską",
+    "cityDetails": "už automobilį į vieną pusę. Paimame iš viešbučio, autobusų ar geležinkelio stoties. Galutinę kainą patvirtiname BYN.",
+    "airportDetails": "už automobilį. Nurodykite skrydžio numerį, atvykimo laiką ir adresą Minske. Atsiskaitoma BYN.",
+    "stationPickup": "Vilniaus geležinkelio ir autobusų stotys yra greta. Jei atvykstate traukiniu, nurodykite Geležinkelio g. 16, o jei autobusu – Sodų g. 22. Praneškite atvykimo laiką ir sutarkite tikslią susitikimo vietą. Jei vykstate iš viešbučio, nurodykite jo pavadinimą ir adresą.",
+    "priceQuestion": "Kiek kainuoja privatus pervežimas Vilnius–Minskas?",
+    "guideNote": "Jei automobilį planuojate palikti Lietuvoje, galite užsisakyti kelionę į Minską."
+  },
+  "en": {
+    "cityTitle": "Vilnius to Minsk Private Transfer",
+    "airportTitle": "Vilnius Airport (VNO) to Minsk Transfer",
+    "from": "from €",
+    "cityLead": "Private taxi from Vilnius to Minsk",
+    "airportLead": "Private transfer from Vilnius Airport to Minsk",
+    "cityDetails": "per car, one way. Choose pickup at a hotel, railway station or bus station. Final fare confirmed in BYN.",
+    "airportDetails": "per car. Send your flight number, arrival time and Minsk address to arrange pickup. Payment in BYN.",
+    "stationPickup": "Vilnius railway station (Geležinkelio g. 16) and the bus station (Sodų g. 22) are close together. Specify which station you arrive at, send your arrival time and agree on the exact meeting point with your driver. For hotel pickup, send the hotel name and street address.",
+    "priceQuestion": "How much is a private Vilnius to Minsk transfer?",
+    "guideNote": "If you plan to leave your car in Lithuania, you can arrange a transfer to Minsk."
+  }
+};
+
+function vilniusSummary(lang, airport = false) {
+  const t = vilniusSearchCopy[lang];
+  const [eur, byn] = routeFares.vilnius[0];
+  const price = lang === "lt" ? `nuo ${eur} €` : t.from + eur;
+  return {
+    title: `${airport ? t.airportTitle : t.cityTitle} ${price} | ComfortLine`,
+    description: `${airport ? t.airportLead : t.cityLead} ${price} ${airport ? t.airportDetails : t.cityDetails}`,
+    answer: `${t.cityLead} ${price} (${byn} BYN) ${t.cityDetails}`,
+  };
+}
+function cityRouteSeo(lang, key) {
+  const seo = routeSeo[lang][key];
+  const t = vilniusSearchCopy[lang];
+  if (key !== "vilnius" || !t) return seo;
+  const { title, description, answer } = vilniusSummary(lang);
+  return { ...seo, title, description, intro: description, pickupText: t.stationPickup,
+    faqs: seo.faqs.map(([q, a]) => [q, q === t.priceQuestion ? answer : a]) };
+}
+
 function startingFare(lang, key) {
   const [euros, rubles] = routeFares[key][0];
   return `${fareCopy[lang][2]} €${euros} · ${rubles.toLocaleString(lang)} BYN`;
@@ -874,6 +932,7 @@ function carStoryPage(lang){
     ${sections}
     <section class="guide-article-checklist" aria-label="${esc(c.checklist)}"><h2>${esc(c.checklist)}</h2><ul>${checklist}</ul></section>
     <section class="guide-article-sources" id="official-sources" aria-label="${esc(c.sources)}"><h2>${esc(c.sources)}</h2><ol>${sources}</ol></section>
+    ${vilniusSearchCopy[lang] ? `<aside><p>${esc(vilniusSearchCopy[lang].guideNote)}</p><p><a href="${routePath(lang,"vilnius")}">${esc(vilniusSearchCopy[lang].cityTitle)}</a> · <a href="${geoPath(lang,"vno")}">${esc(vilniusSearchCopy[lang].airportTitle)}</a></p></aside>` : ""}
     <div class="guide-article-back"><a href="${guidePath(lang)}">← ${esc(c.back)}</a></div>
   </div></article></main>${footer(l)}`;
   const schema={"@context":"https://schema.org","@graph":[businessSchema(lang,canonical),
@@ -1356,9 +1415,9 @@ function routeIntentDetails(lang, key) {
 }
 
 function routeEditorial(lang, key) {
-  const seo = routeSeo[lang][key], ui = routeSeo[lang].ui;
+  const seo = cityRouteSeo(lang,key), ui = routeSeo[lang].ui;
   return `<section class="route-editorial section" id="route-guide">
-    <div class="section-head"><span class="eyebrow">${esc(ui.overview)}</span><h2>${esc(ui.overview)}: ${esc(locale[lang].routeNames[key])}</h2><p>${esc(seo.intro)}</p></div>
+    <div class="section-head"><span class="eyebrow">${esc(ui.overview)}</span><h2>${esc(ui.overview)}: ${esc(locale[lang].routeNames[key])}</h2>${key === "vilnius" && vilniusSearchCopy[lang] ? "" : `<p>${esc(seo.intro)}</p>`}</div>
     <div class="route-editorial-grid">
       <article><span class="route-detail-symbol" aria-hidden="true">⌖</span><h3>${esc(ui.pickup)}</h3><p>${esc(seo.pickupText)}</p></article>
       <article id="airport-pickup"><span class="route-detail-symbol" aria-hidden="true">✈</span><h3>${esc(ui.airport)}</h3><p>${esc(seo.airportText)}</p></article>
@@ -1844,8 +1903,9 @@ function geoLocationPage(lang,place) {
   // with the origin's country providing the verified heritage connection.
   const landmarkImage = heritagePhotoFigure(lang,place,"minsk");
 
-  const title=geoText(isAirport?t.airportTitle:t.cityTitle,opts)+" | byComfortLine";
-  const description=geoText(isAirport?t.airportMeta:t.cityMeta,opts);
+  const vnoSummary = place.id === "vno" && vilniusSearchCopy[lang] ? vilniusSummary(lang,true) : null;
+  const title=vnoSummary?.title ?? (geoText(isAirport?t.airportTitle:t.cityTitle,opts)+" | byComfortLine");
+  const description=vnoSummary?.description ?? geoText(isAirport?t.airportMeta:t.cityMeta,opts);
   const h1=geoText(isAirport?t.airportH1:t.cityH1,opts);
   const canonical=base+geoPath(lang,place);
   const parentRoute=routePath(lang,place.parent);
@@ -1886,7 +1946,7 @@ function geoLocationPage(lang,place) {
         </nav>
         <span class="eyebrow light">${esc(t.countryLabels[place.country])} · ${isAirport?esc(t.airport):esc(t.city)}${place.code?" · "+place.code:""}</span>
         <h1>${esc(h1)}</h1>
-        <p>${esc(geoText(isAirport?t.introAirport:t.introCity,opts))}</p>
+        <p>${esc(vnoSummary?.description ?? geoText(isAirport?t.introAirport:t.introCity,opts))}</p>
         <div class="hero-actions">
           <a href="#booking-dialog" data-open-booking class="button primary" aria-haspopup="dialog" aria-controls="booking-dialog">${esc(t.quote)} ${icons.arrow}</a>
           <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a>
@@ -1953,7 +2013,7 @@ function geoLocationPage(lang,place) {
 function routePage(lang, key) {
   const l = locale[lang], r = routes[key];
   const canonical = `${base}${routePath(lang, key)}`;
-  const seo = routeSeo[lang][key];
+  const seo = cityRouteSeo(lang,key);
   const h1 = seo.h1;
   const description = seo.description;
   const faqSchema = { "@type": "FAQPage", mainEntity: [...seo.faqs, ...l.faqs].map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
