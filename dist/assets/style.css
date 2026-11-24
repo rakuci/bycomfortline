@@ -4731,7 +4731,7 @@ body { background:var(--cl-pearl); }
 .booking-extras summary {cursor:pointer;font-size:13px;color:#45615a;}
 .booking-extras label {display:grid;gap:4px;margin-top:10px;font-size:13px;}
 .booking-dialog .booking-telephone {display:flex;align-items:center;min-width:0;}
-.booking-dialog .booking-form .booking-telephone select {width:83px;flex:none;padding:6px;}
+.booking-dialog .booking-form .booking-telephone select {width:83px;flex:0 0 83px;padding:6px;}
 .booking-dialog .booking-form > .booking-consent {display:flex;flex-direction:row;align-items:flex-start;gap:10px;}
 .booking-dialog .booking-consent input[type=checkbox] {width:18px;height:18px;min-height:18px;flex:none;margin:2px 0;padding:0;appearance:auto;}
 .booking-dialog .booking-consent a {text-decoration:underline;}
