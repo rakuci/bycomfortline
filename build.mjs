@@ -1314,6 +1314,50 @@ function longDistancePage(lang){
 }
 
 const passengerReviews = [
+{
+  "author": "Анна Максимович",
+  "date": "2026-09-13",
+  "source": "google",
+  "origin": "kaunas",
+  "text": {
+    "en": "Anna travelled from Minsk to Kaunas and back with Andrei. For the return trip they arranged the pickup in advance, and the car was waiting when she arrived in Kaunas.",
+    "ru": "Анна ездила с Андреем из Минска в Каунас и обратно. Обратную встречу согласовали заранее, и по прибытии в Каунас ей не пришлось ждать машину.",
+    "pl": "Anna jechała z Andriejem z Mińska do Kowna i z powrotem. Odbiór w drodze powrotnej uzgodnili wcześniej, więc po przyjeździe do Kowna samochód już czekał.",
+    "lt": "Ana su Andrejumi keliavo iš Minsko į Kauną ir atgal. Dėl kelionės atgal jie susitarė iš anksto, tad jai atvykus į Kauną automobilis jau laukė.",
+    "lv": "Anna kopā ar Andreju brauca no Minskas uz Kauņu un atpakaļ. Par atpakaļceļu viņi vienojās iepriekš, un, kad viņa ieradās Kauņā, automašīna jau gaidīja.",
+    "de": "Anna fuhr mit Andrei von Minsk nach Kaunas und zurück. Die Abholung für die Rückfahrt war vorher vereinbart. Als sie in Kaunas ankam, wartete der Wagen bereits.",
+    "fr": "Anna a fait l’aller-retour entre Minsk et Kaunas avec Andreï. Ils avaient convenu du rendez-vous pour le retour et la voiture l’attendait à son arrivée à Kaunas."
+  }
+},
+{
+  "author": "Максим Максимович",
+  "date": "2026-09-13",
+  "source": "google",
+  "origin": "kaunas",
+  "text": {
+    "en": "Maksim made the Minsk–Kaunas round trip with his family of four. He appreciated that Andrei stayed in touch, monitored the border queue and helped with their luggage.",
+    "ru": "Максим ездил из Минска в Каунас и обратно с семьёй из четырёх человек. Он отметил, что Андрей оставался на связи, следил за очередью на границе и помогал с багажом.",
+    "pl": "Maksim podróżował z czteroosobową rodziną na trasie Mińsk–Kowno w obie strony. Docenił kontakt z Andriejem, który śledził kolejkę na granicy i pomagał z bagażem.",
+    "lt": "Maksimas su keturių asmenų šeima keliavo iš Minsko į Kauną ir atgal. Jis įvertino tai, kad Andrejus palaikė ryšį, stebėjo eilę pasienyje ir padėjo su bagažu.",
+    "lv": "Maksims ar savu četru cilvēku ģimeni brauca no Minskas uz Kauņu un atpakaļ. Viņš novērtēja to, ka Andrejs uzturēja sakarus, sekoja rindai uz robežas un palīdzēja ar bagāžu.",
+    "de": "Maksim reiste mit seiner vierköpfigen Familie von Minsk nach Kaunas und zurück. Er schätzte, dass Andrei in Kontakt blieb, die Warteschlange an der Grenze im Blick behielt und beim Gepäck half.",
+    "fr": "Maksim a fait l’aller-retour Minsk–Kaunas avec sa famille de quatre personnes. Il a apprécié qu’Andreï reste en contact, surveille la file à la frontière et les aide avec leurs bagages."
+  }
+},
+{
+  "author": "Arnold Petkow",
+  "date": "2026-07-01",
+  "source": "google",
+  "text": {
+    "en": "Arnold recommended the service and said his own border crossing went quickly.",
+    "ru": "Арнольд рекомендовал сервис и написал, что во время его поездки пограничный контроль прошёл быстро.",
+    "pl": "Arnold polecił usługę i napisał, że podczas jego podróży odprawa graniczna przebiegła szybko.",
+    "lt": "Arnoldas rekomendavo šią paslaugą ir rašė, kad per jo kelionę patikra pasienyje vyko greitai.",
+    "lv": "Arnolds ieteica šo pakalpojumu un rakstīja, ka viņa braucienā robežkontrole noritēja ātri.",
+    "de": "Arnold empfahl den Service und berichtete, dass die Grenzkontrolle bei seiner Fahrt schnell ging.",
+    "fr": "Arnold recommande le service et précise que, lors de son trajet, le contrôle à la frontière a été rapide."
+  }
+},
   {id:"1086175411", author:"Mike S", date:"2026-11-20", text:{
     en:"Mike appreciated the punctual service on his business trip.", ru:"Майк отметил пунктуальность во время деловой поездки.", pl:"Mike docenił punktualność podczas podróży służbowej.", lt:"Mike’as įvertino punktualumą per savo verslo kelionę.", lv:"Maiks atzinīgi novērtēja punktualitāti komandējuma laikā.", de:"Mike schätzte die Pünktlichkeit auf seiner Geschäftsreise.", fr:"Mike a apprécié la ponctualité lors de son déplacement professionnel."
   }},
@@ -1330,14 +1374,24 @@ const reviewLabels = {
   lv:["Pasažieru atsauksmes","Lasīt oriģinālu vietnē Tripadvisor"],de:["Erfahrungen unserer Fahrgäste","Original auf Tripadvisor lesen"],
   fr:["Avis des passagers","Lire l’avis original sur Tripadvisor"]
 };
+const googleReviewLabels = {
+  "en": "Reviews on Google Maps",
+  "ru": "Отзывы на Google Картах",
+  "pl": "Opinie w Mapach Google",
+  "lt": "Atsiliepimai „Google“ žemėlapiuose",
+  "lv": "Atsauksmes pakalpojumā Google Maps",
+  "de": "Rezensionen auf Google Maps",
+  "fr": "Avis sur Google Maps"
+};
 function passengerReviewSection(lang,origin) {
   const reviews = origin ? passengerReviews.filter(review => review.origin === origin) : passengerReviews;
   if (!reviews.length) return "";
   const [heading,source] = reviewLabels[lang];
   const dateFormat = new Intl.DateTimeFormat(lang,{year:"numeric",month:"long",day:"numeric",timeZone:"UTC"});
   return `<section class="section" id="passenger-reviews"><h2>${esc(heading)}</h2><div class="geo-detail-grid">${reviews.map(review => {
-    const url = `https://www.tripadvisor.com/ShowUserReviews-g294448-d34505679-r${review.id}-ComfortLine-Minsk_Minsk_Region.html`;
-    return `<article class="geo-detail-card"><h3>${esc(review.author)}</h3><time datetime="${review.date}">${esc(dateFormat.format(new Date(review.date)))}</time><p>${esc(review.text[lang])}</p><a href="${url}">${esc(source)}</a></article>`;
+    const google = review.source === "google";
+    const url = google ? "https://search.google.com/local/reviews?placeid=ChIJ30e6Nk2vHygR5ANPLpgPGnI" : `https://www.tripadvisor.com/ShowUserReviews-g294448-d34505679-r${review.id}-ComfortLine-Minsk_Minsk_Region.html`;
+    return `<article class="geo-detail-card"><h3>${esc(review.author)}</h3><time datetime="${review.date}">${esc(dateFormat.format(new Date(review.date)))}</time><p>${esc(review.text[lang])}</p><a href="${url}">${esc(google ? googleReviewLabels[lang] : source)}</a></article>`;
   }).join("")}</div></section>`;
 }
 
