@@ -654,17 +654,17 @@ function routeCards(lang, current) {
 
 
 const socialChannels = [
-  { id: "whatsapp", label: "WhatsApp", url: "https://wa.me/375291552776" },
-  { id: "viber", label: "Viber", url: "viber://chat?number=%2B375291552776" },
-  { id: "telegram", label: "Telegram", url: "https://t.me/transfer_comfortline" },
-  { id: "instagram", label: "Instagram", url: "https://www.instagram.com/transfer_comfortline/" },
-  { id: "messenger", label: "Facebook Messenger", url: "https://m.me/103816619260365" },
-  { id: "threads", label: "Threads", url: "https://www.threads.com/@transferwarsaw_taxi" },
+  { id: "whatsapp", icon: "whatsapp.svg", label: "WhatsApp", url: "https://wa.me/375291552776" },
+  { id: "viber", icon: "viber.png", label: "Viber", url: "viber://chat?number=%2B375291552776" },
+  { id: "telegram", icon: "telegram.svg", label: "Telegram", url: "https://t.me/transfer_comfortline" },
+  { id: "instagram", icon: "instagram.webp", label: "Instagram", url: "https://www.instagram.com/transfer_comfortline/" },
+  { id: "messenger", icon: "messenger.ico", label: "Facebook Messenger", url: "https://m.me/103816619260365" },
+  { id: "threads", icon: "threads.webp", label: "Threads", url: "https://www.threads.com/@transferwarsaw_taxi" },
 ];
 
 function socialLink(channel, context) {
   const target = channel.url.startsWith("https://") ? ' target="_blank" rel="noopener noreferrer"' : "";
-  return `<a class="social-link ${context} social-${channel.id}" href="${channel.url}"${target} title="${channel.label}" data-name="${channel.label}"><img src="/assets/social/${channel.id}.svg" alt="" aria-hidden="true" width="23" height="23"><span class="social-label">${channel.label}</span></a>`;
+  return `<a class="social-link ${context} social-${channel.id}" href="${channel.url}"${target} aria-label="${channel.label}" title="${channel.label}" data-name="${channel.label}"><img src="/assets/social/official/${channel.icon}" alt="" aria-hidden="true" width="23" height="23"><span class="social-label">${channel.label}</span></a>`;
 }
 
 function messengerButtons() {

@@ -4115,8 +4115,36 @@ body { background:var(--cl-pearl); }
 .booking-dialog-header h2 { font-weight:810; }
 .booking-dialog-close { border-radius:50%; }
 .route-card, .dest-index-card, .geo-directory-card { box-shadow:0 7px 20px rgba(21,45,48,.025); }
-/* Social promotion is deliberately absent from destination browsing. */
-.floating-social { display:none !important; }
+/* Keep contact channels within reach while browsing. */
+.floating-social {
+  left: max(6px, env(safe-area-inset-left));
+  right: auto;
+  background: #fff;
+  border: 1px solid #dce5df;
+}
+.social-link img { filter: none; object-fit: contain; }
+.social-link.social-inline, .social-link.social-floating {
+  background: #fff;
+  color: #173d32;
+}
+.social-link.social-inline { border: 1px solid #dce5df; }
+.social-link.social-floating { width: 44px; height: 44px; }
+.social-floating img { width: 27px; height: 27px; }
+.social-floating::before { left: calc(100% + 12px); right: auto; }
+.social-floating:hover { transform: none; }
+@media (max-width: 760px), (max-height: 430px) {
+  .floating-social {
+    top: auto;
+    bottom: max(6px, env(safe-area-inset-bottom));
+    transform: none;
+    flex-direction: row;
+    gap: 0;
+    padding: 3px;
+  }
+  html { scroll-padding-bottom: 64px; }
+  body { padding-bottom: calc(60px + env(safe-area-inset-bottom)); }
+  .social-floating::before { display: none; }
+}
 
 @media (min-width: 1000px) {
   .hero-home { min-height:650px; }
