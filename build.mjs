@@ -524,10 +524,53 @@ function vilniusSummary(lang, airport = false) {
     answer: `${t.cityLead} ${price} (${byn} BYN) ${t.cityDetails}`,
   };
 }
+const regionalCopy = {
+  en: ["Private transfer", "Departures for Minsk", "Arrival options", "per vehicle, one way. Payment in BYN."],
+  ru: ["Индивидуальный трансфер", "Откуда можно уехать в Минск", "Куда можно приехать", "за автомобиль в одну сторону. Оплата в BYN."],
+  pl: ["Prywatny transfer", "Miejsca wyjazdu do Mińska", "Miejsca docelowe", "za samochód w jedną stronę. Płatność w BYN."],
+  lt: ["Privatus pervežimas", "Išvykimo vietos kelionei į Minską", "Atvykimo vietos", "už automobilį į vieną pusę. Atsiskaitoma BYN."],
+  lv: ["Privāts transfērs", "Izbraukšanas vietas braucienam uz Minsku", "Ierašanās vietas", "par automašīnu vienā virzienā. Samaksa BYN."],
+  de: ["Privattransfer", "Abfahrtsorte für die Fahrt nach Minsk", "Mögliche Ausstiegsorte", "pro Fahrzeug und einfacher Fahrt. Zahlung in BYN."],
+  fr: ["Transfert privé", "Points de départ vers Minsk", "Lieux de dépose", "par véhicule pour un aller simple. Paiement en BYN."],
+};
+const regionalCountries = new Set(Object.values(coreOriginCountries));
+const minskDestination = belarusDestinations.find(dest => dest.id === "minsk");
+const airportCity = {
+  waw:"warsaw", wmi:"warsaw", krk:"krakow", gdn:"gdansk", ktw:"katowice",
+  wro:"wroclaw", poz:"poznan", rze:"rzeszow", luz:"lublin", lcj:"lodz",
+  szz:"szczecin", bzg:"bydgoszcz", vno:"vilnius", kun:"kaunas", plq:"klaipeda", rix:"riga",
+};
+
+function originLabel(lang, origin) {
+  return origin.names[lang] + (origin.code ? ` (${origin.code})` : "");
+}
+
+function regionalFareSeo(lang, origin, fareKey) {
+  const [service, , , unit] = regionalCopy[lang];
+  const euro = new Intl.NumberFormat(lang, {style:"currency", currency:"EUR", maximumFractionDigits:0}).format(routeFares[fareKey][0][0]);
+  const fare = `${fareCopy[lang][2].toLocaleLowerCase(lang)} ${euro}`;
+  const route = `${originLabel(lang,origin)} → ${minskDestination.names[lang]}`;
+  return {title:`${route} · ${service} ${fare} | ComfortLine`, description:`${route}. ${service} ${fare} ${unit}`};
+}
+
+function countryDepartures(lang, origin) {
+  const places = geoPlaces.filter(p => p.country === origin.country);
+  const groups = ["city","airport"].map(type => {
+    const links = places.filter(p => p.type === type).sort((a,b) => a.names[lang].localeCompare(b.names[lang],lang))
+      .map(p => `<a href="${geoPath(lang,p)}">${esc(originLabel(lang,p))}</a>`).join("");
+    const t = geoLocale[lang];
+    return `<h3>${esc(type === "city" ? t.directoryCities : t.directoryAirports)}</h3><div>${links}</div>`;
+  });
+  return `<section class="section geo-related"><h2>${esc(regionalCopy[lang][1])} · ${esc(geoLocale[lang].countryLabels[origin.country])}</h2>${groups.join("")}</section>`;
+}
+
 function cityRouteSeo(lang, key) {
   const seo = routeSeo[lang][key];
   const t = vilniusSearchCopy[lang];
-  if (key !== "vilnius" || !t) return seo;
+  if (key !== "vilnius" || !t) {
+    const origin = coreOriginProfiles.find(p => p.id === key);
+    return origin ? { ...seo, ...regionalFareSeo(lang,origin,key) } : seo;
+  }
   const { title, description, answer } = vilniusSummary(lang);
   return { ...seo, title, description, intro: description, pickupText: t.stationPickup,
     faqs: seo.faqs.map(([q, a]) => [q, q === t.priceQuestion ? answer : a]) };
@@ -1574,7 +1617,10 @@ function transferPairPage(lang,origin,dest){
  const values={from,to:short,dest:short};
  const canonical=base+transferPairPath(lang,origin,dest);
  const title=localeWords(ui.routeTitle,values)+" | byComfortLine";
- const description=localeWords(ui.routeMeta,values);
+ const regional = regionalCountries.has(origin.country);
+ const description = regional
+   ? `${localeWords(ui.routeTitle,{...values,from:originLabel(lang,origin)})}. ${regionalCopy[lang][2]}: ${dest.arrivalOptions[lang]}.`
+   : localeWords(ui.routeMeta,values);
  const h1=localeWords(ui.routeH1,values);
  const facts=origin.type==="airport"?origin.facts[lang]:origin.pickup[lang];
  const originAirport=origin.type==="airport";
@@ -1620,7 +1666,8 @@ function transferPairPage(lang,origin,dest){
         <span class="dest-card-eyebrow">${originAirport?esc(ui.airportCode):esc(ui.fromLabel)}</span>
         <h2>${esc(localeWords(ui.originTitle,values))}</h2>
         <p>${esc(facts)}</p><p>${esc(originAirport?ui.airportAdvice:ui.cityAdvice)}</p>
-        ${originAirport?`<a href="${geoPath(lang,origin)}">${esc(ui.compare)} ↗</a>`:""}
+        ${regional ? `<a href="${destinationRouteUrl(lang,origin,minskDestination)}">${esc(originLabel(lang,origin))} → ${esc(minskDestination.names[lang])}</a>`
+          : originAirport ? `<a href="${geoPath(lang,origin)}">${esc(ui.compare)} ↗</a>` : ""}
       </article>
       <article><span class="dest-card-eyebrow">${esc(ui.toLabel)}</span>
         <h2>${esc(localeWords(ui.destTitle,values))}</h2>
@@ -1903,16 +1950,21 @@ function geoLocationPage(lang,place) {
   // with the origin's country providing the verified heritage connection.
   const landmarkImage = heritagePhotoFigure(lang,place,"minsk");
 
-  const vnoSummary = place.id === "vno" && vilniusSearchCopy[lang] ? vilniusSummary(lang,true) : null;
-  const title=vnoSummary?.title ?? (geoText(isAirport?t.airportTitle:t.cityTitle,opts)+" | byComfortLine");
-  const description=vnoSummary?.description ?? geoText(isAirport?t.airportMeta:t.cityMeta,opts);
+  const regional = regionalCountries.has(place.country);
+  const locationFact = (isAirport ? place.facts : place.pickup)[lang];
+  const fareKey = airportFareRoutes[place.id];
+  const fareSummary = place.id === "vno" && vilniusSearchCopy[lang] ? vilniusSummary(lang,true)
+    : fareKey ? regionalFareSeo(lang,place,fareKey) : null;
+  const title=fareSummary?.title ?? (geoText(isAirport?t.airportTitle:t.cityTitle,opts)+" | byComfortLine");
+  const description=fareSummary?.description ?? (regional ? `${originLabel(lang,place)} → ${minskDestination.names[lang]}. ${locationFact}` : geoText(isAirport?t.airportMeta:t.cityMeta,opts));
   const h1=geoText(isAirport?t.airportH1:t.cityH1,opts);
   const canonical=base+geoPath(lang,place);
   const parentRoute=routePath(lang,place.parent);
   const related=geoPlaces.filter(item=>item.country===place.country&&item.id!==place.id);
-  const countyLinks=related.sort((a,b)=>a.type===b.type? a.names[lang].localeCompare(b.names[lang]) : a.type==="airport"?-1:1).slice(0,8)
+  const sameArea = item => Number(regional && (airportCity[item.id] === place.id || airportCity[place.id] === item.id));
+  const countyLinks=related.sort((a,b)=>sameArea(b)-sameArea(a) || (a.type===b.type? a.names[lang].localeCompare(b.names[lang],lang) : a.type==="airport"?-1:1)).slice(0,8)
     .map(item=>`<a href="${geoPath(lang,item)}">${esc(item.names[lang])}${item.code?` · ${item.code}`:""} ↗</a>`).join("");
-  const locationFact=(place.type==="airport"?place.facts:place.pickup)[lang];
+  
   const applicableAdvice=routeOfficialSources[place.parent] || [];
   const adviceLinks=applicableAdvice.map(([text,url])=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(text)} ↗</a>`).join("");
   const official=isAirport?`<a class="geo-official-link" target="_blank" rel="noopener noreferrer" href="${esc(place.official)}">${esc(t.official)} ↗</a>`:"";
@@ -1946,7 +1998,7 @@ function geoLocationPage(lang,place) {
         </nav>
         <span class="eyebrow light">${esc(t.countryLabels[place.country])} · ${isAirport?esc(t.airport):esc(t.city)}${place.code?" · "+place.code:""}</span>
         <h1>${esc(h1)}</h1>
-        <p>${esc(vnoSummary?.description ?? geoText(isAirport?t.introAirport:t.introCity,opts))}</p>
+        <p>${esc(fareSummary?.description ?? geoText(isAirport?t.introAirport:t.introCity,opts))}</p>
         <div class="hero-actions">
           <a href="#booking-dialog" data-open-booking class="button primary" aria-haspopup="dialog" aria-controls="booking-dialog">${esc(t.quote)} ${icons.arrow}</a>
           <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a>
@@ -1995,7 +2047,7 @@ function geoLocationPage(lang,place) {
       <section class="geo-related" aria-label="${esc(t.localLinks)}">
         <h2>${esc(t.localLinks)}</h2>
         <div>${countyLinks}</div>
-        <p><a href="${parentRoute}">${esc(t.backHub)} ↗</a>
+        <p><a href="${parentRoute}">${esc(regional ? l.routeNames[place.parent] : t.backHub)} ↗</a>
           <a href="${geoIndexPath(lang,"airport")}">${esc(t.browseAirports)} ↗</a>
           <a href="${geoIndexPath(lang,"city")}">${esc(t.browseCities)} ↗</a></p>
       </section>
@@ -2037,6 +2089,7 @@ function routePage(lang, key) {
     </section>
     <section class="facts-section"><article><span>${icons.pin}</span><div><small>${esc(l.facts.distance)}</small><strong>${r.distance}</strong></div></article><article><span class="clock">◷</span><div><small>${esc(l.facts.time)}</small><strong>${r.time}</strong><em>${esc(l.facts.note)}</em></div></article><article><span class="plane">✈</span><div><small>${esc(l.facts.airport)}</small><strong>${r.airport}</strong></div></article></section>
     ${routeEditorial(lang, key)}
+    ${countryDepartures(lang,origin)}
     ${destinationCardList(lang,coreOriginProfiles.find(origin=>origin.id===key))}
     ${returnTripInfo(lang,key)}
     ${longDistanceTeaser(lang)}
