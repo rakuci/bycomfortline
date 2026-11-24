@@ -147,11 +147,11 @@
     </div>
   </main><footer id="operator-info"><div class="footer-grid"><div><a class="brand footer-brand" href="/ru/"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>Индивидуальные трансферы между Беларусью и Европой. Работаем с 2015 года.</p></div><div><strong>Контакты</strong><a href="tel:+375291552776">+375 29 155 27 76</a><a href="mailto:info@comfortline.by">info@comfortline.by</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>Маршруты</strong><a href="/ru/vilnius-minsk-transfer/">Вильнюс — Минск</a><a href="/ru/warsaw-minsk-transfer/">Варшава — Минск</a><a href="/ru/riga-minsk-transfer/">Рига — Минск</a><a href="/ru/transfery-iz-aeroportov/">Все аэропорты</a><a href="/ru/transfery-iz-gorodov/">Все города</a><a href="/ru/goroda-belarusi/">Все направления</a><a href="/ru/dalnie-transfery-ot-300-km/">Дальние поездки</a><a href="/ru/travel-guide/">Путеводитель</a></div></div><div class="legal"><span>ИП Мурашко Андрей Антонович · лицензия № 02190/1-85358 · УНП 193255422</span><span>© 2026 ComfortLine. Все права защищены.</span></div></footer><dialog class="booking-dialog" id="booking-dialog" aria-labelledby="booking-dialog-title">
     <div class="booking-dialog-shell">
-      <div class="booking-dialog-header"><div><span class="eyebrow">Ваша поездка — ваши условия</span>
-        <h2 id="booking-dialog-title">Оформление заявки на трансфер</h2><p>Маршрут, детали поездки и контакты — в одной форме.</p></div>
+      <div class="booking-dialog-header"><h2 id="booking-dialog-title">Оформление трансфера</h2>
         <button type="button" class="booking-dialog-close" data-close-booking aria-label="Закрыть окно бронирования"><span aria-hidden="true">×</span></button>
       </div>
       <form class="booking-form" data-lang="ru" data-email="info@comfortline.by" data-sending="Отправляем заявку…" data-send-error="Не удалось отправить заявку. Попробуйте ещё раз или напишите в WhatsApp. Введённые данные сохранены в форме." data-storage-success="Заявка отправлена по email. Номер для связи: " data-invalid-phone="Укажите настоящий контактный телефон: от 6 до 16 цифр, например +375 29 155 27 76." data-invalid-route="Выберите разные пункты отправления и прибытия." data-invalid-form="Проверьте данные заявки и попробуйте ещё раз." data-rate-limited="Слишком много запросов. Подождите и повторите попытку или напишите в WhatsApp." data-service-unavailable="Сервис отправки писем временно недоступен. Повторите попытку позже или напишите в WhatsApp." data-network-error="Не удалось подключиться к сервису бронирования. Проверьте интернет и повторите попытку." data-capacity-error="В выбранной машине не более {seats} пассажирских мест, а у вас {people}. Выберите более вместительное авто или оставьте модель на усмотрение менеджера." action="/api/booking" method="post">
+        <h3 class="full">Маршрут</h3>
         <div class="location-form-field "><label for="details-fromPreset-ru">Откуда</label><div class="location-control" data-location-picker data-location-mode="from">
     <span class="location-leading-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
     <input id="details-fromPreset-ru" type="text" name="fromPreset" value="Аэропорт Щецин-Голенюв"
@@ -174,9 +174,7 @@
     </button>
     <div class="location-suggestions" role="listbox" id="details-to-ru-suggestions" aria-label="Поиск города, аэропорта или ввод адреса" hidden></div>
   </div></div>
-        <label><span>Точный адрес подачи</span><input name="pickupAddress" placeholder="Город, аэропорт или адрес"></label>
-        <label><span>Точный адрес прибытия (любой город)</span><input name="dropAddress" placeholder="Улица, дом, город и страна"></label>
-        <label><span>Дата и время поездки</span><input type="datetime-local" name="date" required></label>
+        <label class="full"><span>Дата поездки</span><input type="date" name="date" required></label>
         <div class="passenger-field" data-passenger-picker data-language="ru"
       data-passenger-one="пассажир" data-passenger-many="пассажиров"
       data-max-warning="Максимум 8 пассажиров с учётом младенцев.">
@@ -237,6 +235,7 @@
     <input type="hidden" name="luggage" value="1">
     <input type="hidden" name="carClass" value="any">
   </div>
+        <details class="booking-extras full"><summary>Дополнительные пожелания</summary>
         <label class="vehicle-model-field full"><span>Желаемый автомобиль (необязательно)</span>
           <select name="vehicleModel" aria-describedby="vehicle-choice-note">
             <option value="">Любой подходящий автомобиль — посоветует менеджер</option>
@@ -246,10 +245,13 @@
         </label>
         <label><span>Детские кресла</span><input type="number" min="0" max="8" name="childSeats" value="0"></label>
         <label><span>Номер рейса (если аэропорт)</span><input name="flight" placeholder="VNO / WAW / WMI / RIX"></label>
-        <label><span>Ваше имя</span><input name="customerName" autocomplete="name" required></label>
-        <label><span>Телефон для связи</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="50" placeholder="+375 …" required></label>
-        <label class="full"><span>Email (необязательно)</span><input type="email" name="customerEmail" autocomplete="email"></label>
-        <label class="full"><span>Пожелания к поездке</span><textarea name="notes" rows="3"></textarea></label>
+        </details>
+        <div class="booking-contact-intro full"><h3>Контактные данные</h3><p>Оставьте контакты — менеджер свяжется с вами для подтверждения поездки.</p></div>
+        <input class="full" name="customerName" autocomplete="name" placeholder="Ваше имя" aria-label="Ваше имя" required>
+        <input type="email" name="customerEmail" autocomplete="email" placeholder="Email (необязательно)" aria-label="Email (необязательно)">
+        <div class="booking-telephone"><select data-dial-code aria-label="Код страны"><option value="+375">BY +375</option><option value="+370">LT +370</option><option value="+48">PL +48</option><option value="+371">LV +371</option><option value="+43">AT +43</option><option value="+994">AZ +994</option><option value="+32">BE +32</option><option value="+420">CZ +420</option><option value="+49">DE +49</option><option value="+45">DK +45</option><option value="+372">EE +372</option><option value="+34">ES +34</option><option value="+358">FI +358</option><option value="+33">FR +33</option><option value="+44">GB +44</option><option value="+995">GE +995</option><option value="+30">GR +30</option><option value="+385">HR +385</option><option value="+36">HU +36</option><option value="+353">IE +353</option><option value="+972">IL +972</option><option value="+39">IT +39</option><option value="+996">KG +996</option><option value="+7">KZ +7</option><option value="+373">MD +373</option><option value="+31">NL +31</option><option value="+47">NO +47</option><option value="+351">PT +351</option><option value="+40">RO +40</option><option value="+7">RU +7</option><option value="+46">SE +46</option><option value="+421">SK +421</option><option value="+90">TR +90</option><option value="+380">UA +380</option><option value="+1">US +1</option><option value="+998">UZ +998</option></select><input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="50" placeholder="Телефон для связи" aria-label="Телефон для связи" required></div>
+        <textarea class="full" name="notes" rows="2" placeholder="Пожелания к поездке" aria-label="Пожелания к поездке"></textarea>
+        <label class="booking-consent full"><input type="checkbox" required><span>Я согласен с <a href="https://comfortline.by/privacy" target="_blank" rel="noopener">политикой конфиденциальности</a> и <a href="https://comfortline.by/terms" target="_blank" rel="noopener">публичной офертой</a></span></label>
         <div class="booking-spam-trap" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
         <button type="submit" class="booking-prepare">Отправить заявку <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         <p class="booking-status" role="status" aria-live="polite" hidden></p>
