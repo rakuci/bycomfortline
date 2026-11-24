@@ -4039,10 +4039,10 @@ body { background:var(--cl-pearl); }
 .location-control > .location-clear,
 .quick-booking .location-control > .location-clear,
 .booking-dialog .booking-form .location-control > .location-clear {
-  opacity:0;
-  pointer-events:none;
-  background:transparent;
-  color:#798986;
+  opacity:1;
+  pointer-events:auto;
+  background:#e5ece8;
+  color:#36524d;
   transition:opacity .15s ease,color .15s ease;
 }
 .location-control:focus-within > .location-clear:not([hidden]) {
@@ -4697,3 +4697,17 @@ body { background:var(--cl-pearl); }
 .route-fares th:first-child { text-align: start; }
 .route-fares td { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .route-fares p { max-width: 48rem; line-height: 1.6; }
+
+.location-control > button.location-browse,
+.quick-booking .location-control > button.location-browse,
+.booking-dialog .booking-form .location-control > button.location-browse {
+  display:inline-grid; place-items:center; flex:0 0 32px; width:32px; min-width:32px;
+  height:36px; min-height:36px; margin:0 0 0 3px; padding:0; border:0;
+  border-radius:7px; background:transparent; color:#36524d; box-shadow:none; cursor:pointer;
+}
+.location-control > .location-browse::after {
+  content:""; width:8px; height:8px; border:solid currentColor; border-width:0 2px 2px 0;
+  transform:translateY(-2px) rotate(45deg);
+}
+.location-control.is-suggesting > .location-browse::after { transform:translateY(2px) rotate(225deg); }
+.location-control > .location-browse:focus-visible { outline:2px solid #14836b; }
