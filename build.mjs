@@ -664,11 +664,11 @@ const socialChannels = [
 
 function socialLink(channel, context) {
   const target = channel.url.startsWith("https://") ? ' target="_blank" rel="noopener noreferrer"' : "";
-  return `<a class="social-link ${context} social-${channel.id}" href="${channel.url}"${target} aria-label="ComfortLine on ${channel.label}" title="${channel.label}" data-name="${channel.label}"><img src="/assets/social/${channel.id}.svg" alt="" aria-hidden="true" width="23" height="23"><span class="social-label">${channel.label}</span></a>`;
+  return `<a class="social-link ${context} social-${channel.id}" href="${channel.url}"${target} title="${channel.label}" data-name="${channel.label}"><img src="/assets/social/${channel.id}.svg" alt="" aria-hidden="true" width="23" height="23"><span class="social-label">${channel.label}</span></a>`;
 }
 
 function messengerButtons() {
-  return `<div class="messenger-contact" aria-label="ComfortLine social and messaging channels"><strong class="messenger-heading">ComfortLine · Social</strong><div class="messenger-buttons">${socialChannels.map(channel => socialLink(channel, "social-inline")).join("")}</div></div>`;
+  return `<div class="messenger-buttons">${socialChannels.map(channel => socialLink(channel, "social-inline")).join("")}</div>`;
 }
 
 const bookingLabels = {
@@ -1011,7 +1011,7 @@ function faq(l) {
 }
 
 function footer(l) {
-  return `<footer id="operator-info"><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a></div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}<a href="${geoIndexPath(l.code,"airport")}">${esc(geoLocale[l.code].browseAirports)}</a><a href="${geoIndexPath(l.code,"city")}">${esc(geoLocale[l.code].browseCities)}</a><a href="${destinationIndexPath(l.code)}">${esc(destinationLocale[l.code].browse)}</a><a href="${longDistancePath(l.code)}">${esc(l.nav.longDistance)}</a><a href="${guidePath(l.code)}">${esc(l.nav.guide)}</a></div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
+  return `<footer id="operator-info"><div class="footer-grid"><div><a class="brand footer-brand" href="${l.home}"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a><p>${esc(l.footerText)}</p></div><div><strong>${esc(l.nav.contact)}</strong><a href="tel:${phoneHref}">${phoneDisplay}</a><a href="mailto:${email}">${email}</a><a href="https://comfortline.by" rel="noopener">comfortline.by</a>${messengerButtons()}</div><div><strong>${esc(l.nav.routes)}</strong>${Object.keys(routes).map(key => `<a href="${routePath(l.code, key)}">${esc(l.routeNames[key])}</a>`).join("")}<a href="${geoIndexPath(l.code,"airport")}">${esc(geoLocale[l.code].browseAirports)}</a><a href="${geoIndexPath(l.code,"city")}">${esc(geoLocale[l.code].browseCities)}</a><a href="${destinationIndexPath(l.code)}">${esc(destinationLocale[l.code].browse)}</a><a href="${longDistancePath(l.code)}">${esc(l.nav.longDistance)}</a><a href="${guidePath(l.code)}">${esc(l.nav.guide)}</a></div></div><div class="legal"><span>${esc(l.license)}</span><span>© 2026 ComfortLine. ${esc(l.rights)}</span></div></footer>`;
 }
 
 function floatingContact() {
@@ -1552,6 +1552,7 @@ function homeBookingTransparency(lang) {
       <a href="tel:${phoneHref}" class="booking-confidence-link">${icons.phone}${phoneDisplay}</a>
       <a href="mailto:${email}" class="booking-confidence-link">${esc(email)}</a>
     </div>
+    ${messengerButtons()}
   </section>`;
 }
 
