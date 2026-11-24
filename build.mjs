@@ -514,6 +514,30 @@ const vilniusSearchCopy = {
   }
 };
 
+const vilniusPickupDetails = {
+  ...vilniusSearchCopy,
+  pl: {
+    stationPickup: "Dworzec kolejowy w Wilnie (Geležinkelio g. 16) i dworzec autobusowy (Sodų g. 22) znajdują się blisko siebie. Podaj nazwę dworca i godzinę przyjazdu, aby uzgodnić miejsce odbioru.",
+    guideNote: "Jeśli zostawiasz samochód na Litwie, sprawdź możliwości dojazdu do Mińska.",
+    cityTitle: "Transfer Wilno – Mińsk", airportTitle: "Lotnisko w Wilnie (VNO) – Mińsk"
+  },
+  lv: {
+    stationPickup: "Viļņas dzelzceļa stacija (Geležinkelio g. 16) un autoosta (Sodų g. 22) atrodas blakus. Norādiet, kurā stacijā un cikos ieradīsieties, lai vienotos par satikšanās vietu.",
+    guideNote: "Ja automašīnu atstājat Lietuvā, apskatiet brauciena iespējas uz Minsku.",
+    cityTitle: "Transfērs Viļņa–Minska", airportTitle: "Viļņas lidosta (VNO) – Minska"
+  },
+  de: {
+    stationPickup: "Der Bahnhof von Vilnius (Geležinkelio g. 16) und der Busbahnhof (Sodų g. 22) liegen nahe beieinander. Geben Sie bei der Buchung den Bahnhof und die Ankunftszeit an, damit Sie den Treffpunkt mit dem Fahrer vereinbaren können.",
+    guideNote: "Wenn Sie Ihr Auto in Litauen lassen, finden Sie hier Abholmöglichkeiten für die Weiterfahrt nach Minsk.",
+    cityTitle: "Privattransfer von Vilnius nach Minsk", airportTitle: "Flughafen Vilnius (VNO) nach Minsk"
+  },
+  fr: {
+    stationPickup: "La gare ferroviaire de Vilnius (Geležinkelio g. 16) et la gare routière (Sodų g. 22) sont proches. Précisez votre gare et votre heure d’arrivée pour convenir du lieu de rendez-vous avec le chauffeur.",
+    guideNote: "Si vous laissez votre voiture en Lituanie, consultez les possibilités de transfert vers Minsk.",
+    cityTitle: "Transfert de Vilnius à Minsk", airportTitle: "De l’aéroport de Vilnius (VNO) à Minsk"
+  },
+};
+
 function vilniusSummary(lang, airport = false) {
   const t = vilniusSearchCopy[lang];
   const [eur, byn] = routeFares.vilnius[0];
@@ -569,7 +593,9 @@ function cityRouteSeo(lang, key) {
   const t = vilniusSearchCopy[lang];
   if (key !== "vilnius" || !t) {
     const origin = coreOriginProfiles.find(p => p.id === key);
-    return origin ? { ...seo, ...regionalFareSeo(lang,origin,key) } : seo;
+    if (!origin) return seo;
+    const summary = regionalFareSeo(lang,origin,key);
+    return { ...seo, ...summary, ...(key === "vilnius" ? {pickupText:vilniusPickupDetails[lang].stationPickup} : {}) };
   }
   const { title, description, answer } = vilniusSummary(lang);
   return { ...seo, title, description, intro: description, pickupText: t.stationPickup,
@@ -975,7 +1001,7 @@ function carStoryPage(lang){
     ${sections}
     <section class="guide-article-checklist" aria-label="${esc(c.checklist)}"><h2>${esc(c.checklist)}</h2><ul>${checklist}</ul></section>
     <section class="guide-article-sources" id="official-sources" aria-label="${esc(c.sources)}"><h2>${esc(c.sources)}</h2><ol>${sources}</ol></section>
-    ${vilniusSearchCopy[lang] ? `<aside><p>${esc(vilniusSearchCopy[lang].guideNote)}</p><p><a href="${routePath(lang,"vilnius")}">${esc(vilniusSearchCopy[lang].cityTitle)}</a> · <a href="${geoPath(lang,"vno")}">${esc(vilniusSearchCopy[lang].airportTitle)}</a></p></aside>` : ""}
+    <aside><p>${esc(vilniusPickupDetails[lang].guideNote)}</p><p><a href="${routePath(lang,"vilnius")}">${esc(vilniusPickupDetails[lang].cityTitle)}</a> · <a href="${geoPath(lang,"vno")}">${esc(vilniusPickupDetails[lang].airportTitle)}</a></p></aside>
     <div class="guide-article-back"><a href="${guidePath(lang)}">← ${esc(c.back)}</a></div>
   </div></article></main>${footer(l)}`;
   const schema={"@context":"https://schema.org","@graph":[businessSchema(lang,canonical),
