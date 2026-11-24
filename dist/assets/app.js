@@ -102,12 +102,9 @@
       // must be discoverable as either the departure or the destination.
       const pool = entries;
       if (!term) {
-        return pool.filter(item => item.popular).sort((a,b) => {
-          const popular = mode === "to"
-            ? ["minsk","grodno","brest","msq","lida","vitebsk"]
-            : ["warsaw","vilnius","riga","waw","vno","rix"];
-          return popular.indexOf(a.id)-popular.indexOf(b.id);
-        }).slice(0,4);
+        return [...pool].sort((a,b) => Number(b.mode === mode) - Number(a.mode === mode)
+          || Number(b.popular) - Number(a.popular)
+          || a.label.localeCompare(b.label, document.documentElement.lang));
       }
       const scored = pool.map(item => {
         const label = normalize(item.label);
@@ -121,7 +118,7 @@
       }).filter(result => result.score < 99);
       scored.sort((a,b) => a.score-b.score || Number(b.item.popular)-Number(a.item.popular)
         || a.item.label.localeCompare(b.item.label));
-      return scored.slice(0,6).map(result=>result.item);
+      return scored.map(result=>result.item);
     };
   
     function updatePosition(picker) {
@@ -132,9 +129,9 @@
       const viewport = window.visualViewport;
       const topLimit = viewport?.offsetTop || 0;
       const bottomLimit = topLimit+(viewport?.height || window.innerHeight);
-      const rect = input.getBoundingClientRect();
-      const width = Math.min(Math.max(270,rect.width+18),window.innerWidth-24);
-      const left = Math.max(12,Math.min(rect.left-9,window.innerWidth-width-12));
+      const rect = picker.getBoundingClientRect();
+      const width = Math.min(Math.max(270,rect.width),window.innerWidth-24);
+      const left = Math.max(12,Math.min(rect.left,window.innerWidth-width-12));
       const below = bottomLimit-rect.bottom-15;
       const above = rect.top-topLimit-15;
       const upward = below < 205 && above > below;
@@ -197,17 +194,15 @@
       const input=picker.querySelector("input");
       const panel=picker.querySelector(".location-suggestions");
       const mode=picker.dataset.locationMode;
-      if (!query.trim()) {
-        closePicker(picker);
-        return;
-      }
+
+      picker._fullList = !query.trim();
       const matches=candidates(mode,query);
       picker._suggestions=matches;
       picker._activeIndex=-1;
       input.removeAttribute("aria-activedescendant");
       panel.replaceChildren();
   
-      // Never open a generic destination dropdown; only show actual type-ahead results.
+      panel.scrollTop = 0;
       if (!matches.length && normalize(query).length < 3) {
         closePicker(picker);
         return;
@@ -215,6 +210,7 @@
       matches.forEach((item,i)=>{
         const opt=document.createElement("button");
         opt.type="button";
+        opt.tabIndex=-1;
         opt.className="location-suggestion";
         opt.id=panel.id+"-option-"+i;
         opt.setAttribute("role","option");
@@ -244,6 +240,7 @@
       if (customText.length >= 3 && !exact) {
         const custom=document.createElement("button");
         custom.type="button";
+        custom.tabIndex=-1;
         custom.id=panel.id+"-option-custom";
         custom.className="location-suggestion location-suggestion-custom";
         custom.setAttribute("role","option");
@@ -273,11 +270,34 @@
     pickers.forEach((picker)=>{
       const input=picker.querySelector("input");
       const clear=picker.querySelector(".location-clear");
+      const labels = {
+        en:["Clear","Show all locations"],ru:["Очистить","Показать все места"],pl:["Wyczyść","Pokaż wszystkie miejsca"],
+        lt:["Išvalyti","Rodyti visas vietas"],lv:["Notīrīt","Rādīt visas vietas"],de:["Löschen","Alle Orte anzeigen"],fr:["Effacer","Afficher tous les lieux"]
+      }[document.documentElement.lang] || ["Clear","Show all locations"];
       clear.hidden=!input.value.trim();
+      clear.title=labels[0];
+      clear.setAttribute("aria-label",labels[0]+" · "+input.getAttribute("aria-label"));
+      const browse=document.createElement("button");
+      browse.type="button";
+      browse.className="location-browse";
+      browse.title=labels[1];
+      browse.setAttribute("aria-label",labels[1]+" · "+input.getAttribute("aria-label"));
+      browse.setAttribute("aria-haspopup","listbox");
+      browse.setAttribute("aria-controls",input.getAttribute("aria-controls"));
+      clear.after(browse);
+      browse.addEventListener("pointerdown",event=>event.preventDefault());
+      browse.addEventListener("click",()=>{
+        const close=activePicker===picker && picker._fullList;
+        input.focus({preventScroll:true});
+        if (close) closePicker(picker);
+        else render(picker,"");
+      });
+      input.addEventListener("click",()=>{if (activePicker!==picker) render(picker,"");});
+      input.addEventListener("change",()=>{clear.hidden=!input.value.trim();});
       input.addEventListener("focus",()=>{
         setLocationEditing();
         if (input.value) input.select();
-        closePicker(picker);
+        render(picker,"");
       });
       input.addEventListener("blur",()=>{
         closePicker(picker);
@@ -287,17 +307,13 @@
       input.addEventListener("input",()=>{
         clear.hidden=!input.value.trim();
         setLocationEditing();
-        if (input.value.trim()) render(picker,input.value);
-        else closePicker(picker);
+        render(picker,input.value);
       });
       input.addEventListener("keydown",(event)=>{
         if (event.key==="ArrowDown" || event.key==="ArrowUp"){
           event.preventDefault();
           if (picker!==activePicker) {
-            // Arrow keys move within suggestions created by typing; an empty
-            // field never invokes a classic dropdown of all destinations.
-            if (!input.value.trim()) return;
-            render(picker,input.value);
+            render(picker,"");
           }
           const total=picker.querySelectorAll(".location-suggestions [role=option]").length;
           if (total) activate(picker,event.key==="ArrowDown"?picker._activeIndex+1:picker._activeIndex===-1?total-1:picker._activeIndex-1);
@@ -315,6 +331,7 @@
           }
         } else if (event.key==="Escape" && picker===activePicker) {
           event.preventDefault();
+          event.stopPropagation();
           closePicker(picker);
         } else if (event.key==="Tab") closePicker(picker);
       });
@@ -322,7 +339,7 @@
         input.value="";
         input.dispatchEvent(new Event("change",{bubbles:true}));
         input.focus({preventScroll:true});
-        closePicker(picker);
+        render(picker,"");
         clear.hidden=true;
       });
     });
@@ -536,7 +553,10 @@
       for (const name of ["fromPreset", "to"]) {
         const source = getControl(quick, name);
         const target = getControl(details, name);
-        if (source && target) target.value = source.value;
+        if (source && target) {
+          target.value = source.value;
+          target.dispatchEvent(new Event("change",{bubbles:true}));
+        }
       }
       const detailedPicker = details.querySelector("[data-passenger-picker]");
       if (detailedPicker) updatePassengerPicker(detailedPicker);
