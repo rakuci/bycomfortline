@@ -19,7 +19,7 @@ body{background:var(--atlas-paper)}
 .atlas-start{left:16%;bottom:77%;padding-bottom:12px}.atlas-end{right:16%;top:77%;padding-top:12px;text-align:right}
 .atlas-plate span:after{content:"";position:absolute;width:12px;height:12px;box-sizing:border-box;border:2px solid #ffe4bc;background:#ba895e;border-radius:50%}
 .atlas-start:after{left:-6px;bottom:-6px}.atlas-end:after{right:-6px;top:-6px}
-.atlas-shell>.quick-booking{position:relative;grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(155px,.7fr);width:100%;max-width:none;margin:0;padding:20px 0 24px;gap:18px;border:0;border-top:1px solid var(--atlas-rule);border-radius:0;background:var(--atlas-paper);box-shadow:none;align-items:end}
+.atlas-shell>.quick-booking{position:relative;z-index:5;grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(155px,.7fr);width:100%;max-width:none;margin:0;padding:20px 0 24px;gap:18px;border:0;border-top:1px solid var(--atlas-rule);border-radius:0;background:var(--atlas-paper);box-shadow:none;align-items:end}
 .atlas-shell>.quick-booking>*{grid-column:auto;padding:0;border:0}
 .atlas-shell .quick-booking .location-control{border:1px solid #bbc3b6;border-radius:5px;background:#fbf9f2}
 .atlas-shell .quick-booking .quick-submit{border-radius:4px;color:white;background:#194638;min-height:55px}
