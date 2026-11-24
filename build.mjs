@@ -1395,16 +1395,18 @@ function passengerReviewSection(lang,origin) {
   }).join("")}</div></section>`;
 }
 
-// Schematic route plates use a shared contour print and country-specific linework.
-function atlasPlate(lang, origin, destination = minskDestination) {
-  const paths = {
-    LT:"M16 23 L32 30 L41 49 L58 53 L70 68 L84 77",
-    PL:"M16 23 L25 43 L44 43 L60 66 L73 66 L84 77",
-    LV:"M16 23 L35 24 L46 47 L62 57 L64 66 L84 77"
-  };
-  const line = paths[origin.country] || "M16 23 L31 40 L52 47 L67 68 L84 77";
-  return `<div class="atlas-plate" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false"><path d="${line}"/></svg>
-    <span class="atlas-start">${esc(origin.code || origin.names[lang])}</span><span class="atlas-end">${esc(destination.id === "msq" ? "MSQ" : destSeoName(destination,lang))}</span></div>`;
+function atlasPlate(lang, origin) {
+  const city = airportCity[origin.id] || ({ber:"berlin",cdg:"paris",ory:"paris"})[origin.id] || origin.id;
+  const winter = city === "vilnius";
+  const photo = winter ? {
+    labels: {en:"Christmas lights on Cathedral Square in Vilnius",ru:"Рождественские огни на Кафедральной площади Вильнюса",lt:"Kalėdų šviesos Vilniaus Katedros aikštėje",lv:"Ziemassvētku gaismas Viļņas Katedrāles laukumā",pl:"Świąteczne światła na placu Katedralnym w Wilnie",de:"Weihnachtslichter auf dem Domplatz in Vilnius",fr:"Illuminations de Noël sur la place de la Cathédrale à Vilnius"},
+    credit:"Guillaume Speurt", license:"CC BY-SA 2.0", licenseUrl:"https://creativecommons.org/licenses/by-sa/2.0/",
+    sourcePage:"https://commons.wikimedia.org/wiki/File:The_Vilnius_Cathedral_square_at_night_in_winter.jpg"
+  } : curatedCityPhotos[city];
+  const src = winter ? "/assets/vilnius-cathedral-christmas.webp" : "/assets/cities/"+photo.base+"-1200.webp";
+  const srcset = winter ? "" : ` srcset="/assets/cities/${esc(photo.base)}-640.webp 640w, ${esc(src)} 1200w" sizes="(max-width:760px) 92vw, 48vw"`;
+  return `<figure class="atlas-landmark"><img src="${esc(src)}"${srcset} alt="${esc(photo.labels[lang])}" fetchpriority="high" decoding="async">
+    <figcaption><strong>${esc(photo.labels[lang])}</strong><small><a href="${esc(photo.sourcePage)}">${esc(photo.credit)}</a> · <a href="${esc(photo.licenseUrl)}" rel="license">${esc(photo.license)}</a> · WebP</small></figcaption></figure>`;
 }
 
 function hubPage(lang) {
@@ -1804,7 +1806,7 @@ function transferPairPage(lang,origin,dest){
       <a href="#booking-dialog" data-open-booking class="button primary" aria-controls="booking-dialog" aria-haspopup="dialog">${esc(ui.booking)} ${icons.arrow}</a>
       <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a>
     </div>
-    </div>${atlasPlate(lang,origin,dest)}${quickBooking(lang,origin.parent,from,to)}
+    </div>${atlasPlate(lang,origin)}${quickBooking(lang,origin.parent,from,to)}
   </div></section>
   <section class="section dest-pair-main" id="service">
     ${heritagePhoto?heritagePhotoFigure(lang,origin,dest.id):relevantPhoto?cityPhotoFigure(lang,relevantPhoto):""}
