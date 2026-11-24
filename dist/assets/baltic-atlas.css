@@ -81,3 +81,21 @@ body{background:var(--atlas-paper)}
 }
 body:has(dialog[open]) .christmas-sleigh {visibility:hidden}
 @media(prefers-reduced-motion:reduce){.christmas-sleigh{display:none;animation:none}}
+
+:is(.booking-confidence-home-contact,.booking-operator-contact) a[href^="tel:"] {
+  display:inline-flex;
+  align-items:center;
+  gap:.5em;
+  width:max-content;
+  flex:none;
+  white-space:nowrap;
+}
+:is(.booking-confidence-home-contact,.booking-operator-contact) a[href^="tel:"] svg {
+  width:1em;
+  height:1em;
+  flex:none;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.7;
+}
+.booking-confidence-home-contact {align-items:center;}
