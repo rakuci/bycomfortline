@@ -607,6 +607,34 @@ function startingFare(lang, key) {
   return `${fareCopy[lang][2]} €${euros} · ${rubles.toLocaleString(lang)} BYN`;
 }
 
+const vilniusTripOptions = {
+  en:["Plan your Vilnius to Minsk transfer","Two travellers sharing an Economy car","Four travellers sharing a Comfort minivan","per person when sharing the starting fare equally","Tell us your pickup time, luggage and any child seats you need. We confirm the vehicle and total in BYN before departure.","City or station pickup","Pickup at Vilnius Airport (VNO)","Going to Minsk Airport (MSQ)?","Request a quote on WhatsApp","Date and pickup time","Passengers and bags","Drop-off address"],
+  ru:["Как спланировать трансфер из Вильнюса в Минск","Два пассажира в автомобиле экономкласса","Четыре пассажира в минивэне «Комфорт»","на человека, если разделить начальную цену поровну","Укажите время подачи, количество чемоданов и нужны ли детские кресла. Машину и итоговую сумму в BYN согласуем до выезда.","Подача в городе или у вокзала","Встреча в аэропорту Вильнюса (VNO)","Едете в аэропорт Минска (MSQ)?","Уточнить цену в WhatsApp","Дата и время подачи","Пассажиры и багаж","Адрес прибытия"],
+  lt:["Kaip suplanuoti kelionę iš Vilniaus į Minską","Du keleiviai ekonominės klasės automobilyje","Keturi keleiviai komforto klasės mikroautobuse","asmeniui, jei pradinę kainą pasidalysite po lygiai","Nurodykite paėmimo laiką, bagažą ir ar reikės vaikiškų kėdučių. Prieš išvykstant patvirtinsime automobilį ir galutinę kainą BYN.","Paėmimas mieste arba prie stoties","Paėmimas Vilniaus oro uoste (VNO)","Vykstate į Minsko oro uostą (MSQ)?","Teirautis kainos per WhatsApp","Data ir paėmimo laikas","Keleiviai ir bagažas","Atvykimo adresas"],
+  pl:["Zaplanuj transfer z Wilna do Mińska","Dwie osoby w samochodzie klasy ekonomicznej","Cztery osoby w minivanie klasy komfort","na osobę przy równym podziale ceny początkowej","Podaj godzinę odbioru, liczbę walizek i potrzebne foteliki. Przed wyjazdem potwierdzimy pojazd i pełną cenę w BYN.","Odbiór w mieście lub na dworcu","Odbiór na lotnisku w Wilnie (VNO)","Jedziesz na lotnisko w Mińsku (MSQ)?","Zapytaj o cenę przez WhatsApp","Data i godzina odbioru","Pasażerowie i bagaż","Adres docelowy"],
+  lv:["Plānojiet braucienu no Viļņas uz Minsku","Divi pasažieri ekonomiskās klases automašīnā","Četri pasažieri komforta klases minivenā","par personu, dalot sākumcenu vienādās daļās","Norādiet izbraukšanas laiku, bagāžas daudzumu un vajadzīgos bērnu sēdeklīšus. Pirms izbraukšanas apstiprināsim automašīnu un kopējo cenu BYN.","Izbraukšana no pilsētas vai stacijas","Sagaidīšana Viļņas lidostā (VNO)","Dodaties uz Minskas lidostu (MSQ)?","Jautāt cenu WhatsApp","Datums un izbraukšanas laiks","Pasažieri un bagāža","Galamērķa adrese"],
+  de:["Transfer von Vilnius nach Minsk planen","Zwei Personen im Economy-Wagen","Vier Personen im Komfort-Minivan","pro Person bei gleichmäßiger Aufteilung des Einstiegspreises","Nennen Sie Abholzeit, Gepäck und benötigte Kindersitze. Fahrzeug und Gesamtpreis in BYN bestätigen wir vor der Abfahrt.","Abholung in der Stadt oder am Bahnhof","Abholung am Flughafen Vilnius (VNO)","Sie fahren zum Flughafen Minsk (MSQ)?","Preis per WhatsApp anfragen","Datum und Abholzeit","Fahrgäste und Gepäck","Zieladresse"],
+  fr:["Préparer votre transfert de Vilnius à Minsk","Deux passagers en voiture économique","Quatre passagers en minivan confort","par personne en partageant le tarif de départ à parts égales","Précisez l’heure de départ, les bagages et les sièges enfant nécessaires. Nous confirmerons le véhicule et le prix total en BYN avant le départ.","Départ en ville ou à la gare","Accueil à l’aéroport de Vilnius (VNO)","Vous allez à l’aéroport de Minsk (MSQ) ?","Demander un devis sur WhatsApp","Date et heure de départ","Passagers et bagages","Adresse de destination"],
+};
+function vilniusTripPlanner(lang, originId) {
+  const [heading, pair, group, split, details, city, airport, msq, quote, date, bags, address] = vilniusTripOptions[lang];
+  const isAirport = originId === "vno";
+  const from = isAirport ? originLabel(lang,geoIds.get("vno")) : locale[lang].fromNames.vilnius;
+  const route = `${from} → ${minskDestination.names[lang]}`;
+  const message = [route,date + ": ",bags + ": ",address + ": "].join("\n");
+  const whatsapp = socialChannels.find(channel => channel.id === "whatsapp").url;
+  const money = new Intl.NumberFormat(lang,{style:"currency",currency:"EUR"});
+  const examples = [[pair,0,2],[group,4,4]].map(([label,index,count]) => {
+    const amount = money.format(routeFares.vilnius[index][0] / count);
+    return `<li>${esc(label)} — <strong>${esc(amount)}</strong> ${esc(split)}.</li>`;
+  }).join("");
+  return `<section class="section geo-how-book" id="vilnius-trip"><h2>${esc(heading)}</h2>
+    <ul>${examples}</ul><p>${esc(details)}</p>
+    <p><a href="${isAirport ? routePath(lang,"vilnius") : geoPath(lang,"vno")}">${esc(isAirport ? city : airport)}</a> ·
+    <a href="${transferPairPath(lang,originId,"msq")}">${esc(msq)}</a></p>
+    <a class="button primary" href="${whatsapp}?text=${encodeURIComponent(message)}">${esc(quote)}</a></section>`;
+}
+
 function fareTable(lang, key) {
   const [heading, vehicle, from, labels, note] = fareCopy[lang];
   const classes = labels.split("|");
@@ -2062,6 +2090,7 @@ function geoLocationPage(lang,place) {
       </div>
     </section>
     ${airportFareRoutes[place.id] ? fareTable(lang,airportFareRoutes[place.id]) : ""}
+    ${place.id === "vno" ? vilniusTripPlanner(lang,place.id) : ""}
     <section class="section geo-airport-landmark-section" aria-label="${esc(t.arrival)}">${landmarkImage}</section>
     <div class="geo-content-wrap section">
       <div class="geo-page-facts">
@@ -2133,6 +2162,7 @@ function routePage(lang, key) {
     <section class="route-hero"><div class="route-hero-bg"></div><div class="route-hero-content"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(l.routeNames[key])}</span></nav><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(h1)}</h1><p>${esc(seo.intro)}</p><div class="hero-actions"><a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div>${quickBooking(lang, key)}</div><div class="journey-card"><div><span>${esc(l.fromNames[key])}</span><b>${r.airport}</b></div><div class="journey-line"><i></i><em>${r.distance}</em><i></i></div><div><span>${esc(destinationLabels[lang])}</span><b>BY</b></div></div></section>
     ${trustStrip(l)}
     ${fareTable(lang,key)}
+    ${key === "vilnius" ? vilniusTripPlanner(lang,key) : ""}
     ${lang === "ru" && key === "vilnius" ? `<section class="section" aria-labelledby="airport-review-title">
       <h2 id="airport-review-title">Отзыв о встрече в аэропорту</h2>
       <figure class="geo-detail-card">
