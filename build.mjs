@@ -1285,6 +1285,34 @@ function longDistancePage(lang){
     body,schema,routeKey:"vilnius",originOverride:"",destinationOverride:"",ogImage:cityPhotoPreviewUrl("minsk")});
 }
 
+const passengerReviews = [
+  {id:"1086175411", author:"Mike S", date:"2026-11-20", text:{
+    en:"Mike appreciated the punctual service on his business trip.", ru:"Майк отметил пунктуальность во время деловой поездки.", pl:"Mike docenił punktualność podczas podróży służbowej.", lt:"Mike’as įvertino punktualumą per savo verslo kelionę.", lv:"Maiks atzinīgi novērtēja punktualitāti komandējuma laikā.", de:"Mike schätzte die Pünktlichkeit auf seiner Geschäftsreise.", fr:"Mike a apprécié la ponctualité lors de son déplacement professionnel."
+  }},
+  {id:"1077496087", author:"Максим М", date:"2026-09-12", text:{
+    en:"Maksim found the ride comfortable and said he arrived on time.", ru:"Максим рассказал, что поездка прошла с комфортом и он приехал вовремя.", pl:"Maksim wspomina wygodną podróż i przyjazd na czas.", lt:"Maksimas rašo, kad kelionė buvo patogi ir jis atvyko laiku.", lv:"Maksims raksta, ka brauciens bija ērts un viņš ieradās laikā.", de:"Maksim beschreibt die Fahrt als angenehm und berichtet, dass er pünktlich ankam.", fr:"Maksim a trouvé le trajet confortable et indique être arrivé à l’heure."
+  }},
+  {id:"1067254519", author:"Arnold P", date:"2026-07-06", origin:"kaunas", text:{
+    en:"On his trip from Kaunas to Minsk, Arnold said the driver arrived on time. He found the advice about goods and banknotes helpful at the border.", ru:"Арнольд ехал из Каунаса в Минск. По его словам, водитель приехал вовремя, а советы о товарах и наличных пригодились на границе.", pl:"Arnold jechał z Kowna do Mińska. Jak wspomina, kierowca przyjechał na czas, a wskazówki dotyczące towarów i gotówki przydały się na granicy.", lt:"Arnoldas keliavo iš Kauno į Minską. Jis rašo, kad vairuotojas atvyko laiku, o patarimai dėl prekių ir grynųjų pinigų pravertė pasienyje.", lv:"Arnolds brauca no Kauņas uz Minsku. Viņš raksta, ka vadītājs ieradās laikā un padomi par precēm un skaidru naudu noderēja uz robežas.", de:"Arnold fuhr von Kaunas nach Minsk. Er berichtet, dass der Fahrer pünktlich kam und ihm die Hinweise zu Waren und Bargeld an der Grenze halfen.", fr:"Arnold a voyagé de Kaunas à Minsk. Il raconte que le chauffeur est arrivé à l’heure et que ses conseils sur les marchandises et les espèces lui ont été utiles à la frontière."
+  }},
+];
+const reviewLabels = {
+  en:["Passenger reviews","Read the original on Tripadvisor"], ru:["Отзывы пассажиров","Читать оригинал на Tripadvisor"],
+  pl:["Opinie pasażerów","Przeczytaj oryginał na Tripadvisor"],lt:["Keleivių atsiliepimai","Skaityti originalą Tripadvisor svetainėje"],
+  lv:["Pasažieru atsauksmes","Lasīt oriģinālu vietnē Tripadvisor"],de:["Erfahrungen unserer Fahrgäste","Original auf Tripadvisor lesen"],
+  fr:["Avis des passagers","Lire l’avis original sur Tripadvisor"]
+};
+function passengerReviewSection(lang,origin) {
+  const reviews = origin ? passengerReviews.filter(review => review.origin === origin) : passengerReviews;
+  if (!reviews.length) return "";
+  const [heading,source] = reviewLabels[lang];
+  const dateFormat = new Intl.DateTimeFormat(lang,{year:"numeric",month:"long",day:"numeric",timeZone:"UTC"});
+  return `<section class="section" id="passenger-reviews"><h2>${esc(heading)}</h2><div class="geo-detail-grid">${reviews.map(review => {
+    const url = `https://www.tripadvisor.com/ShowUserReviews-g294448-d34505679-r${review.id}-ComfortLine-Minsk_Minsk_Region.html`;
+    return `<article class="geo-detail-card"><h3>${esc(review.author)}</h3><time datetime="${review.date}">${esc(dateFormat.format(new Date(review.date)))}</time><p>${esc(review.text[lang])}</p><a href="${url}">${esc(source)}</a></article>`;
+  }).join("")}</div></section>`;
+}
+
 function hubPage(lang) {
   const l = locale[lang];
   const canonical = `${base}/${lang}/`;
@@ -1302,6 +1330,7 @@ function hubPage(lang) {
     <section class="service-section" id="service"><div class="service-intro"><span class="eyebrow light">Door to door</span><h2>${esc(l.serviceTitle)}</h2></div><div class="service-grid">${l.services.map(([h, p], i) => `<article><span>0${i + 1}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     <section class="section steps-section"><div class="section-head"><span class="eyebrow">3 steps</span><h2>${esc(l.stepsTitle)}</h2></div><div class="steps">${l.steps.map(([n, h, p]) => `<article><span>${n}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join("")}</div></section>
     ${homeBookingTransparency(lang)}
+    ${passengerReviewSection(lang)}
     ${faq(l)}</main>${footer(l)}`;
   return layout({ lang, title, description: l.hubDescription, canonical, alternates: alternateLinks("home"), body,
     schema: {"@context":"https://schema.org","@graph":[businessSchema(lang,canonical),cityPhotoObject(lang,"minsk")]},
@@ -2068,6 +2097,7 @@ function geoLocationPage(lang,place) {
         <h2>${esc(t.reviews)}</h2><p>${esc(t.reviewsText)}</p>
         <a href="${parentRoute}#fleet">${esc(l.serviceTitle)} ↗</a>
       </section>
+      ${passengerReviewSection(lang,place.id)}
       ${destinationCardList(lang,place)}
       ${longDistanceTeaser(lang,{from:name,isAirport})}
       <section class="geo-related" aria-label="${esc(t.localLinks)}">
