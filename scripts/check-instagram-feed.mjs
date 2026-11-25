@@ -4,7 +4,11 @@ const env={INSTAGRAM_ACCESS_TOKEN:"test-secret",INSTAGRAM_USER_ID:"123",INSTAGRA
 const request=()=>new Request("https://bycomfortline.com/api/instagram-feed");
 const originalFetch=globalThis.fetch;
 try {
-  assert.equal((await worker.fetch(request(),{})).status,503);
+  const missingToken=await worker.fetch(request(),{...env,INSTAGRAM_ACCESS_TOKEN:""});
+  assert.equal(missingToken.status,503);
+  assert.equal((await missingToken.json()).code,"feed_token_missing");
+  assert.equal((await (await worker.fetch(request(),{...env,INSTAGRAM_USER_ID:""})).json()).code,"feed_user_id_missing_or_invalid");
+  assert.equal((await (await worker.fetch(request(),{...env,INSTAGRAM_API_VERSION:"invalid"})).json()).code,"feed_api_version_invalid");
   assert.equal((await worker.fetch(new Request(request().url,{method:"POST"}),env)).status,405);
   globalThis.fetch=async(url,options)=>{
     assert.equal(new URL(url).hostname,"graph.facebook.com");

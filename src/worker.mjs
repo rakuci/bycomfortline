@@ -448,13 +448,13 @@ function instagramHttps(value, isPost = false) {
 
 async function instagramFeed(request, env, ctx) {
   if (request.method !== "GET") return new Response(null,{status:405,headers:{"Allow":"GET","Cache-Control":"no-store"}});
-  const token = env.INSTAGRAM_ACCESS_TOKEN;
-  const id = env.INSTAGRAM_USER_ID;
-  const version = env.INSTAGRAM_API_VERSION || "v27.0";
-  if (!token || !/^\d+$/.test(id || "") || !/^v\d+\.\d+$/.test(version)) {
-    console.warn("Instagram configuration missing or invalid", {token:!!token,id:!!id,version:!!version});
-    return json({success:false,code:"feed_unconfigured"},503);
-  }
+  const token = typeof env.INSTAGRAM_ACCESS_TOKEN === "string" ? env.INSTAGRAM_ACCESS_TOKEN.trim() : "";
+  const id = String(env.INSTAGRAM_USER_ID || "").trim();
+  const version = String(env.INSTAGRAM_API_VERSION || "v27.0").trim();
+  // Report only the missing configuration category, never any secret values.
+  if (!token) return json({success:false,code:"feed_token_missing"},503);
+  if (!/^\d+$/.test(id)) return json({success:false,code:"feed_user_id_missing_or_invalid"},503);
+  if (!/^v\d+\.\d+$/.test(version)) return json({success:false,code:"feed_api_version_invalid"},503);
   const cache = globalThis.caches?.default;
   const cacheKey = new Request(new URL("/api/instagram-feed",request.url).href);
   if (cache) {
