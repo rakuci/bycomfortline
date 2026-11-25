@@ -849,3 +849,48 @@
   }, {once:true});
   sleigh.src = "/assets/christmas-sleigh.svg";
 })();
+
+/* Load public Instagram posts only as the journal approaches the viewport. */
+(() => {
+  const grid = document.querySelector("[data-instagram-feed]");
+  if (!grid) return;
+  const load = async () => {
+    try {
+      const response = await fetch("/api/instagram-feed",{credentials:"omit",signal:AbortSignal.timeout(10000)});
+      if (!response.ok) return;
+      const {success,posts} = await response.json();
+      if (!success || !Array.isArray(posts) || !posts.length) return;
+      for (const post of posts.slice(0,6)) {
+        const link = document.createElement("a");
+        link.className = "instagram-journal-post";
+        link.href = post.permalink;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.setAttribute("aria-label",post.caption || grid.dataset.postLabel || "Instagram");
+        const image = document.createElement("img");
+        image.src = post.image;
+        image.alt = post.caption || grid.dataset.postLabel || "Instagram";
+        image.loading = "lazy";
+        image.decoding = "async";
+        image.referrerPolicy = "no-referrer";
+        image.addEventListener("error",()=>{link.remove();if(!grid.children.length)grid.hidden=true;},{once:true});
+        link.append(image);
+        if (post.type === "VIDEO" || post.type === "CAROUSEL_ALBUM") {
+          const mark = document.createElement("span");
+          mark.className = "instagram-post-mark";
+          mark.setAttribute("aria-hidden","true");
+          mark.textContent = post.type === "VIDEO" ? "▶" : "▣";
+          link.append(mark);
+        }
+        grid.append(link);
+      }
+      grid.hidden = !grid.children.length;
+    } catch {}
+  };
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) {observer.disconnect();load();}
+    },{rootMargin:"400px"});
+    observer.observe(grid.closest(".instagram-journal"));
+  } else load();
+})();

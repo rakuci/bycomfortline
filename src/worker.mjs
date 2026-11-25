@@ -430,8 +430,64 @@ async function submitEditorialContribution(request, env) {
   }
 }
 
+
+/* Public read-only Instagram gallery. Never return Graph paging URLs or raw errors. */
+function instagramHttps(value, isPost = false) {
+  try {
+    const url = new URL(value);
+    if (url.protocol !== "https:" || url.username || url.password) return null;
+    if (isPost) {
+      if (!["www.instagram.com","instagram.com"].includes(url.hostname) ||
+          !/^\/(p|reel|reels|tv)\/[A-Za-z0-9_-]+\/?$/.test(url.pathname)) return null;
+      return "https://www.instagram.com" + url.pathname;
+    }
+    if (!/(^|\.)(cdninstagram\.com|fbcdn\.net|fbsbx\.com)$/.test(url.hostname)) return null;
+    return url.href;
+  } catch { return null; }
+}
+
+async function instagramFeed(request, env, ctx) {
+  if (request.method !== "GET") return new Response(null,{status:405,headers:{"Allow":"GET","Cache-Control":"no-store"}});
+  const token = env.INSTAGRAM_ACCESS_TOKEN;
+  const id = env.INSTAGRAM_USER_ID;
+  const version = env.INSTAGRAM_API_VERSION || "v27.0";
+  if (!token || !/^\d+$/.test(id || "") || !/^v\d+\.\d+$/.test(version))
+    return json({success:false,code:"feed_unconfigured"},503);
+  const cache = globalThis.caches?.default;
+  const cacheKey = new Request(new URL("/api/instagram-feed",request.url).href);
+  if (cache) {
+    try { const cached = await cache.match(cacheKey); if (cached) return cached; } catch {}
+  }
+  try {
+    const endpoint = new URL("https://graph.facebook.com/" + version + "/" + id + "/media");
+    endpoint.searchParams.set("fields","id,caption,media_type,media_url,thumbnail_url,permalink,timestamp");
+    endpoint.searchParams.set("limit","12");
+    const upstream = await fetch(endpoint.href,{
+      headers:{Authorization:"Bearer "+token,Accept:"application/json"},
+      redirect:"error",signal:AbortSignal.timeout(8000)
+    });
+    if (!upstream.ok) return json({success:false,code:"feed_unavailable"},503);
+    const data = await upstream.json();
+    if (!Array.isArray(data.data)) return json({success:false,code:"feed_unavailable"},503);
+    const posts = data.data.flatMap(post => {
+      if (!post || !["IMAGE","VIDEO","CAROUSEL_ALBUM"].includes(post.media_type)) return [];
+      const permalink = instagramHttps(post.permalink,true);
+      const image = instagramHttps(post.media_type === "VIDEO" ? post.thumbnail_url : post.media_url);
+      if (!permalink || !image) return [];
+      return [{permalink,image,type:post.media_type,caption:typeof post.caption === "string" ? post.caption.slice(0,300) : ""}];
+    }).slice(0,6);
+    const response = new Response(JSON.stringify({success:true,posts}),{headers:{
+      "Content-Type":"application/json; charset=utf-8",
+      "Cache-Control":"public, max-age=900, s-maxage=1800",
+      "X-Content-Type-Options":"nosniff"
+    }});
+    if (cache && ctx?.waitUntil) ctx.waitUntil(cache.put(cacheKey,response.clone()).catch(()=>{}));
+    return response;
+  } catch { return json({success:false,code:"feed_unavailable"},503); }
+}
+
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     // Consolidate indexed duplicate hostname variants into the site's declared
     // canonical HTTPS domain. This applies only when this Worker actually serves
@@ -448,6 +504,7 @@ export default {
         headers:{"Location":url.toString(),"Cache-Control":"public, max-age=3600"}
       });
     }
+    if (url.pathname === "/api/instagram-feed") return instagramFeed(request,env,ctx);
     if (url.pathname === "/api/travel-guide-submission") {
       if (request.method !== "POST") {
         return new Response(null,{status:405,headers:{"Allow":"POST","Cache-Control":"no-store"}});

@@ -59,6 +59,8 @@ jobs:
           node-version: '22'
       - name: Render all seven language variants and run rigorous SEO/photo audit
         run: node build.mjs
+      - name: Verify Instagram feed without live credentials
+        run: node scripts/check-instagram-feed.mjs
       - name: Verify published Travel Guide articles, sources and SEO
         run: node scripts/check-travel-guide.mjs
       - name: Validate both XML sitemaps and article images
