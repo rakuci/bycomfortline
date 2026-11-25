@@ -8,5 +8,10 @@
     "run_worker_first": [
       "/api/*"
     ]
+  },
+  "keep_vars": true,
+  "vars": {
+    "INSTAGRAM_USER_ID": "17841456791586879",
+    "INSTAGRAM_API_VERSION": "v27.0"
   }
 }

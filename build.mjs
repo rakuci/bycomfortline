@@ -1507,7 +1507,7 @@ function atlasPlate(lang, origin) {
 function instagramGallery(lang) {
   const labels = {
     en:["Stories from the road","Discover our latest posts and Reels.","View on Instagram","Instagram post"],
-    ru:["Истории из дороги","Наши новые публикации и Reels.","Смотреть в Instagram","Публикация Instagram"],
+    ru:["Истории в пути","Наши новые публикации и Reels.","Смотреть в Instagram","Публикация Instagram"],
     pl:["Historie z podróży","Zobacz nasze najnowsze posty i rolki.","Zobacz na Instagramie","Post na Instagramie"],
     lt:["Kelionių istorijos","Naujausi mūsų įrašai ir Reels.","Žiūrėti Instagram","Instagram įrašas"],
     lv:["Ceļojumu stāsti","Jaunākie ieraksti un Reels.","Skatīt Instagram","Instagram ieraksts"],
@@ -1515,7 +1515,7 @@ function instagramGallery(lang) {
     fr:["Histoires de voyage","Nos dernières publications et Reels.","Voir sur Instagram","Publication Instagram"]
   };
   const [title,intro,view,post] = labels[lang] || labels.en;
-  return `<section class="section instagram-journal" id="instagram-journal" aria-labelledby="instagram-journal-title"><div class="instagram-journal-header"><div><span class="eyebrow">COMFORTLINE · INSTAGRAM</span><h2 id="instagram-journal-title">${esc(title)}</h2><p>${esc(intro)}</p></div><a class="instagram-profile" href="https://www.instagram.com/transfer_comfortline/" target="_blank" rel="noopener noreferrer" aria-label="${esc(view)}: @transfer_comfortline"><img src="/assets/social/official/instagram.webp" width="26" height="26" alt="">@transfer_comfortline</a></div><div class="instagram-journal-grid" data-instagram-feed data-post-label="${esc(post)}" hidden></div><a class="instagram-journal-link" href="https://www.instagram.com/transfer_comfortline/" target="_blank" rel="noopener noreferrer">${esc(view)} ${icons.arrow}</a></section>`;
+  return `<section class="section instagram-journal" id="instagram-journal" aria-labelledby="instagram-journal-title"><div class="instagram-journal-header"><div><span class="eyebrow">COMFORTLINE · INSTAGRAM</span><h2 id="instagram-journal-title">${esc(title)}</h2><p>${esc(intro)}</p></div><a class="instagram-profile" href="https://www.instagram.com/transfer_comfortline/" target="_blank" rel="noopener noreferrer" aria-label="${esc(view)}: @transfer_comfortline"><img src="/assets/social/official/instagram.webp" width="26" height="26" alt="">@transfer_comfortline</a></div><div class="instagram-journal-grid" data-instagram-feed data-post-label="${esc(post)}" hidden></div><a class="instagram-journal-link" href="https://www.instagram.com/transfer_comfortline/" target="_blank" rel="noopener noreferrer"><span>${esc(view)}</span> ${icons.arrow}</a></section>`;
 }
 
 function hubPage(lang) {

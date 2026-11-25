@@ -4811,3 +4811,11 @@ body { background:var(--cl-pearl); }
 .instagram-post-mark{position:absolute;top:10px;right:10px;background:rgba(19,46,41,.78);color:white;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;font-size:12px;pointer-events:none}
 @media(max-width:760px){.instagram-journal-header{align-items:flex-start;flex-direction:column;gap:12px}.instagram-journal-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
 @media(prefers-reduced-motion:reduce){.instagram-journal-post img{transition:none}.instagram-journal-post:hover img{transform:none}}
+
+/* Instagram journal: constrain shared SVG and collapse empty gallery spacing. */
+.instagram-journal-link{width:fit-content;max-width:100%;gap:8px;white-space:normal;line-height:1.5}
+.instagram-journal-link>span{min-width:0}
+.instagram-journal-link>svg{display:block;flex:0 0 18px;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.instagram-journal:has(.instagram-journal-grid[hidden]){padding-bottom:22px}
+.instagram-journal:has(.instagram-journal-grid[hidden]) .instagram-journal-header{margin-bottom:0}
+.instagram-journal:has(.instagram-journal-grid[hidden]) .instagram-journal-link{display:none}

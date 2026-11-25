@@ -451,8 +451,10 @@ async function instagramFeed(request, env, ctx) {
   const token = env.INSTAGRAM_ACCESS_TOKEN;
   const id = env.INSTAGRAM_USER_ID;
   const version = env.INSTAGRAM_API_VERSION || "v27.0";
-  if (!token || !/^\d+$/.test(id || "") || !/^v\d+\.\d+$/.test(version))
+  if (!token || !/^\d+$/.test(id || "") || !/^v\d+\.\d+$/.test(version)) {
+    console.warn("Instagram configuration missing or invalid", {token:!!token,id:!!id,version:!!version});
     return json({success:false,code:"feed_unconfigured"},503);
+  }
   const cache = globalThis.caches?.default;
   const cacheKey = new Request(new URL("/api/instagram-feed",request.url).href);
   if (cache) {
@@ -466,7 +468,15 @@ async function instagramFeed(request, env, ctx) {
       headers:{Authorization:"Bearer "+token,Accept:"application/json"},
       redirect:"error",signal:AbortSignal.timeout(8000)
     });
-    if (!upstream.ok) return json({success:false,code:"feed_unavailable"},503);
+    if (!upstream.ok) {
+      const meta = await upstream.json().catch(()=>null);
+      const code = Number(meta?.error?.code);
+      const subcode = Number(meta?.error?.error_subcode);
+      console.warn("Instagram Graph request failed", upstream.status,
+        Number.isFinite(code)?code:"unknown", Number.isFinite(subcode)?subcode:"unknown");
+      const reason = code===190?"feed_token_invalid":([10,200,294,299].includes(code)?"feed_permission_denied":(code===100?"feed_account_or_request_invalid":"feed_unavailable"));
+      return json({success:false,code:reason},503);
+    }
     const data = await upstream.json();
     if (!Array.isArray(data.data)) return json({success:false,code:"feed_unavailable"},503);
     const posts = data.data.flatMap(post => {
