@@ -466,8 +466,9 @@ async function instagramFeed(request, env, ctx) {
     endpoint.searchParams.set("limit","12");
     const upstream = await fetch(endpoint.href,{
       headers:{Authorization:"Bearer "+token,Accept:"application/json"},
-      redirect:"error",signal:AbortSignal.timeout(8000)
+      redirect:"manual",signal:AbortSignal.timeout(8000)
     });
+    if (upstream.status >= 300 && upstream.status < 400) return json({success:false,code:"feed_unexpected_redirect",upstream_status:upstream.status},503);
     if (!upstream.ok) {
       const meta = await upstream.json().catch(()=>null);
       const code = Number(meta?.error?.code);
@@ -475,10 +476,10 @@ async function instagramFeed(request, env, ctx) {
       console.warn("Instagram Graph request failed", upstream.status,
         Number.isFinite(code)?code:"unknown", Number.isFinite(subcode)?subcode:"unknown");
       const reason = code===190?"feed_token_invalid":([10,200,294,299].includes(code)?"feed_permission_denied":(code===100?"feed_account_or_request_invalid":"feed_unavailable"));
-      return json({success:false,code:reason},503);
+      return json({success:false,code:reason,upstream_status:upstream.status,...(Number.isInteger(code)?{meta_code:code}:{}),...(Number.isInteger(subcode)?{meta_subcode:subcode}:{})},503);
     }
     const data = await upstream.json();
-    if (!Array.isArray(data.data)) return json({success:false,code:"feed_unavailable"},503);
+    if (!Array.isArray(data.data)) return json({success:false,code:"feed_invalid_response"},503);
     const posts = data.data.flatMap(post => {
       if (!post || !["IMAGE","VIDEO","CAROUSEL_ALBUM"].includes(post.media_type)) return [];
       const permalink = instagramHttps(post.permalink,true);
@@ -493,7 +494,11 @@ async function instagramFeed(request, env, ctx) {
     }});
     if (cache && ctx?.waitUntil) ctx.waitUntil(cache.put(cacheKey,response.clone()).catch(()=>{}));
     return response;
-  } catch { return json({success:false,code:"feed_unavailable"},503); }
+  } catch (error) {
+    const code = ["TimeoutError","AbortError"].includes(error?.name) ? "feed_timeout" : "feed_request_failed";
+    console.warn("Instagram feed request failed",code);
+    return json({success:false,code},503);
+  }
 }
 
 export default {

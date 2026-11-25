@@ -14,6 +14,9 @@ try {
     assert.equal(new URL(url).hostname,"graph.facebook.com");
     assert.equal(new URL(url).pathname,"/v27.0/123/media");
     assert.equal(options.headers.Authorization,"Bearer test-secret");
+    assert.equal(options.redirect,"manual");
+    // Construct the actual Request as well as validating the mock parameters.
+    assert.equal(new Request(url,options).redirect,"manual");
     assert.ok(!url.includes("test-secret"));
     return Response.json({data:[
       {media_type:"IMAGE",media_url:"https://scontent.cdninstagram.com/photo.jpg",permalink:"https://www.instagram.com/p/abc/",caption:"A journey"},
@@ -32,5 +35,13 @@ try {
   const failed=await worker.fetch(request(),env);
   assert.equal(failed.status,503);
   assert.ok(!(await failed.text()).includes("test-secret"));
-  console.log("Instagram feed: authentication, sanitization, thumbnails and failure checks passed");
+  globalThis.fetch=async()=>new Response(null,{status:302,headers:{Location:"https://example.com/"}});
+  assert.equal((await (await worker.fetch(request(),env)).json()).code,"feed_unexpected_redirect");
+  globalThis.fetch=async()=>Response.json({error:{code:190,error_subcode:463,message:"test-secret"}},{status:400});
+  const auth=await (await worker.fetch(request(),env)).json();
+  assert.equal(auth.code,"feed_token_invalid");
+  assert.equal(auth.meta_code,190);
+  assert.equal(auth.meta_subcode,463);
+  assert.ok(!JSON.stringify(auth).includes("test-secret"));
+  console.log("Instagram feed: authentication, sanitization, thumbnails, redirects and failure checks passed");
 } finally {globalThis.fetch=originalFetch;}
