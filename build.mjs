@@ -1378,8 +1378,7 @@ function longDistancePage(lang){
       <span class="eyebrow light">${esc(c.kicker)}</span>
       <h1>${esc(c.h1)}</h1>
       <p>${esc(c.lead)}</p>
-      <div class="hero-actions"><a href="#booking-dialog" class="button primary" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(c.quote)} ${icons.arrow}</a>
-        <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a></div>
+      <div class="hero-actions"><a href="#booking-dialog" class="button primary" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(c.quote)} ${icons.arrow}</a></div>
       ${quickBooking(lang,"vilnius","","")}
     </div></section>
     <section class="section long-distance-landmark" aria-label="${esc(destinationLabels[lang])}">${cityPhotoFigure(lang,"minsk")}</section>
@@ -1510,7 +1509,7 @@ function hubPage(lang) {
   const canonical = `${base}/${lang}/`;
   const title = `${l.hubTitle} | ComfortLine`;
   const body = `${header(lang)}<main>
-    <section class="atlas-hero"><div class="atlas-shell"><div class="atlas-copy"><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(l.hubTitle)}</h1><p>${esc(l.hubDescription)}</p><div class="hero-actions"><a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div></div>${atlasPlate(lang,coreOriginProfiles.find(p=>p.id==="vilnius"))}${quickBooking(lang)}</div></section>
+    <section class="atlas-hero"><div class="atlas-shell"><div class="atlas-copy"><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(l.hubTitle)}</h1><p>${esc(l.hubDescription)}</p></div>${atlasPlate(lang,coreOriginProfiles.find(p=>p.id==="vilnius"))}${quickBooking(lang)}</div></section>
     ${trustStrip(l)}
     <section class="section route-cultural-story" aria-label="${esc(destinationLabels[lang])}">${cityPhotoFigure(lang,"minsk")}</section>
     <section class="section routes-section" id="routes"><div class="section-head"><span class="eyebrow">Comfortline routes</span><h2>${esc(l.routesTitle)}</h2><p>${esc(l.routesLead)}</p></div><div class="route-grid three">${routeCards(lang)}</div></section>
@@ -1549,7 +1548,6 @@ function homeBookingTransparency(lang) {
     <h2>${esc(d.hubTitle)}</h2>
     <p>${esc(d.hubText)}</p>
     <div class="booking-confidence-home-contact">
-      <a href="tel:${phoneHref}" class="booking-confidence-link">${icons.phone}${phoneDisplay}</a>
       <a href="mailto:${email}" class="booking-confidence-link">${esc(email)}</a>
     </div>
     ${messengerButtons()}
@@ -1600,7 +1598,6 @@ function routeBookingTransparency(lang,key) {
         <small>${esc(copy.licensingNote)}</small>
       </div>
       <div class="booking-operator-contact">
-        <a href="tel:${phoneHref}">${icons.phone} ${phoneDisplay}</a>
         <a href="mailto:${email}">${esc(email)}</a>
       </div>
     </aside>
@@ -1826,8 +1823,7 @@ function destinationPage(lang,dest){
     <span class="eyebrow light">${esc(ui.section)}</span>
     <h1>${esc(localeWords(ui.hubHeading,values))}</h1>${cityPhotoFigure(lang,dest.id)}<p>${esc(intro)}</p>
     <div class="hero-actions"><a href="#booking-dialog" class="button primary"
-      data-open-booking aria-controls="booking-dialog" aria-haspopup="dialog">${esc(ui.booking)} ${icons.arrow}</a>
-      <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a></div>
+      data-open-booking aria-controls="booking-dialog" aria-haspopup="dialog">${esc(ui.booking)} ${icons.arrow}</a></div>
     ${quickBooking(lang,"vilnius","",to)}
   </div></section>
   <section class="section dest-local-guide" id="service">
@@ -1899,10 +1895,7 @@ function transferPairPage(lang,origin,dest){
       <a href="${destinationPath(lang,dest)}">${esc(to)}</a><span>/</span><span>${esc(from)}</span></nav>
     <span class="eyebrow light">${esc(ui.service)} · ${esc(ui.price)}</span>
     <h1>${esc(h1)}</h1><p>${esc(localeWords(ui.routeLead,values))}</p>
-    <div class="hero-actions">
-      <a href="#booking-dialog" data-open-booking class="button primary" aria-controls="booking-dialog" aria-haspopup="dialog">${esc(ui.booking)} ${icons.arrow}</a>
-      <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a>
-    </div>
+    
     </div>${atlasPlate(lang,origin)}${quickBooking(lang,origin.parent,from,to)}
   </div></section>
   <section class="section dest-pair-main" id="service">
@@ -2248,10 +2241,7 @@ function geoLocationPage(lang,place) {
         <span class="eyebrow light">${esc(t.countryLabels[place.country])} · ${isAirport?esc(t.airport):esc(t.city)}${place.code?" · "+place.code:""}</span>
         <h1>${esc(h1)}</h1>
         <p>${esc(fareSummary?.description ?? geoText(isAirport?t.introAirport:t.introCity,opts))}</p>
-        <div class="hero-actions">
-          <a href="#booking-dialog" data-open-booking class="button primary" aria-haspopup="dialog" aria-controls="booking-dialog">${esc(t.quote)} ${icons.arrow}</a>
-          <a href="tel:${phoneHref}" class="button ghost">${icons.phone}${phoneDisplay}</a>
-        </div>
+        
         </div>${atlasPlate(lang,place)}${quickBooking(lang,place.parent,name)}
       </div>
     </section>
@@ -2325,7 +2315,7 @@ function routePage(lang, key) {
   const heritage=heritagePhotoObject(lang,origin,"minsk");
   if(heritage)schema["@graph"].push(heritage);
   const body = `${header(lang, "route", key)}<main>
-    <section class="atlas-hero"><div class="atlas-shell"><div class="atlas-copy"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(l.routeNames[key])}</span></nav><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(h1)}</h1><p>${esc(seo.intro)}</p><div class="hero-actions"><a class="button primary" href="#booking-dialog" data-open-booking aria-haspopup="dialog" aria-controls="booking-dialog">${esc(l.formTitle)} ${icons.arrow}</a><a class="button ghost" href="tel:${phoneHref}">${icons.phone}${phoneDisplay}</a></div></div>${atlasPlate(lang,origin)}${quickBooking(lang,key)}</div></section>
+    <section class="atlas-hero"><div class="atlas-shell"><div class="atlas-copy"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${l.home}">${esc(l.nav.routes)}</a><span>/</span><span>${esc(l.routeNames[key])}</span></nav><span class="eyebrow light">${esc(l.kicker)}</span><h1>${esc(h1)}</h1><p>${esc(seo.intro)}</p></div>${atlasPlate(lang,origin)}${quickBooking(lang,key)}</div></section>
     ${trustStrip(l)}
     ${fareTable(lang,key)}
     ${key === "vilnius" ? vilniusTripPlanner(lang,key) : ""}
