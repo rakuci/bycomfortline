@@ -860,6 +860,10 @@
       if (!response.ok) return;
       const {success,posts} = await response.json();
       if (!success || !Array.isArray(posts) || !posts.length) return;
+      for (let index = posts.length - 1; index > 0; index--) {
+        const other = Math.floor(Math.random() * (index + 1));
+        [posts[index], posts[other]] = [posts[other], posts[index]];
+      }
       for (const post of posts.slice(0,6)) {
         const link = document.createElement("a");
         link.className = "instagram-journal-post";
