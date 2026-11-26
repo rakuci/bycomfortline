@@ -6,7 +6,8 @@
     "directory": "./dist",
     "binding": "ASSETS",
     "run_worker_first": [
-      "/api/*"
+      "/api/*",
+      "/yandex_d183d31bca7304df.html"
     ]
   },
   "keep_vars": true,

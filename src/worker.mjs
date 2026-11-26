@@ -519,6 +519,18 @@ export default {
         headers:{"Location":url.toString(),"Cache-Control":"public, max-age=3600"}
       });
     }
+    if (url.pathname === "/yandex_d183d31bca7304df.html" &&
+        (request.method === "GET" || request.method === "HEAD")) {
+      const html = `<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>Verification: d183d31bca7304df</body>
+</html>`;
+      return new Response(request.method === "HEAD" ? null : html, {
+        headers: {"Content-Type": "text/html; charset=UTF-8"}
+      });
+    }
     if (url.pathname === "/api/instagram-feed") return instagramFeed(request,env,ctx);
     if (url.pathname === "/api/travel-guide-submission") {
       if (request.method !== "POST") {
