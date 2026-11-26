@@ -670,17 +670,15 @@
         const enquiry = { reference, subject, summary: lines.join("\n"), createdAt: new Date().toISOString(), emailAccepted: true };
         try {
           sessionStorage.setItem("comfortline-enquiry:" + reference, JSON.stringify(enquiry));
-          if (Array.isArray(window.dataLayer)) {
-            window.dataLayer.push({ event: "booking_enquiry_email_accepted", enquiry_reference: reference, enquiry_language: lang });
-          }
-          window.location.assign("/" + lang + "/thank-you/?ref=" + encodeURIComponent(reference));
+          sessionStorage.setItem("comfortline-last-booking", JSON.stringify({ lang, reference }));
         } catch (_) {
-          // The email was already accepted. Never ask for a retry when storage is blocked.
-          if (message) {
-            message.hidden = false;
-            message.textContent = (form.dataset.storageSuccess || "Enquiry emailed. Reference: ") + reference;
-          }
+          // Keep only the language and reference when browser storage is unavailable.
+          window.name = "comfortline-confirmation:" + lang + ":" + reference;
         }
+        if (Array.isArray(window.dataLayer)) {
+          window.dataLayer.push({ event: "booking_enquiry_email_accepted", enquiry_reference: reference, enquiry_language: lang });
+        }
+        window.location.assign("/thank-you/");
       } catch (error) {
         // Keep all entered details and explain validation vs email-service errors.
         const code = error?.message;
@@ -706,12 +704,43 @@
     });
   });
 
-  const thankyou = document.querySelector("[data-booking-thankyou]");
+  let thankyou = document.querySelector("[data-booking-thankyou]");
   if (thankyou) {
-    const ref = new URLSearchParams(window.location.search).get("ref") || "";
+    let ref = new URLSearchParams(window.location.search).get("ref") || "";
+    let minimal = false;
     let draft = null;
+    if (location.pathname === "/thank-you/") {
+      let receipt;
+      const fallback = /^comfortline-confirmation:([a-z]{2}):(CL-[0-9]{8}-[A-F0-9]{10})$/.exec(window.name);
+      if (fallback) {
+        window.name = "";
+        receipt = { lang: fallback[1], reference: fallback[2], minimal: true };
+        history.replaceState({ bookingReceipt: receipt }, "");
+      } else {
+        receipt = history.state?.bookingReceipt;
+        if (!receipt) {
+          try {
+            receipt = JSON.parse(sessionStorage.getItem("comfortline-last-booking"));
+            sessionStorage.removeItem("comfortline-last-booking");
+          } catch (_) {}
+          if (receipt) history.replaceState({ bookingReceipt: receipt }, "");
+        }
+      }
+      ref = receipt?.reference || "";
+      minimal = receipt?.minimal === true;
+      const localized = Array.from(document.querySelectorAll("template[data-thanks-language]"))
+        .find(template => template.dataset.thanksLanguage === receipt?.lang);
+      if (localized) {
+        thankyou.replaceWith(localized.content.cloneNode(true));
+        thankyou = document.querySelector("[data-booking-thankyou]");
+        document.documentElement.lang = receipt.lang;
+        const home = document.querySelector(".thanks-header .brand");
+        if (home) home.href = "/" + receipt.lang + "/";
+        document.title = localized.dataset.title;
+      }
+    }
     try { if (ref) draft = JSON.parse(sessionStorage.getItem("comfortline-enquiry:" + ref) || "null"); }
-    catch (error) { draft = null; }
+    catch (_) {}
     const refNode = thankyou.querySelector("[data-inquiry-reference]");
     const details = thankyou.querySelector("[data-inquiry-summary]");
     const actions = thankyou.querySelector(".thanks-actions");
@@ -733,7 +762,8 @@
     } else {
       if (details?.parentElement) details.parentElement.hidden = true;
       if (actions) actions.hidden = true;
-      if (missing) missing.hidden = false;
+      if (minimal && confirmation) confirmation.hidden = false;
+      if (missing) missing.hidden = minimal;
     }
     const copy = thankyou.querySelector("[data-copy-reference]");
     copy?.addEventListener("click", async () => {

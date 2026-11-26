@@ -2361,15 +2361,9 @@ function routePage(lang, key) {
     body, schema, routeKey: key, ogImage:heritagePhotoPublicUrl(heritageForRoute(origin,"minsk")) });
 }
 
-function thankYouPage(lang) {
+function thankYouPanel(lang) {
   const l = locale[lang], ui = bookingPopupUi[lang];
-  const title = `${ui.thanksTitle} | ComfortLine`;
-  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>${esc(title)}</title><meta name="robots" content="noindex,follow"><meta name="description" content="${esc(ui.thanksNotice)}">
-    <link rel="canonical" href="${base}/${lang}/thank-you/"><link rel="stylesheet" href="/assets/style.css"><link rel="stylesheet" href="/assets/baltic-atlas.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <script src="/assets/app.js" defer></script></head><body class="thanks-body">
-    <header class="thanks-header"><a class="brand" href="${l.home}" aria-label="ComfortLine"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a></header>
-    <main class="thanks-main"><section class="thanks-panel" data-booking-thankyou data-lang="${lang}">
+  return `<section class="thanks-panel" data-booking-thankyou data-lang="${lang}">
       <div data-inquiry-confirmation hidden>
       <div class="thanks-check" aria-hidden="true">✓</div><span class="eyebrow">ComfortLine</span><h1>${esc(ui.thanksTitle)}</h1>
       <p class="thanks-lead">${esc(ui.thanksLead)}</p>
@@ -2379,7 +2373,19 @@ function thankYouPage(lang) {
         <a class="thanks-email" data-inquiry-email href="mailto:${email}">${esc(ui.sendEmail)}</a></div>
       <p class="thanks-notice">${esc(ui.thanksNotice)}</p></div><p class="thanks-missing">${esc(ui.noDraft)}</p>
       <a class="thanks-back" href="${l.home}">← ${esc(ui.back)}</a>
-    </section></main>${floatingContact()}</body></html>`;
+    </section>`;
+}
+
+function thankYouPage(lang, shared = false) {
+  const l = locale[lang], ui = bookingPopupUi[lang];
+  const title = `${ui.thanksTitle} | ComfortLine`;
+  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>${esc(title)}</title><meta name="robots" content="noindex,follow"><meta name="description" content="${esc(ui.thanksNotice)}">
+    <link rel="canonical" href="${base}/${shared ? "" : lang + "/" }thank-you/"><link rel="stylesheet" href="/assets/style.css"><link rel="stylesheet" href="/assets/baltic-atlas.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <script src="/assets/app.js" defer></script></head><body class="thanks-body">
+    <header class="thanks-header"><a class="brand" href="${l.home}" aria-label="ComfortLine"><img class="brand-logo" src="/assets/comfortline-logo-dark.svg" alt="ComfortLine" width="200" height="56"></a></header>
+    <main class="thanks-main">${thankYouPanel(lang)}${shared ? Object.keys(locale).filter(code => code !== lang).map(code =>
+      `<template data-thanks-language="${code}" data-title="${esc(bookingPopupUi[code].thanksTitle)} | ComfortLine">${thankYouPanel(code)}</template>`).join("") : ""}</main>${floatingContact()}</body></html>`;
 }
 function gateway() {
   const links = Object.entries(locale).map(([code,l]) => `<a href="/${code}/"><span>${code.toUpperCase()}</span><strong>${l.label}</strong>${icons.arrow}</a>`).join("");
@@ -2415,6 +2421,7 @@ async function put(relative, content) {
 // Yandex recommends a discoverable root favicon; keep this synced with the site logo.
 await copyFile(join(out,"assets/favicon.svg"), join(out,"favicon.svg"));
 await put("index.html", gateway());
+await put("thank-you/index.html", thankYouPage("en", true));
 for (const lang of Object.keys(locale)) {
   await put(`${lang}/index.html`, hubPage(lang));
   await put(guidePath(lang).slice(1)+"index.html", travelGuidePage(lang));
