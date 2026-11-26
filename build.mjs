@@ -2412,7 +2412,23 @@ function gateway() {
     </div></main>${floatingContact()}</body></html>`;
 }
 
+const googleAnalyticsTag = `<script>
+if (["bycomfortline.com", "www.bycomfortline.com"].includes(location.hostname)) {
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+  window.gtag("js", new Date());
+  window.gtag("config", "G-4P26GE2YPD");
+  const tag = document.createElement("script");
+  tag.async = true;
+  tag.src = "https://www.googletagmanager.com/gtag/js?id=G-4P26GE2YPD";
+  document.head.appendChild(tag);
+}
+</script>`;
+
 async function put(relative, content) {
+  if (relative.endsWith(".html")) {
+    content = content.replace("</head>", googleAnalyticsTag + "</head>");
+  }
   const file = join(out, relative);
   await mkdir(dirname(file), { recursive: true });
   await writeFile(file, content, "utf8");
