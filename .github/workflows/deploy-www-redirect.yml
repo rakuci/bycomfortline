@@ -1,0 +1,20 @@
+name: Deploy www hostname redirect
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - www-redirect/**
+      - .github/workflows/deploy-www-redirect.yml
+permissions:
+  contents: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --config www-redirect/wrangler.jsonc
