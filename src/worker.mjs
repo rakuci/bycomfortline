@@ -504,6 +504,11 @@ async function instagramFeed(request, env, ctx) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    const legacyRigaPath = encodeURI("/трансфер-рига").toLowerCase();
+    if ((request.method === "GET" || request.method === "HEAD") &&
+        url.pathname.replace(/\/$/, "").toLowerCase() === legacyRigaPath) {
+      return Response.redirect("https://bycomfortline.com/ru/riga-minsk-transfer/" + url.search, 301);
+    }
     // Consolidate indexed duplicate hostname variants into the site's declared
     // canonical HTTPS domain. This applies only when this Worker actually serves
     // the alias; the separate comfortline.by property is intentionally untouched.
