@@ -590,6 +590,18 @@ function countryDepartures(lang, origin) {
 
 function cityRouteSeo(lang, key) {
   const seo = routeSeo[lang][key];
+  if (lang === "ru" && key === "warsaw") {
+    const [economy, byn] = routeFares.warsaw[0];
+    const minivan = routeFares.warsaw[4][0];
+    const priceAnswer = `Эконом — от ${economy} €, минивэн «Комфорт» — от ${minivan} € за автомобиль в одну сторону. Оплата в белорусских рублях. Итоговую сумму менеджер подтвердит по дате, адресам и багажу.`;
+    return { ...seo,
+      title: `Трансфер Варшава — Минск от ${economy} € за автомобиль | ComfortLine`,
+      h1: "Индивидуальный трансфер Варшава — Минск",
+      description: `Трансфер из Варшавы в Минск от ${economy} € за автомобиль. Подача по адресу, у вокзала Warszawa Centralna или в аэропортах Шопен и Модлин. Оплата в BYN.`,
+      intro: `Заберём вас у дома, в отеле или у вокзала Warszawa Centralna и довезём до вашего адреса в Минске. Ориентир за машину экономкласса в одну сторону — от ${economy} € (от ${byn.toLocaleString("ru")} BYN). Оплата в BYN. Если прилетаете в Варшаву, укажите аэропорт — Шопен (WAW) или Модлин (WMI).`,
+      faqs: seo.faqs.map(([q, a]) => [q, q === "Сколько стоит такси Варшава–Минск?" ? priceAnswer : a])
+    };
+  }
   const t = vilniusSearchCopy[lang];
   if (key !== "vilnius" || !t) {
     const origin = coreOriginProfiles.find(p => p.id === key);
@@ -1720,7 +1732,7 @@ function routeIntentDetails(lang, key) {
 function routeEditorial(lang, key) {
   const seo = cityRouteSeo(lang,key), ui = routeSeo[lang].ui;
   return `<section class="route-editorial section" id="route-guide">
-    <div class="section-head"><span class="eyebrow">${esc(ui.overview)}</span><h2>${esc(ui.overview)}: ${esc(locale[lang].routeNames[key])}</h2>${key === "vilnius" && vilniusSearchCopy[lang] ? "" : `<p>${esc(seo.intro)}</p>`}</div>
+    <div class="section-head"><span class="eyebrow">${esc(ui.overview)}</span><h2>${esc(ui.overview)}: ${esc(locale[lang].routeNames[key])}</h2>${(key === "vilnius" && vilniusSearchCopy[lang]) || (key === "warsaw" && lang === "ru") ? "" : `<p>${esc(seo.intro)}</p>`}</div>
     <div class="route-editorial-grid">
       <article><span class="route-detail-symbol" aria-hidden="true">⌖</span><h3>${esc(ui.pickup)}</h3><p>${esc(seo.pickupText)}</p></article>
       <article id="airport-pickup"><span class="route-detail-symbol" aria-hidden="true">✈</span><h3>${esc(ui.airport)}</h3><p>${esc(seo.airportText)}</p></article>
