@@ -477,7 +477,7 @@ const fareCopy = {
 
 const vilniusSearchCopy = {
   "ru": {
-    "cityTitle": "Трансфер Вильнюс — Минск",
+    "cityTitle": "Такси Вильнюс — Минск: индивидуальный трансфер",
     "airportTitle": "Аэропорт Вильнюса (VNO) — Минск",
     "from": "от €",
     "cityLead": "Частное такси из Вильнюса в Минск",
@@ -501,7 +501,7 @@ const vilniusSearchCopy = {
     "guideNote": "Jei automobilį planuojate palikti Lietuvoje, galite užsisakyti kelionę į Minską."
   },
   "en": {
-    "cityTitle": "Vilnius to Minsk Private Transfer",
+    "cityTitle": "Vilnius to Minsk Taxi & Private Transfer",
     "airportTitle": "Vilnius Airport (VNO) to Minsk Transfer",
     "from": "from €",
     "cityLead": "Private taxi from Vilnius to Minsk",
@@ -610,7 +610,12 @@ function cityRouteSeo(lang, key) {
     return { ...seo, ...summary, ...(key === "vilnius" ? {pickupText:vilniusPickupDetails[lang].stationPickup} : {}) };
   }
   const { title, description, answer } = vilniusSummary(lang);
-  return { ...seo, title, description, intro: description, pickupText: t.stationPickup,
+  const economy = routeFares.vilnius[0][0], minivan = routeFares.vilnius[4][0];
+  const cityIntro = {
+    ru: `Заберём вас у отеля, дома, железнодорожного или автобусного вокзала Вильнюса и довезём до вашего адреса в Минске. Ориентир за машину в одну сторону: эконом — от ${economy} €, минивэн «Комфорт» — от ${minivan} €. Итоговую сумму в BYN согласуем до поездки.`,
+    en: `Book a private taxi from your Vilnius hotel, home, railway station or bus station to your address in Minsk. One-way fares start at €${economy} for an Economy car and €${minivan} for a Comfort minivan. We confirm the final fare in BYN before departure.`
+  };
+  return { ...seo, title, description, intro: cityIntro[lang] || description, pickupText: t.stationPickup,
     faqs: seo.faqs.map(([q, a]) => [q, q === t.priceQuestion ? answer : a]) };
 }
 
@@ -620,8 +625,8 @@ function startingFare(lang, key) {
 }
 
 const vilniusTripOptions = {
-  en:["Plan your Vilnius to Minsk transfer","Two travellers sharing an Economy car","Four travellers sharing a Comfort minivan","per person when sharing the starting fare equally","Tell us your pickup time, luggage and any child seats you need. We confirm the vehicle and total in BYN before departure.","City or station pickup","Pickup at Vilnius Airport (VNO)","Going to Minsk Airport (MSQ)?","Request a quote on WhatsApp","Date and pickup time","Passengers and bags","Drop-off address"],
-  ru:["Как спланировать трансфер из Вильнюса в Минск","Два пассажира в автомобиле экономкласса","Четыре пассажира в минивэне «Комфорт»","на человека, если разделить начальную цену поровну","Укажите время подачи, количество чемоданов и нужны ли детские кресла. Машину и итоговую сумму в BYN согласуем до выезда.","Подача в городе или у вокзала","Встреча в аэропорту Вильнюса (VNO)","Едете в аэропорт Минска (MSQ)?","Уточнить цену в WhatsApp","Дата и время подачи","Пассажиры и багаж","Адрес прибытия"],
+  en:["Plan your Vilnius to Minsk transfer","Two travellers sharing an Economy car","Four travellers sharing a Comfort minivan","per person when sharing the starting fare equally","Tell us your pickup time, luggage and any child seats you need. We confirm the vehicle and total in BYN before departure.","Vilnius to Minsk taxi from a hotel or station","Pickup at Vilnius Airport (VNO)","Going to Minsk Airport (MSQ)?","Request a quote on WhatsApp","Date and pickup time","Passengers and bags","Drop-off address"],
+  ru:["Как спланировать трансфер из Вильнюса в Минск","Два пассажира в автомобиле экономкласса","Четыре пассажира в минивэне «Комфорт»","на человека, если разделить начальную цену поровну","Укажите время подачи, количество чемоданов и нужны ли детские кресла. Машину и итоговую сумму в BYN согласуем до выезда.","Такси из Вильнюса в Минск с подачей в городе","Встреча в аэропорту Вильнюса (VNO)","Едете в аэропорт Минска (MSQ)?","Уточнить цену в WhatsApp","Дата и время подачи","Пассажиры и багаж","Адрес прибытия"],
   lt:["Kaip suplanuoti kelionę iš Vilniaus į Minską","Du keleiviai ekonominės klasės automobilyje","Keturi keleiviai komforto klasės mikroautobuse","asmeniui, jei pradinę kainą pasidalysite po lygiai","Nurodykite paėmimo laiką, bagažą ir ar reikės vaikiškų kėdučių. Prieš išvykstant patvirtinsime automobilį ir galutinę kainą BYN.","Paėmimas mieste arba prie stoties","Paėmimas Vilniaus oro uoste (VNO)","Vykstate į Minsko oro uostą (MSQ)?","Teirautis kainos per WhatsApp","Data ir paėmimo laikas","Keleiviai ir bagažas","Atvykimo adresas"],
   pl:["Zaplanuj transfer z Wilna do Mińska","Dwie osoby w samochodzie klasy ekonomicznej","Cztery osoby w minivanie klasy komfort","na osobę przy równym podziale ceny początkowej","Podaj godzinę odbioru, liczbę walizek i potrzebne foteliki. Przed wyjazdem potwierdzimy pojazd i pełną cenę w BYN.","Odbiór w mieście lub na dworcu","Odbiór na lotnisku w Wilnie (VNO)","Jedziesz na lotnisko w Mińsku (MSQ)?","Zapytaj o cenę przez WhatsApp","Data i godzina odbioru","Pasażerowie i bagaż","Adres docelowy"],
   lv:["Plānojiet braucienu no Viļņas uz Minsku","Divi pasažieri ekonomiskās klases automašīnā","Četri pasažieri komforta klases minivenā","par personu, dalot sākumcenu vienādās daļās","Norādiet izbraukšanas laiku, bagāžas daudzumu un vajadzīgos bērnu sēdeklīšus. Pirms izbraukšanas apstiprināsim automašīnu un kopējo cenu BYN.","Izbraukšana no pilsētas vai stacijas","Sagaidīšana Viļņas lidostā (VNO)","Dodaties uz Minskas lidostu (MSQ)?","Jautāt cenu WhatsApp","Datums un izbraukšanas laiks","Pasažieri un bagāža","Galamērķa adrese"],
