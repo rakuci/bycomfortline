@@ -504,6 +504,12 @@ async function instagramFeed(request, env, ctx) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (url.protocol === "http:" && url.hostname === "bycomfortline.com" &&
+        (request.method === "GET" || request.method === "HEAD") &&
+        (url.pathname === "/" || /^\/(ru|en|fr|de|pl|lt|lv)\/$/.test(url.pathname))) {
+      url.protocol = "https:";
+      return Response.redirect(url.href, 301);
+    }
     const legacyRigaPath = encodeURI("/трансфер-рига").toLowerCase();
     if ((request.method === "GET" || request.method === "HEAD") &&
         url.pathname.replace(/\/$/, "").toLowerCase() === legacyRigaPath) {
